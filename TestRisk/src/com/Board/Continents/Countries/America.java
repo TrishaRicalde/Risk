@@ -7,7 +7,7 @@ public class America extends Country {
 
 	@Override
 	public void attack(Country attackedCountry) {
-		System.out.print("test");
+		System.out.print("testtest123456s");
 		// TODO Auto-generated method stub
 		
 	}
