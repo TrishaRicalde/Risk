@@ -6,7 +6,7 @@ import java.util.Scanner;
 import com.Board.Map.Country;
 
 public class Console {
-	ArrayList<String> commands = new ArrayList<String>();
+	ArrayList<String> commands = new ArrayList<String>(); //MAY NOT BE NEEDED
 	Scanner input = new Scanner(System.in);
 	
 	public Console() {
@@ -14,6 +14,7 @@ public class Console {
 	}
 	
 	private void initCommandsList() {
+		//TEST CODE
 		commands.add("Attack");
 		commands.add("Move");
 		commands.add("Quick Attack");

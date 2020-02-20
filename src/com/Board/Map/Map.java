@@ -73,7 +73,6 @@ public class Map {
 				Country easternaustralia = new Country("Eastren Australia");
 				Country indonesia = new Country("Indonesia");
 				Country newguinea = new Country("New Guinea");
-
 				Country westernaustralia = new Country("Western Australia");
 				
 				
