@@ -35,6 +35,10 @@ public class Player {
 		return playerNumber;
 	}
 	
+	public boolean compareplayerNumber(Player p) {
+		return this.getPlayerNumber() == p.getPlayerNumber();
+	}
+	
 	
 
 }
