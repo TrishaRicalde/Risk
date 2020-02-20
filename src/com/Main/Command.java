@@ -27,4 +27,6 @@ public class Command {
 		fortifyCmds.add("Fortify");
 	}
 	
+	
+	
 }

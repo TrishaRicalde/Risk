@@ -71,8 +71,10 @@ public class Board {
 		int bonusTroops = currentPlayer.getTroopBonus();
 		console.println("Player " + currentPlayer.getPlayerNumber() + " has " + bonusTroops + " bonus troops.");
 		//option to trade in cards --------TO BE IMPLEMENTED
-		//console will print out available countries for player to draft troops(Console)--------TO BE IMPLEMENTED
+		console.printCountryArrayList(getCurrentPlayerOwnedCountries());
 		console.println("Where would you like to place your troops?");
+		String selectedCountry = console.getScannerCountry(getCurrentPlayerOwnedCountries());
+		
 
 		
 	}
@@ -105,13 +107,34 @@ public class Board {
 		
 	}
 
+	
 	// TO DO
 	private void endTurn() {
 		printBoardState();				
 	}
 	
+	
 	//TO DO
 	public void moveTroops(){}
+	
+	
+	
+	/**
+	 * Gets the countries owned by the current player
+	 * @return an ArrayList of Countries owned by the current Player
+	 */
+	public ArrayList<Country> getCurrentPlayerOwnedCountries() {
+		ArrayList<Country> playerOwnedCountries = new ArrayList<Country>();
+		for (Continent cont : continents) {
+			for (Country c : cont.getCountries()) {
+				if (c.getPlayerOwnerOfCountry() == currentPlayer.getPlayerNumber()) {
+					playerOwnedCountries.add(new Country(c));
+				}
+			}
+		}
+		return playerOwnedCountries;		
+	}
+	
 	
 	public void initializePlayers() {
 		int numPlayers = console.getScannerNumOfPlayers();
@@ -124,11 +147,8 @@ public class Board {
 		currentPlayer = new Player(players.get(0));
 	}
 	
-	public ArrayList<Country> getPlayerCountries(Player p) {
-		ArrayList<Country> playerCountries = new ArrayList<Country>();
-		
-		return null;
-		
+	public ArrayList<Continent> getContinentsList() {
+		return new ArrayList<Continent>(continents);
 	}
 	
 }
