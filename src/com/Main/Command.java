@@ -9,10 +9,10 @@ public class Command {
 	
 
 	public Command() {
-		
+		initCommands();
 	}
 	
-	public void initCommands() {
+	private void initCommands() {
 		draftCmds = new ArrayList<String>();
 		attackCmds = new ArrayList<String>();
 		fortifyCmds = new ArrayList<String>();
@@ -25,8 +25,20 @@ public class Command {
 		attackCmds.add("Next Phase");
 		
 		fortifyCmds.add("Fortify");
+		fortifyCmds.add("End Turn");
 	}
 	
+	public ArrayList<String> getDraftCmds() {
+		return draftCmds;
+	}
+	
+	public ArrayList<String> getAttackCmds() {
+		return attackCmds;
+	}
+	
+	public ArrayList<String> getFortifyCmds() {
+		return fortifyCmds;
+	}
 	
 	
 }
