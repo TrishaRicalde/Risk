@@ -68,7 +68,7 @@ public class Board {
 	private void draft() {
 		printBoardState();
 		console.println("--------- Draft ---------");
-		int bonusTroops = currentPlayer.getTroopBonus();
+		int bonusTroops = getTroopBonus();
 		console.println("Player " + currentPlayer.getPlayerNumber() + " has " + bonusTroops + " bonus troops.");
 		//option to trade in cards --------TO BE IMPLEMENTED
 		console.printCountryArrayList(getCurrentPlayerOwnedCountries());
@@ -149,6 +149,11 @@ public class Board {
 	
 	public ArrayList<Continent> getContinentsList() {
 		return new ArrayList<Continent>(continents);
+	}
+	
+	public int getTroopBonus() {
+		int playerOwnedCountryNum = getCurrentPlayerOwnedCountries().size();
+		return playerOwnedCountryNum; //Still have to loop through continents to see if bonus is applicable.
 	}
 	
 }

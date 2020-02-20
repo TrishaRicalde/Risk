@@ -1,8 +1,10 @@
 package com.Player;
+import com.*;
 
 public class Player {
 	private Alliance alliance;
 	private int playerNumber;
+	private String playerName;
 	// private string playerName?
 
 	public Player(int playerNumber) {
@@ -26,13 +28,13 @@ public class Player {
 			this.alliance = Alliance.YELLOW;
 		}
 	}
-
-	public int getTroopBonus() {
-		return 0;
-	}
 	
 	public int getPlayerNumber() {
 		return playerNumber;
+	}
+	
+	public boolean comparePlayerNumber(Player p) {
+		return this.getPlayerNumber() == p.getPlayerNumber();
 	}
 	
 	
