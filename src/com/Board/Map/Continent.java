@@ -19,6 +19,9 @@ public class Continent {
 		countries.add(new Country(country));
 	}
 	
+	public ArrayList<Country> getCountries() {
+		return new ArrayList<Country>(countries);
+	}
 	
 	
 	

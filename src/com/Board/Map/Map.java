@@ -18,8 +18,9 @@ public class Map {
 		//TEST CONTINENTS
 		Continent northAmerica = new Continent("North America");
 		
-		Country alberta = new Country("Alberta");
+		Country alberta = new Country("Alberta");		
 		Country britishColoumbia = new Country("British Coloumbia");
+		
 		
 		alberta.addBorder(britishColoumbia);
 		britishColoumbia.addBorder(alberta);

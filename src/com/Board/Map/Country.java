@@ -7,7 +7,7 @@ public class Country {
 	private String countryName;
 	private int currentNumTroops;
 	private ArrayList<Country> borders;
-	private int playerOwner;
+	private int playerIdentity;
 	
 	public Country(String countryName) {
 		this.countryName = countryName;
@@ -38,7 +38,7 @@ public class Country {
 	 */
 	//TO BE IMPLEMENTED
 	public int getPlayerOwnerOfCountry() {
-		return playerOwner;
+		return playerIdentity;
 	}
 	
 	//TO BE IMPLEMENTED
