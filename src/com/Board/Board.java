@@ -147,5 +147,9 @@ public class Board {
 		currentPlayer = new Player(players.get(0));
 	}
 	
+	public ArrayList<Continent> getContinentsList() {
+		return new ArrayList<Continent>(continents);
+	}
+	
 }
 
