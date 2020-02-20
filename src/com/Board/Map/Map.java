@@ -15,6 +15,7 @@ public class Map {
 	 */
 	//TO BE IMPLEMENTED
 	public void initMap() {
+		continents = new ArrayList<Continent>();
 		//All of the Continents 
 		Continent northAmerica = new Continent("North America");
 		Continent southAmerica = new Continent("South America");
@@ -73,8 +74,13 @@ public class Map {
 				Country indonesia = new Country("Indonesia");
 				Country newguinea = new Country("New Guinea");
 				Country westrenaustralia = new Country("Westren Australia");
-				
-				
-
+	}
+	
+	/**
+	 * Gets the ArrayList of Continents
+	 * @return the ArrayList of Continents 
+	 */
+	public ArrayList<Continent> getContinents() {
+		return continents;
 	}
 }
