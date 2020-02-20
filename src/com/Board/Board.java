@@ -130,6 +130,7 @@ public class Board {
 	public void moveTroops() {
 	}
 
+	
 	/**
 	 * Gets the countries owned by the current player
 	 * 
