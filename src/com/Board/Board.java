@@ -74,6 +74,7 @@ public class Board {
 		console.printCountryArrayList(getCurrentPlayerOwnedCountries());
 		console.println("Where would you like to place your troops?");
 		String selectedCountry = console.getScannerCountry(getCurrentPlayerOwnedCountries());
+		
 
 		
 	}

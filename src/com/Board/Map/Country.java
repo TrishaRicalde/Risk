@@ -12,8 +12,10 @@ public class Country {
 	public Country(String countryName) {
 		this.countryName = countryName;
 		borders = new ArrayList<Country>();
+		currentNumTroops = 0;
 		
 	}
+	
 	
 	/**
 	 * Copy Constructor
@@ -54,11 +56,15 @@ public class Country {
 	}
 
 	
-	
 	//TO BE IMPLEMENTED
 	public String getName() {
 		return countryName;
 		
+	}
+	
+	
+	public void addDraftedTroops(int numTroops) {
+		currentNumTroops += numTroops;
 	}
 
 	
