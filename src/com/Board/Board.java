@@ -4,22 +4,29 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import com.Board.Console.Console;
-import com.Board.Continents.Continent;
+import com.Board.Map.Continent;
+import com.Board.Map.Country;
+import com.Board.Map.Map;
 import com.Player.Player;
+
 
 public class Board {
 	private ArrayList<Continent> continents;
-	private ArrayList<Player> players = new ArrayList<Player>();
-	private Console console = new Console();
+	private ArrayList<Player> players;
+	private Console console;
 	private Player currentPlayer;
 	private int numAI;
+	private Map earthMap;
 	//Create Dice??
 	
 	public Board() {
-		int numPlayers = initializePlayers();
-		for (int i = 0; i < numPlayers; i ++) {			
-			players.add(new Player(i));
-		}
+		players  = new ArrayList<Player>();
+		console = new Console();
+		earthMap = new Map();
+		
+		initializePlayers();
+						
+		
 	}
 	
 	private void createBoard() {
@@ -130,6 +137,7 @@ public class Board {
 	
 	public void playerTurn(Player p) {
 		currentPlayer = new Player(p);
+		console.println("----------------------- Player " + currentPlayer.getPlayerNumber() + " -----------------------");
 		draft();
 		attack();
 		fortify();
@@ -149,13 +157,13 @@ public class Board {
 	//TO DO
 	private void draft() {
 		printBoardState();
-		/* get bonus troops(Player)
-		 * console will give option to trade in cards(PLayer)
-		 * console will print out available countries for player to draft troops(Console) ----------Maybe?
-		 * console will prompt: where would you like to place your troops(Console)
-		 * Once a country is chosen. Troops will be placed. (Country)
-		 * Move to next phase.
-		 */
+		console.println("--------- Draft ---------");
+		int bonusTroops = currentPlayer.getTroopBonus();
+		console.println("Player " + currentPlayer.getPlayerNumber() + " has " + bonusTroops + " bonus troops.");
+		//option to trade in cards --------TO BE IMPLEMENTED
+		//console will print out available countries for player to draft troops(Console)--------TO BE IMPLEMENTED
+		console.println("Where would you like to place your troops?");
+
 		
 	}
 
@@ -163,6 +171,7 @@ public class Board {
 	//TO DO
 	private void attack() {
 		printBoardState();
+		console.println("--------- Attack ---------");
 		/* console will print out the players occupied countries(Console) -----------Maybe?
 		 * console will prompt: Which country would you like to attack from?(Console)
 		 * After user input, print out borders of chosen country(Console)
@@ -181,6 +190,7 @@ public class Board {
 	// TO DO
 	private void fortify() {
 		printBoardState();
+		console.println("--------- Fortify ---------");
 		
 		
 	}
@@ -193,11 +203,22 @@ public class Board {
 	//TO DO
 	public void moveTroops(){}
 	
-	public int initializePlayers() {
+	public void initializePlayers() {
 		int numPlayers = console.getScannerNumOfPlayers();
-		//out of bounds check -- TO ADD
 		numAI = 4 - numPlayers;
-		return numPlayers;
+		
+		for (int i = 0; i < numPlayers; i ++) {			
+			players.add(new Player(i));
+		}
+		
+		currentPlayer = new Player(players.get(0));
+	}
+	
+	public ArrayList<Country> getPlayerCountries(Player p) {
+		ArrayList<Country> playerCountries = new ArrayList<Country>();
+		
+		return null;
+		
 	}
 	
 }
