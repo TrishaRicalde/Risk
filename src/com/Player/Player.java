@@ -27,9 +27,6 @@ public class Player {
 		}
 	}
 
-	public int getTroopBonus() {
-		return 0;
-	}
 	
 	public int getPlayerNumber() {
 		return playerNumber;
