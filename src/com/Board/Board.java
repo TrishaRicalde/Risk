@@ -17,6 +17,7 @@ public class Board {
 	private int numAI;
 	private Map earthMap;
 	private Command commands;
+	private boolean firstRound;
 	// Create Dice??
 
 	public Board() {
@@ -24,8 +25,8 @@ public class Board {
 		console = new Console();
 		earthMap = new Map();
 		commands = new Command();
-		continents = new ArrayList<Continent>(); // earthMap.getContinents();
-													// ----TO BE IMPLEMENTED
+		continents = new ArrayList<Continent>(); // earthMap.getContinents();----TO BE IMPLEMENTED
+		firstRound = true; 
 		initializePlayers();
 
 	}
@@ -43,9 +44,17 @@ public class Board {
 		return players;
 	}
 
-	public void playerTurn(Player p) {
-		currentPlayer = new Player(p);
-		console.println("----------------------- Player " + currentPlayer.getPlayerNumber()
+	public void nextTurn() {
+		if (firstRound) {
+			currentPlayer = players.get(0);
+			firstRound = false;
+		} else if (currentPlayer.getPlayerNumber() < players.size()) {
+			currentPlayer = players.get(currentPlayer.getPlayerNumber());
+		} else {
+			currentPlayer = players.get(0);
+		}
+		
+		console.println("----------------------- " + currentPlayer.getPlayerName()
 				+ "'s Turn -----------------------");
 		draft();
 		attack();
@@ -92,7 +101,7 @@ public class Board {
 	private void attack() {
 		printBoardState();
 		console.println("--------- Attack --------- \n");
-		if (console.getScannerCommand(commands.getAttackCmds()).equalsIgnoreCase("draft")) {
+		if (console.getScannerCommand(commands.getAttackCmds()).equalsIgnoreCase("attack")) {
 			
 		}
 		/*
@@ -115,7 +124,7 @@ public class Board {
 	private void fortify() {
 		printBoardState();
 		console.println("--------- Fortify --------- \n");
-		if (console.getScannerCommand(commands.getFortifyCmds()).equalsIgnoreCase("draft")) {
+		if (console.getScannerCommand(commands.getFortifyCmds()).equalsIgnoreCase("fortify")) {
 			
 		}
 
@@ -130,6 +139,7 @@ public class Board {
 	public void moveTroops() {
 	}
 
+	
 	/**
 	 * Gets the countries owned by the current player
 	 * 
@@ -147,16 +157,24 @@ public class Board {
 		return playerOwnedCountries;
 	}
 
+	
+	/**
+	 * Initializes the number of Players and their respective names by getting user input with the Console class.
+	 * 
+	 */
 	public void initializePlayers() {
 		int numPlayers = console.getScannerNumOfPlayers();
+		ArrayList<String> playerNames = console.getPlayerNames(numPlayers);
 		numAI = 4 - numPlayers;
 
-		for (int i = 1; i <= numPlayers; i++) {
-			players.add(new Player(i));
+		for (int i = 0; i < numPlayers; i++) {
+			players.add(new Player(i + 1));
+			players.get(i).setPlayerName(playerNames.get(i));
 		}
-
 		currentPlayer = new Player(players.get(0));
 	}
+	
+	
 
 	/**
 	 * 
