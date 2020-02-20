@@ -34,8 +34,8 @@ public class Console {
 		numPlayers = getScannerIntWithinRange(1,4);
 		
 		//TEST CODE
-		getScannerCommand(commands);
-		getScannerIntWithinRange(1,5, "Enter the amount of troops you would like to move.");
+		//getScannerCommand(commands);
+		//getScannerIntWithinRange(1,5, "Enter the amount of troops you would like to move.");
 		//END TEST CODE
 		
 		return numPlayers;
@@ -79,7 +79,7 @@ public class Console {
 		System.out.println("You entered: " + nextInt + "\n");
 		return nextInt;		
 	}
-	
+
 	
 	
 	/**  
@@ -168,4 +168,68 @@ public class Console {
 		System.out.println("You entered: " + nextString + "\n");
 		return nextString;		
 	}
+	
+	
+	/**
+	 * Prints a String and then terminate the line using System's println method.
+	 * @param s The String to be printed.
+	 */
+	public void println(String s) {
+		System.out.println(s);
+	}
+	
+	
+	/**
+	 * Prints a String using System's print method.
+	 * @param s The String to be printed.
+	 */
+	public void print(String s) {
+		System.out.print(s);
+	}
+	
+	
+	/**
+	 * Prompts for the user to input a command. Once a valid command is entered, the command is returned as a String.
+	 * @param cmds A list of Strings containing valid commands.
+	 * @return A String of the command entered by the user.
+	 */
+	public String getScannerCountry(ArrayList<String> validCountries) {
+		boolean validInput = false;
+		boolean done = false;
+		String nextString = "";
+		
+		System.out.print("Commands:");
+		for (String s : validCountries) {
+			System.out.print(" [" + s + "]");
+		}
+		System.out.println("\nPlease enter a command: ");
+		
+		while (!done) {
+			while (!validInput) {
+				validInput = true;
+				try {
+					nextString = input.nextLine();	
+					for (String str : validCountries) {
+						if (nextString.equalsIgnoreCase(str)) {
+							done = true;
+						}
+					}
+					if (!done) throw new Exception();
+				} catch(Exception e) {
+					System.out.println("You have entered an invalid command!");
+					System.out.print("Commands:");
+					for (String s : validCountries) {
+						System.out.print(" [" + s + "]");
+					}
+					System.out.println("\nPlease enter a command: ");
+					validInput = false;
+				}
+			}
+			
+		}
+		
+		System.out.println("You entered: " + nextString + "\n");
+		return nextString;		
+	}
+	
 }
