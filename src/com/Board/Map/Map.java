@@ -14,7 +14,8 @@ public class Map {
 	 * Initializes the entire Map with Continents and Countries
 	 */
 	//TO BE IMPLEMENTED
-	public void initMap() {
+	private void initMap() {
+		continents = new ArrayList<Continent>();
 		//All of the Continents 
 		Continent northAmerica = new Continent("North America");
 		Continent southAmerica = new Continent("South America");
@@ -72,7 +73,8 @@ public class Map {
 				Country easternaustralia = new Country("Eastren Australia");
 				Country indonesia = new Country("Indonesia");
 				Country newguinea = new Country("New Guinea");
-				Country westernaustralia = new Country("western Australia");
+
+				Country westernaustralia = new Country("Western Australia");
 				
 				
 				
@@ -346,5 +348,15 @@ public class Map {
 			
 		
 		
+
+				
+	}
+	
+	/**
+	 * Gets the ArrayList of Continents
+	 * @return the ArrayList of Continents 
+	 */
+	public ArrayList<Continent> getContinents() {
+		return continents;
 	}
 }

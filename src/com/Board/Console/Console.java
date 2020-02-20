@@ -3,6 +3,8 @@ package com.Board.Console;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.Board.Map.Country;
+
 public class Console {
 	ArrayList<String> commands = new ArrayList<String>();
 	Scanner input = new Scanner(System.in);
@@ -76,7 +78,6 @@ public class Console {
 			}						
 		}
 		
-		System.out.println("You entered: " + nextInt + "\n");
 		return nextInt;		
 	}
 
@@ -119,7 +120,6 @@ public class Console {
 			}						
 		}
 		
-		System.out.println("You entered: " + nextInt + "\n");
 		return nextInt;		
 	}
 	
@@ -165,7 +165,6 @@ public class Console {
 			
 		}
 		
-		System.out.println("You entered: " + nextString + "\n");
 		return nextString;		
 	}
 	
@@ -193,43 +192,49 @@ public class Console {
 	 * @param cmds A list of Strings containing valid commands.
 	 * @return A String of the command entered by the user.
 	 */
-	public String getScannerCountry(ArrayList<String> validCountries) {
+	public String getScannerCountry(ArrayList<Country> validCountries) {
 		boolean validInput = false;
 		boolean done = false;
 		String nextString = "";
 		
-		System.out.print("Commands:");
-		for (String s : validCountries) {
-			System.out.print(" [" + s + "]");
+		System.out.print("Countries:");
+		for (Country c : validCountries) {
+			System.out.print(" [" + c.getName() + "]");
 		}
-		System.out.println("\nPlease enter a command: ");
+		System.out.println("\nPlease enter a Country: ");
 		
 		while (!done) {
 			while (!validInput) {
 				validInput = true;
 				try {
 					nextString = input.nextLine();	
-					for (String str : validCountries) {
-						if (nextString.equalsIgnoreCase(str)) {
+					for (Country c : validCountries) {
+						if (nextString.equalsIgnoreCase(c.getName())) {
 							done = true;
 						}
 					}
 					if (!done) throw new Exception();
 				} catch(Exception e) {
-					System.out.println("You have entered an invalid command!");
-					System.out.print("Commands:");
-					for (String s : validCountries) {
-						System.out.print(" [" + s + "]");
+					System.out.println("You have entered an invalid Country!");
+					System.out.print("Countries:");
+					for (Country c : validCountries) {
+						System.out.print(" [" + c.getName() + "]");
 					}
-					System.out.println("\nPlease enter a command: ");
+					System.out.println("\nPlease enter a Country: ");
 					validInput = false;
 				}
 			}
 			
 		}
 		
-		System.out.println("You entered: " + nextString + "\n");
 		return nextString;		
+	}
+	
+	public void printCountryArrayList(ArrayList<Country> cList) {
+		for (Country c : cList) {
+			System.out.print(" [" + c.getName() + "] ");
+		}
+		System.out.println();
 	}
 	
 }
