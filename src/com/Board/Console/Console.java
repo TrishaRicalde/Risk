@@ -200,11 +200,11 @@ public class Console {
 		boolean done = false;
 		String nextString = "";
 		
-		System.out.print("Commands:");
+		System.out.print("Countries:");
 		for (Country c : validCountries) {
 			System.out.print(" [" + c.getName() + "]");
 		}
-		System.out.println("\nPlease enter a command: ");
+		System.out.println("\nPlease enter a Country: ");
 		
 		while (!done) {
 			while (!validInput) {
@@ -223,7 +223,7 @@ public class Console {
 					for (Country c : validCountries) {
 						System.out.print(" [" + c.getName() + "]");
 					}
-					System.out.println("\nPlease enter a command: ");
+					System.out.println("\nPlease enter a Country: ");
 					validInput = false;
 				}
 			}

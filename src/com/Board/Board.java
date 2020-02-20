@@ -22,7 +22,7 @@ public class Board {
 		players  = new ArrayList<Player>();
 		console = new Console();
 		earthMap = new Map();
-		
+		continents =  new ArrayList<Continent>(); //earthMap.getContinents(); ----TO BE IMPLEMENTED
 		initializePlayers();
 						
 		
@@ -37,11 +37,7 @@ public class Board {
 	 * @return
 	 */
 	public ArrayList<Player> getPlayers() {
-		ArrayList<Player> player = new ArrayList<Player>();
-		for(Player p: players) {
-			player.add(new Player(p));
-		}
-		return player;
+		return players;
 	}
 
 	
@@ -71,9 +67,16 @@ public class Board {
 		int bonusTroops = getTroopBonus();
 		console.println("Player " + currentPlayer.getPlayerNumber() + " has " + bonusTroops + " bonus troops.");
 		//option to trade in cards --------TO BE IMPLEMENTED
-		console.printCountryArrayList(getCurrentPlayerOwnedCountries());
-		console.println("Where would you like to place your troops?");
-		String selectedCountry = console.getScannerCountry(getCurrentPlayerOwnedCountries());
+
+		while (bonusTroops > 0) {
+			console.println("Where would you like to place your troops?");
+			String selectedCountry = console.getScannerCountry(getCurrentPlayerOwnedCountries());
+			Country c = this.getCountry(selectedCountry);
+			int numTroopsToAdd = console.getScannerIntWithinRange(1, bonusTroops, "How many troops would you like to place?");
+			c.addDraftedTroops(numTroopsToAdd);
+			bonusTroops -= numTroopsToAdd;
+		}
+		
 		
 
 		
@@ -121,7 +124,7 @@ public class Board {
 	
 	/**
 	 * Gets the countries owned by the current player
-	 * @return an ArrayList of Countries owned by the current Player
+	 * @return a copy of the ArrayList of Countries owned by the current Player
 	 */
 	public ArrayList<Country> getCurrentPlayerOwnedCountries() {
 		ArrayList<Country> playerOwnedCountries = new ArrayList<Country>();
@@ -140,21 +143,41 @@ public class Board {
 		int numPlayers = console.getScannerNumOfPlayers();
 		numAI = 4 - numPlayers;
 		
-		for (int i = 0; i < numPlayers; i ++) {			
+		for (int i = 1; i <= numPlayers; i ++) {			
 			players.add(new Player(i));
 		}
 		
 		currentPlayer = new Player(players.get(0));
 	}
 	
+	
+	/**
+	 * 
+	 * @return a copy of the ArrayList of Continents (encapsulated)
+	 */
 	public ArrayList<Continent> getContinentsList() {
 		return new ArrayList<Continent>(continents);
 	}
 	
+	/**
+	 * Gets the Country Object corresponding to countryName. 
+	 * The returned Country Object is non-encapsulated.
+	 * @param countryName Name of the Country
+	 * @return the corresponding Country Object. Returns null if no Country is found.
+	 */
+	public Country getCountry(String countryName) {
+		for (Continent cont : continents) {
+			for (Country c : cont.getCountries()) {
+				if (c.getName().equalsIgnoreCase(countryName)) return c;
+			}
+		}
+		return null;
+	}
+
 	public int getTroopBonus() {
 		int playerOwnedCountryNum = getCurrentPlayerOwnedCountries().size();
 		return playerOwnedCountryNum; //Still have to loop through continents to see if bonus is applicable.
 	}
-	
+
 }
 

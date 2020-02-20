@@ -28,7 +28,7 @@ public class Player {
 			this.alliance = Alliance.YELLOW;
 		}
 	}
-	
+
 	public int getPlayerNumber() {
 		return playerNumber;
 	}
