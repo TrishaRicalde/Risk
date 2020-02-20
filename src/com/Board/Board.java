@@ -159,10 +159,6 @@ public class Board {
 		return new ArrayList<Continent>(continents);
 	}
 	
-	
-	public int getTroopBonus() {
-		return 1;
-	}
 	/**
 	 * Gets the Country Object corresponding to countryName. 
 	 * The returned Country Object is non-encapsulated.
@@ -177,5 +173,11 @@ public class Board {
 		}
 		return null;
 	}
+
+	public int getTroopBonus() {
+		int playerOwnedCountryNum = getCurrentPlayerOwnedCountries().size();
+		return playerOwnedCountryNum; //Still have to loop through continents to see if bonus is applicable.
+	}
+
 }
 
