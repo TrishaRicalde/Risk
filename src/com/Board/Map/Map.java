@@ -75,15 +75,6 @@ public class Map {
 				Country westrenaustralia = new Country("Westren Australia");
 				
 				
-				
-				
-				
-		alberta.addBorder(britishColoumbia);
-		britishColoumbia.addBorder(alberta);
-		
-		northAmerica.addCountry(alberta);
-		northAmerica.addCountry(britishColoumbia);
-		
-		continents.add(northAmerica);
+
 	}
 }
