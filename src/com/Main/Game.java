@@ -1,9 +1,6 @@
 package com.Main;
 
-import java.util.Scanner;
-
 import com.Board.Board;
-import com.Board.Console.Console;
 import com.Player.Player;
 
 public class Game {
@@ -27,7 +24,7 @@ public class Game {
 	public void run() {
 		while (running) {
 			for(Player p: board.getPlayers()) {
-				
+				board.playerTurn(p);
 			}
 			stop();
 		}
