@@ -1,6 +1,7 @@
 package com.Board;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.Board.Console.Console;
 import com.Board.Continents.Continent;
@@ -22,6 +23,95 @@ public class Board {
 	}
 	
 	private void createBoard() {
+		
+		// STARTING TROOPS BELOW
+		
+		// clone continents list
+		
+		// clone continents list as a new list called currentContinents
+		
+		// clone country list per continent
+		
+		// new list, Player's current countries list, there's always going to be 4 players
+		
+		int numberOfPlayers = 4;
+		int startingTroopsPerPlayer = 100;
+		
+		int player1Troops = startingTroopsPerPlayer;
+		int player2Troops = startingTroopsPerPlayer;
+		int player3Troops = startingTroopsPerPlayer;
+		int player4Troops = startingTroopsPerPlayer;
+		
+		// loop if playerCountWithNoTroops != numberOfPlayers:
+		for (int playerCountWithNoTroops = 0; playerCountWithNoTroops < numberOfPlayers;) {
+			
+			// loop once per player:
+			for (int playerTurn = 0; playerTurn != numberOfPlayers; playerTurn++) {
+			
+				int currentTroops = 0;
+				
+				// get current number of troops for that player
+				if (playerTurn == 0) {
+					currentTroops = player1Troops;
+				}
+				if (playerTurn == 1) {
+					currentTroops = player2Troops;
+				}
+				if (playerTurn == 2) {
+					currentTroops = player3Troops;
+				}
+				if (playerTurn == 3) {
+					currentTroops = player4Troops;
+				}
+				
+				// if current number of troops for that player > 0:
+				if (currentTroops > 0) {
+				
+					// if currentContinents is NOT empty:
+					if (currentContinents.length > 0) {
+					
+						// choose random currentContinent
+						
+						// choose random country from the currentCountryList of that continent
+				
+						// if player number of troops > 2:
+							// Randomize 1-3 Troops
+							Random selectTroops = new Random(3);
+							// Minus that number from the player's current number of troops
+							
+							
+						// else:
+							// change the number of troops to add as the player's current number of troops
+							// set player's current number of troops as 0
+						
+						// add those troops to that random country
+						// remove that random country from currentCountryList
+						// add country to player's current countries list
+				
+						// if currentCountryList for that continent is empty:
+							// remove that continent from currentContinents list
+					}
+					
+					// else:
+						// randomize through player's current countries list
+						
+						// if country's number of troops < 3:
+							// add 1 troop to that country
+							// remove 1 troop from player's current number of troops
+				
+				}	
+				// else:
+					// playerCountWithNoTroops += 1
+					playerCountWithNoTroops += 1;
+			
+			}
+			// if playerCountWithNoTroops < numberOfPlayers, playerCountWithNoTroops = 0.
+			if (playerCountWithNoTroops < numberOfPlayers) {
+				playerCountWithNoTroops = 0;
+			}
+		}
+		
+	// END OF STARTING TROOPS ABOVE
 		
 	}
 	
