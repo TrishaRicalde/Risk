@@ -78,7 +78,6 @@ public class Console {
 			}						
 		}
 		
-		System.out.println("You entered: " + nextInt + "\n");
 		return nextInt;		
 	}
 
@@ -121,7 +120,6 @@ public class Console {
 			}						
 		}
 		
-		System.out.println("You entered: " + nextInt + "\n");
 		return nextInt;		
 	}
 	
@@ -167,7 +165,6 @@ public class Console {
 			
 		}
 		
-		System.out.println("You entered: " + nextString + "\n");
 		return nextString;		
 	}
 	
@@ -230,7 +227,6 @@ public class Console {
 			
 		}
 		
-		System.out.println("You entered: " + nextString + "\n");
 		return nextString;		
 	}
 	
