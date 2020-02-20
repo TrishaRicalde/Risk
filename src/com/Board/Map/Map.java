@@ -14,7 +14,7 @@ public class Map {
 	 * Initializes the entire Map with Continents and Countries
 	 */
 	//TO BE IMPLEMENTED
-	public void initMap() {
+	private void initMap() {
 		continents = new ArrayList<Continent>();
 		//All of the Continents 
 		Continent northAmerica = new Continent("North America");
