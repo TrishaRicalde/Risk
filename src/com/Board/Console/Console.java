@@ -6,7 +6,7 @@ import java.util.Scanner;
 import com.Board.Map.Country;
 
 public class Console {
-	ArrayList<String> commands = new ArrayList<String>();
+	ArrayList<String> commands = new ArrayList<String>(); //MAY NOT BE NEEDED
 	Scanner input = new Scanner(System.in);
 	
 	public Console() {
@@ -14,6 +14,7 @@ public class Console {
 	}
 	
 	private void initCommandsList() {
+		//TEST CODE
 		commands.add("Attack");
 		commands.add("Move");
 		commands.add("Quick Attack");
@@ -43,6 +44,23 @@ public class Console {
 		return numPlayers;
 	}
 	
+	/**
+	 * Gets the player names from the scanner.
+	 * @param numPlayers The number of Human Players in the game.
+	 * @return an ArrayList<String> containing the player names.
+	 */
+	public ArrayList<String> getPlayerNames(int numPlayers) {
+		ArrayList<String> pNames = new ArrayList<String>();
+		
+		for (int i = 1; i <= numPlayers; i ++) {
+			System.out.println("Player " + i);
+			System.out.println("Please enter your name: \n");
+			pNames.add(input.nextLine());			
+		}		
+		return pNames;
+	}
+	
+	//TO BE IMPLEMENTED
 	public void printStats(){}
 	
 	

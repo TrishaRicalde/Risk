@@ -17,6 +17,7 @@ public class Board {
 	private int numAI;
 	private Map earthMap;
 	private Command commands;
+	private boolean firstRound;
 	// Create Dice??
 
 	public Board() {
@@ -24,12 +25,13 @@ public class Board {
 		console = new Console();
 		earthMap = new Map();
 		commands = new Command();
-		continents = new ArrayList<Continent>(); // earthMap.getContinents();
-													// ----TO BE IMPLEMENTED
+		continents = new ArrayList<Continent>(earthMap.getContinents());
+		firstRound = true;
 		initializePlayers();
 
 	}
 
+	// TO DO
 	private void createBoard() {
 
 	}
@@ -43,10 +45,17 @@ public class Board {
 		return players;
 	}
 
-	public void playerTurn(Player p) {
-		currentPlayer = new Player(p);
-		console.println("----------------------- Player " + currentPlayer.getPlayerNumber()
-				+ "'s Turn -----------------------");
+	public void nextTurn() {
+		if (firstRound) {
+			currentPlayer = players.get(0);
+			firstRound = false;
+		} else if (currentPlayer.getPlayerNumber() < players.size()) {
+			currentPlayer = players.get(currentPlayer.getPlayerNumber());
+		} else {
+			currentPlayer = players.get(0);
+		}
+
+		console.println("----------------------- " + currentPlayer.getPlayerName() + "'s Turn -----------------------");
 		draft();
 		attack();
 		fortify();
@@ -92,8 +101,26 @@ public class Board {
 	private void attack() {
 		printBoardState();
 		console.println("--------- Attack --------- \n");
-		if (console.getScannerCommand(commands.getAttackCmds()).equalsIgnoreCase("draft")) {
-			
+		while (console.getScannerCommand(commands.getAttackCmds()).equalsIgnoreCase("attack")) {
+			console.println("Which Country would you like to launch your attack from?");
+			Country attackFrom = this.getCountry(console.getScannerCountry(getCurrentPlayerOwnedCountries()));
+			console.println("Which Country would you like to attack?");
+			console.getScannerCountry(attackFrom.getBorders());
+			/*
+			 * Attack - TO BE IMPLEMENTED
+			 */
+
+			// Checks if the player has troops left to attack with.
+			int count = 0;
+			for (Country c : this.getCurrentPlayerOwnedCountries()) {
+				if (c.getNumTroops() > 1)
+					count++;
+			}
+			if (count > 0) {
+				console.println("Would you like to continue attacking?");
+			} else {
+				return;
+			}
 		}
 		/*
 		 * console will print out the players occupied countries(Console)
@@ -115,8 +142,8 @@ public class Board {
 	private void fortify() {
 		printBoardState();
 		console.println("--------- Fortify --------- \n");
-		if (console.getScannerCommand(commands.getFortifyCmds()).equalsIgnoreCase("draft")) {
-			
+		if (console.getScannerCommand(commands.getFortifyCmds()).equalsIgnoreCase("fortify")) {
+
 		}
 
 	}
@@ -127,7 +154,7 @@ public class Board {
 	}
 
 	// TO DO
-	public void moveTroops() {
+	private void moveTroops() {
 	}
 
 	/**
@@ -135,7 +162,7 @@ public class Board {
 	 * 
 	 * @return a copy of the ArrayList of Countries owned by the current Player
 	 */
-	public ArrayList<Country> getCurrentPlayerOwnedCountries() {
+	private ArrayList<Country> getCurrentPlayerOwnedCountries() {
 		ArrayList<Country> playerOwnedCountries = new ArrayList<Country>();
 		for (Continent cont : continents) {
 			for (Country c : cont.getCountries()) {
@@ -147,22 +174,27 @@ public class Board {
 		return playerOwnedCountries;
 	}
 
-	public void initializePlayers() {
+	/**
+	 * Initializes the number of Players and their respective names by getting
+	 * user input with the Console class.
+	 * 
+	 */
+	private void initializePlayers() {
 		int numPlayers = console.getScannerNumOfPlayers();
+		ArrayList<String> playerNames = console.getPlayerNames(numPlayers);
 		numAI = 4 - numPlayers;
 
-		for (int i = 1; i <= numPlayers; i++) {
-			players.add(new Player(i));
+		for (int i = 0; i < numPlayers; i++) {
+			players.add(new Player(i + 1));
+			players.get(i).setPlayerName(playerNames.get(i));
 		}
-
-		currentPlayer = new Player(players.get(0));
 	}
 
 	/**
 	 * 
 	 * @return a copy of the ArrayList of Continents (encapsulated)
 	 */
-	public ArrayList<Continent> getContinentsList() {
+	private ArrayList<Continent> getContinentsList() {
 		return new ArrayList<Continent>(continents);
 	}
 
@@ -175,7 +207,7 @@ public class Board {
 	 * @return the corresponding Country Object. Returns null if no Country is
 	 *         found.
 	 */
-	public Country getCountry(String countryName) {
+	private Country getCountry(String countryName) {
 		for (Continent cont : continents) {
 			for (Country c : cont.getCountries()) {
 				if (c.getName().equalsIgnoreCase(countryName))
@@ -185,10 +217,12 @@ public class Board {
 		return null;
 	}
 
-	public int getTroopBonus() {
+	private int getTroopBonus() {
 		int playerOwnedCountryNum = getCurrentPlayerOwnedCountries().size();
 		return playerOwnedCountryNum; // Still have to loop through continents
 										// to see if bonus is applicable.
 	}
+
+	
 
 }
