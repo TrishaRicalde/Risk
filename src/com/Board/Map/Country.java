@@ -67,5 +67,20 @@ public class Country {
 		currentNumTroops += numTroops;
 	}
 
+	/**
+	 * (Non-encapsulated)
+	 * @return the ArrayList of this Country's borders. 
+	 */
+	public ArrayList<Country> getBorders() {
+		return borders;
+	}
+	
+	/**
+	 * 
+	 * @return the current number of troops occupying the country.
+	 */
+	public int getNumTroops() {
+		return currentNumTroops;
+	}
 	
 }
