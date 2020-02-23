@@ -1,5 +1,4 @@
 package com.Board.Console;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -52,11 +51,12 @@ public class Console {
 	public ArrayList<String> getPlayerNames(int numPlayers) {
 		ArrayList<String> pNames = new ArrayList<String>();
 		
-		for (int i = 1; i <= numPlayers; i ++) {
+		for (int i = 1; i <= numPlayers; i++) {
 			System.out.println("Player " + i);
 			System.out.println("Please enter your name: \n");
-			pNames.add(input.nextLine());			
-		}		
+			pNames.add(input.nextLine());		
+		}
+		 
 		return pNames;
 	}
 	
