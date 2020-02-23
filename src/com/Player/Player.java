@@ -40,7 +40,7 @@ public class Player {
 
 
 	
-	public boolean comparePlayerNumber(Player p) {
+	public boolean equals(Player p) {
 		return this.getPlayerNumber() == p.getPlayerNumber();
 	}
 	
@@ -68,5 +68,8 @@ public class Player {
 		}
 	}
 	
+	public void setPlayerNumber(int i) {
+		this.playerNumber = i;
+	}
 
 }

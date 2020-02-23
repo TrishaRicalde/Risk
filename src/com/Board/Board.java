@@ -8,7 +8,6 @@ import com.Board.Map.Country;
 import com.Board.Map.Map;
 import com.Main.Command;
 import com.Player.Player;
-import com.Player.AI;
 
 public class Board {
 	private ArrayList<Continent> continents;
@@ -27,8 +26,8 @@ public class Board {
 		console = new Console();
 		earthMap = new Map();
 		commands = new Command();
-		continents = new ArrayList<Continent>(); // earthMap.getContinents();----TO BE IMPLEMENTED
-		firstRound = true; 
+		continents = new ArrayList<Continent>(earthMap.getContinents());
+		firstRound = true;
 		initializePlayers();
 
 	}
@@ -42,7 +41,7 @@ public class Board {
 		this.firstRound = b.firstRound;
 	}
 
-
+	// TO DO
 	private void createBoard() {
 
 	}
@@ -70,8 +69,8 @@ public class Board {
 			currentPlayer = players.get(0);
 		}
 
-		console.println("----------------------- " + currentPlayer.getPlayerName()
-		+ "'s Turn -----------------------");
+		console.println("----------------------- " + currentPlayer.getPlayerName() + "'s Turn -----------------------");
+		
 		draft();
 		attack();
 		fortify();
@@ -117,8 +116,27 @@ public class Board {
 	private void attack() {
 		printBoardState();
 		console.println("--------- Attack --------- \n");
-		if (console.getScannerCommand(commands.getAttackCmds()).equalsIgnoreCase("attack")) {
+			
+		while (console.getScannerCommand(commands.getAttackCmds()).equalsIgnoreCase("attack")) {
+			console.println("Which Country would you like to launch your attack from?");
+			Country attackFrom = this.getCountry(console.getScannerCountry(getCurrentPlayerOwnedCountries()));
+			console.println("Which Country would you like to attack?");
+			console.getScannerCountry(attackFrom.getBorders());
+			/*
+			 * Attack - TO BE IMPLEMENTED
+			 */
 
+			// Checks if the player has troops left to attack with.
+			int count = 0;
+			for (Country c : this.getCurrentPlayerOwnedCountries()) {
+				if (c.getNumTroops() > 1)
+					count++;
+			}
+			if (count > 0) {
+				console.println("Would you like to continue attacking?");
+			} else {
+				return;
+			}
 		}
 		/*
 		 * console will print out the players occupied countries(Console)
@@ -152,10 +170,9 @@ public class Board {
 	}
 
 	// TO DO
-	public void moveTroops() {
+	private void moveTroops() {
 	}
-
-
+	
 	/**
 	 * Gets the countries owned by the current player
 	 * 
@@ -172,13 +189,13 @@ public class Board {
 		}
 		return playerOwnedCountries;
 	}
-
-
+	
 	/**
-	 * Initializes the number of Players and their respective names by getting user input with the Console class.
+	 * Initializes the number of Players and their respective names by getting
+	 * user input with the Console class.
 	 * 
 	 */
-	public void initializePlayers() {
+	private void initializePlayers() {
 		int numPlayers = console.getScannerNumOfPlayers();
 		ArrayList<String> playerNames = console.getPlayerNames(numPlayers);
 		numAI = 4 - numPlayers;
@@ -187,6 +204,7 @@ public class Board {
 			players.add(new Player(i + 1, false, this.getBoard()));
 			players.get(i).setPlayerName(playerNames.get(i));
 		}
+		
 		for (int i = numPlayers; i < totalPlayerNum; i++) {
 			players.add(new Player(i + 1, true, this.getBoard()));
 			players.get(i).setPlayerName(null);
@@ -195,13 +213,11 @@ public class Board {
 		currentPlayer = new Player(players.get(0));
 	}
 
-
-
 	/**
 	 * 
 	 * @return a copy of the ArrayList of Continents (encapsulated)
 	 */
-	public ArrayList<Continent> getContinentsList() {
+	private ArrayList<Continent> getContinentsList() {
 		return new ArrayList<Continent>(continents);
 	}
 
@@ -214,7 +230,7 @@ public class Board {
 	 * @return the corresponding Country Object. Returns null if no Country is
 	 *         found.
 	 */
-	public Country getCountry(String countryName) {
+	private Country getCountry(String countryName) {
 		for (Continent cont : continents) {
 			for (Country c : cont.getCountries()) {
 				if (c.getName().equalsIgnoreCase(countryName))
@@ -224,10 +240,12 @@ public class Board {
 		return null;
 	}
 
-	public int getTroopBonus() {
+	private int getTroopBonus() {
 		int playerOwnedCountryNum = getCurrentPlayerOwnedCountries().size();
 		return playerOwnedCountryNum; // Still have to loop through continents
 		// to see if bonus is applicable.
 	}
+
+	
 
 }

@@ -345,6 +345,16 @@ public class Map {
 			africa.addCountry(madagascar);
 			africa.addCountry(congo);
 			
+			
+		//Continents Bonuses
+			northAmerica.setContinentBonus(5);
+			australia.setContinentBonus(2);
+			southAmerica.setContinentBonus(2);
+			asia.setContinentBonus(7);
+			europe.setContinentBonus(5);
+			africa.setContinentBonus(3);
+			
+			
 		
 		
 
