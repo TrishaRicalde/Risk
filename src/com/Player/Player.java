@@ -1,18 +1,28 @@
 package com.Player;
+import java.util.Random;
+
 import com.*;
+import com.Board.Board;
 
 public class Player {
 	private Alliance alliance;
 	private int playerNumber;
+	private String[] possibleNames = {"Jefferson(AI)", "Billy(AI)", "Suzan(AI)", "Kong(AI)", "Makenzy(AI)", "Lora(AI)", "Kitten(AI)", "Dogo(AI)", "Izzy(AI)", "Poppy(AI)", "Lisa(AI)", "John(AI)", "Callie(AI)", "Shadow(AI)", "Whiskers(AI)", "Lily(AI)", "Charlotte(AI)", "Sylvester(AI)", "Gamer99(AI)", "Kid(AI)", "Alexander_The_Great(AI)"};
 	private String playerName;
+	private Board board;// = new Board();
+	private boolean isAI;
 
-	public Player(int playerNumber) {
+	public Player(int playerNumber, boolean isai, Board b) {
 		this.playerNumber = playerNumber;
+		this.isAI = isai;
+		board = new Board(b);
 		setAlliance();
 	}
 
 	public Player(Player p) {
 		this.playerNumber = p.playerNumber;
+		this.isAI = p.isAI;
+		this.board = p.board;
 	}
 
 	private void setAlliance() {
@@ -39,11 +49,23 @@ public class Player {
 	}
 	
 	public void setPlayerName(String name) {
-		playerName = name;
+		if(isAI == true) {
+			Random r = new Random();
+			playerName = new String(possibleNames[r.nextInt(possibleNames.length)]);
+		}
+		else {
+			playerName = name;
+		}
 	}
 	
 	public String getPlayerName() {
 		return playerName;
+	}
+	
+	public void aiDraft(Board b) {
+		if(isAI == true) {
+			b.getCurrentPlayerOwnedCountries();
+		}
 	}
 	
 
