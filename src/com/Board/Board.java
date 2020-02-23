@@ -69,27 +69,29 @@ public class Board {
 			currentPlayer = players.get(0);
 		}
 
-		console.println("----------------------- " + currentPlayer.getPlayerName() + "'s Turn -----------------------");
-
+		printBoardState();
+		console.println("\n---------------------------------------------- " + currentPlayer.getPlayerName() + "'s Turn ----------------------------------------------");
 		draft();
 		attack();
 		fortify();
 		endTurn(); // Useful??
 	}
 
-	// TO DO
 	private void printBoardState() {
 		/*
 		 * Prints out current state of the board. for (continent: continents)
 		 * for (country: countries) prints players troops on each
 		 * country/continent
 		 */
+		
+		for(int i = 0; i < continents.size(); i++) {
+			console.printBoardState(continents, i, getBoard());
+		}
 	}
 
 	// TO DO
 	private void draft() {
-		printBoardState();
-		console.println("--------- Draft --------- \n");
+		console.println("\n---------------------- Draft ----------------------\n");
 		// option to trade in cards --------TO BE IMPLEMENTED
 		int bonusTroops = getTroopBonus();
 		if (bonusTroops == 0) {
@@ -109,13 +111,12 @@ public class Board {
 				bonusTroops -= numTroopsToAdd;
 			}
 		}
-
+		printBoardState();
 	}
 
 	// TO DO
 	private void attack() {
-		printBoardState();
-		console.println("--------- Attack --------- \n");
+		console.println("---------------------- Attack ----------------------\n");
 		ArrayList<Country> deployableCountries = new ArrayList<Country>(this.getDeployableCountries());
 		
 		if (deployableCountries.size() == 0) {
@@ -144,26 +145,12 @@ public class Board {
 				return;
 			}
 		}
-		/*
-		 * console will print out the players occupied countries(Console)
-		 * -----------Maybe? console will prompt: Which country would you like
-		 * to attack from?(Console) After user input, print out borders of
-		 * chosen country(Console) console will prompt: Which country would you
-		 * like to attack? (Console) console will prompt: [blitz] [normal]
-		 * etc... (Console) attackingFromCountry.attack(countryBeingAttacked) If
-		 * not conquered. Console prompt: attack again? console prompt: option
-		 * to move troops (Console) moveTroops(moveToCountryConquered) ---------
-		 * (Board/Country) ??
-		 * 
-		 * TO BE CONTINUED
-		 */
-
+		printBoardState();
 	}
 
 	// TO DO
 	private void fortify() {
-		printBoardState();
-		console.println("--------- Fortify --------- \n");
+		console.println("---------------------- Fortify ----------------------\n");
 		ArrayList<Country> deployableCountries = new ArrayList<Country>(this.getDeployableCountries());		
 		if (deployableCountries.size() == 0) {
 			console.println("You do not have any troops to attack with.\n");
@@ -202,6 +189,7 @@ public class Board {
 				return;
 			}
 		}
+		printBoardState();
 
 	}
 
@@ -295,6 +283,19 @@ public class Board {
 		int playerOwnedCountryNum = getCurrentPlayerOwnedCountries().size();
 		return playerOwnedCountryNum; // Still have to loop through continents
 		// to see if bonus is applicable.
+	}
+
+	public ArrayList<Continent> getContinents() {
+		return continents;
+	}
+	
+	public String getPlayerName(int playerNumber) {
+		for(int i = 0; i < players.size(); i++) {
+			if(players.get(i).getPlayerNumber() == playerNumber) {
+				return players.get(i).getPlayerName();
+			}
+		}
+		return null;
 	}
 
 }
