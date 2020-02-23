@@ -77,13 +77,16 @@ public class Board {
 		endTurn(); // Useful??
 	}
 
-	// TO DO
 	private void printBoardState() {
 		/*
 		 * Prints out current state of the board. for (continent: continents)
 		 * for (country: countries) prints players troops on each
 		 * country/continent
 		 */
+		
+		for(int i = 0; i < continents.size(); i++) {
+			console.printBoardState(continents, i, getBoard());
+		}
 	}
 
 	// TO DO
@@ -246,6 +249,17 @@ public class Board {
 		// to see if bonus is applicable.
 	}
 
+	public ArrayList<Continent> getContinents() {
+		return continents;
+	}
 	
+	public String getPlayerName(int playerNumber) {
+		for(int i = 0; i < players.size(); i++) {
+			if(players.get(i).getPlayerNumber() == playerNumber) {
+				return players.get(i).getPlayerName();
+			}
+		}
+		return null;
+	}
 
 }
