@@ -34,8 +34,10 @@ public class Board {
 		// STARTING TROOPS BELOW
 		
 		// clone continents list
+		ArrayList<Continent> allContinents = new ArrayList<Continent>(continents);
 		
 		// clone continents list as a new list called currentContinents
+		ArrayList<Continent> currentContinents = new ArrayList<Continent>(continents);
 		
 		// clone country list per continent
 		
@@ -75,11 +77,15 @@ public class Board {
 				if (currentTroops > 0) {
 				
 					// if currentContinents is NOT empty:
-					if (currentContinents.length > 0) {
+					if (currentContinents.size() > 0) {
 					
 						// choose random currentContinent
+						Random r = new Random();
+						String chosenContinent = currentContinents.get(r.nextInt(currentContinents.size())).getContinentName();
 						
 						// choose random country from the currentCountryList of that continent
+						
+						
 				
 						// if player number of troops > 2:
 							// Randomize 1-3 Troops

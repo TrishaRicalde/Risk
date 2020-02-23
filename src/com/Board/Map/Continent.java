@@ -19,6 +19,10 @@ public class Continent {
 		countries.add(new Country(country));
 	}
 	
+	public String getContinentName() {
+		return continentName;
+	}
+	
 	
 	
 	
