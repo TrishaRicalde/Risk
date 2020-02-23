@@ -62,6 +62,10 @@ public class Player {
 		return playerName;
 	}
 	
+	public String getPlayerName(int PlayerNumber) {
+		return playerName;
+	}
+	
 	public void aiDraft(Board b) {
 		if(isAI == true) {
 			b.getCurrentPlayerOwnedCountries();
