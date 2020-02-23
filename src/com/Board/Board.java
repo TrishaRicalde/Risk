@@ -110,9 +110,9 @@ public class Board {
 			return;
 		}
 		if (bonusTroops > 0 && console.getScannerCommand(commands.getDraftCmds()).equalsIgnoreCase("draft")) {
-			console.println("Player " + currentPlayer.getPlayerNumber() + " has " + bonusTroops + " bonus troops.");
 
 			while (bonusTroops > 0) {
+				console.println("Player " + currentPlayer.getPlayerNumber() + ": has " + bonusTroops + " bonus troops.");
 				console.println("Where would you like to place your troops?");
 				String selectedCountry = console.getScannerCountry(getCurrentPlayerOwnedCountries());
 				Country c = this.getCountry(selectedCountry);
@@ -197,6 +197,7 @@ public class Board {
 				int numTroopsToAdd = console.getScannerIntWithinRange(1, deployFrom.getNumTroops() - 1,
 						"How many troops would you like to place?");
 				fortifiedCountry.addDraftedTroops(numTroopsToAdd);
+				deployFrom.subractTroops(numTroopsToAdd);
 				return;
 			}
 		}
