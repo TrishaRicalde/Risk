@@ -280,9 +280,20 @@ public class Board {
 	}
 
 	private int getTroopBonus() {
-		int playerOwnedCountryNum = getCurrentPlayerOwnedCountries().size();
-		return playerOwnedCountryNum; // Still have to loop through continents
-		// to see if bonus is applicable.
+		int playerOwnedCountryNum = getCurrentPlayerOwnedCountries().size() / 3;
+		int continentBonus = 0;
+		for(Continent cont : continents) {
+			int contScore = 0;
+			for(Country country : cont.getCountries()) {
+				if(country.getPlayerOwnerOfCountry() == currentPlayer.getPlayerNumber()) {
+					contScore++;
+				}
+			}
+			if(contScore == cont.getCountries().size()) {
+				continentBonus = continentBonus + cont.getContinentBonus();
+			}
+		}
+		return playerOwnedCountryNum + continentBonus;
 	}
 
 	public ArrayList<Continent> getContinents() {
