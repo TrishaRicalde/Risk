@@ -29,6 +29,7 @@ public class Board {
 		continents = new ArrayList<Continent>(earthMap.getContinents());
 		firstRound = true;
 		initializePlayers();
+		createBoard();
 
 	}
 
@@ -43,7 +44,17 @@ public class Board {
 
 	// TO DO
 	private void createBoard() {
-
+		for (Continent cont : continents) {
+			int playerIdentity = 1;
+			for (Country country : cont.getCountries()) {
+				country.setPlayerIdentity(playerIdentity);
+				playerIdentity ++;
+				if (playerIdentity == 4) {
+					playerIdentity = 0;
+				}
+				country.addDraftedTroops(3);
+			}
+		}
 	}
 
 	private Board getBoard() {
@@ -99,9 +110,9 @@ public class Board {
 			return;
 		}
 		if (bonusTroops > 0 && console.getScannerCommand(commands.getDraftCmds()).equalsIgnoreCase("draft")) {
-			console.println("Player " + currentPlayer.getPlayerNumber() + " has " + bonusTroops + " bonus troops.");
 
 			while (bonusTroops > 0) {
+				console.println("Player " + currentPlayer.getPlayerNumber() + ": has " + bonusTroops + " bonus troops.");
 				console.println("Where would you like to place your troops?");
 				String selectedCountry = console.getScannerCountry(getCurrentPlayerOwnedCountries());
 				Country c = this.getCountry(selectedCountry);
@@ -153,7 +164,7 @@ public class Board {
 		console.println("---------------------- Fortify ----------------------\n");
 		ArrayList<Country> deployableCountries = new ArrayList<Country>(this.getDeployableCountries());		
 		if (deployableCountries.size() == 0) {
-			console.println("You do not have any troops to attack with.\n");
+			console.println("You do not have any troops to fortify with.\n");
 			return;
 		}
 
@@ -186,6 +197,7 @@ public class Board {
 				int numTroopsToAdd = console.getScannerIntWithinRange(1, deployFrom.getNumTroops() - 1,
 						"How many troops would you like to place?");
 				fortifiedCountry.addDraftedTroops(numTroopsToAdd);
+				deployFrom.subractTroops(numTroopsToAdd);
 				return;
 			}
 		}

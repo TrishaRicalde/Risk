@@ -63,6 +63,10 @@ public class Country {
 	public void addDraftedTroops(int numTroops) {
 		currentNumTroops += numTroops;
 	}
+	
+	public void subractTroops(int numTroops) {
+		currentNumTroops -= numTroops;
+	}
 
 	/**
 	 * (Non-encapsulated)
