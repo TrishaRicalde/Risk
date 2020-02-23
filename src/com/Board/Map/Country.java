@@ -21,10 +21,11 @@ public class Country {
 	 * @param c
 	 */
 	//TO BE IMPLEMENTED
+	/*
 	public Country(Country c) {
 		
 	}
-	
+	*/
 	/**
 	 * Adds a border to the Country
 	 * @param c
@@ -77,5 +78,11 @@ public class Country {
 	 */
 	public int getNumTroops() {
 		return currentNumTroops;
-	}	
+	}
+	
+	public void setPlayerIdentity(int playerNumber) {
+		playerIdentity = playerNumber;
+	}
+	
+	
 }
