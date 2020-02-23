@@ -31,7 +31,8 @@ public class Continent {
 	}
 	
 	public String getContinentName() {
-		return continentName;
+		return this.continentName;
 	}
+	
 
 }
