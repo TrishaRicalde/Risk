@@ -13,7 +13,6 @@ public class Country {
 		this.countryName = countryName;
 		borders = new ArrayList<Country>();
 		currentNumTroops = 0;
-		
 	}
 	
 	
@@ -55,11 +54,9 @@ public class Country {
 		return false;
 		
 	}
-
 	
 	public String getName() {
 		return countryName;
-		
 	}
 	
 	
@@ -86,5 +83,6 @@ public class Country {
 	public void setPlayerIdentity(int playerNumber) {
 		playerIdentity = playerNumber;
 	}
+	
 	
 }
