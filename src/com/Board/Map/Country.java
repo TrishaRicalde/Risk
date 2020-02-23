@@ -13,7 +13,6 @@ public class Country {
 		this.countryName = countryName;
 		borders = new ArrayList<Country>();
 		currentNumTroops = 0;
-		
 	}
 	
 	
@@ -31,7 +30,7 @@ public class Country {
 	 * @param c
 	 */
 	public void addBorder(Country c) {
-		borders.add(new Country(c));
+		borders.add(c);
 	}
 	
 	/**
@@ -54,12 +53,9 @@ public class Country {
 		return false;
 		
 	}
-
 	
-	//TO BE IMPLEMENTED
 	public String getName() {
 		return countryName;
-		
 	}
 	
 	
@@ -81,6 +77,5 @@ public class Country {
 	 */
 	public int getNumTroops() {
 		return currentNumTroops;
-	}
-	
+	}	
 }
