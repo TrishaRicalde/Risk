@@ -1,10 +1,11 @@
 package com.Board.Console;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.Board.Map.Country;
+
 public class Console {
-	ArrayList<String> commands = new ArrayList<String>();
+	ArrayList<String> commands = new ArrayList<String>(); //MAY NOT BE NEEDED
 	Scanner input = new Scanner(System.in);
 	
 	public Console() {
@@ -12,6 +13,7 @@ public class Console {
 	}
 	
 	private void initCommandsList() {
+		//TEST CODE
 		commands.add("Attack");
 		commands.add("Move");
 		commands.add("Quick Attack");
@@ -41,6 +43,24 @@ public class Console {
 		return numPlayers;
 	}
 	
+	/**
+	 * Gets the player names from the scanner.
+	 * @param numPlayers The number of Human Players in the game.
+	 * @return an ArrayList<String> containing the player names.
+	 */
+	public ArrayList<String> getPlayerNames(int numPlayers) {
+		ArrayList<String> pNames = new ArrayList<String>();
+		
+		for (int i = 1; i <= numPlayers; i++) {
+			System.out.println("Player " + i);
+			System.out.println("Please enter your name: \n");
+			pNames.add(input.nextLine());		
+		}
+		 
+		return pNames;
+	}
+	
+	//TO BE IMPLEMENTED
 	public void printStats(){}
 	
 	
@@ -76,7 +96,6 @@ public class Console {
 			}						
 		}
 		
-		System.out.println("You entered: " + nextInt + "\n");
 		return nextInt;		
 	}
 
@@ -119,7 +138,6 @@ public class Console {
 			}						
 		}
 		
-		System.out.println("You entered: " + nextInt + "\n");
 		return nextInt;		
 	}
 	
@@ -165,7 +183,6 @@ public class Console {
 			
 		}
 		
-		System.out.println("You entered: " + nextString + "\n");
 		return nextString;		
 	}
 	
@@ -193,43 +210,49 @@ public class Console {
 	 * @param cmds A list of Strings containing valid commands.
 	 * @return A String of the command entered by the user.
 	 */
-	public String getScannerCountry(ArrayList<String> validCountries) {
+	public String getScannerCountry(ArrayList<Country> validCountries) {
 		boolean validInput = false;
 		boolean done = false;
 		String nextString = "";
 		
-		System.out.print("Commands:");
-		for (String s : validCountries) {
-			System.out.print(" [" + s + "]");
+		System.out.print("Countries:");
+		for (Country c : validCountries) {
+			System.out.print(" [" + c.getName() + "]");
 		}
-		System.out.println("\nPlease enter a command: ");
+		System.out.println("\nPlease enter a Country: ");
 		
 		while (!done) {
 			while (!validInput) {
 				validInput = true;
 				try {
 					nextString = input.nextLine();	
-					for (String str : validCountries) {
-						if (nextString.equalsIgnoreCase(str)) {
+					for (Country c : validCountries) {
+						if (nextString.equalsIgnoreCase(c.getName())) {
 							done = true;
 						}
 					}
 					if (!done) throw new Exception();
 				} catch(Exception e) {
-					System.out.println("You have entered an invalid command!");
-					System.out.print("Commands:");
-					for (String s : validCountries) {
-						System.out.print(" [" + s + "]");
+					System.out.println("You have entered an invalid Country!");
+					System.out.print("Countries:");
+					for (Country c : validCountries) {
+						System.out.print(" [" + c.getName() + "]");
 					}
-					System.out.println("\nPlease enter a command: ");
+					System.out.println("\nPlease enter a Country: ");
 					validInput = false;
 				}
 			}
 			
 		}
 		
-		System.out.println("You entered: " + nextString + "\n");
 		return nextString;		
+	}
+	
+	public void printCountryArrayList(ArrayList<Country> cList) {
+		for (Country c : cList) {
+			System.out.print(" [" + c.getName() + "] ");
+		}
+		System.out.println();
 	}
 	
 }

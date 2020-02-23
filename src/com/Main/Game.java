@@ -15,6 +15,7 @@ public class Game {
 	
 	public void start() {
 		running = true;
+		run();
 	}
 	
 	public void stop() {
@@ -24,9 +25,10 @@ public class Game {
 	public void run() {
 		while (running) {
 			for(Player p: board.getPlayers()) {
-				board.playerTurn(p);
+				board.nextTurn();
+				stop();
 			}
-			stop();
+			
 		}
 	}
 	
