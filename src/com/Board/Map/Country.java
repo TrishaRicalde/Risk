@@ -7,13 +7,15 @@ public class Country {
 	private String countryName;
 	private int currentNumTroops;
 	private ArrayList<Country> borders;
-	private int playerOwner;
+	private int playerIdentity;
 	
 	public Country(String countryName) {
 		this.countryName = countryName;
 		borders = new ArrayList<Country>();
+		currentNumTroops = 0;
 		
 	}
+	
 	
 	/**
 	 * Copy Constructor
@@ -38,7 +40,7 @@ public class Country {
 	 */
 	//TO BE IMPLEMENTED
 	public int getPlayerOwnerOfCountry() {
-		return playerOwner;
+		return playerIdentity;
 	}
 	
 	//TO BE IMPLEMENTED
@@ -54,12 +56,31 @@ public class Country {
 	}
 
 	
-	
 	//TO BE IMPLEMENTED
 	public String getName() {
 		return countryName;
 		
 	}
+	
+	
+	public void addDraftedTroops(int numTroops) {
+		currentNumTroops += numTroops;
+	}
 
+	/**
+	 * (Non-encapsulated)
+	 * @return the ArrayList of this Country's borders. 
+	 */
+	public ArrayList<Country> getBorders() {
+		return borders;
+	}
+	
+	/**
+	 * 
+	 * @return the current number of troops occupying the country.
+	 */
+	public int getNumTroops() {
+		return currentNumTroops;
+	}
 	
 }
