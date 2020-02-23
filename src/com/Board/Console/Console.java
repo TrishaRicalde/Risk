@@ -2,7 +2,9 @@ package com.Board.Console;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.Board.Map.Continent;
 import com.Board.Map.Country;
+import com.Board.Board;
 
 public class Console {
 	ArrayList<String> commands = new ArrayList<String>(); //MAY NOT BE NEEDED
@@ -54,7 +56,7 @@ public class Console {
 		for (int i = 1; i <= numPlayers; i++) {
 			System.out.println("Player " + i);
 			System.out.println("Please enter your name: \n");
-			pNames.add(input.nextLine());		
+			pNames.add(input.nextLine());
 		}
 		 
 		return pNames;
@@ -253,6 +255,14 @@ public class Console {
 			System.out.print(" [" + c.getName() + "] ");
 		}
 		System.out.println();
+	}
+	
+	public void printBoardState(ArrayList<Continent> continents, int i, Board b) {
+		System.out.println(continents.get(i).getContinentName());
+		for(int j = 0; j < continents.get(i).getCountries().size(); j++) {
+			System.out.println("	" + continents.get(i).getCountries().get(j).getName() + " (" 
+			+ b.getPlayerName(continents.get(i).getCountries().get(j).getPlayerOwnerOfCountry()) + ") " + continents.get(i).getCountries().get(j).getNumTroops() + " troops.");
+		}
 	}
 	
 }
