@@ -22,7 +22,7 @@ public class Map {
 		Continent europe = new Continent("Europe");
 		Continent africa = new Continent("Africa");
 		Continent asia = new Continent("Asia");
-		Continent australia = new Continent("Austalia");
+		Continent australia = new Continent("Australia");
 		
 		// All of the Countries
 			//North America
