@@ -49,8 +49,8 @@ public class Board {
 			for (Country country : cont.getCountries()) {
 				country.setPlayerIdentity(playerIdentity);
 				playerIdentity ++;
-				if (playerIdentity == 4) {
-					playerIdentity = 0;
+				if (playerIdentity == 5) {
+					playerIdentity = 1;
 				}
 				country.addDraftedTroops(3);
 			}
