@@ -13,7 +13,6 @@ public class Country {
 		this.countryName = countryName;
 		borders = new ArrayList<Country>();
 		currentNumTroops = 0;
-		
 	}
 	
 	
@@ -22,16 +21,17 @@ public class Country {
 	 * @param c
 	 */
 	//TO BE IMPLEMENTED
+	/*
 	public Country(Country c) {
 		
 	}
-	
+	*/
 	/**
 	 * Adds a border to the Country
 	 * @param c
 	 */
 	public void addBorder(Country c) {
-		borders.add(new Country(c));
+		borders.add(c);
 	}
 	
 	/**
@@ -54,17 +54,18 @@ public class Country {
 		return false;
 		
 	}
-
 	
-	//TO BE IMPLEMENTED
 	public String getName() {
 		return countryName;
-		
 	}
 	
 	
 	public void addDraftedTroops(int numTroops) {
 		currentNumTroops += numTroops;
+	}
+	
+	public void subractTroops(int numTroops) {
+		currentNumTroops -= numTroops;
 	}
 
 	/**
@@ -82,5 +83,10 @@ public class Country {
 	public int getNumTroops() {
 		return currentNumTroops;
 	}
+	
+	public void setPlayerIdentity(int playerNumber) {
+		playerIdentity = playerNumber;
+	}
+	
 	
 }

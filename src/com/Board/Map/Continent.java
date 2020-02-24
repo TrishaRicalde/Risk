@@ -15,11 +15,7 @@ public class Continent {
 	}
 	
 	public void addCountry(Country country) {
-		countries.add(new Country(country));
-	}
-	
-	public String getContinentName() {
-		return continentName;
+		countries.add(country);
 	}
 	
 
@@ -34,6 +30,10 @@ public class Continent {
 	
 	public int getContinentBonus() {
 		return continentBonus;
+	}
+	
+	public String getContinentName() {
+		return this.continentName;
 	}
 	
 
