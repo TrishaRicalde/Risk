@@ -43,13 +43,9 @@ public class Board {
 		this.firstRound = b.firstRound;
 	}
 
-	// TO DO
 	private void createBoard() {
 		
-		// STARTING TROOPS BELOW
-		
-		// clone continents list
-		ArrayList<Continent> allContinents = new ArrayList<Continent>(continents);
+		// Clean this up later...
 		
 		//clone continents list as a new list called currentContinents
 		ArrayList<String> currentContinents = new ArrayList<String>();
@@ -70,7 +66,7 @@ public class Board {
 		
 		// new list, Player's current countries list, there's always going to be 4 players
 		int numberOfPlayers = 4;
-		int startingTroopsPerPlayer = 100;
+		int startingTroopsPerPlayer = 25;
 		
 		int player1Troops = startingTroopsPerPlayer;
 		int player2Troops = startingTroopsPerPlayer;
@@ -155,7 +151,6 @@ public class Board {
 							currentTroops -= selectTroops;
 						}
 						
-						// else
 						else {
 							// change the number of troops to add as the player's current number of troops
 							selectTroops = currentTroops;
@@ -228,8 +223,7 @@ public class Board {
 						}
 						
 					}
-					
-					// else:
+
 					else {
 						// randomize through player's current countries list
 						// if country's number of troops < 3:
@@ -275,20 +269,32 @@ public class Board {
 					}
 					
 				}	
-				// else:
 				else {
-					// playerCountWithNoTroops += 1
 					playerCountWithNoTroops += 1;
 				}
 						
 			}
-			// if playerCountWithNoTroops < numberOfPlayers, playerCountWithNoTroops = 0.
+
 			if (playerCountWithNoTroops < numberOfPlayers) {
 				playerCountWithNoTroops = 0;
 			}
 		}
 		
-	// END OF STARTING TROOPS ABOVE
+	// Give troops to player ID
+
+	for (Country cont : player1Countries) {
+		cont.setPlayerIdentity(1);
+	}
+	for (Country cont : player2Countries) {
+		cont.setPlayerIdentity(2);
+	}
+	for (Country cont : player3Countries) {
+		cont.setPlayerIdentity(3);
+	}
+	for (Country cont : player4Countries) {
+		cont.setPlayerIdentity(4);
+	}
+
 	
 }
 
