@@ -7,22 +7,11 @@ import com.Board.Map.Country;
 import com.Board.Board;
 
 public class Console {
-	ArrayList<String> commands = new ArrayList<String>(); //MAY NOT BE NEEDED
 	Scanner input = new Scanner(System.in);
 	
 	public Console() {
-		initCommandsList();
+		
 	}
-	
-	private void initCommandsList() {
-		//TEST CODE
-		commands.add("Attack");
-		commands.add("Move");
-		commands.add("Quick Attack");
-	}
-	
-	
-	
 	
 	/**
 	 * Prompts the user to enter the number of Human Players in the game.
@@ -33,8 +22,8 @@ public class Console {
 		int numPlayers = 0;
 		
 		System.out.println("Risk" + "\n");
-		System.out.println("You can have a maximum of 4 Players." 
-				+ "\n" + "Please enter the number of Human Players:");
+		System.out.print("You can have a maximum of 4 Players." 
+				+ "\n" + "Please enter the number of Human Players: ");
 		numPlayers = getScannerIntWithinRange(1,4);
 		
 		//TEST CODE
@@ -54,8 +43,9 @@ public class Console {
 		ArrayList<String> pNames = new ArrayList<String>();
 		
 		for (int i = 1; i <= numPlayers; i++) {
+			System.out.println();
 			System.out.println("Player " + i);
-			System.out.println("Please enter your name: \n");
+			System.out.print("Please enter your name: ");
 			pNames.add(input.nextLine());
 		}
 		 
@@ -92,7 +82,7 @@ public class Console {
 				} catch(Exception e) {
 					System.out.println("You have entered an invalid input!");
 					System.out.println("Your number should be between "+ min + " and " + max + ".");
-					System.out.println("Please enter a number:");
+					System.out.print("Please enter a number: ");
 					validInput = false;
 				}
 			}						
@@ -134,7 +124,7 @@ public class Console {
 					System.out.println("You have entered an invalid input!");
 					System.out.println(prompt);
 					System.out.println("Your number should be between "+ min + " and " + max + ".");
-					System.out.println("Please enter a number:");
+					System.out.print("Please enter a number:");
 					validInput = false;
 				}
 			}						
@@ -159,13 +149,14 @@ public class Console {
 		for (String s : cmds) {
 			System.out.print(" [" + s + "]");
 		}
-		System.out.println("\nPlease enter a command: ");
+		System.out.print("\nPlease enter a command: ");
 		
 		while (!done) {
 			while (!validInput) {
 				validInput = true;
 				try {
-					nextString = input.nextLine();	
+					nextString = input.nextLine();
+					
 					for (String str : cmds) {
 						if (nextString.equalsIgnoreCase(str)) {
 							done = true;
@@ -178,7 +169,7 @@ public class Console {
 					for (String s : cmds) {
 						System.out.print(" [" + s + "]");
 					}
-					System.out.println("\nPlease enter a command: ");
+					System.out.print("\nPlease enter a command: ");
 					validInput = false;
 				}
 			}
@@ -221,7 +212,7 @@ public class Console {
 		for (Country c : validCountries) {
 			System.out.print(" [" + c.getName() + "]");
 		}
-		System.out.println("\nPlease enter a Country: ");
+		System.out.print("Please enter a Country: ");
 		
 		while (!done) {
 			while (!validInput) {
@@ -240,7 +231,7 @@ public class Console {
 					for (Country c : validCountries) {
 						System.out.print(" [" + c.getName() + "]");
 					}
-					System.out.println("\nPlease enter a Country: ");
+					System.out.print("\nPlease enter a Country: ");
 					validInput = false;
 				}
 			}
