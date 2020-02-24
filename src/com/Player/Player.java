@@ -7,7 +7,7 @@ import com.Board.Board;
 public class Player {
 	private Alliance alliance;
 	private int playerNumber;
-	private String[] possibleNames = {"Jefferson(AI)", "Billy(AI)", "Suzan(AI)", "Kong(AI)", "Makenzy(AI)", "Lora(AI)", "Kitten(AI)", "Dogo(AI)", "Izzy(AI)", "Poppy(AI)", "Lisa(AI)", "John(AI)", "Callie(AI)", "Shadow(AI)", "Whiskers(AI)", "Lily(AI)", "Charlotte(AI)", "Sylvester(AI)", "Gamer99(AI)", "Kid(AI)", "Alexander_The_Great(AI)"};
+	private String[] possibleNames = {"Jefferson Bot", "Billy Bot", "Suzan Bot", "Kong Bot", "Makenzy Bot", "Lora Bot", "Kitten Bot", "Dogo Bot", "Izzy Bot", "Poppy Bot", "Lisa Bot", "John Bot", "Callie Bot", "Shadow Bot", "Whiskers Bot", "Lily Bot", "Charlotte Bot", "Sylvester Bot", "Gamer99 Bot", "Kid Bot", "Alexander_The_Great Bot"};
 	private String playerName;
 	private Board board;// = new Board();
 	private boolean isAI;
@@ -59,6 +59,10 @@ public class Player {
 	}
 	
 	public String getPlayerName() {
+		return playerName;
+	}
+	
+	public String getPlayerName(int PlayerNumber) {
 		return playerName;
 	}
 	

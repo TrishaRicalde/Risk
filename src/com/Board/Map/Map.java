@@ -2,12 +2,16 @@ package com.Board.Map;
 
 import java.util.ArrayList;
 
+import com.Board.Console.Console;
+
 public class Map {
 	private final String MAP_NAME = "Earth";
 	private ArrayList<Continent> continents;
 	
 	public Map() {
 		initMap();
+		
+		
 	}
 	
 	/**
@@ -354,9 +358,6 @@ public class Map {
 			europe.setContinentBonus(5);
 			africa.setContinentBonus(3);
 			
-			
-		
-		
 
 				
 	}
