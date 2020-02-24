@@ -260,8 +260,8 @@ public class Console {
 	public void printBoardState(ArrayList<Continent> continents, int i, Board b) {
 		System.out.println(continents.get(i).getContinentName());
 		for(int j = 0; j < continents.get(i).getCountries().size(); j++) {
-			System.out.println("	" + continents.get(i).getCountries().get(j).getName() + " (" 
-			+ b.getPlayerName(continents.get(i).getCountries().get(j).getPlayerOwnerOfCountry()) + ") " + continents.get(i).getCountries().get(j).getNumTroops() + " troops.");
+			System.out.println("	" + continents.get(i).getCountries().get(j).getName() + "---(" 
+			+ b.getPlayerName(continents.get(i).getCountries().get(j).getPlayerOwnerOfCountry()) + ")---" + continents.get(i).getCountries().get(j).getNumTroops() + " troops.");
 		}
 	}
 	
