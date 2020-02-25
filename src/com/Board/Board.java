@@ -22,6 +22,10 @@ public class Board {
 	final private int totalPlayerNum = 4;
 	// Create Dice??
 
+	
+	
+	
+	
 	public Board() {
 		players = new ArrayList<Player>();
 		console = new Console();
@@ -43,260 +47,7 @@ public class Board {
 		this.firstRound = b.firstRound;
 	}
 
-	private void createBoard() {
-		
-		// Clean this up later...
-		
-		//clone continents list as a new list called currentContinents
-		ArrayList<String> currentContinents = new ArrayList<String>();
-		for (Continent cont : continents) {
-			currentContinents.add(cont.getContinentName());
-		}
-		
-		//ArrayList<Continent> currentContinents = new ArrayList<Continent>(continents);
-		
-		// clone current country list per continent
-		ArrayList<Country> currentNorthAmericaCountries = continents.get(0).getCountries();
-		ArrayList<Country> currentSouthAmericaCountries = continents.get(1).getCountries();
-		ArrayList<Country> currentEuropeCountries = continents.get(2).getCountries();
-		ArrayList<Country> currentAfricaCountries = continents.get(3).getCountries();
-		ArrayList<Country> currentAsiaCountries = continents.get(4).getCountries();
-		ArrayList<Country> currentAustraliaCountries = continents.get(5).getCountries();
-		
-		
-		// new list, Player's current countries list, there's always going to be 4 players
-		int numberOfPlayers = 4;
-		int startingTroopsPerPlayer = 25;
-		
-		int player1Troops = startingTroopsPerPlayer;
-		int player2Troops = startingTroopsPerPlayer;
-		int player3Troops = startingTroopsPerPlayer;
-		int player4Troops = startingTroopsPerPlayer;
-		
-		ArrayList<Country> player1Countries = new ArrayList<Country>();
-		ArrayList<Country> player2Countries = new ArrayList<Country>();
-		ArrayList<Country> player3Countries = new ArrayList<Country>();
-		ArrayList<Country> player4Countries = new ArrayList<Country>();
-		
-		
-		// loop if playerCountWithNoTroops != numberOfPlayers:
-		for (int playerCountWithNoTroops = 0; playerCountWithNoTroops < numberOfPlayers;) {
-			
-			// loop once per player:
-			for (int playerTurn = 0; playerTurn != numberOfPlayers; playerTurn++) {
-			
-				int currentTroops = 0;
-				
-				// get current number of troops for that player
-				if (playerTurn == 0) {
-					currentTroops = player1Troops;
-				}
-				if (playerTurn == 1) {
-					currentTroops = player2Troops;
-				}
-				if (playerTurn == 2) {
-					currentTroops = player3Troops;
-				}
-				if (playerTurn == 3) {
-					currentTroops = player4Troops;
-				}
-				
-				// if current number of troops for that player > 0:
-				if (currentTroops > 0) {
-				
-					// if currentContinents is NOT empty:
-					if (currentContinents.size() > 0) {
-					
-						Country currentCountry = null;
-						
-						// choose random currentContinent
-						Random randomContinent = new Random();
-						String chosenContinent = currentContinents.get(randomContinent.nextInt(currentContinents.size()));
-						
-						// choose random country from the currentCountryList of that continent
-						if (chosenContinent == "North America") {
-							Random randomCountry = new Random();
-							currentCountry = currentNorthAmericaCountries.get(randomCountry.nextInt(currentNorthAmericaCountries.size()));
-						}
-						if (chosenContinent == "South America") {
-							Random randomCountry = new Random();
-							currentCountry = currentSouthAmericaCountries.get(randomCountry.nextInt(currentSouthAmericaCountries.size()));
-						}
-						if (chosenContinent == "Europe") {
-							Random randomCountry = new Random();
-							currentCountry = currentEuropeCountries.get(randomCountry.nextInt(currentEuropeCountries.size()));
-						}
-						if (chosenContinent == "Africa") {
-							Random randomCountry = new Random();
-							currentCountry = currentAfricaCountries.get(randomCountry.nextInt(currentAfricaCountries.size()));
-						}
-						if (chosenContinent == "Asia") {
-							Random randomCountry = new Random();
-							currentCountry = currentAsiaCountries.get(randomCountry.nextInt(currentAsiaCountries.size()));
-						}
-						if (chosenContinent == "Australia") {
-							Random randomCountry = new Random();
-							currentCountry = currentAustraliaCountries.get(randomCountry.nextInt(currentAustraliaCountries.size()));
-						}
-						
-						int selectTroops = 0;
-						// if player number of troops > 2:
-						if (currentTroops > 2) {
-							// Randomize 1-3 Troops
-							Random randomSelectTroops = new Random();
-							selectTroops = randomSelectTroops.nextInt(3);
-							selectTroops += 1;
-							
-							// Minus that number from the player's current number of troops
-							currentTroops -= selectTroops;
-						}
-						
-						else {
-							// change the number of troops to add as the player's current number of troops
-							selectTroops = currentTroops;
-							// set player's current number of troops as 0
-							currentTroops = 0;
-						}
-						
-						
-						// add those troops to that random country
-						for (Continent cont : continents) {
-				            for (Country country : cont.getCountries()) {
-				            	if (country == currentCountry) {
-				            		country.addDraftedTroops(selectTroops);
-				            	}
-				            }
-						}
-						
-						// remove that random country from currentCountryList
-						// if currentCountryList for that continent is empty:
-							// remove that continent from currentContinents list
-						if (chosenContinent == "North America") {
-							currentNorthAmericaCountries.remove(currentCountry);
-							if (currentNorthAmericaCountries.size() == 0) {
-								currentContinents.remove("North America");
-							}
-						}
-						if (chosenContinent == "South America") {
-							currentSouthAmericaCountries.remove(currentCountry);
-							if (currentSouthAmericaCountries.size() == 0) {
-								currentContinents.remove("South America");
-							}
-						}
-						if (chosenContinent == "Europe") {
-							currentEuropeCountries.remove(currentCountry);
-							if (currentEuropeCountries.size() == 0) {
-								currentContinents.remove("Europe");
-							}
-						}
-						if (chosenContinent == "Africa") {
-							currentAfricaCountries.remove(currentCountry);
-							if (currentAfricaCountries.size() == 0) {
-								currentContinents.remove("Africa");
-							}
-						}
-						if (chosenContinent == "Asia") {
-							currentAsiaCountries.remove(currentCountry);
-							if (currentAsiaCountries.size() == 0) {
-								currentContinents.remove("Asia");
-							}
-						}
-						if (chosenContinent == "Australia") {
-							currentAustraliaCountries.remove(currentCountry);
-							if (currentAustraliaCountries.size() == 0) {
-								currentContinents.remove("Australia");
-							}
-						}
-						
-						// add country to player's current countries list
-						if (playerTurn == 0) {
-							player1Countries.add(currentCountry);
-						}
-						if (playerTurn == 1) {
-							player2Countries.add(currentCountry);
-						}
-						if (playerTurn == 2) {
-							player3Countries.add(currentCountry);
-						}
-						if (playerTurn == 3) {
-							player4Countries.add(currentCountry);
-						}
-						
-					}
-
-					else {
-						// randomize through player's current countries list
-						// if country's number of troops < 3:
-							// add 1 troop to that country
-							// remove 1 troop from player's current number of troops
-						Random previousCountry = new Random();
-						Country currentCountry = null;
-
-						if (playerTurn == 0) {
-							currentCountry = player1Countries.get(previousCountry.nextInt(player1Countries.size()));
-						}
-						if (playerTurn == 1) {
-							currentCountry = player2Countries.get(previousCountry.nextInt(player2Countries.size()));
-						}
-						if (playerTurn == 2) {
-							currentCountry = player3Countries.get(previousCountry.nextInt(player3Countries.size()));
-						}
-						if (playerTurn == 3) {
-							currentCountry = player4Countries.get(previousCountry.nextInt(player4Countries.size()));
-						}
-						
-						
-						if (currentCountry.getNumTroops() < 3) {
-							currentCountry.addDraftedTroops(1);
-						}
-						
-						currentTroops -= 1;
-						
-					}
-						
-					// set current Troops to the proper player
-					if (playerTurn == 0) {
-						player1Troops = currentTroops;
-					}
-					if (playerTurn == 1) {
-						player2Troops = currentTroops;
-					}
-					if (playerTurn == 2) {
-						player3Troops = currentTroops;
-					}
-					if (playerTurn == 3) {
-						player4Troops = currentTroops;
-					}
-					
-				}	
-				else {
-					playerCountWithNoTroops += 1;
-				}
-						
-			}
-
-			if (playerCountWithNoTroops < numberOfPlayers) {
-				playerCountWithNoTroops = 0;
-			}
-		}
-		
-	// Give troops to player ID
-
-	for (Country cont : player1Countries) {
-		cont.setPlayerIdentity(1);
-	}
-	for (Country cont : player2Countries) {
-		cont.setPlayerIdentity(2);
-	}
-	for (Country cont : player3Countries) {
-		cont.setPlayerIdentity(3);
-	}
-	for (Country cont : player4Countries) {
-		cont.setPlayerIdentity(4);
-	}
-
 	
-}
 
 
 	private Board getBoard() {
@@ -562,5 +313,262 @@ public class Board {
 		}
 		return null;
 	}
+	
+	
+	
+private void createBoard() {
+		
+		// Clean this up later...
+		
+		//clone continents list as a new list called currentContinents
+		ArrayList<String> currentContinents = new ArrayList<String>();
+		for (Continent cont : continents) {
+			currentContinents.add(cont.getContinentName());
+		}
+		
+		//ArrayList<Continent> currentContinents = new ArrayList<Continent>(continents);
+		
+		// clone current country list per continent
+		ArrayList<Country> currentNorthAmericaCountries = continents.get(0).getCountries();
+		ArrayList<Country> currentSouthAmericaCountries = continents.get(1).getCountries();
+		ArrayList<Country> currentEuropeCountries = continents.get(2).getCountries();
+		ArrayList<Country> currentAfricaCountries = continents.get(3).getCountries();
+		ArrayList<Country> currentAsiaCountries = continents.get(4).getCountries();
+		ArrayList<Country> currentAustraliaCountries = continents.get(5).getCountries();
+		
+		
+		// new list, Player's current countries list, there's always going to be 4 players
+		int numberOfPlayers = 4;
+		int startingTroopsPerPlayer = 25;
+		
+		int player1Troops = startingTroopsPerPlayer;
+		int player2Troops = startingTroopsPerPlayer;
+		int player3Troops = startingTroopsPerPlayer;
+		int player4Troops = startingTroopsPerPlayer;
+		
+		ArrayList<Country> player1Countries = new ArrayList<Country>();
+		ArrayList<Country> player2Countries = new ArrayList<Country>();
+		ArrayList<Country> player3Countries = new ArrayList<Country>();
+		ArrayList<Country> player4Countries = new ArrayList<Country>();
+		
+		
+		// loop if playerCountWithNoTroops != numberOfPlayers:
+		for (int playerCountWithNoTroops = 0; playerCountWithNoTroops < numberOfPlayers;) {
+			
+			// loop once per player:
+			for (int playerTurn = 0; playerTurn != numberOfPlayers; playerTurn++) {
+			
+				int currentTroops = 0;
+				
+				// get current number of troops for that player
+				if (playerTurn == 0) {
+					currentTroops = player1Troops;
+				}
+				if (playerTurn == 1) {
+					currentTroops = player2Troops;
+				}
+				if (playerTurn == 2) {
+					currentTroops = player3Troops;
+				}
+				if (playerTurn == 3) {
+					currentTroops = player4Troops;
+				}
+				
+				// if current number of troops for that player > 0:
+				if (currentTroops > 0) {
+				
+					// if currentContinents is NOT empty:
+					if (currentContinents.size() > 0) {
+					
+						Country currentCountry = null;
+						
+						// choose random currentContinent
+						Random randomContinent = new Random();
+						String chosenContinent = currentContinents.get(randomContinent.nextInt(currentContinents.size()));
+						
+						// choose random country from the currentCountryList of that continent
+						if (chosenContinent == "North America") {
+							Random randomCountry = new Random();
+							currentCountry = currentNorthAmericaCountries.get(randomCountry.nextInt(currentNorthAmericaCountries.size()));
+						}
+						if (chosenContinent == "South America") {
+							Random randomCountry = new Random();
+							currentCountry = currentSouthAmericaCountries.get(randomCountry.nextInt(currentSouthAmericaCountries.size()));
+						}
+						if (chosenContinent == "Europe") {
+							Random randomCountry = new Random();
+							currentCountry = currentEuropeCountries.get(randomCountry.nextInt(currentEuropeCountries.size()));
+						}
+						if (chosenContinent == "Africa") {
+							Random randomCountry = new Random();
+							currentCountry = currentAfricaCountries.get(randomCountry.nextInt(currentAfricaCountries.size()));
+						}
+						if (chosenContinent == "Asia") {
+							Random randomCountry = new Random();
+							currentCountry = currentAsiaCountries.get(randomCountry.nextInt(currentAsiaCountries.size()));
+						}
+						if (chosenContinent == "Australia") {
+							Random randomCountry = new Random();
+							currentCountry = currentAustraliaCountries.get(randomCountry.nextInt(currentAustraliaCountries.size()));
+						}
+						
+						int selectTroops = 0;
+						// if player number of troops > 2:
+						if (currentTroops > 2) {
+							// Randomize 1-3 Troops
+							Random randomSelectTroops = new Random();
+							selectTroops = randomSelectTroops.nextInt(3);
+							selectTroops += 1;
+							
+							// Minus that number from the player's current number of troops
+							currentTroops -= selectTroops;
+						}
+						
+						else {
+							// change the number of troops to add as the player's current number of troops
+							selectTroops = currentTroops;
+							// set player's current number of troops as 0
+							currentTroops = 0;
+						}
+						
+						
+						// add those troops to that random country
+						for (Continent cont : continents) {
+				            for (Country country : cont.getCountries()) {
+				            	if (country == currentCountry) {
+				            		country.addDraftedTroops(selectTroops);
+				            	}
+				            }
+						}
+						
+						// remove that random country from currentCountryList
+						// if currentCountryList for that continent is empty:
+							// remove that continent from currentContinents list
+						if (chosenContinent == "North America") {
+							currentNorthAmericaCountries.remove(currentCountry);
+							if (currentNorthAmericaCountries.size() == 0) {
+								currentContinents.remove("North America");
+							}
+						}
+						if (chosenContinent == "South America") {
+							currentSouthAmericaCountries.remove(currentCountry);
+							if (currentSouthAmericaCountries.size() == 0) {
+								currentContinents.remove("South America");
+							}
+						}
+						if (chosenContinent == "Europe") {
+							currentEuropeCountries.remove(currentCountry);
+							if (currentEuropeCountries.size() == 0) {
+								currentContinents.remove("Europe");
+							}
+						}
+						if (chosenContinent == "Africa") {
+							currentAfricaCountries.remove(currentCountry);
+							if (currentAfricaCountries.size() == 0) {
+								currentContinents.remove("Africa");
+							}
+						}
+						if (chosenContinent == "Asia") {
+							currentAsiaCountries.remove(currentCountry);
+							if (currentAsiaCountries.size() == 0) {
+								currentContinents.remove("Asia");
+							}
+						}
+						if (chosenContinent == "Australia") {
+							currentAustraliaCountries.remove(currentCountry);
+							if (currentAustraliaCountries.size() == 0) {
+								currentContinents.remove("Australia");
+							}
+						}
+						
+						// add country to player's current countries list
+						if (playerTurn == 0) {
+							player1Countries.add(currentCountry);
+						}
+						if (playerTurn == 1) {
+							player2Countries.add(currentCountry);
+						}
+						if (playerTurn == 2) {
+							player3Countries.add(currentCountry);
+						}
+						if (playerTurn == 3) {
+							player4Countries.add(currentCountry);
+						}
+						
+					}
+
+					else {
+						// randomize through player's current countries list
+						// if country's number of troops < 3:
+							// add 1 troop to that country
+							// remove 1 troop from player's current number of troops
+						Random previousCountry = new Random();
+						Country currentCountry = null;
+
+						if (playerTurn == 0) {
+							currentCountry = player1Countries.get(previousCountry.nextInt(player1Countries.size()));
+						}
+						if (playerTurn == 1) {
+							currentCountry = player2Countries.get(previousCountry.nextInt(player2Countries.size()));
+						}
+						if (playerTurn == 2) {
+							currentCountry = player3Countries.get(previousCountry.nextInt(player3Countries.size()));
+						}
+						if (playerTurn == 3) {
+							currentCountry = player4Countries.get(previousCountry.nextInt(player4Countries.size()));
+						}
+						
+						
+						if (currentCountry.getNumTroops() < 3) {
+							currentCountry.addDraftedTroops(1);
+						}
+						
+						currentTroops -= 1;
+						
+					}
+						
+					// set current Troops to the proper player
+					if (playerTurn == 0) {
+						player1Troops = currentTroops;
+					}
+					if (playerTurn == 1) {
+						player2Troops = currentTroops;
+					}
+					if (playerTurn == 2) {
+						player3Troops = currentTroops;
+					}
+					if (playerTurn == 3) {
+						player4Troops = currentTroops;
+					}
+					
+				}	
+				else {
+					playerCountWithNoTroops += 1;
+				}
+						
+			}
+
+			if (playerCountWithNoTroops < numberOfPlayers) {
+				playerCountWithNoTroops = 0;
+			}
+		}
+		
+	// Give troops to player ID
+
+	for (Country cont : player1Countries) {
+		cont.setPlayerIdentity(1);
+	}
+	for (Country cont : player2Countries) {
+		cont.setPlayerIdentity(2);
+	}
+	for (Country cont : player3Countries) {
+		cont.setPlayerIdentity(3);
+	}
+	for (Country cont : player4Countries) {
+		cont.setPlayerIdentity(4);
+	}
+
+	
+}
 
 }
