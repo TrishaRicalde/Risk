@@ -108,7 +108,7 @@ public class Console {
 		int nextInt = 0;
 		
 		System.out.println(prompt);
-		System.out.println("Please enter a number between "+ min + " and " + max + ".");
+		System.out.print("Please enter a number between "+ min + " and " + max + ":");
 		
 		while (!done) {
 			while (!validInput) {
@@ -207,12 +207,17 @@ public class Console {
 		boolean validInput = false;
 		boolean done = false;
 		String nextString = "";
-		
+		int count = 0;
 		System.out.print("Countries:");
 		for (Country c : validCountries) {
 			System.out.print(" [" + c.getName() + "]");
+			count ++;
+			if (count == 5) {
+				System.out.println();
+			}
 		}
-		System.out.print("Please enter a Country: ");
+		count = 0;
+		System.out.print("\nPlease enter a Country: ");
 		
 		while (!done) {
 			while (!validInput) {
@@ -230,7 +235,12 @@ public class Console {
 					System.out.print("Countries:");
 					for (Country c : validCountries) {
 						System.out.print(" [" + c.getName() + "]");
+						count ++;
+						if (count == 5) {
+							System.out.println();
+						}
 					}
+					count = 0;
 					System.out.print("\nPlease enter a Country: ");
 					validInput = false;
 				}
