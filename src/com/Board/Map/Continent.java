@@ -18,9 +18,11 @@ public class Continent {
 		countries.add(country);
 	}
 	
+
 	public ArrayList<Country> getCountries() {
 		return new ArrayList<Country>(countries);
 	}
+
 	
 	public void setContinentBonus(int bonus) {
 		continentBonus = bonus;

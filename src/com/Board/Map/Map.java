@@ -26,7 +26,7 @@ public class Map {
 		Continent europe = new Continent("Europe");
 		Continent africa = new Continent("Africa");
 		Continent asia = new Continent("Asia");
-		Continent australia = new Continent("Austalia");
+		Continent australia = new Continent("Australia");
 		
 		// All of the Countries
 			//North America
@@ -46,7 +46,7 @@ public class Map {
 				Country peru = new Country("Peru");
 				Country venezuela = new Country("Venezuela");
 			//Europe
-				Country greatbritian = new Country("Great Britian");
+				Country greatbritain = new Country("Great Britain");
 				Country iceland = new Country("Iceland");
 				Country northerneurope = new Country("Northern Europe");
 				Country scandinavia = new Country("Scandinavia");
@@ -176,21 +176,21 @@ public class Map {
 						southafrica.addBorder(eastafrica);
 				//Europe
 					//1.Great Britian
-						greatbritian.addBorder(iceland);
-						greatbritian.addBorder(westerneurope);
-						greatbritian.addBorder(scandinavia);
-						greatbritian.addBorder(northerneurope);
+						greatbritain.addBorder(iceland);
+						greatbritain.addBorder(westerneurope);
+						greatbritain.addBorder(scandinavia);
+						greatbritain.addBorder(northerneurope);
 					//2.Iceland
-						iceland.addBorder(greatbritian);
+						iceland.addBorder(greatbritain);
 						iceland.addBorder(scandinavia);
 						iceland.addBorder(greenland);
 					//3.Northern Europe
-						northerneurope.addBorder(greatbritian);
+						northerneurope.addBorder(greatbritain);
 						northerneurope.addBorder(westerneurope);
 						northerneurope.addBorder(ukraine);
 						northerneurope.addBorder(scandinavia);
 					//4.Scandinavia
-						scandinavia.addBorder(greatbritian);
+						scandinavia.addBorder(greatbritain);
 						scandinavia.addBorder(iceland);
 						scandinavia.addBorder(northerneurope);
 						scandinavia.addBorder(ukraine);
@@ -211,7 +211,7 @@ public class Map {
 				   //7. Western Europe
 						westerneurope.addBorder(southerneurope);
 						westerneurope.addBorder(northerneurope);
-						westerneurope.addBorder(greatbritian);
+						westerneurope.addBorder(greatbritain);
 						westerneurope.addBorder(northafrica);
 				//Asia
 				   //1.Afghanistan
@@ -310,7 +310,7 @@ public class Map {
 			northAmerica.addCountry(northwestTerritory);
 			
 		continents.add(europe);
-			europe.addCountry(greatbritian);
+			europe.addCountry(greatbritain);
 			europe.addCountry(scandinavia);
 			europe.addCountry(southerneurope);
 			europe.addCountry(northerneurope);
