@@ -3,56 +3,60 @@ package com.Board;
 import java.util.Random;
 
 public class Dice {
+	
+	private Random randomNumber;
+	
+	public Dice() {
+		randomNumber = new Random();
+	}
+
+	/**
+	 * 
+	 * @return a random number between 1 and 6 inclusive.
+	 */
+	public int roll() {
+		return randomNumber.nextInt(6) + 1;
+	}
 
 	
-	 // RANDOM NUMBER GENERATOR
-	private int faceValue;
-	 
-	public Dice() 
-	{
-		Random randomNumber = new Random();
-		faceValue = randomNumber.nextInt(6) + 1;
-	}
-	
-	//generate rand. number
-	public int roll() 
-	{
-		Random randomNumber = new Random();
-		faceValue = randomNumber.nextInt(6) + 1;
-		
-		return faceValue;
-	}
-	
-	//return true if Dice.isHigher(otherDice.number)
-	public boolean isHigher(int i) 
-	{
-		Dice oneDie = new Dice();
-		boolean isHigher = false;
-		
-		if (oneDie.faceValue > i)
-			isHigher = true;
-		return isHigher;
-	
-	}
-	
-	public void blitz(int attackingTroops, int defendingTroops) 
-	{
-		//Still not quite sure about this
-	}
-	
-	public int getTroopsdifference(int attackingTroops, int defendingTroops) 
-	{
-		int troopDifference;
-		if (defendingTroops > attackingTroops)
-		{
-			troopDifference = defendingTroops - attackingTroops;
-		}
-		else
-		{
-			troopDifference = attackingTroops - defendingTroops;
+	/**
+	 * Generates numbers between 1 and 6 inclusive, based on the amount of troops
+	 * @param numOfTroops
+	 * @return
+	 */
+	public int[] getRolls(int numTroops) {
+		int numRolls = 0;
+		if (numTroops >= 3) {
+			numRolls = 3;
+		} else {
+			numRolls = 2;
 		}
 		
-		return troopDifference;
+		int[] rolls = new int[numRolls];
+		for (int i = 0; i < numRolls; i++) {
+			rolls[i] = roll();
+		}
+		return rolls;
 	}
+
 	
+	/**
+	 * 
+	 * @param atckRolls
+	 * @param dfdRolls
+	 * @return true if atckRolls contains an int greater than the ints in dfdRolls.
+	 */
+	public boolean checkIfVictorious(int[] atckRolls, int[] dfdRolls) {
+		boolean victorious = false;
+		for (int i : atckRolls) {
+			for (int j : dfdRolls) {
+				if (i > j) {
+					victorious = true;
+				}
+			}
+		}
+		return victorious;
+	}
+
+
 }
