@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.Board.Map.Continent;
 import com.Board.Map.Country;
+import com.Player.Player;
 import com.Board.Board;
 
 public class Console {
@@ -140,7 +141,7 @@ public class Console {
 	 * @param cmds A list of Strings containing valid commands.
 	 * @return A String of the command entered by the user.
 	 */
-	public String getScannerCommand(ArrayList<String> cmds) {
+	public String getScannerCommand(ArrayList<String> cmds, Player p) {
 		boolean validInput = false;
 		boolean done = false;
 		String nextString = "";
