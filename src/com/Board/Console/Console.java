@@ -214,6 +214,7 @@ public class Console {
 			count ++;
 			if (count == 5) {
 				System.out.println();
+				System.out.print("          ");
 			}
 		}
 		count = 0;
@@ -238,6 +239,7 @@ public class Console {
 						count ++;
 						if (count == 5) {
 							System.out.println();
+							System.out.print("          ");
 						}
 					}
 					count = 0;
