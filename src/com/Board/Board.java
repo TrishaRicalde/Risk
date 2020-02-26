@@ -109,7 +109,7 @@ public class Board {
 			console.println("You have no bonus Troops \n");
 			return;
 		}
-		if (bonusTroops > 0 && console.getScannerCommand(commands.getDraftCmds(), null).equalsIgnoreCase("draft")) {
+		if (bonusTroops > 0 && console.getScannerCommand(commands.getDraftCmds()).equalsIgnoreCase("draft")) {
 
 			while (bonusTroops > 0) {
 				console.println("Player " + currentPlayer.getPlayerNumber() + ": has " + bonusTroops + " bonus troops.");
@@ -135,7 +135,7 @@ public class Board {
 			return;
 		}
 		
-		while (console.getScannerCommand(commands.getAttackCmds(), null).equalsIgnoreCase("attack")) {
+		while (console.getScannerCommand(commands.getAttackCmds()).equalsIgnoreCase("attack")) {
 			console.println("Which Country would you like to launch your attack from?");
 			Country attackFrom = this.getCountry(console.getScannerCountry(deployableCountries));
 			console.println("Which Country would you like to attack?");
@@ -168,7 +168,7 @@ public class Board {
 			return;
 		}
 
-		while (console.getScannerCommand(commands.getFortifyCmds(), null).equalsIgnoreCase("fortify")) {
+		while (console.getScannerCommand(commands.getFortifyCmds()).equalsIgnoreCase("fortify")) {
 			console.println("Which Country would you like to take troops from?");
 
 			// Adds the countries owned with more than 1 troop to the ArrayList
