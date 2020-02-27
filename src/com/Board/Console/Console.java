@@ -4,7 +4,6 @@ import java.util.Scanner;
 
 import com.Board.Map.Continent;
 import com.Board.Map.Country;
-import com.Player.Player;
 import com.Board.Board;
 
 public class Console {
