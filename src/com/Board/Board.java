@@ -74,7 +74,6 @@ public class Board {
 		draft();
 		attack();
 		fortify();
-		endTurn(); // Useful??
 	}
 
 	private void printBoardState() {
