@@ -13,11 +13,11 @@ public class BattleReport {
 		this.victorious = won;
 		if (victorious) {
 			System.out.println("Victory!"
-					+ "\n You have lost:" + atkTroopsLost + " troops.");
+					+ "\nYou have lost:" + atkTroopsLost + " troops.\n");
 		} else {
 			System.out.println("Defeat!"
 					+ "\n You have lost:" + atkTroopsLost + " troops."
-					+ "\n Your enemy has lost:" + dfndTroopsLost + " troops");
+					+ "\n Your enemy has lost:" + dfndTroopsLost + " troops \n");
 		}
 	}
 

@@ -20,11 +20,9 @@ public class Board {
 	private Command commands;
 	private boolean firstRound;
 	private Dice dice;
-	
+
 	private final int totalPlayerNum = 4;
-	private final int absolutePower = 5;
-	
-	
+	private final int absolutePower = 20;
 
 	public Board() {
 		players = new ArrayList<Player>();
@@ -118,6 +116,7 @@ public class Board {
 	// TO DO
 	private void attack() {
 		console.println("---------------------- Attack ----------------------\n");
+		
 		ArrayList<Country> deployableCountries = new ArrayList<Country>(this.getDeployableCountries());
 
 		if (deployableCountries.size() == 0) {
@@ -126,31 +125,76 @@ public class Board {
 		}
 
 		while (console.getScannerCommand(commands.getAttackCmds()).equalsIgnoreCase("attack")) {
+			boolean invalid = false;
+			deployableCountries = new ArrayList<Country>(this.getDeployableCountries());
 			console.println("Which Country would you like to launch your attack from?");
 			Country attackingCountry = this.getCountry(console.getScannerCountry(deployableCountries));
 			console.println("Which Country would you like to attack?");
-			Country defendingCountry = this.getCountry(console.getScannerCountry(attackingCountry.getBorders()));
-			BattleReport bReport = this.battle(attackingCountry, defendingCountry);
-			attackingCountry.subractTroops(bReport.getAttackingTroopsLost());
-			defendingCountry.subractTroops(bReport.getDefendingTroopsLost());
-			/*
-			 * TO BE CONTINUED
-			 * if victorious then moveTroops();
-			 */
-
-			// Checks if the player has troops left to attack with.
-			int count = 0;
-			for (Country c : this.getCurrentPlayerOwnedCountries()) {
-				if (c.getNumTroops() > 1)
-					count++;
+			ArrayList<Country> attackableCountries = new ArrayList<Country>();
+			for (Country c : attackingCountry.getBorders()) {
+				if (c.getPlayerOwnerOfCountry() != currentPlayer.getPlayerNumber()) {
+					attackableCountries.add(c);
+				}
 			}
-			if (count > 0) {
+			
+			int count = 0;
+			
+			if (attackableCountries.size() > 0) {
+				Country defendingCountry = this.getCountry(console.getScannerCountry(attackableCountries));
+				
+				BattleReport bReport = this.battle(attackingCountry, defendingCountry);
+				attackingCountry.subractTroops(bReport.getAttackingTroopsLost());
+				defendingCountry.subractTroops(bReport.getDefendingTroopsLost());
+				
+				if (bReport.isVictorious()) {
+					moveTroops(attackingCountry, defendingCountry);
+					defendingCountry.setPlayerIdentity(currentPlayer.getPlayerNumber());
+					printBoardState();
+				}
+				
+				// Checks if the player has troops left to attack with.
+				
+				for (Country c : this.getCurrentPlayerOwnedCountries()) {
+					if (c.getNumTroops() > 1)
+						count++;
+				}
+				
+			} else {
+				invalid = true;
+				console.println("The Country you have chosen does not border any Enemy Countries.");
+			}
+						
+			if (count > 0 || invalid) {
 				console.println("Would you like to continue attacking?");
 			} else {
 				return;
 			}
 		}
 		printBoardState();
+	}
+
+	/**
+	 * Moves troops from c1 to c2.
+	 * 
+	 * @param c1
+	 *            Country you are taking troops from.
+	 * @param c2
+	 *            Country you are moving troops to.
+	 */
+	private void moveTroops(Country c1, Country c2) {
+		int max = c1.getNumTroops() - 1;
+		int min = 1;
+		if (max == 1) {
+			c1.subractTroops(1);
+			c2.addDraftedTroops(1);
+			console.println("1 troop was moved");
+			return;
+		}
+		int numTroopsToMove = console.getScannerIntWithinRange(min, max,
+				"Enter the amount of troops to move to " + c2.getName() + ": ");
+		c1.subractTroops(numTroopsToMove);
+		c2.addDraftedTroops(numTroopsToMove);
+
 	}
 
 	// TO DO
@@ -205,48 +249,46 @@ public class Board {
 		printBoardState();
 	}
 
-	
-	 
 	private BattleReport battle(Country attacking, Country defending) {
 		int atkTroopsLost = 0;
 		int dfndTroopsLost = 0;
-		
+
 		boolean victorious = false;
 		boolean wonBattle = false;
 		int atkTroops = attacking.getNumTroops();
 		int dfndTroops = defending.getNumTroops();
-		
+
 		if (this.getTroopsDifference(atkTroops, dfndTroops) >= absolutePower) {
 			victorious = true;
 			dfndTroopsLost = dfndTroops;
 		}
-		
+
 		while (!victorious && atkTroops > 1) {
-			
+
 			int[] atkRolls = dice.getRolls(atkTroops);
 			int[] dfndRolls = dice.getRolls(dfndTroops);
 			wonBattle = dice.checkIfVictorious(atkRolls, dfndRolls);
-			
+
 			if (wonBattle) {
-				dfndTroopsLost ++;
-				dfndTroops --;
+				dfndTroopsLost++;
+				dfndTroops--;
 			} else {
-				atkTroopsLost ++;
-				atkTroops --;
+				atkTroopsLost++;
+				atkTroops--;
 			}
-			
+
 			if (dfndTroops == 0) {
-				victorious = true;			
+				victorious = true;
 			}
 		}
-		
+
 		return new BattleReport(atkTroopsLost, dfndTroopsLost, victorious);
 	}
-	
+
 	public int getTroopsDifference(int attackingTroops, int defendingTroops) {
 		return Math.abs(attackingTroops - defendingTroops);
 	}
-	
+
 	/**
 	 * Gets an ArrayList of current Player Owned Countries with more than 1
 	 * troop.
