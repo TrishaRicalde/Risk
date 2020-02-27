@@ -18,6 +18,7 @@ public class Board {
 	private Map earthMap;
 	private Command commands;
 	private boolean firstRound;
+	final private int totalPlayerNum = 4;
 	// Create Dice??
 
 	public Board() {
@@ -28,12 +29,36 @@ public class Board {
 		continents = new ArrayList<Continent>(earthMap.getContinents());
 		firstRound = true;
 		initializePlayers();
+		createBoard();
 
+	}
+
+	public Board(Board b) { // Have to make new ArrayList<Players> for all.
+		this.players = b.players;
+		this.console = b.console;
+		this.earthMap = b.earthMap;
+		this.commands = b.commands;
+		this.continents = b.continents;
+		this.firstRound = b.firstRound;
 	}
 
 	// TO DO
 	private void createBoard() {
+		for (Continent cont : continents) {
+			int playerIdentity = 1;
+			for (Country country : cont.getCountries()) {
+				country.setPlayerIdentity(playerIdentity);
+				playerIdentity ++;
+				if (playerIdentity == 5) {
+					playerIdentity = 1;
+				}
+				country.addDraftedTroops(3);
+			}
+		}
+	}
 
+	private Board getBoard() {
+		return new Board(this);
 	}
 
 	/**
@@ -55,26 +80,29 @@ public class Board {
 			currentPlayer = players.get(0);
 		}
 
-		console.println("----------------------- " + currentPlayer.getPlayerName() + "'s Turn -----------------------");
+		printBoardState();
+		console.println("\n---------------------------------------------- " + currentPlayer.getPlayerName() + "'s Turn ----------------------------------------------");
 		draft();
 		attack();
 		fortify();
 		endTurn(); // Useful??
 	}
 
-	// TO DO
 	private void printBoardState() {
 		/*
 		 * Prints out current state of the board. for (continent: continents)
 		 * for (country: countries) prints players troops on each
 		 * country/continent
 		 */
+		
+		for(int i = 0; i < continents.size(); i++) {
+			console.printBoardState(continents, i, getBoard());
+		}
 	}
 
 	// TO DO
 	private void draft() {
-		printBoardState();
-		console.println("--------- Draft --------- \n");
+		console.println("\n---------------------- Draft ----------------------\n");
 		// option to trade in cards --------TO BE IMPLEMENTED
 		int bonusTroops = getTroopBonus();
 		if (bonusTroops == 0) {
@@ -82,9 +110,9 @@ public class Board {
 			return;
 		}
 		if (bonusTroops > 0 && console.getScannerCommand(commands.getDraftCmds()).equalsIgnoreCase("draft")) {
-			console.println("Player " + currentPlayer.getPlayerNumber() + " has " + bonusTroops + " bonus troops.");
 
 			while (bonusTroops > 0) {
+				console.println("Player " + currentPlayer.getPlayerNumber() + ": has " + bonusTroops + " bonus troops.");
 				console.println("Where would you like to place your troops?");
 				String selectedCountry = console.getScannerCountry(getCurrentPlayerOwnedCountries());
 				Country c = this.getCountry(selectedCountry);
@@ -94,16 +122,22 @@ public class Board {
 				bonusTroops -= numTroopsToAdd;
 			}
 		}
-
+		printBoardState();
 	}
 
 	// TO DO
 	private void attack() {
-		printBoardState();
-		console.println("--------- Attack --------- \n");
+		console.println("---------------------- Attack ----------------------\n");
+		ArrayList<Country> deployableCountries = new ArrayList<Country>(this.getDeployableCountries());
+		
+		if (deployableCountries.size() == 0) {
+			console.println("You do not have any troops to attack with.\n");
+			return;
+		}
+		
 		while (console.getScannerCommand(commands.getAttackCmds()).equalsIgnoreCase("attack")) {
 			console.println("Which Country would you like to launch your attack from?");
-			Country attackFrom = this.getCountry(console.getScannerCountry(getCurrentPlayerOwnedCountries()));
+			Country attackFrom = this.getCountry(console.getScannerCountry(deployableCountries));
 			console.println("Which Country would you like to attack?");
 			console.getScannerCountry(attackFrom.getBorders());
 			/*
@@ -122,29 +156,52 @@ public class Board {
 				return;
 			}
 		}
-		/*
-		 * console will print out the players occupied countries(Console)
-		 * -----------Maybe? console will prompt: Which country would you like
-		 * to attack from?(Console) After user input, print out borders of
-		 * chosen country(Console) console will prompt: Which country would you
-		 * like to attack? (Console) console will prompt: [blitz] [normal]
-		 * etc... (Console) attackingFromCountry.attack(countryBeingAttacked) If
-		 * not conquered. Console prompt: attack again? console prompt: option
-		 * to move troops (Console) moveTroops(moveToCountryConquered) ---------
-		 * (Board/Country) ??
-		 * 
-		 * TO BE CONTINUED
-		 */
-
+		printBoardState();
 	}
 
 	// TO DO
 	private void fortify() {
-		printBoardState();
-		console.println("--------- Fortify --------- \n");
-		if (console.getScannerCommand(commands.getFortifyCmds()).equalsIgnoreCase("fortify")) {
-
+		console.println("---------------------- Fortify ----------------------\n");
+		ArrayList<Country> deployableCountries = new ArrayList<Country>(this.getDeployableCountries());		
+		if (deployableCountries.size() == 0) {
+			console.println("You do not have any troops to fortify with.\n");
+			return;
 		}
+
+		while (console.getScannerCommand(commands.getFortifyCmds()).equalsIgnoreCase("fortify")) {
+			console.println("Which Country would you like to take troops from?");
+
+			// Adds the countries owned with more than 1 troop to the ArrayList
+			// countryDeployable.
+
+			Country deployFrom;
+			deployFrom = getCountry(console.getScannerCountry(deployableCountries));
+
+			// Creates an ArrayList of fortifiable Countries.
+			ArrayList<Country> fortifiable = new ArrayList<Country>();
+			for (Country i : deployFrom.getBorders()) {
+				if (this.getCurrentPlayerOwnedCountries().indexOf(i) >= 0) {
+					fortifiable.add(i);
+				}
+			}
+
+			//If the ArrayList is of size 0, then gives the option to choose another country or end turn.
+			//Else 
+			if (fortifiable.size() == 0) {
+				console.println("The Country you have selected has does not border any other Countries you own.\n" + ""
+						+ "Would you like to choose a different Country?");
+				deployableCountries.remove(deployFrom);
+			} else {
+				console.println("Which Country would you like to fortify?");
+				Country fortifiedCountry = getCountry(console.getScannerCountry(deployFrom.getBorders()));
+				int numTroopsToAdd = console.getScannerIntWithinRange(1, deployFrom.getNumTroops() - 1,
+						"How many troops would you like to place?");
+				fortifiedCountry.addDraftedTroops(numTroopsToAdd);
+				deployFrom.subractTroops(numTroopsToAdd);
+				return;
+			}
+		}
+		printBoardState();
 
 	}
 
@@ -153,8 +210,18 @@ public class Board {
 		printBoardState();
 	}
 
-	// TO DO
-	private void moveTroops() {
+	/**
+	 * Gets an ArrayList of current Player Owned Countries with more than 1 troop.
+	 * @return an ArrayList<Country> 
+	 */
+	private ArrayList<Country> getDeployableCountries() {
+		ArrayList<Country> deployableCountries = new ArrayList<Country>();
+		for (Country c :  this.getCurrentPlayerOwnedCountries()) {
+			if (c.getNumTroops() > 1) {
+				deployableCountries.add(c);
+			} 
+		}
+		return deployableCountries;
 	}
 
 	/**
@@ -162,12 +229,12 @@ public class Board {
 	 * 
 	 * @return a copy of the ArrayList of Countries owned by the current Player
 	 */
-	private ArrayList<Country> getCurrentPlayerOwnedCountries() {
+	public ArrayList<Country> getCurrentPlayerOwnedCountries() {
 		ArrayList<Country> playerOwnedCountries = new ArrayList<Country>();
 		for (Continent cont : continents) {
 			for (Country c : cont.getCountries()) {
 				if (c.getPlayerOwnerOfCountry() == currentPlayer.getPlayerNumber()) {
-					playerOwnedCountries.add(new Country(c));
+					playerOwnedCountries.add(c);
 				}
 			}
 		}
@@ -185,9 +252,16 @@ public class Board {
 		numAI = 4 - numPlayers;
 
 		for (int i = 0; i < numPlayers; i++) {
-			players.add(new Player(i + 1));
+			players.add(new Player(i + 1, false, this.getBoard()));
 			players.get(i).setPlayerName(playerNames.get(i));
 		}
+
+		for (int i = numPlayers; i < totalPlayerNum; i++) {
+			players.add(new Player(i + 1, true, this.getBoard()));
+			players.get(i).setPlayerName(null);
+		}
+
+		currentPlayer = new Player(players.get(0));
 	}
 
 	/**
@@ -218,11 +292,33 @@ public class Board {
 	}
 
 	private int getTroopBonus() {
-		int playerOwnedCountryNum = getCurrentPlayerOwnedCountries().size();
-		return playerOwnedCountryNum; // Still have to loop through continents
-										// to see if bonus is applicable.
+		int playerOwnedCountryNum = getCurrentPlayerOwnedCountries().size() / 3;
+		int continentBonus = 0;
+		for(Continent cont : continents) {
+			int contScore = 0;
+			for(Country country : cont.getCountries()) {
+				if(country.getPlayerOwnerOfCountry() == currentPlayer.getPlayerNumber()) {
+					contScore++;
+				}
+			}
+			if(contScore == cont.getCountries().size()) {
+				continentBonus = continentBonus + cont.getContinentBonus();
+			}
+		}
+		return playerOwnedCountryNum + continentBonus;
 	}
 
+	public ArrayList<Continent> getContinents() {
+		return continents;
+	}
 	
+	public String getPlayerName(int playerNumber) {
+		for(int i = 0; i < players.size(); i++) {
+			if(players.get(i).getPlayerNumber() == playerNumber) {
+				return players.get(i).getPlayerName();
+			}
+		}
+		return null;
+	}
 
 }
