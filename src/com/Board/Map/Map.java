@@ -22,12 +22,11 @@ public class Map {
 		Continent europe = new Continent("Europe");
 		Continent africa = new Continent("Africa");
 		Continent asia = new Continent("Asia");
-		Continent australia = new Continent("Austalia");
+		Continent australia = new Continent("Australia");
 		
 		// All of the Countries
 			//North America
-				Country alberta = new Country("Alberta");
-				Country britishColoumbia = new Country("British Coloumbia");
+				Country alberta = new Country("Alberta");				
 				Country alaska = new Country("Alaska");
 				Country centralAmerica = new Country("Central America");
 				Country eastrenUnitedStates = new Country("Eastren United States");
@@ -35,7 +34,7 @@ public class Map {
 				Country northwestTerritory = new Country("Northwest Territory");
 				Country ontario = new Country("Ontario");
 				Country quebec = new Country("Quebec");
-				Country westernunitedstates = new Country("western United States");
+				Country westernunitedstates = new Country("Western United States");
 			//South America
 				Country argentina = new Country("Argentina");
 				Country brazil = new Country("Brazil");
@@ -46,9 +45,9 @@ public class Map {
 				Country iceland = new Country("Iceland");
 				Country northerneurope = new Country("Northern Europe");
 				Country scandinavia = new Country("Scandinavia");
-				Country southerneurope = new Country("Sothern Europe");
+				Country southerneurope = new Country("Southern Europe");
 				Country ukraine = new Country("Ukraine");
-				Country westerneurope = new Country("western Europe");
+				Country westerneurope = new Country("Western Europe");
 			//Africa
 				Country congo = new Country("Congo");
 				Country eastafrica = new Country("East Africa");
@@ -70,7 +69,7 @@ public class Map {
 				Country ural = new Country("Ural");
 				Country yakutsk = new Country("Yakutsk");
 			//Australia
-				Country easternaustralia = new Country("Eastren Australia");
+				Country easternaustralia = new Country("Eastern Australia");
 				Country indonesia = new Country("Indonesia");
 				Country newguinea = new Country("New Guinea");
 				Country westernaustralia = new Country("Western Australia");
