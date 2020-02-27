@@ -28,8 +28,10 @@ public class Dice {
 		int numRolls = 0;
 		if (numTroops >= 3) {
 			numRolls = 3;
-		} else {
+		} else if (numTroops == 2){
 			numRolls = 2;
+		} else {
+			numRolls = 1;
 		}
 		
 		int[] rolls = new int[numRolls];
