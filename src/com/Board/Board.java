@@ -83,10 +83,11 @@ public class Board {
 		 * for (country: countries) prints players troops on each
 		 * country/continent
 		 */
-
+		console.println("");
 		for (int i = 0; i < continents.size(); i++) {
 			console.printBoardState(continents, i, getBoard());
 		}
+		console.println("");
 	}
 
 	// TO DO
@@ -165,6 +166,7 @@ public class Board {
 			}
 						
 			if (count > 0 || invalid) {
+				printBoardState();
 				console.println("Would you like to continue attacking?");
 			} else {
 				return;
@@ -208,6 +210,7 @@ public class Board {
 
 		while (console.getScannerCommand(commands.getFortifyCmds()).equalsIgnoreCase("fortify")) {
 			console.println("Which Country would you like to take troops from?");
+			deployableCountries = new ArrayList<Country>(this.getDeployableCountries());
 
 			// Adds the countries owned with more than 1 troop to the ArrayList
 			// countryDeployable.
@@ -218,7 +221,7 @@ public class Board {
 			// Creates an ArrayList of fortifiable Countries.
 			ArrayList<Country> fortifiable = new ArrayList<Country>();
 			for (Country i : deployFrom.getBorders()) {
-				if (this.getCurrentPlayerOwnedCountries().indexOf(i) >= 0) {
+				if (i.getPlayerOwnerOfCountry() == currentPlayer.getPlayerNumber()) {
 					fortifiable.add(i);
 				}
 			}
@@ -228,11 +231,11 @@ public class Board {
 			// Else
 			if (fortifiable.size() == 0) {
 				console.println("The Country you have selected has does not border any other Countries you own.\n" + ""
-						+ "Would you like to choose a different Country?");
+						+ "Would you like to choose a different Country?\n");
 				deployableCountries.remove(deployFrom);
 			} else {
 				console.println("Which Country would you like to fortify?");
-				Country fortifiedCountry = getCountry(console.getScannerCountry(deployFrom.getBorders()));
+				Country fortifiedCountry = getCountry(console.getScannerCountry(fortifiable));
 				int numTroopsToAdd = console.getScannerIntWithinRange(1, deployFrom.getNumTroops() - 1,
 						"How many troops would you like to place?");
 				fortifiedCountry.addDraftedTroops(numTroopsToAdd);
