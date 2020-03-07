@@ -7,6 +7,7 @@ public class Continent {
 	private int continentBonus;
 	private ArrayList<Country> countries;
 	
+	//add copy constructor
 	
 	public Continent(String continentName) {
 		countries = new ArrayList<Country>();
