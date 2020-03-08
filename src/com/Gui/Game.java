@@ -1,8 +1,6 @@
 package com.Gui;
 
 import com.Board.Board;
-import com.Board.Map.Map;
-import com.Gui.Panes.InteractivePane;
 
 import javafx.application.Application;
 import javafx.scene.Group;
