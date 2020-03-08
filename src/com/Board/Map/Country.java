@@ -2,6 +2,9 @@ package com.Board.Map;
 
 import java.util.ArrayList;
 
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Polygon;
+
 
 public class Country {
 	private String countryName;
@@ -9,12 +12,34 @@ public class Country {
 	private ArrayList<Country> borders;
 	private int playerIdentity;
 	
+	private Polygon countryShape;
+	private boolean selected;
+	private boolean clickable;
+	
 	public Country(String countryName) {
 		this.countryName = countryName;
 		borders = new ArrayList<Country>();
 		currentNumTroops = 0;
 	}
 	
+	//For Gui
+	public Country(String countryName, Polygon shape) {		
+		borders = new ArrayList<Country>();
+		this.countryName = countryName;
+		this.countryShape = shape;
+		
+		currentNumTroops = 0;
+		clickable = true;
+		selected = false;
+		
+		
+		countryShape.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+			if (clickable) {
+	    	  selected = !selected;
+			}	
+			System.out.println(countryName);
+	      });
+	}
 	
 	/**
 	 * Copy Constructor
@@ -25,6 +50,8 @@ public class Country {
 	public Country(Country c) {
 		
 	}
+	
+	
 	*/
 	/**
 	 * Adds a border to the Country
@@ -60,7 +87,7 @@ public class Country {
 	}
 	
 	
-	public void addDraftedTroops(int numTroops) {
+	public void addTroops(int numTroops) {
 		currentNumTroops += numTroops;
 	}
 	
@@ -84,9 +111,29 @@ public class Country {
 		return currentNumTroops;
 	}
 	
-	public void setPlayerIdentity(int playerNumber) {
+	public void setOccupantID(int playerNumber) {
 		playerIdentity = playerNumber;
 	}
 	
 	
+	//--------------------------------------------------GUI RELATED--------------------------------------------------
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
+	
+	public void setClickable(boolean clickable) {
+		this.clickable = clickable;
+	}
+	
+	public boolean isSelected() {
+		return selected;
+	}
+	
+	public boolean isClickable() {
+		return clickable;
+	}
+	
+	public Polygon getShape() {
+		return countryShape;
+	}
 }
