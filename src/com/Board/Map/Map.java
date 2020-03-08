@@ -4,11 +4,18 @@ import java.util.ArrayList;
 
 import com.Board.Console.Console;
 
+import javafx.scene.shape.Polygon;
+
 public class Map {
-	private final String MAP_NAME = "Earth";
+
 	private ArrayList<Continent> continents;
+	private CountryShapes countryShapes;
+	private ArrayList<Polygon> shapes;
 	
 	public Map() {
+		continents = new ArrayList<Continent>();
+		countryShapes = new CountryShapes();
+		shapes = new ArrayList<Polygon>();
 		initMap();
 		
 		
@@ -19,7 +26,7 @@ public class Map {
 	 */
 	//TO BE IMPLEMENTED
 	private void initMap() {
-		continents = new ArrayList<Continent>();
+		
 		//All of the Continents 
 		Continent northAmerica = new Continent("North America");
 		Continent southAmerica = new Continent("South America");
@@ -30,7 +37,7 @@ public class Map {
 		
 		// All of the Countries
 			//North America
-				Country alberta = new Country("Alberta");				
+				Country alberta = new Country("Alberta", countryShapes.getPolygon("alberta"));				
 				Country alaska = new Country("Alaska");
 				Country centralAmerica = new Country("Central America");
 				Country eastrenUnitedStates = new Country("Eastren United States");
@@ -358,7 +365,8 @@ public class Map {
 			africa.setContinentBonus(3);
 			
 
-				
+		//TEMPORARY
+			shapes.add(alberta.getShape());
 	}
 	
 	/**
@@ -367,5 +375,9 @@ public class Map {
 	 */
 	public ArrayList<Continent> getContinents() {
 		return continents;
+	}
+	
+	public ArrayList<Polygon> getShapes() {
+		return shapes;
 	}
 }
