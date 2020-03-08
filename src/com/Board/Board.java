@@ -2,7 +2,6 @@ package com.Board;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 import com.Board.Console.Console;
 import com.Board.Map.Continent;
 import com.Board.Map.Country;
@@ -76,7 +75,6 @@ public class Board {
 		draft();
 		attack();
 		fortify();
-		endTurn(); // Useful??
 	}
 
 	private void printBoardState() {
