@@ -33,8 +33,6 @@ public class Country {
 		this.countryName = countryName;
 		this.countryShape = shape;
 		
-		Image countryImage = new Image(countryName + "" + Alliance.BLUE);
-		
 		currentNumTroops = 0;
 		clickable = true;
 		selected = false;
@@ -150,4 +148,5 @@ public class Country {
 	public Polygon getShape() {
 		return countryShape;
 	}
+	
 }
