@@ -28,6 +28,11 @@ public class CountryShapes {
 		countryShapes.put("ALBERTA", alberta);
 	}
 	
+	/**
+	 * Get the polygon corresponding to the name from the HashMap countryShapes.
+	 * @param name
+	 * @return
+	 */
 	public Polygon getPolygon(String name) {
 		return countryShapes.get(name.toUpperCase());
 	}

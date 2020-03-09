@@ -363,7 +363,7 @@ public class Board {
 		ArrayList<Country> playerOwnedCountries = new ArrayList<Country>();
 		for (Continent cont : continents) {
 			for (Country c : cont.getCountries()) {
-				if (c.getPlayerOwnerOfCountry() == currentPlayer.getPlayerNumber()) {
+				if (c.getPlayerOccupantOfCountry() == currentPlayer.getPlayerNumber()) {
 					playerOwnedCountries.add(c);
 				}
 			}
@@ -427,7 +427,7 @@ public class Board {
 		for (Continent cont : continents) {
 			int contScore = 0;
 			for (Country country : cont.getCountries()) {
-				if (country.getPlayerOwnerOfCountry() == currentPlayer.getPlayerNumber()) {
+				if (country.getPlayerOccupantOfCountry() == currentPlayer.getPlayerNumber()) {
 					contScore++;
 				}
 			}
