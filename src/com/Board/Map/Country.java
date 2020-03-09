@@ -2,6 +2,9 @@ package com.Board.Map;
 
 import java.util.ArrayList;
 
+import com.Player.Alliance;
+
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 
@@ -11,6 +14,8 @@ public class Country {
 	private int currentNumTroops;
 	private ArrayList<Country> borders;
 	private int playerIdentity;
+	private Alliance alliance;
+	Image image;
 	
 	private Polygon countryShape;
 	private boolean selected;
@@ -27,6 +32,8 @@ public class Country {
 		borders = new ArrayList<Country>();
 		this.countryName = countryName;
 		this.countryShape = shape;
+		
+		Image countryImage = new Image(countryName + "" + Alliance.BLUE);
 		
 		currentNumTroops = 0;
 		clickable = true;
@@ -65,8 +72,8 @@ public class Country {
 	 * Gets the current Player occupying the Country
 	 * @return the player number of the current Player occupying the territory
 	 */
-	//TO BE IMPLEMENTED
-	public int getPlayerOwnerOfCountry() {
+	
+	public int getPlayerOccupantOfCountry() {
 		return playerIdentity;
 	}
 	
@@ -76,12 +83,7 @@ public class Country {
 	}
 	
 	
-	//TO BE IMPLEMENTED
-	public boolean isAllied() {
-		return false;
-		
-	}
-	
+
 	public String getName() {
 		return countryName;
 	}
@@ -115,6 +117,18 @@ public class Country {
 		playerIdentity = playerNumber;
 	}
 	
+	public void setAlliance() {
+		switch(this.playerIdentity) {
+		case 1: 
+			this.alliance = Alliance.BLUE;
+		case 2: 
+			this.alliance = Alliance.GREEN;
+		case 3:
+			this.alliance = Alliance.RED;
+		case 4:
+			this.alliance = Alliance.YELLOW;
+		}
+	}
 	
 	//--------------------------------------------------GUI RELATED--------------------------------------------------
 	public void setSelected(boolean selected) {
