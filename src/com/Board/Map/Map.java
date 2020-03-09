@@ -37,40 +37,40 @@ public class Map {
 		
 		// All of the Countries
 			//North America
-				Country alberta = new Country("Alberta", countryShapes.getPolygon("alberta"));				
-				Country alaska = new Country("Alaska");
-				Country centralAmerica = new Country("Central America");
-				Country eastrenUnitedStates = new Country("Eastren United States");
-				Country greenland = new Country("Greenland");
-				Country northwestTerritory = new Country("Northwest Territory");
-				Country ontario = new Country("Ontario");
-				Country quebec = new Country("Quebec");
-				Country westernunitedstates = new Country("Western United States");
+				Country alberta = new Country("Alberta", countryShapes.getPolygon("Alberta"));				
+				Country alaska = new Country("Alaska", countryShapes.getPolygon("alasaka"));
+				Country centralAmerica = new Country("Central America", countryShapes.getPolygon("central america"));
+				Country eastrenUnitedStates = new Country("Eastren United States", countryShapes.getPolygon("Eastern United States"));
+				Country greenland = new Country("Greenland", countryShapes.getPolygon("greenland"));
+				Country northwestTerritory = new Country("Northwest Territory", countryShapes.getPolygon("northwest territory"));
+				Country ontario = new Country("Ontario", countryShapes.getPolygon("ontario"));
+				Country quebec = new Country("Quebec", countryShapes.getPolygon("quebec"));
+				Country westernunitedstates = new Country("Western United States", countryShapes.getPolygon("western united states"));
 			//South America
-				Country argentina = new Country("Argentina");
-				Country brazil = new Country("Brazil");
-				Country peru = new Country("Peru");
-				Country venezuela = new Country("Venezuela");
+				Country argentina = new Country("Argentina", countryShapes.getPolygon("argentina"));
+				Country brazil = new Country("Brazil", countryShapes.getPolygon("brazil"));
+				Country peru = new Country("Peru", countryShapes.getPolygon("peru"));
+				Country venezuela = new Country("Venezuela", countryShapes.getPolygon("venezuela"));
 			//Europe
-				Country greatbritain = new Country("Great Britain");
-				Country iceland = new Country("Iceland");
-				Country northerneurope = new Country("Northern Europe");
-				Country scandinavia = new Country("Scandinavia");
-				Country southerneurope = new Country("Southern Europe");
-				Country ukraine = new Country("Ukraine");
-				Country westerneurope = new Country("Western Europe");
+				Country greatbritain = new Country("Great Britain", countryShapes.getPolygon("great britian"));
+				Country iceland = new Country("Iceland", countryShapes.getPolygon("iceland"));
+				Country northerneurope = new Country("Northern Europe", countryShapes.getPolygon("northern europe"));
+				Country scandinavia = new Country("Scandinavia", countryShapes.getPolygon("scandinavia"));
+				Country southerneurope = new Country("Southern Europe", countryShapes.getPolygon("southern europe"));
+				Country ukraine = new Country("Ukraine", countryShapes.getPolygon("ukraine"));
+				Country westerneurope = new Country("Western Europe", countryShapes.getPolygon("westerneurope"));
 			//Africa
-				Country congo = new Country("Congo");
-				Country eastafrica = new Country("East Africa");
-				Country egypt = new Country("Egypt");
-				Country madagascar = new Country("Madagascar");
-				Country northafrica = new Country("North Africa");
-				Country southafrica = new Country("South Africa");
+				Country congo = new Country("Congo", countryShapes.getPolygon("congo"));
+				Country eastafrica = new Country("East Africa", countryShapes.getPolygon("east africa"));
+				Country egypt = new Country("Egypt", countryShapes.getPolygon("egypt"));
+				Country madagascar = new Country("Madagascar", countryShapes.getPolygon("madagascar"));
+				Country northafrica = new Country("North Africa", countryShapes.getPolygon("north africa"));
+				Country southafrica = new Country("South Africa", countryShapes.getPolygon("south africa"));
 			//Asia
-				Country afghanistan = new Country("Afghanistan");
-				Country china = new Country("China");
-				Country india = new Country("India");
-				Country irkutsk = new Country("Irkutsk");
+				Country afghanistan = new Country("Afghanistan", countryShapes.getPolygon("afghanistan"));
+				Country china = new Country("China", countryShapes.getPolygon("china"));
+				Country india = new Country("India", countryShapes.getPolygon("india"));
+				Country irkutsk = new Country("Irkutsk",countryShapes.getPolygon("irkutsk"));
 				Country japan = new Country("Japan");
 				Country kamchatka = new Country("Kamchatka");
 				Country middleeast = new Country("Middle East");
