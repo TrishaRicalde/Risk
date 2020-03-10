@@ -736,4 +736,9 @@ public class Board {
 			currentPhase = Phase.DRAFT;
 		}
 	}
-}
+	
+	
+	
+	}
+
+
