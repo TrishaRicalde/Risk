@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.Player.Alliance;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 
@@ -14,8 +15,9 @@ public class Country {
 	private int currentNumTroops;
 	private ArrayList<Country> borders;
 	private int playerIdentity;
-	private Alliance alliance;
-	Image image;
+	private Alliance alliance = Alliance.GREEN;
+	private ImageView imageView;
+	private String pathName;
 	
 	private Polygon countryShape;
 	private boolean selected;
@@ -32,6 +34,7 @@ public class Country {
 		borders = new ArrayList<Country>();
 		this.countryName = countryName;
 		this.countryShape = shape;
+		this.pathName = countryName.replaceAll(" ", "").toUpperCase();
 		
 		currentNumTroops = 0;
 		clickable = true;
@@ -41,6 +44,7 @@ public class Country {
 		countryShape.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
 			if (clickable) {
 	    	  selected = !selected;
+	    	  updateImageView();
 			}	
 			System.out.println(countryName);
 	      });
@@ -129,6 +133,27 @@ public class Country {
 	}
 	
 	//--------------------------------------------------GUI RELATED--------------------------------------------------
+	public void updateImageView() {
+		String highlight = "";
+		if (selected) {
+			highlight = "DARK";
+		} else {
+			highlight = "LIGHT";
+		}		
+		try {
+			Image image = new Image(pathName + alliance + highlight + ".png");
+			imageView = new ImageView(image);
+			imageView.setMouseTransparent(true);
+		} catch (Exception e) {
+			System.out.println("Country Image Error: " + pathName + alliance + highlight + ".png");
+		}
+	}
+	
+	public ImageView getImageView() {
+		updateImageView();
+		return this.imageView;
+	}
+	
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
