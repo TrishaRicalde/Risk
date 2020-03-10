@@ -1,11 +1,18 @@
 package com.Board.Map;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import com.Player.Alliance;
 
+import javafx.fxml.FXML;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 
@@ -16,12 +23,14 @@ public class Country {
 	private ArrayList<Country> borders;
 	private int playerIdentity;
 	private Alliance alliance = Alliance.GREEN;
+	private String countryPathName;
+	
 	private ImageView imageView;
-	private String pathName;
 	
 	private Polygon countryShape;
 	private boolean selected;
 	private boolean clickable;
+	private String highlightPath;
 	
 	public Country(String countryName) {
 		this.countryName = countryName;
@@ -34,16 +43,26 @@ public class Country {
 		borders = new ArrayList<Country>();
 		this.countryName = countryName;
 		this.countryShape = shape;
-		this.pathName = countryName.replaceAll(" ", "").toUpperCase();
+		this.countryPathName = countryName.replaceAll(" ", "").toUpperCase();
+		this.highlightPath = "LIGHT";
 		
 		currentNumTroops = 0;
 		clickable = true;
 		selected = false;
 		
+		this.updateHighlight();
+		
+		try {
+			imageView = new ImageView(new Image(getPath()));
+			imageView.setMouseTransparent(true);
+		} catch (Exception e) {
+			System.out.println("Country Image Error: " + countryPathName + alliance + highlightPath + ".png");
+		}
 		
 		countryShape.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
 			if (clickable) {
 	    	  selected = !selected;
+	    	  System.out.println("selected: " + selected);
 	    	  updateImageView();
 			}	
 			System.out.println(countryName);
@@ -134,19 +153,12 @@ public class Country {
 	
 	//--------------------------------------------------GUI RELATED--------------------------------------------------
 	public void updateImageView() {
-		String highlight = "";
-		if (selected) {
-			highlight = "DARK";
-		} else {
-			highlight = "LIGHT";
-		}		
-		try {
-			Image image = new Image(pathName + alliance + highlight + ".png");
-			imageView = new ImageView(image);
-			imageView.setMouseTransparent(true);
-		} catch (Exception e) {
-			System.out.println("Country Image Error: " + pathName + alliance + highlight + ".png");
-		}
+		this.updateHighlight();	
+		System.out.println(highlightPath);
+		imageView.setImage(new Image(getPath()));
+		imageView.snapshot(new SnapshotParameters(), new WritableImage(1000, 1000));
+		
+		
 	}
 	
 	public ImageView getImageView() {
@@ -172,6 +184,18 @@ public class Country {
 	
 	public Polygon getShape() {
 		return countryShape;
+	}
+	
+	public void updateHighlight() {
+		if (selected) {
+			highlightPath = "DARK";
+		} else {
+			highlightPath = "LIGHT";
+		}	
+	}
+	
+	public String getPath() {
+		return countryPathName + alliance + highlightPath + ".png";
 	}
 	
 }
