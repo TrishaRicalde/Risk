@@ -9,6 +9,7 @@ import com.Board.Map.Country;
 import com.Board.Map.Map;
 import com.Gui.Command;
 import com.Gui.Panes.InteractivePane;
+import com.Gui.Panes.StartPane;
 import com.Player.Player;
 
 import javafx.scene.layout.Pane;
@@ -28,6 +29,7 @@ public class Board {
 	
 	private ArrayList<Pane> panes;
 	private InteractivePane interactivePane;
+	private StartPane startPane;
 
 
 	private final int totalPlayerNum = 4;
