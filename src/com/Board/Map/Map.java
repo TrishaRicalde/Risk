@@ -67,23 +67,23 @@ public class Map {
 				Country northafrica = new Country("North Africa", countryShapes.getPolygon("north africa"));
 				Country southafrica = new Country("South Africa", countryShapes.getPolygon("south africa"));
 			//Asia
-				Country afghanistan = new Country("Afghanistan");
-				Country china = new Country("China");
-				Country india = new Country("India");
-				Country irkutsk = new Country("Irkutsk");
-				Country japan = new Country("Japan");
-				Country kamchatka = new Country("Kamchatka");
-				Country middleeast = new Country("Middle East");
-				Country mongolia = new Country("Mongolia");
-				Country siam = new Country("Siam");
-				Country siberia = new Country("Siberia");
-				Country ural = new Country("Ural");
-				Country yakutsk = new Country("Yakutsk");
+				Country afghanistan = new Country("Afghanistan", countryShapes.getPolygon("Afghanistan"));
+				Country china = new Country("China", countryShapes.getPolygon("China"));
+				Country india = new Country("India", countryShapes.getPolygon("India"));
+				Country irkutsk = new Country("Irkutsk", countryShapes.getPolygon("Irkutsk"));
+				Country japan = new Country("Japan", countryShapes.getPolygon("Japan"));
+				Country kamchatka = new Country("Kamchatka", countryShapes.getPolygon("Kamchatka"));
+				Country middleeast = new Country("Middle East", countryShapes.getPolygon("Middle East"));
+				Country mongolia = new Country("Mongolia", countryShapes.getPolygon("Mongolia"));
+				Country siam = new Country("Siam", countryShapes.getPolygon("Siam"));
+				Country siberia = new Country("Siberia", countryShapes.getPolygon("Siberia"));
+				Country ural = new Country("Ural", countryShapes.getPolygon("Ural"));
+				Country yakutsk = new Country("Yakutsk", countryShapes.getPolygon("Yakutsk"));
 			//Australia
-				Country easternaustralia = new Country("Eastern Australia");
-				Country indonesia = new Country("Indonesia");
-				Country newguinea = new Country("New Guinea");
-				Country westernaustralia = new Country("Western Australia");
+				Country easternaustralia = new Country("Eastern Australia", countryShapes.getPolygon("Eastern Australia"));
+				Country indonesia = new Country("Indonesia", countryShapes.getPolygon("Indonesia"));
+				Country newguinea = new Country("New Guinea", countryShapes.getPolygon("New Guinea"));
+				Country westernaustralia = new Country("Western Australia", countryShapes.getPolygon("Western Australia"));
 				
 				
 				

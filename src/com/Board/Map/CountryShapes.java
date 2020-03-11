@@ -933,7 +933,7 @@ public class CountryShapes {
 			576.0, 187.0,
 			565.0, 224.0
 		});
-		countryShapes.put("MIDDLE EAST", middleEast
+		countryShapes.put("MIDDLE EAST", middleEast);
 		
 		Polygon mongolia = new Polygon();
 		mongolia.getPoints().addAll(new Double[] {
