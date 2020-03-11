@@ -14,7 +14,7 @@ public class Country {
 	private int currentNumTroops;
 	private ArrayList<Country> borders;
 	private int playerIdentity;
-	private Alliance alliance = Alliance.BLUE;
+	private Alliance alliance;
 	private String countryPathName;
 	
 	private ImageView imageView;
@@ -39,6 +39,7 @@ public class Country {
 		this.countryShape = shape;
 		this.countryPathName = countryName.replaceAll(" ", "").toUpperCase();
 		this.highlightPath = "LIGHT";
+		this.alliance = Alliance.RED;
 		
 		this.countryShape.setOpacity(opacity);
 		
@@ -60,10 +61,11 @@ public class Country {
 		countryShape.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
 			if (clickable) {
 	    	  selected = !selected;
-	    	  System.out.println("selected: " + selected);
+	    	  //System.out.println("selected: " + selected);
+	    	  updateAlliance();
 	    	  updateImageView();
 			}	
-			System.out.println(countryName);
+			//System.out.println(countryName);
 	      });
 	}
 	
@@ -134,25 +136,34 @@ public class Country {
 	
 	public void setOccupantID(int playerNumber) {
 		playerIdentity = playerNumber;
+		updateAlliance();
 	}
 	
-	public void setAlliance() {
+	public void updateAlliance() {
 		switch(this.playerIdentity) {
 		case 1: 
-			this.alliance = Alliance.BLUE;
-		case 2: 
-			this.alliance = Alliance.GREEN;
-		case 3:
 			this.alliance = Alliance.RED;
+			System.out.println(this.countryName + ": RED playerID: " + this.playerIdentity);
+			break;
+		case 2: 
+			this.alliance = Alliance.BLUE;
+			System.out.println(this.countryName + ": BLUE playerID: " + this.playerIdentity);
+			break;
+		case 3:
+			this.alliance = Alliance.GREEN;
+			System.out.println(this.countryName + ": GREEN playerID: " + this.playerIdentity);
+			break;
 		case 4:
 			this.alliance = Alliance.YELLOW;
+			System.out.println(this.countryName + ": YELLOW playerID: " + this.playerIdentity);
+			break;
 		}
 	}
 	
 	//--------------------------------------------------GUI RELATED--------------------------------------------------
 	public void updateImageView() {
 		this.updateHighlight();	
-		System.out.println(highlightPath);
+		//System.out.println(highlightPath);
 		imageView.setImage(new Image(getPath()));	
 		
 	}

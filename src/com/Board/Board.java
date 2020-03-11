@@ -45,7 +45,7 @@ public class Board {
 		panes = new ArrayList<Pane>();
 		firstRound = true;
 		currentPhase = Phase.START;
-		//initializePlayers();
+		initializePlayers();
 		createBoard();
 		createPanes();
 	}
@@ -378,7 +378,10 @@ public class Board {
 	 * 
 	 */
 	private void initializePlayers() {
-		int numPlayers = console.getScannerNumOfPlayers();
+		for (int i = 1;i <= 4; i ++) {
+			players.add(new Player(i, false, this.getBoard()));
+		}
+		/*int numPlayers = console.getScannerNumOfPlayers();
 		ArrayList<String> playerNames = console.getPlayerNames(numPlayers);
 		numAI = 4 - numPlayers;
 
@@ -392,7 +395,7 @@ public class Board {
 			players.get(i).setPlayerName(null);
 		}
 
-		currentPlayer = new Player(players.get(0));
+		currentPlayer = new Player(players.get(0));*/
 	}
 
 	/**
@@ -452,6 +455,34 @@ public class Board {
 		return null;
 	}
 
+	
+	public void createPanes() {
+		interactivePane = new InteractivePane(earthMap); 
+		panes.add(interactivePane);
+
+		
+	}
+	
+	public ArrayList<Pane> getPanes() {
+		return panes;
+	}
+	
+	public void nextPhase() {
+		switch(currentPhase) {
+		case START: 
+			currentPhase = Phase.DRAFT;
+		case DRAFT:
+			currentPhase = Phase.ATTACK;
+		case ATTACK: 
+			currentPhase = Phase.FORTIFY;
+		case FORTIFY: 
+			currentPhase = Phase.DRAFT;
+		}
+	}
+	
+	
+	
+		
 	private void createBoard() {
 
 		// Clean this up later...
@@ -700,9 +731,11 @@ public class Board {
 
 		for (Country cont : player1Countries) {
 			cont.setOccupantID(1);
+			System.out.println(cont.getName() + "1");
 		}
 		for (Country cont : player2Countries) {
 			cont.setOccupantID(2);
+			System.out.println(cont.getName() + "2");
 		}
 		for (Country cont : player3Countries) {
 			cont.setOccupantID(3);
@@ -713,29 +746,7 @@ public class Board {
 
 	}
 
-	public void createPanes() {
-		interactivePane = new InteractivePane(earthMap); 
-		panes.add(interactivePane);
-
-		
-	}
 	
-	public ArrayList<Pane> getPanes() {
-		return panes;
-	}
-	
-	public void nextPhase() {
-		switch(currentPhase) {
-		case START: 
-			currentPhase = Phase.DRAFT;
-		case DRAFT:
-			currentPhase = Phase.ATTACK;
-		case ATTACK: 
-			currentPhase = Phase.FORTIFY;
-		case FORTIFY: 
-			currentPhase = Phase.DRAFT;
-		}
-	}
 	
 	
 	
