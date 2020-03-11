@@ -143,19 +143,15 @@ public class Country {
 		switch(this.playerIdentity) {
 		case 1: 
 			this.alliance = Alliance.RED;
-			System.out.println(this.countryName + ": RED playerID: " + this.playerIdentity);
 			break;
 		case 2: 
 			this.alliance = Alliance.BLUE;
-			System.out.println(this.countryName + ": BLUE playerID: " + this.playerIdentity);
 			break;
 		case 3:
 			this.alliance = Alliance.GREEN;
-			System.out.println(this.countryName + ": GREEN playerID: " + this.playerIdentity);
 			break;
 		case 4:
 			this.alliance = Alliance.YELLOW;
-			System.out.println(this.countryName + ": YELLOW playerID: " + this.playerIdentity);
 			break;
 		}
 	}
