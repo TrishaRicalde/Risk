@@ -2,6 +2,7 @@ package com.Board;
 
 import java.util.ArrayList;
 import java.util.Random;
+
 import com.Board.Console.Console;
 import com.Board.Map.Continent;
 import com.Board.Map.Country;
@@ -46,7 +47,7 @@ public class Board {
 		panes = new ArrayList<Pane>();
 		firstRound = true;
 		currentPhase = Phase.START;
-		//initializePlayers();
+		initializePlayers();
 		createBoard();
 		createPanes();
 	}
@@ -365,7 +366,7 @@ public class Board {
 		ArrayList<Country> playerOwnedCountries = new ArrayList<Country>();
 		for (Continent cont : continents) {
 			for (Country c : cont.getCountries()) {
-				if (c.getPlayerOwnerOfCountry() == currentPlayer.getPlayerNumber()) {
+				if (c.getPlayerOccupantOfCountry() == currentPlayer.getPlayerNumber()) {
 					playerOwnedCountries.add(c);
 				}
 			}
@@ -379,7 +380,10 @@ public class Board {
 	 * 
 	 */
 	private void initializePlayers() {
-		int numPlayers = console.getScannerNumOfPlayers();
+		for (int i = 1;i <= totalPlayerNum; i ++) {
+			players.add(new Player(i, false, this.getBoard()));
+		}
+		/*int numPlayers = console.getScannerNumOfPlayers();
 		ArrayList<String> playerNames = console.getPlayerNames(numPlayers);
 		numAI = 4 - numPlayers;
 
@@ -393,7 +397,7 @@ public class Board {
 			players.get(i).setPlayerName(null);
 		}
 
-		currentPlayer = new Player(players.get(0));
+		currentPlayer = new Player(players.get(0));*/
 	}
 
 	/**
@@ -429,7 +433,7 @@ public class Board {
 		for (Continent cont : continents) {
 			int contScore = 0;
 			for (Country country : cont.getCountries()) {
-				if (country.getPlayerOwnerOfCountry() == currentPlayer.getPlayerNumber()) {
+				if (country.getPlayerOccupantOfCountry() == currentPlayer.getPlayerNumber()) {
 					contScore++;
 				}
 			}
@@ -453,6 +457,34 @@ public class Board {
 		return null;
 	}
 
+	
+	public void createPanes() {
+		interactivePane = new InteractivePane(earthMap); 
+		panes.add(interactivePane);
+
+		
+	}
+	
+	public ArrayList<Pane> getPanes() {
+		return panes;
+	}
+	
+	public void nextPhase() {
+		switch(currentPhase) {
+		case START: 
+			currentPhase = Phase.DRAFT;
+		case DRAFT:
+			currentPhase = Phase.ATTACK;
+		case ATTACK: 
+			currentPhase = Phase.FORTIFY;
+		case FORTIFY: 
+			currentPhase = Phase.DRAFT;
+		}
+	}
+	
+	
+	
+		
 	private void createBoard() {
 
 		// Clean this up later...
@@ -714,29 +746,10 @@ public class Board {
 
 	}
 
-	public void createPanes() {
-		interactivePane = new InteractivePane(earthMap); 
-		startPane = new StartPane();
-		panes.add(interactivePane);
-		panes.add(startPane);
+	
+	
+	
+	
+	}
 
-		
-	}
-	
-	public ArrayList<Pane> getPanes() {
-		return panes;
-	}
-	
-	public void nextPhase() {
-		switch(currentPhase) {
-		case START: 
-			currentPhase = Phase.DRAFT;
-		case DRAFT:
-			currentPhase = Phase.ATTACK;
-		case ATTACK: 
-			currentPhase = Phase.FORTIFY;
-		case FORTIFY: 
-			currentPhase = Phase.DRAFT;
-		}
-	}
-}
+

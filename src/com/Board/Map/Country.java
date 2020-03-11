@@ -1,8 +1,11 @@
 package com.Board.Map;
 
 import java.util.ArrayList;
-
+import com.Player.Alliance;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
 
@@ -11,10 +14,17 @@ public class Country {
 	private int currentNumTroops;
 	private ArrayList<Country> borders;
 	private int playerIdentity;
+	private Alliance alliance;
+	private String countryPathName;
+	
+	private ImageView imageView;
 	
 	private Polygon countryShape;
 	private boolean selected;
 	private boolean clickable;
+	private String highlightPath;
+	
+	private final double opacity = 0.1;
 	
 	public Country(String countryName) {
 		this.countryName = countryName;
@@ -27,17 +37,35 @@ public class Country {
 		borders = new ArrayList<Country>();
 		this.countryName = countryName;
 		this.countryShape = shape;
+		this.countryPathName = countryName.replaceAll(" ", "").toUpperCase();
+		this.highlightPath = "LIGHT";
+		this.alliance = Alliance.RED;
+		
+		this.countryShape.setOpacity(opacity);
 		
 		currentNumTroops = 0;
 		clickable = true;
 		selected = false;
 		
+		this.updateHighlight();
+		
+		try {
+			imageView = new ImageView(new Image(getPath()));
+			imageView.setMouseTransparent(true);
+		} catch (Exception e) {
+			System.out.println("Country Image Error: " + countryPathName + alliance + highlightPath + ".png");
+		}
+		
+		
 		
 		countryShape.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
 			if (clickable) {
 	    	  selected = !selected;
+	    	  //System.out.println("selected: " + selected);
+	    	  updateAlliance();
+	    	  updateImageView();
 			}	
-			System.out.println(countryName);
+			//System.out.println(countryName);
 	      });
 	}
 	
@@ -65,8 +93,8 @@ public class Country {
 	 * Gets the current Player occupying the Country
 	 * @return the player number of the current Player occupying the territory
 	 */
-	//TO BE IMPLEMENTED
-	public int getPlayerOwnerOfCountry() {
+	
+	public int getPlayerOccupantOfCountry() {
 		return playerIdentity;
 	}
 	
@@ -76,12 +104,7 @@ public class Country {
 	}
 	
 	
-	//TO BE IMPLEMENTED
-	public boolean isAllied() {
-		return false;
-		
-	}
-	
+
 	public String getName() {
 		return countryName;
 	}
@@ -113,10 +136,39 @@ public class Country {
 	
 	public void setOccupantID(int playerNumber) {
 		playerIdentity = playerNumber;
+		updateAlliance();
 	}
 	
+	public void updateAlliance() {
+		switch(this.playerIdentity) {
+		case 1: 
+			this.alliance = Alliance.RED;
+			break;
+		case 2: 
+			this.alliance = Alliance.BLUE;
+			break;
+		case 3:
+			this.alliance = Alliance.GREEN;
+			break;
+		case 4:
+			this.alliance = Alliance.YELLOW;
+			break;
+		}
+	}
 	
 	//--------------------------------------------------GUI RELATED--------------------------------------------------
+	public void updateImageView() {
+		this.updateHighlight();	
+		//System.out.println(highlightPath);
+		imageView.setImage(new Image(getPath()));	
+		
+	}
+	
+	public ImageView getImageView() {
+		updateImageView();
+		return this.imageView;
+	}
+	
 	public void setSelected(boolean selected) {
 		this.selected = selected;
 	}
@@ -136,4 +188,17 @@ public class Country {
 	public Polygon getShape() {
 		return countryShape;
 	}
+	
+	public void updateHighlight() {
+		if (selected) {
+			highlightPath = "DARK";
+		} else {
+			highlightPath = "LIGHT";
+		}	
+	}
+	
+	public String getPath() {
+		return countryPathName + alliance + highlightPath + ".png";
+	}
+	
 }
