@@ -45,6 +45,14 @@ public class Player {
 		return this.getPlayerNumber() == p.getPlayerNumber();
 	}
 
+	public void setAlliance(Alliance a) {
+		this.alliance = a;
+	}
+	
+	public Alliance getAlliance() {
+		return alliance;
+	}
+	
 	public int getPlayerNumber() {
 		return playerNumber;
 	}
@@ -81,11 +89,11 @@ public class Player {
 		Random random = new Random();
 		Continent contWithMostTroops = continents.get(0);
 		Country temp = contWithMostTroops.getCountries().get(random.nextInt(contWithMostTroops.getCountries().size()));
-		while(temp.getPlayerOwnerOfCountry() != this.playerNumber) {
+		while(temp.getPlayerOccupantOfCountry() != this.playerNumber) {
 			for(Continent cont : continents) {
 				int contTroopNum = 0;
 				for(Country country : cont.getCountries()) {
-					if(country.getPlayerOwnerOfCountry() == this.playerNumber) {
+					if(country.getPlayerOccupantOfCountry() == this.playerNumber) {
 						contTroopNum = contTroopNum + country.getNumTroops();
 					}
 					if(contTroopNum > num1) {
@@ -108,7 +116,7 @@ public class Player {
 
 		for(Continent cont : continents) {
 			for(Country country : cont.getCountries()) {
-				if(country.getPlayerOwnerOfCountry() == this.playerNumber) {
+				if(country.getPlayerOccupantOfCountry() == this.playerNumber) {
 					ArrayList<Country> borders = country.getBorders();
 					for(Country bord : borders) {
 						if(country.getNumTroops() > bord.getNumTroops() + bord.getNumTroops() * 0.25) {
@@ -126,7 +134,7 @@ public class Player {
 
 		for(Continent cont : continents) {
 			for(Country country : cont.getCountries()) {
-				if(country.getPlayerOwnerOfCountry() == this.playerNumber) {
+				if(country.getPlayerOccupantOfCountry() == this.playerNumber) {
 					ArrayList<Country> borders = country.getBorders();
 					for(Country bord : borders) {
 						if(country.getNumTroops() > bord.getNumTroops() + bord.getNumTroops() * 0.25) {
@@ -145,7 +153,7 @@ public class Player {
 
 		for(Continent cont : continents) {
 			for(Country country : cont.getCountries()) {
-				if(country.getPlayerOwnerOfCountry() == this.playerNumber) {
+				if(country.getPlayerOccupantOfCountry() == this.playerNumber) {
 					ArrayList<Country> borders = country.getBorders();
 					for(Country bord : borders) {
 						if(country.getNumTroops() > bord.getNumTroops() + bord.getNumTroops() * 0.25) {

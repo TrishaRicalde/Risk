@@ -933,7 +933,7 @@ public class CountryShapes {
 			576.0, 187.0,
 			565.0, 224.0
 		});
-		countryShapes.put("MIDDLE EAST", middleEast
+		countryShapes.put("MIDDLE EAST", middleEast);
 		
 		Polygon mongolia = new Polygon();
 		mongolia.getPoints().addAll(new Double[] {
@@ -1144,6 +1144,11 @@ public class CountryShapes {
 		
 	}
 	
+	/**
+	 * Get the polygon corresponding to the name from the HashMap countryShapes.
+	 * @param name
+	 * @return
+	 */
 	public Polygon getPolygon(String name) {
 		return countryShapes.get(name.toUpperCase());
 	}
