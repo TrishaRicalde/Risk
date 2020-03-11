@@ -30,12 +30,16 @@ public class Player {
 		switch (playerNumber) {
 		case 1:
 			this.alliance = Alliance.RED;
+			break;
 		case 2:
 			this.alliance = Alliance.BLUE;
+			break;
 		case 3:
 			this.alliance = Alliance.GREEN;
+			break;
 		case 4:
 			this.alliance = Alliance.YELLOW;
+			break;
 		}
 	}
 
@@ -43,10 +47,6 @@ public class Player {
 
 	public boolean equals(Player p) {
 		return this.getPlayerNumber() == p.getPlayerNumber();
-	}
-
-	public void setAlliance(Alliance a) {
-		this.alliance = a;
 	}
 	
 	public Alliance getAlliance() {
