@@ -1,15 +1,23 @@
 package com.Gui;
 
+
 import com.Board.Board;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Game extends Application {
 	private static final String name = "Risk";
@@ -17,11 +25,13 @@ public class Game extends Application {
 	private static final int height = 55 * 9;
 	private static final Image mapImage = new Image("Risk_Map.png");
 	private Board board;
+	private boolean selected = true;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		board = new Board();
 		ImageView imageview = new ImageView(mapImage);
+		
 		
 		Group root = new Group(imageview);
 		Scene scene = new Scene(root);
@@ -30,19 +40,7 @@ public class Game extends Application {
 		for (Pane p : board.getPanes()) {
 			stack.getChildren().add(p);
 		}
-		//InteractivePane interactivePane = new InteractivePane(new Map());
-		//stack.getChildren().add(interactivePane);
-//		Pane welcomePane = new Pane();
-//		Pane invisibleLayer = new Pane();
-//		Pane mapLayer = new Pane();		
-//		Pane topLayer = new Pane();
-//		invisibleLayer.setOpacity(0.5);
-		
-		
 
-//		stack.getChildren().add(mapLayer);
-//		stack.getChildren().add(topLayer);
-//		stack.getChildren().add(invisibleLayer);
 
 		root.getChildren().add(stack);
 

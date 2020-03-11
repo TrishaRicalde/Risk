@@ -366,7 +366,7 @@ public class Map {
 			
 
 		//TEMPORARY
-			shapes.add(alberta.getShape());
+			
 	}
 	
 	/**
