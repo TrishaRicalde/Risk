@@ -378,7 +378,7 @@ public class Board {
 	 * 
 	 */
 	private void initializePlayers() {
-		for (int i = 1;i <= 4; i ++) {
+		for (int i = 1;i <= totalPlayerNum; i ++) {
 			players.add(new Player(i, false, this.getBoard()));
 		}
 		/*int numPlayers = console.getScannerNumOfPlayers();
@@ -731,11 +731,9 @@ public class Board {
 
 		for (Country cont : player1Countries) {
 			cont.setOccupantID(1);
-			System.out.println(cont.getName() + "1");
 		}
 		for (Country cont : player2Countries) {
 			cont.setOccupantID(2);
-			System.out.println(cont.getName() + "2");
 		}
 		for (Country cont : player3Countries) {
 			cont.setOccupantID(3);
