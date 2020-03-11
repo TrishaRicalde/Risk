@@ -1,19 +1,11 @@
 package com.Board.Map;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
-
 import com.Player.Alliance;
-
-import javafx.fxml.FXML;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
 
@@ -22,7 +14,7 @@ public class Country {
 	private int currentNumTroops;
 	private ArrayList<Country> borders;
 	private int playerIdentity;
-	private Alliance alliance = Alliance.GREEN;
+	private Alliance alliance = Alliance.BLUE;
 	private String countryPathName;
 	
 	private ImageView imageView;
@@ -31,6 +23,8 @@ public class Country {
 	private boolean selected;
 	private boolean clickable;
 	private String highlightPath;
+	
+	private final double opacity = 0.1;
 	
 	public Country(String countryName) {
 		this.countryName = countryName;
@@ -46,6 +40,8 @@ public class Country {
 		this.countryPathName = countryName.replaceAll(" ", "").toUpperCase();
 		this.highlightPath = "LIGHT";
 		
+		this.countryShape.setOpacity(opacity);
+		
 		currentNumTroops = 0;
 		clickable = true;
 		selected = false;
@@ -58,6 +54,8 @@ public class Country {
 		} catch (Exception e) {
 			System.out.println("Country Image Error: " + countryPathName + alliance + highlightPath + ".png");
 		}
+		
+		
 		
 		countryShape.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
 			if (clickable) {
@@ -155,9 +153,7 @@ public class Country {
 	public void updateImageView() {
 		this.updateHighlight();	
 		System.out.println(highlightPath);
-		imageView.setImage(new Image(getPath()));
-		imageView.snapshot(new SnapshotParameters(), new WritableImage(1000, 1000));
-		
+		imageView.setImage(new Image(getPath()));	
 		
 	}
 	
