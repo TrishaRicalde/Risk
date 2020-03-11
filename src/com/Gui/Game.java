@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import com.Board.Board;
+
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,8 +19,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
+import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Popup;
@@ -25,21 +33,27 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 
+import javafx.util.Duration;
+
 public class Game extends Application {
 	private static final String name = "Risk";
 	private static final int width = 55 * 16;
 	private static final int height = 55 * 9;
 	private static final Image mapImage = new Image("Risk_Map.png");
 	private Board board;
+
 	private int numOfPlayers = 0;
 	private ArrayList<String> names;
-	
+
+	private boolean selected = true;
+
 	
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		board = new Board();
 		ImageView imageview = new ImageView(mapImage);		
+		
 		
 		Group root = new Group(imageview);
 		Scene scene = new Scene(root);
@@ -193,6 +207,7 @@ public class Game extends Application {
 			stack.getChildren().add(p);
 		}
 
+
 		borderPane.setPrefSize(width, height);
 		borderPane.setCenter(start);
 		stack.getChildren().add(borderPane);
@@ -205,9 +220,7 @@ public class Game extends Application {
 //		Pane topLayer = new Pane();
 //		invisibleLayer.setOpacity(0.5);
 
-//		stack.getChildren().add(mapLayer);
-//		stack.getChildren().add(topLayer);
-//		stack.getChildren().add(invisibleLayer);
+
 
 		root.getChildren().add(stack);
 

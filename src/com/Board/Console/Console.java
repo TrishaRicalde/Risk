@@ -264,7 +264,7 @@ public class Console {
 		System.out.println(continents.get(i).getContinentName());
 		for(int j = 0; j < continents.get(i).getCountries().size(); j++) {
 			System.out.println("	" + continents.get(i).getCountries().get(j).getName() + "---(" 
-			+ b.getPlayerName(continents.get(i).getCountries().get(j).getPlayerOwnerOfCountry()) + ")---" + continents.get(i).getCountries().get(j).getNumTroops() + " troops.");
+			+ b.getPlayerName(continents.get(i).getCountries().get(j).getPlayerOccupantOfCountry()) + ")---" + continents.get(i).getCountries().get(j).getNumTroops() + " troops.");
 		}
 	}
 	

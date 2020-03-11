@@ -37,53 +37,53 @@ public class Map {
 		
 		// All of the Countries
 			//North America
-				Country alberta = new Country("Alberta", countryShapes.getPolygon("alberta"));				
-				Country alaska = new Country("Alaska");
-				Country centralAmerica = new Country("Central America");
-				Country eastrenUnitedStates = new Country("Eastren United States");
-				Country greenland = new Country("Greenland");
-				Country northwestTerritory = new Country("Northwest Territory");
-				Country ontario = new Country("Ontario");
-				Country quebec = new Country("Quebec");
-				Country westernunitedstates = new Country("Western United States");
+				Country alberta = new Country("Alberta", countryShapes.getPolygon("Alberta"));				
+				Country alaska = new Country("Alaska", countryShapes.getPolygon("alaska"));
+				Country centralAmerica = new Country("Central America", countryShapes.getPolygon("central america"));
+				Country easternUnitedStates = new Country("Eastern United States", countryShapes.getPolygon("Eastern United States"));
+				Country greenland = new Country("Greenland", countryShapes.getPolygon("greenland"));
+				Country northwestTerritory = new Country("Northwest Territory", countryShapes.getPolygon("northwest territory"));
+				Country ontario = new Country("Ontario", countryShapes.getPolygon("ontario"));
+				Country quebec = new Country("Quebec", countryShapes.getPolygon("quebec"));
+				Country westernunitedstates = new Country("Western United States", countryShapes.getPolygon("western united states"));
 			//South America
-				Country argentina = new Country("Argentina");
-				Country brazil = new Country("Brazil");
-				Country peru = new Country("Peru");
-				Country venezuela = new Country("Venezuela");
+				Country argentina = new Country("Argentina", countryShapes.getPolygon("argentina"));
+				Country brazil = new Country("Brazil", countryShapes.getPolygon("brazil"));
+				Country peru = new Country("Peru", countryShapes.getPolygon("peru"));
+				Country venezuela = new Country("Venezuela", countryShapes.getPolygon("venezuela"));
 			//Europe
-				Country greatbritain = new Country("Great Britain");
-				Country iceland = new Country("Iceland");
-				Country northerneurope = new Country("Northern Europe");
-				Country scandinavia = new Country("Scandinavia");
-				Country southerneurope = new Country("Southern Europe");
-				Country ukraine = new Country("Ukraine");
-				Country westerneurope = new Country("Western Europe");
+				Country greatbritain = new Country("Great Britain", countryShapes.getPolygon("great britain"));
+				Country iceland = new Country("Iceland", countryShapes.getPolygon("iceland"));
+				Country northerneurope = new Country("Northern Europe", countryShapes.getPolygon("northern europe"));
+				Country scandinavia = new Country("Scandinavia", countryShapes.getPolygon("scandinavia"));
+				Country southerneurope = new Country("Southern Europe", countryShapes.getPolygon("southern europe"));
+				Country ukraine = new Country("Ukraine", countryShapes.getPolygon("ukraine"));
+				Country westerneurope = new Country("Western Europe", countryShapes.getPolygon("western europe"));
 			//Africa
-				Country congo = new Country("Congo");
-				Country eastafrica = new Country("East Africa");
-				Country egypt = new Country("Egypt");
-				Country madagascar = new Country("Madagascar");
-				Country northafrica = new Country("North Africa");
-				Country southafrica = new Country("South Africa");
+				Country congo = new Country("Congo", countryShapes.getPolygon("congo"));
+				Country eastafrica = new Country("East Africa", countryShapes.getPolygon("east africa"));
+				Country egypt = new Country("Egypt", countryShapes.getPolygon("egypt"));
+				Country madagascar = new Country("Madagascar", countryShapes.getPolygon("madagascar"));
+				Country northafrica = new Country("North Africa", countryShapes.getPolygon("north africa"));
+				Country southafrica = new Country("South Africa", countryShapes.getPolygon("south africa"));
 			//Asia
-				Country afghanistan = new Country("Afghanistan");
-				Country china = new Country("China");
-				Country india = new Country("India");
-				Country irkutsk = new Country("Irkutsk");
-				Country japan = new Country("Japan");
-				Country kamchatka = new Country("Kamchatka");
-				Country middleeast = new Country("Middle East");
-				Country mongolia = new Country("Mongolia");
-				Country siam = new Country("Siam");
-				Country siberia = new Country("Siberia");
-				Country ural = new Country("Ural");
-				Country yakutsk = new Country("Yakutsk");
+				Country afghanistan = new Country("Afghanistan", countryShapes.getPolygon("Afghanistan"));
+				Country china = new Country("China", countryShapes.getPolygon("China"));
+				Country india = new Country("India", countryShapes.getPolygon("India"));
+				Country irkutsk = new Country("Irkutsk", countryShapes.getPolygon("Irkutsk"));
+				Country japan = new Country("Japan", countryShapes.getPolygon("Japan"));
+				Country kamchatka = new Country("Kamchatka", countryShapes.getPolygon("Kamchatka"));
+				Country middleeast = new Country("Middle East", countryShapes.getPolygon("Middle East"));
+				Country mongolia = new Country("Mongolia", countryShapes.getPolygon("Mongolia"));
+				Country siam = new Country("Siam", countryShapes.getPolygon("Siam"));
+				Country siberia = new Country("Siberia", countryShapes.getPolygon("Siberia"));
+				Country ural = new Country("Ural", countryShapes.getPolygon("Ural"));
+				Country yakutsk = new Country("Yakutsk", countryShapes.getPolygon("Yakutsk"));
 			//Australia
-				Country easternaustralia = new Country("Eastern Australia");
-				Country indonesia = new Country("Indonesia");
-				Country newguinea = new Country("New Guinea");
-				Country westernaustralia = new Country("Western Australia");
+				Country easternaustralia = new Country("Eastern Australia", countryShapes.getPolygon("Eastern Australia"));
+				Country indonesia = new Country("Indonesia", countryShapes.getPolygon("Indonesia"));
+				Country newguinea = new Country("New Guinea", countryShapes.getPolygon("New Guinea"));
+				Country westernaustralia = new Country("Western Australia", countryShapes.getPolygon("Western Australia"));
 				
 				
 				
@@ -100,12 +100,12 @@ public class Map {
 						alberta.addBorder(westernunitedstates);
 					//3.Western United States
 						westernunitedstates.addBorder(alberta);
-						westernunitedstates.addBorder(eastrenUnitedStates);
+						westernunitedstates.addBorder(easternUnitedStates);
 						westernunitedstates.addBorder(centralAmerica);
 						westernunitedstates.addBorder(ontario);
 					//4.Central America
 						centralAmerica.addBorder(westernunitedstates);
-						centralAmerica.addBorder(eastrenUnitedStates);
+						centralAmerica.addBorder(easternUnitedStates);
 						centralAmerica.addBorder(venezuela);
 					//5.Greenland
 						greenland.addBorder(quebec);
@@ -120,18 +120,18 @@ public class Map {
 					//7.Ontario
 						ontario.addBorder(alberta);
 						ontario.addBorder(quebec);
-						ontario.addBorder(eastrenUnitedStates);
+						ontario.addBorder(easternUnitedStates);
 						ontario.addBorder(westernunitedstates);
 						ontario.addBorder(greenland);
 						ontario.addBorder(northwestTerritory);
 					//8.Quebec
 						quebec.addBorder(ontario);
-						quebec.addBorder(eastrenUnitedStates);
+						quebec.addBorder(easternUnitedStates);
 						quebec.addBorder(greenland);
 					//9.western United States
 						westernunitedstates.addBorder(alberta);
 						westernunitedstates.addBorder(ontario);
-						westernunitedstates.addBorder(eastrenUnitedStates);
+						westernunitedstates.addBorder(easternUnitedStates);
 						westernunitedstates.addBorder(centralAmerica);
 				//South America
 					//1.Argentina
@@ -311,7 +311,7 @@ public class Map {
 			northAmerica.addCountry(quebec);
 			northAmerica.addCountry(centralAmerica);
 			northAmerica.addCountry(westernunitedstates);
-			northAmerica.addCountry(eastrenUnitedStates);
+			northAmerica.addCountry(easternUnitedStates);
 			northAmerica.addCountry(greenland);
 			northAmerica.addCountry(northwestTerritory);
 			
@@ -366,7 +366,7 @@ public class Map {
 			
 
 		//TEMPORARY
-			shapes.add(alberta.getShape());
+			
 	}
 	
 	/**
