@@ -77,7 +77,7 @@ public class Game extends Application {
 		names = new ArrayList<String>();
 
 		Label greeting = new Label("Welcome to Risk, a Game of War");
-		Label playerLabel = new Label("Please enter number of players (between 0 and 4):");
+		Label playerLabel = new Label("Please enter number of players (between 1 and 4):");
 		Label numPlayerLabel = new Label();
 		Label playerNames = new Label("Enter player names: ");
 		Label welcome = new Label("Welcome");
