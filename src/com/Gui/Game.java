@@ -39,8 +39,8 @@ import javafx.util.Duration;
 
 public class Game extends Application {
 	private static final String name = "Risk";
-	private static final int width = 55 * 16;
-	private static final int height = 55 * 9;
+	private static final int width = 54 * 16;
+	private static final int height = 54 * 9;
 	private static final Image mapImage = new Image("Risk_Map.png");
 	private Board board;
 
@@ -53,12 +53,21 @@ public class Game extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		board = new Board();
-		ImageView imageview = new ImageView(mapImage);		
+
+		board = new Board(width, height);
+		ImageView imageview = new ImageView(mapImage);
+		
+		StackPane stack = new StackPane();
+		for (Pane p : board.getPanes()) {
+			stack.getChildren().add(p);
+		}
+
+
 		
 		
-		Group root = new Group(imageview);
-		Scene scene = new Scene(root);
+		
+
+
 
 		Button start = new Button();
 		Button next = new Button();
@@ -137,10 +146,7 @@ public class Game extends Application {
 		
 		
 		next.setOnAction(new EventHandler<ActionEvent>()
-				{
-					
-					
-					
+				{															
 					@Override
 					public void handle(ActionEvent event) 
 					{
@@ -204,69 +210,36 @@ public class Game extends Application {
 			public void handle(ActionEvent event)
 			{
 				finalPopUp.hide();
-				try {
+				stack.getChildren().remove(borderPane);
+				/*try {
 					beginGame(primaryStage);
 				} catch (Exception e) {
 					e.printStackTrace();
-				}
+				}*/
 			}
 		});
 		
 		///
-
-		StackPane stack = new StackPane();
-		for (Pane p : board.getPanes()) {
-			stack.getChildren().add(p);
-		}
-
-
+		Group root = new Group(imageview);
+		Scene scene = new Scene(root, width, height);
+		
+		
 		borderPane.setPrefSize(width, height);
 		borderPane.setCenter(start);
 		stack.getChildren().add(borderPane);
 
-
 		root.getChildren().add(stack);
 
-		// Adds Countries shape objects to the invisibleLayer
-
-		// Scene scene = new Scene(root, width, height);
+		
+		board.startGame();
 
 		primaryStage.setTitle(name);
 		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
+		
 		primaryStage.show();
 	}
-	
-	
-	/// I am so sorry for below, please fix this -Trisha
-	
-		public void beginGame(Stage primaryStage) throws Exception {
-			ImageView imageview = new ImageView(mapImage);
 			
-			
-			Group root = new Group(imageview);
-			Scene scene = new Scene(root);
-			
-			StackPane stack = new StackPane();
-			for (Pane p : board.getPanes()) {
-				stack.getChildren().add(p);
-			}
-
-
-			root.getChildren().add(stack);
-
-			//Adds Countries shape objects to the invisibleLayer
-					
-			//Scene scene = new Scene(root, width, height);
-			
-			
-			primaryStage.setTitle(name);
-			primaryStage.setScene(scene);
-			primaryStage.show();
-		}
-	
-	
-	////////
-	
 	
 	public void setPlayerNum(int i) {
 		numOfPlayers = i;
