@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Observable;
 
 import com.Board.Board;
+import com.Board.Map.Map;
+import com.Gui.Panes.InteractivePane;
 
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -194,13 +196,19 @@ public class Game extends Application {
 			}
 		});
 		
-		
 		play.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event)
 			{
 				finalPopUp.hide();
+				try {
+					beginGame(primaryStage);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		});
+		
+		///
 
 		StackPane stack = new StackPane();
 		for (Pane p : board.getPanes()) {
@@ -211,15 +219,6 @@ public class Game extends Application {
 		borderPane.setPrefSize(width, height);
 		borderPane.setCenter(start);
 		stack.getChildren().add(borderPane);
-
-		// InteractivePane interactivePane = new InteractivePane(new Map());
-		// stack.getChildren().add(interactivePane);
-//		Pane welcomePane = new Pane();
-//		Pane invisibleLayer = new Pane();
-//		Pane mapLayer = new Pane();		
-//		Pane topLayer = new Pane();
-//		invisibleLayer.setOpacity(0.5);
-
 
 
 		root.getChildren().add(stack);
@@ -232,6 +231,38 @@ public class Game extends Application {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
+	
+	
+	/// I am so sorry for below, please fix this -Trisha
+	
+		public void beginGame(Stage primaryStage) throws Exception {
+			ImageView imageview = new ImageView(mapImage);
+			
+			
+			Group root = new Group(imageview);
+			Scene scene = new Scene(root);
+			
+			StackPane stack = new StackPane();
+			for (Pane p : board.getPanes()) {
+				stack.getChildren().add(p);
+			}
+
+
+			root.getChildren().add(stack);
+
+			//Adds Countries shape objects to the invisibleLayer
+					
+			//Scene scene = new Scene(root, width, height);
+			
+			
+			primaryStage.setTitle(name);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+		}
+	
+	
+	////////
+	
 	
 	public void setPlayerNum(int i) {
 		numOfPlayers = i;
