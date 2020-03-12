@@ -17,37 +17,54 @@ public class Board {
 	private ArrayList<Continent> continents;
 	private ArrayList<Player> players;
 	private Console console;
-	private Player currentPlayer;
+	public Player currentPlayer;
 	private int numAI;
 	private Map earthMap;
 	private Command commands;
 	private boolean firstRound;
 	private Dice dice;
+	private int turnNum;
+	private int width;
+	private int height;
 
 	private Phase currentPhase;
 	
 	private ArrayList<Pane> panes;
 	private InteractivePane interactivePane;
+	private MapController mapController;
+	
+	private Country currentSelected;
 
 
 	private final int totalPlayerNum = 4;
 	private final int absolutePower = 5;
 	
 	
+	
+	
 
-	public Board() {
-		players = new ArrayList<Player>();
+	public Board(int width, int height) {
+		this.width = width;
+		this.height = height;
+		currentPhase = Phase.START;
+		turnNum = 1;
+		firstRound = true;				
+		players = new ArrayList<Player>();		
 		console = new Console();
 		earthMap = new Map();
+		panes = new ArrayList<Pane>();			
 		commands = new Command();
 		dice = new Dice();
 		continents = new ArrayList<Continent>(earthMap.getContinents());
-		panes = new ArrayList<Pane>();
-		firstRound = true;
-		currentPhase = Phase.START;
-		initializePlayers();
+		
 		createBoard();
+		initializePlayers();
 		createPanes();
+		
+		//mapController must be initialized last
+		mapController = new MapController(this);
+		earthMap.setMapController(mapController);
+		currentSelected = mapController.getSelectedCountry1();	
 	}
 
 	public Board(Board b) { // Have to make new ArrayList<Players> for all.
@@ -59,10 +76,10 @@ public class Board {
 		this.firstRound = b.firstRound;
 	}
 	
-	public void start() {
-		for (Player p : players) {
-			setTurn(p);
-		}
+	public void startGame() {
+		setTurn(players.get(0));
+		nextPhase();
+		interactivePane.updateLabels();
 	}
 
 	private Board getBoard() {
@@ -80,7 +97,7 @@ public class Board {
 
 	public void setTurn(Player p) {
 		currentPlayer = p;
-		nextPhase();
+		
 		/*if (firstRound) {
 			currentPlayer = players.get(0);
 			firstRound = false;
@@ -111,8 +128,11 @@ public class Board {
 	}
 
 	// TO DO
-	private void draft() {
-		console.println("\n---------------------- Draft ----------------------\n");
+	private void draft() {		
+		currentPlayer.setBonusTroops(getTroopBonus());
+
+		
+		/*console.println("\n---------------------- Draft ----------------------\n");
 		// option to trade in cards --------TO BE IMPLEMENTED
 		int bonusTroops = getTroopBonus();
 		if (bonusTroops == 0) {
@@ -145,12 +165,12 @@ public class Board {
 
 		}
 
-		printBoardState();
+		printBoardState();*/
 	}
 
 	// TO DO
 	private void attack() {
-		console.println("---------------------- Attack ----------------------\n");
+		//console.println("---------------------- Attack ----------------------\n");
 		/*ArrayList<Country> deployableCountries = new ArrayList<Country>(this.getDeployableCountries());
 
 		if (deployableCountries.size() == 0) {
@@ -380,7 +400,9 @@ public class Board {
 	private void initializePlayers() {
 		for (int i = 1;i <= totalPlayerNum; i ++) {
 			players.add(new Player(i, false, this.getBoard()));
+			players.get(i - 1).setPlayerName("BOB " + i);
 		}
+		currentPlayer = players.get(0);
 		/*int numPlayers = console.getScannerNumOfPlayers();
 		ArrayList<String> playerNames = console.getPlayerNames(numPlayers);
 		numAI = 4 - numPlayers;
@@ -457,7 +479,9 @@ public class Board {
 
 	
 	public void createPanes() {
-		interactivePane = new InteractivePane(earthMap); 
+		interactivePane = new InteractivePane(this, earthMap); 
+		interactivePane.setPrefWidth(width);
+		interactivePane.setPrefHeight(height);
 		panes.add(interactivePane);
 
 		
@@ -470,18 +494,87 @@ public class Board {
 	public void nextPhase() {
 		switch(currentPhase) {
 		case START: 
-			currentPhase = Phase.DRAFT;
-		case DRAFT:
+			currentPhase = Phase.DRAFT;		
+			draft();
+			break;
+		case DRAFT: 
 			currentPhase = Phase.ATTACK;
+			//attack();
+			break;
 		case ATTACK: 
 			currentPhase = Phase.FORTIFY;
+			//fortify();
+			break;
 		case FORTIFY: 
 			currentPhase = Phase.DRAFT;
+			nextTurn();
+			draft();
+			break;
+		}
+		mapController.setPhase(currentPhase);
+		updateMapPhase();
+	}
+	
+	private void nextTurn() {
+		if (turnNum < 4) turnNum ++;
+		else turnNum = 1;
+		setTurn(players.get(turnNum - 1));
+	}
+	
+	private void updateMapPhase() {
+		resetMap();
+		switch(currentPhase) {
+		case DRAFT: 
+			this.setPlayerCountriesClickable(true);
+		break;
+		case ATTACK: this.setPlayerCountriesClickable(true);
+		break;
+		case FORTIFY: this.setPlayerCountriesClickable(true);
+		break;
+		default: resetMap();
+		break;
 		}
 	}
 	
+	//Sets the boolean clickable of all countries to false.
+	public void resetMap() {
+		for (Continent cont : continents) {
+			for (Country c : cont.getCountries()) {
+				c.setClickable(false);
+			}
+		}
+	}
 	
+	public void resetSelected() {
+		for (Continent cont : continents) {
+			for (Country c : cont.getCountries()) {
+				c.setSelected(false);
+			}
+		}
+	}
 	
+	//Sets the current Player's Countries clickable boolean.
+	private void setPlayerCountriesClickable(boolean clickable) {
+		for (Country c : this.getCurrentPlayerOwnedCountries()) {
+			c.setClickable(clickable);
+		}
+	}
+	
+	public Phase getPhase() {
+		return currentPhase;
+	}
+	
+	public String getCurrentPlayerName() {
+		return currentPlayer.getPlayerName();
+	}
+	
+	public int getHeight() {
+		return height;
+	}
+	
+	public int getWidth() {
+		return width;
+	}
 		
 	private void createBoard() {
 

@@ -21,20 +21,21 @@ import javafx.util.Duration;
 
 public class Game extends Application {
 	private static final String name = "Risk";
-	private static final int width = 55 * 16;
-	private static final int height = 55 * 9;
+	private static final int width = 54 * 16;
+	private static final int height = 54 * 9;
 	private static final Image mapImage = new Image("Risk_Map.png");
 	private Board board;
-	private boolean selected = true;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		board = new Board();
+		board = new Board(width, height);
 		ImageView imageview = new ImageView(mapImage);
 		
 		
 		Group root = new Group(imageview);
-		Scene scene = new Scene(root);
+		Scene scene = new Scene(root, width, height);
+		
+
 		
 		StackPane stack = new StackPane();
 		for (Pane p : board.getPanes()) {
@@ -48,9 +49,10 @@ public class Game extends Application {
 				
 		//Scene scene = new Scene(root, width, height);
 		
-		
+		board.startGame();
 		primaryStage.setTitle(name);
 		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 	
