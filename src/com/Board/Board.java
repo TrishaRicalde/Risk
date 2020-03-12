@@ -36,6 +36,7 @@ public class Board {
 	private Country currentSelected;
 
 
+
 	private final int totalPlayerNum = 4;
 	private final int absolutePower = 5;
 	
