@@ -12,6 +12,7 @@ public class Player {
 	private String playerName;
 	private Board board;// = new Board();
 	private boolean isAI;
+	private int bonusTroops;
 
 	public Player(int playerNumber, boolean isai, Board b) {
 		this.playerNumber = playerNumber;
@@ -83,6 +84,18 @@ public class Player {
 		return isAI;
 	}
 
+	public void setBonusTroops(int n) {
+		this.bonusTroops = n;
+	}
+	
+	public int getBonusTroops() {
+		return bonusTroops;
+	}
+	
+	public void subtractBonusTroops(int numToSubtract) {
+		bonusTroops -= numToSubtract;
+	}
+	
 	public Country getCountryToAddTroops(Board b, ArrayList<Country> c) {
 		ArrayList<Continent> continents = b.getContinents();
 		int num1 = 0;

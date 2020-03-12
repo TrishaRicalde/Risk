@@ -1,6 +1,8 @@
 package com.Board.Map;
 
 import java.util.ArrayList;
+
+import com.Board.MapController;
 import com.Player.Alliance;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,6 +20,7 @@ public class Country {
 	private String countryPathName;
 	
 	private ImageView imageView;
+	private MapController mapController;
 	
 	private Polygon countryShape;
 	private boolean selected;
@@ -61,11 +64,11 @@ public class Country {
 		countryShape.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
 			if (clickable) {
 	    	  selected = !selected;
-	    	  //System.out.println("selected: " + selected);
+	    	  if (selected) mapController.selectCountry(this);
+	    	  else mapController.unSelect(this);
 	    	  updateAlliance();
 	    	  updateImageView();
 			}	
-			//System.out.println(countryName);
 	      });
 	}
 	
@@ -171,6 +174,7 @@ public class Country {
 	
 	public void setSelected(boolean selected) {
 		this.selected = selected;
+		updateImageView();
 	}
 	
 	public void setClickable(boolean clickable) {
@@ -195,6 +199,10 @@ public class Country {
 		} else {
 			highlightPath = "LIGHT";
 		}	
+	}
+	
+	public void setMapController(MapController m) {
+		this.mapController = m;
 	}
 	
 	public String getPath() {
