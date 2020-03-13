@@ -174,6 +174,10 @@ public class Game extends Application {
 								e.printStackTrace();
 							}
 						}
+						else
+						{
+							playerLabel.setText("Please select a valid number");
+						}
 						
 					}
 			
