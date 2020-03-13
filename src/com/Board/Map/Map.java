@@ -388,6 +388,10 @@ public class Map {
 		}
 	}
 	
+	/*public Country getMapCover() {
+		//Polygon p = new Polygon
+	}*/
+	
 	public ArrayList<Polygon> getShapes() {
 		return shapes;
 	}

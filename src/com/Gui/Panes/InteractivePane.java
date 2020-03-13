@@ -105,6 +105,8 @@ public class InteractivePane extends BorderPane {
 		phaseLbl.setText("" + board.getPhase());
 		turnLbl.setText("" + board.getCurrentPlayerName());	
 	}
+	
+
 
 	public void draftPopup(int numTroops) {
 		
@@ -126,9 +128,16 @@ public class InteractivePane extends BorderPane {
         	board.resetSelected();
         	this.setMouseTransparent(false);
         });
+        draftPopup.setOpacity(0.9);
+        draftPopup.setResizable(false);
         draftPopup.show();
         activePopup = true;
         this.setMouseTransparent(true);
+	}
+	
+	public void initDraftBtn() {
+		Button draftBtn = new Button("Draft");
+		
 	}
 	
 

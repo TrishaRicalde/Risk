@@ -41,7 +41,7 @@ public class Game extends Application {
 	private static final String name = "Risk";
 	private static final int width = 54 * 16;
 	private static final int height = 54 * 9;
-	private static final Image mapImage = new Image("Risk_Map.png");
+	private static final Image mapImage = new Image("Risk_White.png"); //"Risk_Map.png"
 	private Board board;
 
 	private int numOfPlayers = 0;
@@ -60,6 +60,7 @@ public class Game extends Application {
 		StackPane stack = new StackPane();
 		for (Pane p : board.getPanes()) {
 			stack.getChildren().add(p);
+			p.setOpacity(0.7);
 		}
 
 
@@ -77,7 +78,7 @@ public class Game extends Application {
 		names = new ArrayList<String>();
 
 		Label greeting = new Label("Welcome to Risk, a Game of War");
-		Label playerLabel = new Label("Please enter number of players (between 0 and 4):");
+		Label playerLabel = new Label("Please enter number of players (between 1 and 4):");
 		Label numPlayerLabel = new Label();
 		Label playerNames = new Label("Enter player names: ");
 		Label welcome = new Label("Welcome");
@@ -207,6 +208,7 @@ public class Game extends Application {
 			{
 				finalPopUp.hide();
 				stack.getChildren().remove(borderPane);
+				board.getPanes().get(0).setOpacity(1);
 				/*try {
 					beginGame(primaryStage);
 				} catch (Exception e) {
@@ -217,6 +219,7 @@ public class Game extends Application {
 		
 		///
 		Group root = new Group(imageview);
+		//imageview.setOpacity(0.0);
 		Scene scene = new Scene(root, width, height);
 		
 		
