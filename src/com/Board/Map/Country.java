@@ -27,7 +27,7 @@ public class Country {
 	private boolean clickable;
 	private String highlightPath;
 	
-	private final double opacity = 0.1;
+	private final double opacity = 0.0;
 	
 	public Country(String countryName) {
 		this.countryName = countryName;
