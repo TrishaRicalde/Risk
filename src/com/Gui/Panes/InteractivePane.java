@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.effect.BlendMode;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -37,12 +38,16 @@ public class InteractivePane extends BorderPane {
 	private boolean activePopup;
 	private Stage draftPopup;
 	private boolean globeSelected;
+	private ImageView riskContinents;
 
 	public InteractivePane(Board board, Map map) {
 		this.map = map;
 		this.board = board;
 		this.activePopup = false;
 		
+		Image contImage = new Image("Risk_Continents.png");
+		riskContinents = new ImageView(contImage);
+
 		
 		setCountries(map);
 
@@ -123,14 +128,27 @@ public class InteractivePane extends BorderPane {
 
 	}
 	
+	private void showContinentsCover() {
+		this.getChildren().add(riskContinents);
+	}
+	
+	private void removeContinentsCover() {
+		this.getChildren().remove(riskContinents);
+	}
+	
 	private void initGlobeButton() {
 		Button btnGlobe = new Button("");
 		btnGlobe.setAlignment(Pos.BOTTOM_RIGHT);
 		globeSelected = false;
-		Image darkGlobe = new Image("GlobeNonColoured.png");
-		Image colourGlobe = new Image("GlobeColoured.png");
-		btnGlobe.setGraphic(new ImageView(darkGlobe));
+		ImageView darkGlobe = new ImageView(new Image("globe_button_bw.png"));
+		ImageView colourGlobe = new ImageView(new Image("globe_button.png"));
+		btnGlobe.setGraphic(darkGlobe);
 		btnGlobe.setPadding(Insets.EMPTY);
+		Glow glow = new Glow();  
+	    glow.setLevel(0.5); 
+		//Css stylesheet
+		btnGlobe.setId("globe");
+		
 		
 
 		btnGlobe.setOnAction(new EventHandler<ActionEvent>() {
@@ -138,11 +156,14 @@ public class InteractivePane extends BorderPane {
 			@Override
 			public void handle(ActionEvent event) {
 				globeSelected = !globeSelected;
-				if (globeSelected) {
-					btnGlobe.setGraphic(new ImageView(colourGlobe));
+				if (globeSelected) {					
+				    colourGlobe.setEffect(glow);
+					btnGlobe.setGraphic(colourGlobe);
 					
+					//showContinentsCover();
 				} else {
-					btnGlobe.setGraphic(new ImageView(darkGlobe));
+					btnGlobe.setGraphic(darkGlobe);
+					//removeContinentsCover();
 				}				
 			}			
 		});
