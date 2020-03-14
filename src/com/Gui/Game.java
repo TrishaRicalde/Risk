@@ -199,6 +199,7 @@ public class Game extends Application {
 					names.add(nameString);
 				}
 				
+				board.initializePlayers(names);
 				welcome.setText(welcomeString);
 				nextPopUp.hide();
 				finalPopUp.show(primaryStage);
@@ -213,17 +214,12 @@ public class Game extends Application {
 				finalPopUp.hide();
 				stack.getChildren().remove(borderPane);
 				board.getPanes().get(0).setOpacity(1);
-				/*try {
-					beginGame(primaryStage);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}*/
+				board.startGame();
 			}
 		});
 		
-		///
+		
 		Group root = new Group(imageview);
-		//imageview.setOpacity(0.0);
 		Scene scene = new Scene(root, width, height);
 		
 		
@@ -234,7 +230,7 @@ public class Game extends Application {
 		root.getChildren().add(stack);
 
 		
-		board.startGame();
+		
 
 		primaryStage.setTitle(name);
 		primaryStage.setScene(scene);
