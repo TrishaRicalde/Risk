@@ -1142,6 +1142,7 @@ public class CountryShapes {
 		});
 		countryShapes.put("WESTERN AUSTRALIA", westernAustralia);
 		
+		Polygon mapCover = new Polygon();
 	}
 	
 	/**
