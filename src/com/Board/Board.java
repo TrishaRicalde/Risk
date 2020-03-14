@@ -31,7 +31,7 @@ public class Board {
 	
 	private ArrayList<Pane> panes;
 	private InteractivePane interactivePane;
-	private MapController mapController;
+	public MapController mapController;
 	
 	private Country currentSelected;
 
@@ -59,7 +59,6 @@ public class Board {
 		continents = new ArrayList<Continent>(earthMap.getContinents());
 		
 		createBoard();
-		initializePlayers();
 		createPanes();
 		
 		//mapController must be initialized last
@@ -80,7 +79,7 @@ public class Board {
 	public void startGame() {
 		setTurn(players.get(0));
 		nextPhase();
-		interactivePane.updateLabels();
+		interactivePane.showBottomDisplay();		
 	}
 
 	private Board getBoard() {
@@ -131,7 +130,6 @@ public class Board {
 	// TO DO
 	private void draft() {		
 		currentPlayer.setBonusTroops(getTroopBonus());
-
 		
 		/*console.println("\n---------------------- Draft ----------------------\n");
 		// option to trade in cards --------TO BE IMPLEMENTED
@@ -318,7 +316,10 @@ public class Board {
 		printBoardState();
 	}
 
-	
+	public void draftBonusTroops(Country c, int troopsToDraft) {
+		c.addTroops(troopsToDraft);
+		currentPlayer.setBonusTroops(currentPlayer.getBonusTroops() - troopsToDraft);
+	}
 	 
 	private BattleReport battle(Country attacking, Country defending) {
 		int atkTroopsLost = 0;
@@ -398,12 +399,24 @@ public class Board {
 	 * user input with the Console class.
 	 * 
 	 */
-	private void initializePlayers() {
-		for (int i = 1;i <= totalPlayerNum; i ++) {
+	public void initializePlayers(ArrayList<String> names) {
+		for (int i = 0; i < names.size(); i++) {
+			players.add(new Player(i + 1, false, this.getBoard()));
+			players.get(i).setPlayerName(names.get(i));
+		}
+
+		for (int i = names.size(); i < totalPlayerNum; i++) {
+			players.add(new Player(i + 1, false, this.getBoard()));
+			players.get(i).setPlayerName("AI " + (i + 1));
+		}
+		
+		currentPlayer = players.get(0);
+		/*for (int i = 1;i <= totalPlayerNum; i ++) {
 			players.add(new Player(i, false, this.getBoard()));
 			players.get(i - 1).setPlayerName("BOB " + i);
 		}
-		currentPlayer = players.get(0);
+		currentPlayer = players.get(0);*/
+		
 		/*int numPlayers = console.getScannerNumOfPlayers();
 		ArrayList<String> playerNames = console.getPlayerNames(numPlayers);
 		numAI = 4 - numPlayers;
@@ -483,9 +496,7 @@ public class Board {
 		interactivePane = new InteractivePane(this, earthMap); 
 		interactivePane.setPrefWidth(width);
 		interactivePane.setPrefHeight(height);
-		panes.add(interactivePane);
-
-		
+		panes.add(interactivePane);		
 	}
 	
 	public ArrayList<Pane> getPanes() {
@@ -513,35 +524,26 @@ public class Board {
 			break;
 		}
 		mapController.setPhase(currentPhase);
-		updateMapPhase();
+		interactivePane.update();
+		resetMap();
 	}
 	
 	private void nextTurn() {
 		if (turnNum < 4) turnNum ++;
 		else turnNum = 1;
 		setTurn(players.get(turnNum - 1));
-	}
+	}	
 	
-	private void updateMapPhase() {
-		resetMap();
-		switch(currentPhase) {
-		case DRAFT: 
-			this.setPlayerCountriesClickable(true);
-		break;
-		case ATTACK: this.setPlayerCountriesClickable(true);
-		break;
-		case FORTIFY: this.setPlayerCountriesClickable(true);
-		break;
-		default: resetMap();
-		break;
-		}
-	}
-	
-	//Sets the boolean clickable of all countries to false.
+	//Sets the boolean clickable of all countries except the current Player's to false.
 	public void resetMap() {
 		for (Continent cont : continents) {
 			for (Country c : cont.getCountries()) {
-				c.setClickable(false);
+				if (c.getPlayerOccupantOfCountry() == currentPlayer.getPlayerNumber()) {
+					c.setClickable(true);
+				} else {
+					c.setClickable(false);
+				}
+				c.setSelected(false);
 			}
 		}
 	}
