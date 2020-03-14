@@ -3,6 +3,7 @@ package com.Board.Map;
 import java.util.ArrayList;
 
 import com.Board.MapController;
+import com.Gui.Clickable;
 import com.Player.Alliance;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,7 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
 
-public class Country {
+public class Country extends Clickable {
 	private String countryName;
 	private int currentNumTroops;
 	private ArrayList<Country> borders;
@@ -23,11 +24,9 @@ public class Country {
 	private MapController mapController;
 	
 	private Polygon countryShape;
-	private boolean selected;
-	private boolean clickable;
 	private String highlightPath;
 	
-	private final double opacity = 0.1;
+	private final double opacity = 0.0;
 	
 	public Country(String countryName) {
 		this.countryName = countryName;
@@ -42,13 +41,10 @@ public class Country {
 		this.countryShape = shape;
 		this.countryPathName = countryName.replaceAll(" ", "").toUpperCase();
 		this.highlightPath = "LIGHT";
-		this.alliance = Alliance.RED;
-		
-		this.countryShape.setOpacity(opacity);
-		
-		currentNumTroops = 0;
-		clickable = true;
-		selected = false;
+		this.alliance = Alliance.RED;		
+		this.countryShape.setOpacity(opacity);		
+		this.currentNumTroops = 0;
+
 		
 		this.updateHighlight();
 		
@@ -62,10 +58,12 @@ public class Country {
 		
 		
 		countryShape.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-			if (clickable) {
-	    	  selected = !selected;
-	    	  if (selected) mapController.selectCountry(this);
+			if (isClickable()) {
+	    	  onClick();
+	    	  
+	    	  if (isSelected()) mapController.selectCountry(this);
 	    	  else mapController.unSelect(this);
+	    	  
 	    	  updateAlliance();
 	    	  updateImageView();
 			}	
@@ -95,19 +93,12 @@ public class Country {
 	/**
 	 * Gets the current Player occupying the Country
 	 * @return the player number of the current Player occupying the territory
-	 */
-	
+	 */	
 	public int getPlayerOccupantOfCountry() {
 		return playerIdentity;
 	}
-	
-	//TO BE IMPLEMENTED
-	public void attack(Country attackedCountry){
-		
-	}
-	
-	
 
+		
 	public String getName() {
 		return countryName;
 	}
@@ -172,29 +163,12 @@ public class Country {
 		return this.imageView;
 	}
 	
-	public void setSelected(boolean selected) {
-		this.selected = selected;
-		updateImageView();
-	}
-	
-	public void setClickable(boolean clickable) {
-		this.clickable = clickable;
-	}
-	
-	public boolean isSelected() {
-		return selected;
-	}
-	
-	public boolean isClickable() {
-		return clickable;
-	}
-	
 	public Polygon getShape() {
 		return countryShape;
 	}
 	
 	public void updateHighlight() {
-		if (selected) {
+		if (isSelected()) {
 			highlightPath = "DARK";
 		} else {
 			highlightPath = "LIGHT";
@@ -207,6 +181,12 @@ public class Country {
 	
 	public String getPath() {
 		return countryPathName + alliance + highlightPath + ".png";
+	}
+
+	@Override
+	public void setSelected(boolean selected) {
+		super.setSelected(selected);
+		updateImageView();
 	}
 	
 }
