@@ -1,0 +1,8 @@
+.button {
+	-fx-background-radius: 2;
+}
+
+ #globe .graphic {
+ 	-fx-background-color:#34c669;
+ 	-fx-background-radius: 10;
+ }
