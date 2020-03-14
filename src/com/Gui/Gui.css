@@ -2,7 +2,6 @@
 	-fx-background-radius: 2;
 }
 
- #globe .graphic {
- 	-fx-background-color:#34c669;
+ #globe {
  	-fx-background-radius: 10;
  }

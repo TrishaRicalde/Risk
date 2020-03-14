@@ -29,6 +29,8 @@ public abstract class Clickable {
 		this.selected = selected;
 	}
 	
+	public abstract void unSelect();
+	
 	
 	
 }
