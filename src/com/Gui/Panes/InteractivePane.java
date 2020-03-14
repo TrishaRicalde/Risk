@@ -4,9 +4,11 @@ import com.Board.Board;
 import com.Board.Map.Continent;
 import com.Board.Map.Country;
 import com.Board.Map.Map;
+import com.Gui.Panes.Popup.TroopBox;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -28,7 +30,6 @@ public class InteractivePane extends BorderPane {
 	private Label turnLbl;
 	private HBox bottomDisplay;
 	private boolean activePopup;
-	private boolean clickFilter;
 	private Stage draftPopup;
 
 	
@@ -36,16 +37,17 @@ public class InteractivePane extends BorderPane {
 		this.map = map;
 		this.board = board;
 		this.activePopup = false;
-		this.clickFilter = false;
 		setCountries(map);
 		
 		bottomDisplay = new HBox(50);
 		bottomDisplay.setAlignment(Pos.CENTER);
+		
 		this.setBottom(bottomDisplay);
+		this.hideBottomDisplay();
 		
 		initNextPhaseBtn();
 		initLabels();
-		
+
 		this.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
 			if (activePopup) {
 				draftPopup.close();
@@ -54,6 +56,21 @@ public class InteractivePane extends BorderPane {
 		});
 		
 		
+	}
+	
+	public void update() {
+		
+		this.updateLabels();
+		this.requestLayout();
+	}
+	
+	public void showBottomDisplay() {
+		update();
+		bottomDisplay.setVisible(true);
+	}
+	
+	public void hideBottomDisplay() {
+		bottomDisplay.setVisible(false);
 	}
 
 	/**
@@ -83,12 +100,18 @@ public class InteractivePane extends BorderPane {
 			@Override
 			public void handle(ActionEvent e) {
 				board.nextPhase();	
-				board.resetSelected();
-				updateLabels();
+				//updateLabels();
 			}
 			
 		});
 		bottomDisplay.getChildren().add(btnNextPhase);
+		
+		Button btnGlobe = new Button("Globe");
+		btnGlobe.setMinWidth(50);
+		btnGlobe.setMinHeight(50);
+		btnGlobe.setAlignment(Pos.BOTTOM_RIGHT);
+		bottomDisplay.getChildren().add(btnGlobe);
+				
 
 	}
 	
@@ -101,35 +124,56 @@ public class InteractivePane extends BorderPane {
 		bottomDisplay.getChildren().add(0, turnLbl);		
 	}
 	
-	public void updateLabels() {
-		phaseLbl.setText("" + board.getPhase());
-		turnLbl.setText("" + board.getCurrentPlayerName());	
+	public void initDraftPopup() {
+		
 	}
 	
-
+	private void updateLabels() {
+		phaseLbl.setText("" + board.getPhase());
+		turnLbl.setText("" + board.currentPlayer.getPlayerName());	
+	}
+	
+	
 
 	public void draftPopup(int numTroops) {
 		
 		draftPopup = new Stage();
-        /*VBox dialogVbox = new VBox(20);
-        dialogVbox.getChildren().add(new Text("This is a Dialog"));*/
-		HBox hBox = new HBox();
-		Label lblPrompt = new Label("Draft Troops: ");
-        ComboBox<Integer> dialogCBox = new ComboBox<Integer>();
-        for (int i = 1; i <= numTroops; i ++) {
-        	dialogCBox.getItems().add(i);
-        }
-        dialogCBox.setValue(1);
-        hBox.getChildren().add(lblPrompt);
-        hBox.getChildren().add(dialogCBox);
-        Scene dialogScene = new Scene(hBox, 150, 25);
-        draftPopup.setScene(dialogScene);
+		TroopBox hBox = new TroopBox(numTroops);
+		/*HBox hBox = new HBox();
+		ComboBox<Integer> cBox = new ComboBox<Integer>();
+		Label lblInfo = new Label("Troops");
+		Button btnConfirm = new Button("Confirm")*/;
+		
+		hBox.getConfirmButton().setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+				//switch to next phase if there are no troops left
+				if ((int) hBox.getCBox().getValue() == board.currentPlayer.getBonusTroops()) board.nextPhase();
+				
+				Country selectedCountry = board.mapController.getSelectedCountry1();
+				board.draftBonusTroops(selectedCountry, (int) hBox.getCBox().getValue());
+				draftPopup.close();
+				board.resetSelected();
+				board.mapController.clear();
+				//Transition here
+				
+	        	setPaneMouseTransparent(false);
+			}
+			
+		});
+               
+        Scene dialogScene = new Scene(hBox, 180, 25);
+        
         draftPopup.setOnCloseRequest(event -> {
         	board.resetSelected();
         	this.setMouseTransparent(false);
         });
+        draftPopup.setScene(dialogScene);
+        draftPopup.setTitle("Draft");
         draftPopup.setOpacity(0.9);
         draftPopup.setResizable(false);
+        draftPopup.setAlwaysOnTop(true);
         draftPopup.show();
         activePopup = true;
         this.setMouseTransparent(true);
@@ -140,6 +184,9 @@ public class InteractivePane extends BorderPane {
 		
 	}
 	
-
+	public void setPaneMouseTransparent(boolean value) {
+		this.setMouseTransparent(value);
+	}
+	
 
 }

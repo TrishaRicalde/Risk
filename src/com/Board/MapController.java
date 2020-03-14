@@ -18,6 +18,11 @@ public class MapController {
 	private boolean selected2;
 	private InteractivePane interactivePane;
 
+	/**
+	 * Acts as an intermediary between the Board and the Countries.
+	 * Stores selected Countries.
+	 * @param board
+	 */
 	public MapController(Board board) {
 		this.board = board;
 		interactivePane = (InteractivePane) board.getPanes().get(0);
@@ -31,20 +36,27 @@ public class MapController {
 		this.selectedCountry2 = empty;
 	}
 
+	
+	/** Whenever a Country is selected, this methods checks what phase the game is in and
+	 * goes through the appropriate actions.
+	 * @param c the selected Country.
+	 */
 	public void selectCountry(Country c) {
 		switch (phase) {
 		case DRAFT:
 			selectedCountry1 = c;
 			if (board.currentPlayer.getBonusTroops() > 0) {
 				interactivePane.draftPopup(board.currentPlayer.getBonusTroops());
-			} else {
-				board.nextPhase();
 			}
 		default:
 			break;
 		}
 	}
 
+	/**
+	 * Selects a second country and stores it. Used for attack and fortify methods.
+	 * @param c the country selected consecutively after the first country selected.
+	 */
 	public void setSelectedCountry2(Country c) {
 		if (maxSelected == 2 & !this.selectedCountry1.equals(c)) {
 			this.selectedCountry2 = c;
@@ -54,6 +66,11 @@ public class MapController {
 		}
 	}
 
+	
+	/** Sets the phase/state of the MapController.
+	 * The maximum number of countries selected at any moment changes based on the phase.
+	 * @param p
+	 */
 	public void setPhase(Phase p) {
 		this.phase = p;
 		switch (phase) {
@@ -86,6 +103,12 @@ public class MapController {
 		} else if (selectedCountry2.equals(c)) {
 			clear2();
 		}
+	}
+	
+	
+	public void clear() {
+		clear1();
+		clear2();
 	}
 	
 	private void clear1() {
