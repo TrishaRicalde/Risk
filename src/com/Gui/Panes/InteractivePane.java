@@ -4,6 +4,7 @@ import com.Board.Board;
 import com.Board.Map.Continent;
 import com.Board.Map.Country;
 import com.Board.Map.Map;
+import com.Gui.Effects.Effects;
 import com.Gui.Panes.Popup.TroopBox;
 
 import javafx.event.ActionEvent;
@@ -39,11 +40,13 @@ public class InteractivePane extends BorderPane {
 	private Stage draftPopup;
 	private boolean globeSelected;
 	private ImageView riskContinents;
+	private Effects effects;
 
 	public InteractivePane(Board board, Map map) {
 		this.map = map;
 		this.board = board;
 		this.activePopup = false;
+		this.effects = new Effects();
 		
 		Image contImage = new Image("Risk_Continents.png");
 		riskContinents = new ImageView(contImage);
@@ -144,8 +147,6 @@ public class InteractivePane extends BorderPane {
 		ImageView colourGlobe = new ImageView(new Image("globe_button.png"));
 		btnGlobe.setGraphic(darkGlobe);
 		btnGlobe.setPadding(Insets.EMPTY);
-		Glow glow = new Glow();  
-	    glow.setLevel(0.5); 
 		//Css stylesheet
 		btnGlobe.setId("globe");
 		
@@ -157,13 +158,13 @@ public class InteractivePane extends BorderPane {
 			public void handle(ActionEvent event) {
 				globeSelected = !globeSelected;
 				if (globeSelected) {					
-				    colourGlobe.setEffect(glow);
+				    colourGlobe.setEffect(effects.getEffect("borderGlow"));
 					btnGlobe.setGraphic(colourGlobe);
 					
-					//showContinentsCover();
+					showContinentsCover();
 				} else {
 					btnGlobe.setGraphic(darkGlobe);
-					//removeContinentsCover();
+					removeContinentsCover();
 				}				
 			}			
 		});

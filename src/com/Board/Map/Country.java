@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.Board.MapController;
 import com.Gui.Clickable;
+import com.Gui.Effects.Effects;
 import com.Player.Alliance;
 
 import javafx.scene.effect.DropShadow;
@@ -48,13 +49,8 @@ public class Country extends Clickable {
 		this.currentNumTroops = 0;
 
 		//Glow effect
-		int depth = 70;		 
-		DropShadow borderGlow= new DropShadow();
-		borderGlow.setOffsetY(0f);
-		borderGlow.setOffsetX(0f);
-		borderGlow.setColor(Color.WHITE);
-		borderGlow.setWidth(depth);
-		borderGlow.setHeight(depth);
+		Effects effects = new Effects();
+		
 		
 		this.updateHighlight();
 		
@@ -73,7 +69,7 @@ public class Country extends Clickable {
 	    	  
 	    	  if (isSelected()) {
 	    		  mapController.selectCountry(this);
-	    		  imageView.setEffect(borderGlow);	    		  
+	    		  imageView.setEffect(effects.getEffect("borderGlow"));	    		  
 	    	  } else {
 	    		  mapController.unSelect(this);
 	    		  imageView.setEffect(null);
