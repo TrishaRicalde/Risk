@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import com.Board.MapController;
 import com.Gui.Clickable;
+import com.Gui.Effects.Effects;
 import com.Player.Alliance;
+
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -45,6 +48,9 @@ public class Country extends Clickable {
 		this.countryShape.setOpacity(opacity);		
 		this.currentNumTroops = 0;
 
+		//Glow effect
+		Effects effects = new Effects();
+		
 		
 		this.updateHighlight();
 		
@@ -61,8 +67,13 @@ public class Country extends Clickable {
 			if (isClickable()) {
 	    	  onClick();
 	    	  
-	    	  if (isSelected()) mapController.selectCountry(this);
-	    	  else mapController.unSelect(this);
+	    	  if (isSelected()) {
+	    		  mapController.selectCountry(this);
+	    		  imageView.setEffect(effects.getEffect("borderGlow"));	    		  
+	    	  } else {
+	    		  mapController.unSelect(this);
+	    		  imageView.setEffect(null);
+	    	  }
 	    	  
 	    	  updateAlliance();
 	    	  updateImageView();
@@ -154,7 +165,7 @@ public class Country extends Clickable {
 	public void updateImageView() {
 		this.updateHighlight();	
 		//System.out.println(highlightPath);
-		imageView.setImage(new Image(getPath()));	
+		imageView.setImage(new Image(getPath()));
 		
 	}
 	
@@ -186,7 +197,17 @@ public class Country extends Clickable {
 	@Override
 	public void setSelected(boolean selected) {
 		super.setSelected(selected);
+		if (selected == false) {
+			imageView.setEffect(null);
+		}
 		updateImageView();
+	}
+
+	@Override
+	public void unSelect() {
+		setSelected(false);
+		imageView.setEffect(null);
+		
 	}
 	
 }

@@ -99,9 +99,11 @@ public class MapController {
 	
 	public void unSelect(Country c) {
 		if (selectedCountry1.equals(c)) {
+			c.unSelect();
 			clear1();
 		} else if (selectedCountry2.equals(c)) {
-			clear2();
+			c.unSelect();
+			clear2();			
 		}
 	}
 	
