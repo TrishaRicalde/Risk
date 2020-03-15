@@ -230,7 +230,8 @@ public class Game extends Application {
 		root.getChildren().add(stack);
 
 		
-		
+		String style= getClass().getResource("Gui.css").toExternalForm();
+		scene.getStylesheets().add(style);
 
 		primaryStage.setTitle(name);
 		primaryStage.setScene(scene);

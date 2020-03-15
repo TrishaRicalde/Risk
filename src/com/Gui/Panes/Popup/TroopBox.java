@@ -4,6 +4,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 
 public class TroopBox extends HBox {
 	ComboBox<Integer> cBox;
@@ -15,17 +17,17 @@ public class TroopBox extends HBox {
 		lblInfo = new Label("Troops");
 		btnConfirm = new Button("Confirm");
 		
+		
+		//Adds an option for each bonus troop number to the Drop down.
 		for (int i = 1; i <= numTroops; i ++) {
         	cBox.getItems().add(i);
         }
         cBox.setValue(1);
         
-        
+        this.getChildren().addAll(lblInfo, cBox, btnConfirm);
         this.setPadding(new Insets(5,10,5,10));
-        this.getChildren().add(lblInfo);
-        this.getChildren().add(cBox);
-        this.getChildren().add(btnConfirm);
         this.setSpacing(10);
+        
 	}
 	
 	
