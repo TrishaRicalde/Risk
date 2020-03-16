@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import javafx.scene.effect.DropShadow;
 import javafx.scene.effect.Effect;
+import javafx.scene.effect.Glow;
 import javafx.scene.paint.Color;
 
 public class Effects {
@@ -22,6 +23,9 @@ public class Effects {
 		borderGlow.setWidth(depth);
 		borderGlow.setHeight(depth);
 		effects.put("borderGlow", borderGlow);
+		
+		Glow countryGlow = new Glow(0.4);
+		effects.put("countryGlow", countryGlow);
 	}
 	
 	public Effect getEffect(String name) {
