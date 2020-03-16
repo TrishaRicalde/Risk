@@ -11,14 +11,16 @@ public class TransitionLayer extends Pane
 
 	private Map map;
 	private Board board;
-	private Label phaseLbl;
-	private Label turnLbl;
+
 	
 	
 	public TransitionLayer(Board board, Map map)
 	{
 		this.board = board;
 		this.map = map;
+		
+		Label playerLabel = new Label();
+		
 		
 	}
 }
