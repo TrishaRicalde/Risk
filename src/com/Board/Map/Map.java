@@ -99,15 +99,15 @@ public class Map {
 						alberta.addBorder(northwestTerritory);
 						alberta.addBorder(ontario);
 						alberta.addBorder(westernunitedstates);
-					//3.Western United States
-						westernunitedstates.addBorder(alberta);
-						westernunitedstates.addBorder(easternUnitedStates);
-						westernunitedstates.addBorder(centralAmerica);
-						westernunitedstates.addBorder(ontario);
-					//4.Central America
+					//3.Central America
 						centralAmerica.addBorder(westernunitedstates);
 						centralAmerica.addBorder(easternUnitedStates);
 						centralAmerica.addBorder(venezuela);
+					//4. Eastern United States
+						easternUnitedStates.addBorder(centralAmerica);
+						easternUnitedStates.addBorder(ontario);
+						easternUnitedStates.addBorder(quebec);
+						easternUnitedStates.addBorder(westernunitedstates);
 					//5.Greenland
 						greenland.addBorder(quebec);
 						greenland.addBorder(ontario);

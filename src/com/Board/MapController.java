@@ -19,8 +19,9 @@ public class MapController {
 	private InteractivePane interactivePane;
 
 	/**
-	 * Acts as an intermediary between the Board and the Countries.
-	 * Stores selected Countries.
+	 * Acts as an intermediary between the Board and the Countries. Stores
+	 * selected Countries.
+	 * 
 	 * @param board
 	 */
 	public MapController(Board board) {
@@ -36,10 +37,12 @@ public class MapController {
 		this.selectedCountry2 = empty;
 	}
 
-	
-	/** Whenever a Country is selected, this methods checks what phase the game is in and
-	 * goes through the appropriate actions.
-	 * @param c the selected Country.
+	/**
+	 * Whenever a Country is selected, this methods checks what phase the game
+	 * is in and goes through the appropriate actions.
+	 * 
+	 * @param c
+	 *            the selected Country.
 	 */
 	public void selectCountry(Country c) {
 		switch (phase) {
@@ -48,14 +51,20 @@ public class MapController {
 			if (board.currentPlayer.getBonusTroops() > 0) {
 				interactivePane.draftPopup(board.currentPlayer.getBonusTroops());
 			}
+		case ATTACK:
+
 		default:
 			break;
 		}
 	}
 
 	/**
-	 * Selects a second country and stores it. Used for attack and fortify methods.
-	 * @param c the country selected consecutively after the first country selected.
+	 * Selects a second country and stores it. Used for attack and fortify
+	 * methods.
+	 * 
+	 * @param c
+	 *            the country selected consecutively after the first country
+	 *            selected.
 	 */
 	public void setSelectedCountry2(Country c) {
 		if (maxSelected == 2 & !this.selectedCountry1.equals(c)) {
@@ -66,9 +75,10 @@ public class MapController {
 		}
 	}
 
-	
-	/** Sets the phase/state of the MapController.
-	 * The maximum number of countries selected at any moment changes based on the phase.
+	/**
+	 * Sets the phase/state of the MapController. The maximum number of
+	 * countries selected at any moment changes based on the phase.
+	 * 
 	 * @param p
 	 */
 	public void setPhase(Phase p) {
@@ -79,6 +89,7 @@ public class MapController {
 			break;
 		case ATTACK:
 			this.maxSelected = 2;
+			setDeployableCountries();
 			break;
 		case FORTIFY:
 			this.maxSelected = 2;
@@ -89,6 +100,64 @@ public class MapController {
 		}
 	}
 
+	public void attack(Country c) {
+		if (selectedCountry1.equals(empty) && selectedCountry2.equals(empty)) {
+			selectedCountry1 = c;
+			singlePlayerOwnedClickable(selectedCountry1);
+			setBorderingEnemies(selectedCountry1);
+		} else if (!selectedCountry1.equals(empty) && selectedCountry2.equals(empty)) {
+			selectedCountry2 = c;
+		}
+
+		// setDeployableCountries();
+	}
+
+	/**
+	 * Goes through each of the current Player's countries, if the number of
+	 * troops on that country is equal to 1. Then the boolean clickable of that
+	 * country is set to false.
+	 */
+	private void setDeployableCountries() {
+		for (Country c : board.getCurrentPlayerOwnedCountries()) {
+			boolean deployable = false;
+			if (c.getNumTroops() > 1) {
+				for (Country border : c.getBorders()) {
+					if (!border.isAllied(c)) {
+						deployable = true;
+						break;
+					}
+				}
+			}
+			if (deployable) c.setClickable(true);				
+		}
+	}
+
+	/**
+	 * Out of the player's countries, only the current selected country will be
+	 * clickable.
+	 * 
+	 * @param c
+	 *            Country to be set to clickable.
+	 */
+	private void singlePlayerOwnedClickable(Country c) {
+		for (Country playerOwned : board.getCurrentPlayerOwnedCountries()) {
+			playerOwned.setClickable(false);
+		}
+		c.setClickable(true);
+	}
+
+	/**
+	 * Sets the boolean clickable of the bordering enemy countries to true.
+	 * 
+	 * @param c
+	 */
+	private void setBorderingEnemies(Country c) {
+		for (Country border : c.getBorders()) {
+			if (!border.isAllied(c))
+				border.setClickable(true);
+		}
+	}
+
 	public Country getSelectedCountry1() {
 		return this.selectedCountry1;
 	}
@@ -96,31 +165,32 @@ public class MapController {
 	public Country getSelectedCountry2() {
 		return this.selectedCountry2;
 	}
-	
-	public void unSelect(Country c) {
+
+/*	public void unSelect(Country c) {
 		if (selectedCountry1.equals(c)) {
 			c.unSelect();
-			clear1();
+			clear();
 		} else if (selectedCountry2.equals(c)) {
 			c.unSelect();
-			clear2();			
+			clear2();
 		}
-	}
-	
-	
+	}*/
+
 	public void clear() {
 		clear1();
 		clear2();
 	}
-	
+
 	private void clear1() {
+		if (!selectedCountry1.equals(empty))selectedCountry1.unSelect();
 		selectedCountry1 = empty;
 		selected1 = false;
 	}
-	
+
 	private void clear2() {
+		if (!selectedCountry2.equals(empty))selectedCountry2.unSelect();
 		selectedCountry2 = empty;
 		selected2 = false;
 	}
-	
+
 }
