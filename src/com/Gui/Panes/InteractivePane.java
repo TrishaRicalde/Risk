@@ -5,6 +5,7 @@ import com.Board.Map.Continent;
 import com.Board.Map.Country;
 import com.Board.Map.Map;
 import com.Gui.Effects.Effects;
+import com.Gui.Panes.Popup.DraftPopup;
 import com.Gui.Panes.Popup.TroopBox;
 
 import javafx.event.ActionEvent;
@@ -13,10 +14,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -24,9 +22,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class InteractivePane extends BorderPane {
@@ -36,16 +32,14 @@ public class InteractivePane extends BorderPane {
 	private Label phaseLbl;
 	private Label turnLbl;
 	private HBox bottomDisplay;
-	private boolean activePopup;
-	private Stage draftPopup;
 	private boolean globeSelected;
 	private ImageView riskContinents;
 	private Effects effects;
+	private Button btnNextPhase;
 
 	public InteractivePane(Board board, Map map) {
 		this.map = map;
 		this.board = board;
-		this.activePopup = false;
 		this.effects = new Effects();
 		
 		Image contImage = new Image("Risk_Continents.png");
@@ -64,13 +58,6 @@ public class InteractivePane extends BorderPane {
 
 		initButtons();
 		initLabels();
-
-		this.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-			if (activePopup) {
-				draftPopup.close();
-				activePopup = false;
-			}
-		});
 
 	}
 
@@ -116,7 +103,7 @@ public class InteractivePane extends BorderPane {
 	}
 	
 	private void initNextPhaseButton() {
-		Button btnNextPhase = new Button("Next");
+		btnNextPhase = new Button("Next");
 		btnNextPhase.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -128,7 +115,6 @@ public class InteractivePane extends BorderPane {
 		Region filler = new Region();
 		HBox.setHgrow(filler, Priority.ALWAYS);
 		bottomDisplay.getChildren().addAll(btnNextPhase, filler);
-
 	}
 	
 	private void showContinentsCover() {
@@ -147,7 +133,7 @@ public class InteractivePane extends BorderPane {
 		ImageView colourGlobe = new ImageView(new Image("globe_button.png"));
 		btnGlobe.setGraphic(darkGlobe);
 		btnGlobe.setPadding(Insets.EMPTY);
-		//Css stylesheet
+		//Css stylesheet id to make the button round.
 		btnGlobe.setId("globe");
 		
 		
@@ -205,52 +191,13 @@ public class InteractivePane extends BorderPane {
 	 * @param numTroops the number of bonus troops the current player has
 	 */
 	public void draftPopup(int numTroops) {
-		draftPopup = new Stage();
-		TroopBox hBox = new TroopBox(numTroops);
-
-		hBox.getConfirmButton().setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-				// switch to next phase if there are no troops left
-				if ((int) hBox.getCBox().getValue() == board.currentPlayer.getBonusTroops())
-					board.nextPhase();
-
-				Country selectedCountry = board.mapController.getSelectedCountry1();
-				board.draftBonusTroops(selectedCountry, (int) hBox.getCBox().getValue());
-				draftPopup.close();
-				board.resetSelected();
-				board.mapController.clear();
-				// Transition here
-
-				setPaneMouseTransparent(false);
-			}
-
-		});
-
-		Scene dialogScene = new Scene(hBox, 180, 25);
-
-		draftPopup.setOnCloseRequest(event -> {
-			board.resetSelected();
-			this.setMouseTransparent(false);
-		});
-		draftPopup.setScene(dialogScene);
-		draftPopup.setTitle("Draft");
-		draftPopup.setOpacity(0.9);
-		draftPopup.setResizable(false);
-		draftPopup.setAlwaysOnTop(true);
+		DraftPopup draftPopup = new DraftPopup(numTroops, board);
 		draftPopup.show();
-		activePopup = true;
 		this.setMouseTransparent(true);
 	}
-
-	public void initDraftBtn() {
-		Button draftBtn = new Button("Draft");
-
-	}
-
-	public void setPaneMouseTransparent(boolean value) {
-		this.setMouseTransparent(value);
+	
+	public void setDisableNextButton(boolean value) {
+		btnNextPhase.setDisable(value);
 	}
 
 }
