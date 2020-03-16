@@ -30,13 +30,12 @@ public class TroopBox extends HBox {
         
 	}
 	
-	
 	public Button getConfirmButton() {
 		return btnConfirm;
 	}
 	
-	public ComboBox<Integer> getCBox() {
-		return cBox;
+	public int getNumTroops() {
+		return (int) cBox.getValue();
 	}
 	
 	public Label getLblInfo() {
