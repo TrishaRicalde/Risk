@@ -33,10 +33,10 @@ public class Player {
 			this.alliance = Alliance.RED;
 			break;
 		case 2:
-			this.alliance = Alliance.BLUE;
+			this.alliance = Alliance.GREEN;
 			break;
 		case 3:
-			this.alliance = Alliance.GREEN;
+			this.alliance = Alliance.BLUE;
 			break;
 		case 4:
 			this.alliance = Alliance.YELLOW;
