@@ -5,12 +5,19 @@ import com.Board.Map.Country;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-public abstract class ActionPopup extends Stage {
+/**
+ * A Pop-up for the player to choose an action for the chosen 
+ * number of troops.
+ * @author skusj
+ *
+ */
+public abstract class TroopPopup extends Stage {
 	private TroopBox hBox;
 	protected Board board;
 	
-	public ActionPopup(int numTroops, Board board) {
+	public TroopPopup(int numTroops, Board board) {
 		this.board = board;
 		hBox = new TroopBox(numTroops);
 		Scene dialogScene = new Scene(hBox, 180, 25);
