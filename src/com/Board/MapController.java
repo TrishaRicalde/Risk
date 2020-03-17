@@ -4,16 +4,17 @@ import java.util.ArrayList;
 
 import com.Board.Map.Country;
 import com.Gui.Panes.InteractivePane;
+import com.Gui.Panes.Popup.AttackPopup;
 
 public class MapController {
 
 	private Board board;
 	private Phase phase;
 	private int maxSelected;
+	private int countSelected;
 	private Country selectedCountry1;
 	private Country selectedCountry2;
 	private Country empty;
-	private int count;
 	private boolean selected1;
 	private boolean selected2;
 	private InteractivePane interactivePane;
@@ -29,7 +30,7 @@ public class MapController {
 		interactivePane = (InteractivePane) board.getPanes().get(0);
 		phase = board.getPhase();
 		maxSelected = 1;
-		count = 0;
+		countSelected = 0;
 		selected1 = false;
 		selected2 = false;
 		this.empty = new Country("Empty");
@@ -38,42 +39,51 @@ public class MapController {
 	}
 
 	/**
-	 * Whenever a Country is selected, this methods checks what phase the game
-	 * is in and goes through the appropriate actions.
+	 * This method should be called IF AND ONLY IF the country is selected.
+	 * When the country is unselected this method should NOT be called.
+	 * 
+	 * This method checks what phase the game is in and goes
+	 * through the appropriate actions. 
 	 * 
 	 * @param c
 	 *            the selected Country.
 	 */
 	public void selectCountry(Country c) {
+		countSelected ++;
 		switch (phase) {
-		case DRAFT:
+		case DRAFT:			
 			selectedCountry1 = c;
 			if (board.currentPlayer.getBonusTroops() > 0) {
 				interactivePane.draftPopup(board.currentPlayer.getBonusTroops());
 			}
+		break;
 		case ATTACK:
-
+			attack(c);
+		break;
 		default:
-			break;
+
+		}
+	}
+	
+	
+	/**
+	 * This method is called whenever a country is clicked.
+	 * Based on the current phase, this method will return true if
+	 * the country is able to be selected, and false otherwise.
+	 * @param c the country clicked.
+	 * @return boolean value of whether or not the country is selectable.
+	 */
+	public boolean checkSelectable(Country c) {
+		if (countSelected < maxSelected) {			
+			return true;			
+		} else if (selectedCountry1.equals(c) || selectedCountry2.equals(c)) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 
-	/**
-	 * Selects a second country and stores it. Used for attack and fortify
-	 * methods.
-	 * 
-	 * @param c
-	 *            the country selected consecutively after the first country
-	 *            selected.
-	 */
-	public void setSelectedCountry2(Country c) {
-		if (maxSelected == 2 & !this.selectedCountry1.equals(c)) {
-			this.selectedCountry2 = c;
-			selected2 = true;
-		} else {
-			selected2 = false;
-		}
-	}
+	
 
 	/**
 	 * Sets the phase/state of the MapController. The maximum number of
@@ -101,17 +111,20 @@ public class MapController {
 	}
 
 	public void attack(Country c) {
-		if (selectedCountry1.equals(empty) && selectedCountry2.equals(empty)) {
+		if (selectedCountry1.equals(empty)) {
 			selectedCountry1 = c;
-			singlePlayerOwnedClickable(selectedCountry1);
-			setBorderingEnemies(selectedCountry1);
-		} else if (!selectedCountry1.equals(empty) && selectedCountry2.equals(empty)) {
+			setBorderingEnemies(c);
+			singlePlayerOwnedClickable(c);
+		} else if (selectedCountry2.equals(empty)) {
 			selectedCountry2 = c;
+			interactivePane.attackPopup();
+			clear();
+			board.resetMap();
+			setDeployableCountries();
 		}
-
-		// setDeployableCountries();
 	}
 
+	
 	/**
 	 * Goes through each of the current Player's countries, if the number of
 	 * troops on that country is equal to 1. Then the boolean clickable of that
@@ -157,6 +170,23 @@ public class MapController {
 				border.setClickable(true);
 		}
 	}
+	
+	/**
+	 * Selects a second country and stores it. Used for attack and fortify
+	 * methods.
+	 * 
+	 * @param c
+	 *            the country selected consecutively after the first country
+	 *            selected.
+	 */
+	public void setSelectedCountry2(Country c) {
+		if (maxSelected == 2 & !this.selectedCountry1.equals(c)) {
+			this.selectedCountry2 = c;
+			selected2 = true;
+		} else {
+			selected2 = false;
+		}
+	}
 
 	public Country getSelectedCountry1() {
 		return this.selectedCountry1;
@@ -166,31 +196,29 @@ public class MapController {
 		return this.selectedCountry2;
 	}
 
-/*	public void unSelect(Country c) {
-		if (selectedCountry1.equals(c)) {
-			c.unSelect();
-			clear();
-		} else if (selectedCountry2.equals(c)) {
-			c.unSelect();
-			clear2();
-		}
-	}*/
-
 	public void clear() {
 		clear1();
 		clear2();
 	}
 
 	private void clear1() {
-		if (!selectedCountry1.equals(empty))selectedCountry1.unSelect();
-		selectedCountry1 = empty;
-		selected1 = false;
+		if (!selectedCountry1.equals(empty)) {
+			selectedCountry1.unSelect();
+			countSelected --;
+			selectedCountry1 = empty;
+			selected1 = false;
+		}
+		
 	}
 
 	private void clear2() {
-		if (!selectedCountry2.equals(empty))selectedCountry2.unSelect();
-		selectedCountry2 = empty;
-		selected2 = false;
+		if (!selectedCountry2.equals(empty)) {
+			selectedCountry2.unSelect();
+			countSelected --;
+			selectedCountry2 = empty;
+			selected2 = false;
+		}
+		
 	}
 
 }
