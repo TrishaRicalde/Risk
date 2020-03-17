@@ -543,16 +543,14 @@ public class Board {
 		case ATTACK:
 			for (Continent cont : continents) {
 				for (Country c : cont.getCountries()) {				
-					c.setClickable(false);					
-					c.setSelected(false);
+					c.setClickable(false);
 				}
 			}
 		break;
 		case FORTIFY:
 			for (Continent cont : continents) {
 				for (Country c : cont.getCountries()) {				
-					c.setClickable(false);					
-					c.setSelected(false);
+					c.setClickable(false);		
 				}
 			}
 		break;
@@ -564,7 +562,6 @@ public class Board {
 					} else {
 						c.setClickable(false);
 					}
-					c.setSelected(false);
 				}
 			}
 		break;
@@ -573,11 +570,6 @@ public class Board {
 
 	public void resetSelected() {
 		mapController.clear();
-		for (Continent cont : continents) {
-			for (Country c : cont.getCountries()) {
-				c.setSelected(false);
-			}
-		}
 	}
 
 	// Sets the current Player's Countries clickable boolean.

@@ -7,19 +7,37 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.HBox;
 
-public class DraftPopup extends ActionPopup {
+/**
+ * A Pop-up with which a player can select the number of troops
+ * to draft to the selected Country.
+ * @author skusj
+ *
+ */
+public class DraftPopup extends TroopPopup {
 
+	/** 
+	 * Creates a stage which shows a popup for drafting troops.
+	 * @param numTroops the number of bonus troops available
+	 * @param board the game board.
+	 */
 	public DraftPopup(int numTroops, Board board) {
 		super(numTroops, board);
 		this.setTitle("Draft");
 		
+		//When the popup closes, this method clears the selected objects and allows
+		//the interactive pane to receive mouse events.
 		setOnCloseRequest(event -> {
 			board.mapController.clear();
-			board.getPanes().get(0).setMouseTransparent(false);
+			board.getInteractivePane().removeMapBlocker();
+			//board.getPanes().get(0).setMouseTransparent(false);
 		});
 		
 	}
 
+	/**
+	 * This method is called whenever the confirm button is clicked.
+	 * Adds troops to the selected Country.
+	 */
 	@Override
 	public void onButtonClick() {
 		getTroopBox().getConfirmButton().setOnAction(new EventHandler<ActionEvent>() {
@@ -36,10 +54,11 @@ public class DraftPopup extends ActionPopup {
 					board.draftBonusTroops(selectedCountry, getNumOfTroops());
 					board.mapController.clear();
 				}
-				//Allows the interactive pane to recieeve mouse events.
-				board.getPanes().get(0).setMouseTransparent(false);
+				//Allows the interactive pane to receive mouse events.
+				board.getInteractivePane().removeMapBlocker();
+				//board.getPanes().get(0).setMouseTransparent(false);
 				close();				
-				// Transition pane here				
+				// Activate transition here.			
 			}
 
 		});

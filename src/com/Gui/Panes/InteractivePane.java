@@ -5,6 +5,7 @@ import com.Board.Map.Continent;
 import com.Board.Map.Country;
 import com.Board.Map.Map;
 import com.Gui.Effects.Effects;
+import com.Gui.Panes.Popup.AttackPopup;
 import com.Gui.Panes.Popup.DraftPopup;
 import com.Gui.Panes.Popup.TroopBox;
 
@@ -23,6 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 
 public class InteractivePane extends BorderPane {
@@ -36,6 +38,10 @@ public class InteractivePane extends BorderPane {
 	private ImageView riskContinents;
 	private Effects effects;
 	private Button btnNextPhase;
+	private Polygon mapBlocker;
+	private Button btnAttack;
+	private DraftPopup draftPopup;
+	private Stage currentPopup;
 
 	public InteractivePane(Board board, Map map) {
 		this.map = map;
@@ -44,7 +50,6 @@ public class InteractivePane extends BorderPane {
 		
 		Image contImage = new Image("Risk_Continents.png");
 		riskContinents = new ImageView(contImage);
-
 		
 		setCountries(map);
 
@@ -52,17 +57,18 @@ public class InteractivePane extends BorderPane {
 		bottomDisplay.setAlignment(Pos.CENTER);
 		bottomDisplay.setPrefWidth(Double.MAX_VALUE);
 		
-
 		this.setBottom(bottomDisplay);
 		this.hideBottomDisplay();
 
 		initButtons();
 		initLabels();
-
+		initMapBlocker();		
 	}
 
+	/**
+	 * updates the labels.
+	 */
 	public void update() {
-
 		this.updateLabels();
 		this.requestLayout();
 	}
@@ -95,34 +101,95 @@ public class InteractivePane extends BorderPane {
 				}
 			}
 		}
-	}
-
-	private void initButtons() {
-		initNextPhaseButton();
-		initGlobeButton();
+	}	
+	
+	/**
+	 * Adds the mapBlocker to the pane.
+	 */
+	private void addMapBlocker()  {
+		this.getChildren().add(mapBlocker);
 	}
 	
-	private void initNextPhaseButton() {
-		btnNextPhase = new Button("Next");
-		btnNextPhase.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				board.nextPhase();
-			}
-
-		});
-
-		Region filler = new Region();
-		HBox.setHgrow(filler, Priority.ALWAYS);
-		bottomDisplay.getChildren().addAll(btnNextPhase, filler);
+	/**
+	 * removes the mapBlocker from the pane.
+	 */
+	public void removeMapBlocker() {
+		this.getChildren().remove(mapBlocker);
 	}
 	
+	/**
+	 * shows/adds the image of colour-coded continents.
+	 */
 	private void showContinentsCover() {
 		this.getChildren().add(riskContinents);
 	}
 	
+	/**
+	 * removes the continents cover image.
+	 */
 	private void removeContinentsCover() {
 		this.getChildren().remove(riskContinents);
+	}	
+	
+	/**
+	 * Disables the next button.
+	 * @param value
+	 */
+	public void setDisableNextButton(boolean value) {
+		btnNextPhase.setDisable(value);
+	}
+	
+	/**
+	 * Updates the panes's Labels.
+	 */
+	private void updateLabels() {
+		phaseLbl.setText("" + board.getPhase());
+		turnLbl.setText("" + board.currentPlayer.getPlayerName());
+	}
+
+	/**
+	 * Creates a pop-up for drafting troops and shows it on the scene.
+	 * @param numTroops the number of bonus troops the current player has
+	 */
+	public void draftPopup(int numTroops) {
+		draftPopup = new DraftPopup(numTroops, board);
+		currentPopup = draftPopup;
+		addMapBlocker();
+		draftPopup.show();
+		//this.setMouseTransparent(true);
+	}
+	
+	public void attackPopup() {
+		AttackPopup atkPopup = new AttackPopup(board);
+		currentPopup = atkPopup;
+		addMapBlocker();
+		atkPopup.show();		
+	}
+	
+	
+	//------------------------------------------INITIALIZATION METHODS------------------------------------------------------------------
+	
+	private void initButtons() {
+		initNextPhaseButton();
+		initGlobeButton();
+		/*initAttackButton();*/
+	}
+		
+	private void initLabels() {
+		phaseLbl = new Label("" + board.getPhase());
+		turnLbl = new Label("");
+		phaseLbl.setTextFill(Color.WHITE);
+		turnLbl.setTextFill(Color.WHITE);
+		Region filler = new Region();
+		HBox.setHgrow(filler, Priority.ALWAYS);
+		Button btnFiller = new Button("Filler");
+		btnFiller.setMinWidth(50);
+		btnFiller.setMinHeight(50);
+		btnFiller.setVisible(false);
+		bottomDisplay.getChildren().add(0, btnFiller);
+		bottomDisplay.getChildren().add(1, filler);
+		bottomDisplay.getChildren().add(2, turnLbl);
+		bottomDisplay.getChildren().add(3, phaseLbl);
 	}
 	
 	private void initGlobeButton() {
@@ -156,48 +223,36 @@ public class InteractivePane extends BorderPane {
 		});
 		bottomDisplay.getChildren().add(bottomDisplay.getChildren().size(), btnGlobe);
 	}
-
-	private void initLabels() {
-		phaseLbl = new Label("" + board.getPhase());
-		turnLbl = new Label("");
-		phaseLbl.setTextFill(Color.WHITE);
-		turnLbl.setTextFill(Color.WHITE);
-		Region filler = new Region();
-		HBox.setHgrow(filler, Priority.ALWAYS);
-		Button btnFiller = new Button("Filler");
-		btnFiller.setMinWidth(50);
-		btnFiller.setMinHeight(50);
-		btnFiller.setVisible(false);
-		bottomDisplay.getChildren().add(0, btnFiller);
-		bottomDisplay.getChildren().add(1, filler);
-		bottomDisplay.getChildren().add(2, turnLbl);
-		bottomDisplay.getChildren().add(3, phaseLbl);
-	}
-
-	public void initDraftPopup() {
-
-	}
-
-	/**
-	 * Updates the panes's Labels.
-	 */
-	private void updateLabels() {
-		phaseLbl.setText("" + board.getPhase());
-		turnLbl.setText("" + board.currentPlayer.getPlayerName());
-	}
-
-	/**
-	 * Creates a pop-up for drafting troops and shows it on the scene.
-	 * @param numTroops the number of bonus troops the current player has
-	 */
-	public void draftPopup(int numTroops) {
-		DraftPopup draftPopup = new DraftPopup(numTroops, board);
-		draftPopup.show();
-		this.setMouseTransparent(true);
+	
+	private void initMapBlocker() {
+		//clickable shape which covers entire map from mouse events.
+		mapBlocker = new Polygon();
+		mapBlocker.getPoints().addAll(new Double[] {
+				0.0, 0.0, 
+				(double) board.getWidth() + 8.0, 0.0,
+				(double) board.getWidth() + 8.0, (double) board.getHeight() + 6.0,
+				0.0, (double) board.getHeight() + 6.0,
+				0.0, 0.0				
+		});
+		mapBlocker.setOpacity(0.1);
+		
+		mapBlocker.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+			currentPopup.close();
+			board.mapController.clear();
+			removeMapBlocker();
+		});
 	}
 	
-	public void setDisableNextButton(boolean value) {
-		btnNextPhase.setDisable(value);
+	private void initNextPhaseButton() {
+		btnNextPhase = new Button("Next");
+		btnNextPhase.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				board.nextPhase();
+			}
+		});
+		Region filler = new Region();
+		HBox.setHgrow(filler, Priority.ALWAYS);
+		bottomDisplay.getChildren().addAll(btnNextPhase, filler);
 	}
-
 }
