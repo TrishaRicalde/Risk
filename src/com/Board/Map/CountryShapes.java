@@ -430,11 +430,10 @@ public class CountryShapes {
 		
 		Polygon iceland = new Polygon();
 		iceland.getPoints().addAll(new Double[] {
-			354.0, 77.0,
-			348.0, 67.0,
-			369.0, 62.0,
-			376.0, 66.0,
-			369.0, 78.0
+			342.0, 99.0,
+			329.0, 77.0,
+			376.0, 52.0,
+			388.0, 63.0
 		});
 		countryShapes.put("ICELAND", iceland);
 		

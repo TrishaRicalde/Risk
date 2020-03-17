@@ -25,12 +25,10 @@ public abstract class Clickable {
 		return selected;
 	}
 	
-	public void setSelected(boolean selected) {
-		this.selected = selected;
+	
+	public void unSelect() {
+		selected = false;
 	}
-	
-	public abstract void unSelect();
-	
 	
 	
 }

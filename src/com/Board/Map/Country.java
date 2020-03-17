@@ -48,16 +48,18 @@ public class Country extends Clickable {
 		this.alliance = Alliance.RED;
 		this.countryShape.setOpacity(opacity);
 		this.currentNumTroops = 0;
-
+		// Glow effect
+		effects = new Effects();
+		
 		// Temporary Solution to display troop number
 		Tooltip troopNumTip = new Tooltip("" + currentNumTroops);
 		Tooltip.install(countryShape, troopNumTip);
 
-		// Glow effect
-		effects = new Effects();
+		
 
 		this.updateHighlight();
-
+		
+		//Sets the country's image
 		try {
 			imageView = new ImageView(new Image(getPath()));
 			imageView.setMouseTransparent(true);
@@ -65,25 +67,17 @@ public class Country extends Clickable {
 			System.out.println("Country Image Error: " + countryPathName + alliance + highlightPath + ".png");
 		}
 
+		//updates number of troops whenever the mouse is moved
 		countryShape.addEventFilter(MouseEvent.MOUSE_MOVED, e -> {
 			troopNumTip.setText("" + currentNumTroops);
 		});
 
+
 		countryShape.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-
 			if (isClickable()) {
-				onClick();
-
-				if (isSelected()) {
-					mapController.selectCountry(this);
-					imageView.setEffect(effects.getEffect("borderGlow"));
-				} else {
-					mapController.clear();
-					imageView.setEffect(null);
+				if (mapController.checkSelectable(this)) {
+					onClick();				
 				}
-
-				updateAlliance();
-				updateImageView();
 			}
 		});
 	}
@@ -182,7 +176,6 @@ public class Country extends Clickable {
 	// RELATED--------------------------------------------------
 	public void updateImageView() {
 		this.updateHighlight();
-		// System.out.println(highlightPath);
 		imageView.setImage(new Image(getPath()));
 
 	}
@@ -213,29 +206,26 @@ public class Country extends Clickable {
 	}
 
 	@Override
-	public void setSelected(boolean selected) {
-		super.setSelected(selected);
-		if (selected == false) {
+	public void onClick() {
+		super.onClick();
+		if (isSelected()) {
+			imageView.setEffect(effects.getEffect("borderGlow"));
+			mapController.selectCountry(this);
+						
+		} else {
+			mapController.clear();
 			imageView.setEffect(null);
 		}
+		updateAlliance();
 		updateImageView();
 	}
 
-	@Override
 	public void unSelect() {
-		setSelected(false);
+		super.unSelect();
 		imageView.setEffect(null);
-
+		updateImageView();
+		
 	}
 
-	/*@Override
-	public void setClickable(boolean value) {
-		super.setClickable(value);
-		if (isClickable()) {
-			imageView.setEffect(effects.getEffect("countryGlow"));
-		} else {
-			imageView.setEffect(null);
-		}
-	}*/
 
 }
