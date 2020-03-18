@@ -1,6 +1,7 @@
 package com.Gui.Panes.Popup;
 
 import com.Board.Board;
+import com.Board.Phase;
 import com.Board.Map.Country;
 
 import javafx.event.ActionEvent;
@@ -15,8 +16,7 @@ public class MoveTroopPopup extends TroopPopup {
 		this.initStyle(StageStyle.UNDECORATED);
 		this.setWidth(200);
 		this.setHeight(30);
-		getTroopBox().setInitialSelected(numTroops);
-		
+		getTroopBox().setInitialSelected(numTroops);		
 		board.getInteractivePane().setMouseTransparent(true);
 		
 	}
@@ -33,8 +33,13 @@ public class MoveTroopPopup extends TroopPopup {
 				board.resetMap();
 				board.mapController.setDeployableCountries();
 				//Allows the interactive pane to receive mouse events.
+				board.getInteractivePane().removeMapBlocker();
 				board.getInteractivePane().setMouseTransparent(false);			
-				close();				
+				close();	
+				//Moves to next phase because only one fortify is allowed.
+				if (board.getPhase() == Phase.FORTIFY) {
+					board.nextPhase();
+				}
 				// Activate transition here.			
 			}
 
