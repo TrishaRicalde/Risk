@@ -113,24 +113,27 @@ public class MapController {
 	public void attack(Country c) {
 		if (selectedCountry1.equals(empty)) {
 			selectedCountry1 = c;
-			setBorderingEnemies(c);
 			singlePlayerOwnedClickable(c);
+			setBorderingEnemies(c);			
 		} else if (selectedCountry2.equals(empty)) {
 			selectedCountry2 = c;
 			interactivePane.attackPopup();
+			board.resetMap();
+			board.mapController.setDeployableCountries();
+		} else {
 			clear();
 			board.resetMap();
-			setDeployableCountries();
+			board.mapController.setDeployableCountries();
 		}
 	}
 
 	
 	/**
 	 * Goes through each of the current Player's countries, if the number of
-	 * troops on that country is equal to 1. Then the boolean clickable of that
-	 * country is set to false.
+	 * troops on that country is greater than 1, the country is set to 
+	 * clickable.
 	 */
-	private void setDeployableCountries() {
+	public void setDeployableCountries() {
 		for (Country c : board.getCurrentPlayerOwnedCountries()) {
 			boolean deployable = false;
 			if (c.getNumTroops() > 1) {
@@ -141,7 +144,10 @@ public class MapController {
 					}
 				}
 			}
-			if (deployable) c.setClickable(true);				
+			if (deployable) {
+				c.setClickable(true);	
+			}
+			
 		}
 	}
 
@@ -218,7 +224,18 @@ public class MapController {
 			selectedCountry2 = empty;
 			selected2 = false;
 		}
-		
+	}
+	
+	public void unSelected() {
+		switch(phase) {
+		case ATTACK: 
+			board.resetMap();
+			setDeployableCountries();
+		break;
+		default:
+		break;
+			
+		}
 	}
 
 }

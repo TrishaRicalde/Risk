@@ -233,7 +233,7 @@ public class Board {
 	 * @param c2
 	 *            Country you are moving troops to.
 	 */
-	private void moveTroops(Country c1, Country c2) {
+	public void moveTroops(Country c1, Country c2) {
 		int max = c1.getNumTroops() - 1;
 		int min = 1;
 		if (max == 1) {
@@ -316,7 +316,7 @@ public class Board {
 		currentPlayer.setBonusTroops(currentPlayer.getBonusTroops() - troopsToDraft);
 	}
 
-	private BattleReport battle(Country attacking, Country defending) {
+	public BattleReport battle(Country attacking, Country defending) {
 		int atkTroopsLost = 0;
 		int dfndTroopsLost = 0;
 
@@ -375,7 +375,7 @@ public class Board {
 	/**
 	 * Gets the countries owned by the current player
 	 * 
-	 * @return a copy of the ArrayList of Countries owned by the current Player
+	 * @return the ArrayList of Countries owned by the current Player
 	 */
 	public ArrayList<Country> getCurrentPlayerOwnedCountries() {
 		ArrayList<Country> playerOwnedCountries = new ArrayList<Country>();
@@ -570,13 +570,6 @@ public class Board {
 
 	public void resetSelected() {
 		mapController.clear();
-	}
-
-	// Sets the current Player's Countries clickable boolean.
-	private void setPlayerCountriesClickable(boolean clickable) {
-		for (Country c : this.getCurrentPlayerOwnedCountries()) {
-			c.setClickable(clickable);
-		}
 	}
 
 	public Phase getPhase() {
