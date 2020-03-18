@@ -1,6 +1,8 @@
 package com.Gui.Panes;
 
+import com.Board.BattleReport;
 import com.Board.Board;
+import com.Board.MapController;
 import com.Board.Map.Continent;
 import com.Board.Map.Country;
 import com.Board.Map.Map;
@@ -39,8 +41,8 @@ public class InteractivePane extends BorderPane {
 	private Effects effects;
 	private Button btnNextPhase;
 	private Polygon mapBlocker;
-	private Button btnAttack;
 	private DraftPopup draftPopup;
+	private AttackPopup atkPopup;
 	private Stage currentPopup;
 
 	public InteractivePane(Board board, Map map) {
@@ -160,10 +162,15 @@ public class InteractivePane extends BorderPane {
 	}
 	
 	public void attackPopup() {
-		AttackPopup atkPopup = new AttackPopup(board);
+		atkPopup = new AttackPopup(board);
 		currentPopup = atkPopup;
 		addMapBlocker();
-		atkPopup.show();		
+		atkPopup.show();
+		/*BattleReport report = atkPopup.getBattleReport();
+		if (report.isVictorious()) { 
+			moveTroops(attackingCountry,defendingCountry);
+		}
+				 defendingCountry.setOccupantID(currentPlayer.getPlayerNumber());*/
 	}
 	
 	
