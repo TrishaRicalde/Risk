@@ -214,6 +214,7 @@ public class Country extends Clickable {
 						
 		} else {
 			mapController.clear();
+			mapController.unSelected();
 			imageView.setEffect(null);
 		}
 		updateAlliance();

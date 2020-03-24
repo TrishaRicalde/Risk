@@ -1,12 +1,15 @@
 package com.Gui.Panes;
 
+import com.Board.BattleReport;
 import com.Board.Board;
+import com.Board.MapController;
 import com.Board.Map.Continent;
 import com.Board.Map.Country;
 import com.Board.Map.Map;
 import com.Gui.Effects.Effects;
 import com.Gui.Panes.Popup.AttackPopup;
 import com.Gui.Panes.Popup.DraftPopup;
+import com.Gui.Panes.Popup.MoveTroopPopup;
 import com.Gui.Panes.Popup.TroopBox;
 
 import javafx.event.ActionEvent;
@@ -39,8 +42,8 @@ public class InteractivePane extends BorderPane {
 	private Effects effects;
 	private Button btnNextPhase;
 	private Polygon mapBlocker;
-	private Button btnAttack;
 	private DraftPopup draftPopup;
+	private AttackPopup atkPopup;
 	private Stage currentPopup;
 
 	public InteractivePane(Board board, Map map) {
@@ -151,8 +154,8 @@ public class InteractivePane extends BorderPane {
 	 * Creates a pop-up for drafting troops and shows it on the scene.
 	 * @param numTroops the number of bonus troops the current player has
 	 */
-	public void draftPopup(int numTroops) {
-		draftPopup = new DraftPopup(numTroops, board);
+	public void draftPopup(int bonusTroops) {
+		draftPopup = new DraftPopup(bonusTroops, board);
 		currentPopup = draftPopup;
 		addMapBlocker();
 		draftPopup.show();
@@ -160,10 +163,18 @@ public class InteractivePane extends BorderPane {
 	}
 	
 	public void attackPopup() {
-		AttackPopup atkPopup = new AttackPopup(board);
+		atkPopup = new AttackPopup(board);
 		currentPopup = atkPopup;
 		addMapBlocker();
-		atkPopup.show();		
+		atkPopup.show();
+	}
+	
+	public void fortifyPopup(int maxTroops) {
+		MoveTroopPopup moveTroops = new MoveTroopPopup(maxTroops, board);
+		this.setMouseTransparent(false);
+		currentPopup = moveTroops;
+		addMapBlocker();
+		moveTroops.show();
 	}
 	
 	
