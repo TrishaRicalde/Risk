@@ -9,6 +9,7 @@ import com.Board.Map.Country;
 import com.Board.Map.Map;
 import com.Gui.Command;
 import com.Gui.Panes.InteractivePane;
+import com.Gui.Panes.Popup.TransitionPopup;
 import com.Player.Player;
 
 import javafx.scene.layout.Pane;
@@ -32,6 +33,7 @@ public class Board {
 	private ArrayList<Pane> panes;
 	private InteractivePane interactivePane;
 	public MapController mapController;
+	private TransitionPopup transitionPopup;
 
 	private Country currentSelected;
 
@@ -498,6 +500,7 @@ public class Board {
 	}
 
 	public void nextPhase() {
+
 		mapController.clear();
 		switch (currentPhase) {
 		case START:
@@ -523,12 +526,17 @@ public class Board {
 			break;
 		}
 		// resetMap();
+		transitionPopup = new TransitionPopup(this);
+		transitionPopup.nextPhaseTransition(currentPhase);
 		mapController.setPhase(currentPhase);
 		interactivePane.update();
 
 	}
 
-	private void nextTurn() {
+	private void nextTurn() 
+	{
+		transitionPopup = new TransitionPopup(this);
+		transitionPopup.nextTurnTransition(getCurrentPlayerName());
 		if (turnNum < 4)
 			turnNum++;
 		else
