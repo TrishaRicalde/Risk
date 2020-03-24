@@ -196,6 +196,7 @@ public class Map {
 						northerneurope.addBorder(westerneurope);
 						northerneurope.addBorder(ukraine);
 						northerneurope.addBorder(scandinavia);
+						northerneurope.addBorder(southerneurope);
 					//4.Scandinavia
 						scandinavia.addBorder(greatbritain);
 						scandinavia.addBorder(iceland);

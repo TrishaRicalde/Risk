@@ -1,6 +1,7 @@
 package com.Gui.Panes.Popup;
 
 
+import com.Board.BattleReport;
 import com.Board.Board;
 import com.Board.Map.Country;
 
@@ -25,9 +26,11 @@ public class AttackPopup extends Stage {
 	ImageView attackImg;
 	Board board;
 	Button attack;
+	BattleReport report;
 	
 	public AttackPopup(Board board) {
 		this.board = board;
+		
 		Image image = new Image("sword.png"); 
 		attackImg = new ImageView(image);
 		
@@ -45,12 +48,30 @@ public class AttackPopup extends Stage {
 		attack.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				board.mapController.clear();
+				Country atkCountry = board.mapController.getSelectedCountry1();
+				Country dfdCountry = board.mapController.getSelectedCountry2();
+				report = board.battle(atkCountry, dfdCountry);
+				atkCountry.subractTroops(report.getAttackingTroopsLost());
+				dfdCountry.subractTroops(report.getDefendingTroopsLost());				
 				board.getInteractivePane().removeMapBlocker();
+				
 				close();
+				if (report.isVictorious()) {
+					 MoveTroopPopup movePopup = new MoveTroopPopup(atkCountry.getNumTroops() - 1, board);
+					 movePopup.show();
+				} else {
+					board.mapController.clear();
+					board.resetMap();
+					board.mapController.setDeployableCountries();
+				}
+				
 			}
 
 		});
 		
+	}
+	
+	public BattleReport getBattleReport() {
+		return report;
 	}
 }

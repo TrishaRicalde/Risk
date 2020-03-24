@@ -38,6 +38,10 @@ public class TroopBox extends HBox {
 		return (int) cBox.getValue();
 	}
 	
+	public void setInitialSelected(int num) {
+		cBox.setValue(num);
+	}
+	
 	public Label getLblInfo() {
 		return lblInfo;
 	}
