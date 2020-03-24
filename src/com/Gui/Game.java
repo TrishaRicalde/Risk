@@ -42,6 +42,7 @@ public class Game extends Application {
 	private static final int width = 54 * 16;
 	private static final int height = 54 * 9;
 	private static final Image mapImage = new Image("Risk_White.png"); //"Risk_Map.png"
+	private static final Image titleScreen = new Image("Risk_Title.gif");
 	private Board board;
 
 	private int numOfPlayers = 0;
@@ -56,7 +57,9 @@ public class Game extends Application {
 
 		board = new Board(width, height);
 		ImageView imageview = new ImageView(mapImage);
+		ImageView titleview = new ImageView(titleScreen);
 		
+		StackPane startScreen = new StackPane();
 		StackPane stack = new StackPane();
 		for (Pane p : board.getPanes()) {
 			stack.getChildren().add(p);
@@ -126,6 +129,8 @@ public class Game extends Application {
 		vbox3.getChildren().add(goodLuck);
 		vbox3.getChildren().add(play);
 		vbox3.setMargin(play, new Insets(0, 0, 0, 265));
+		
+		start.setOpacity(0.85);
 
 		start.setText("Start Game");
 		next.setText("Next");
@@ -138,6 +143,7 @@ public class Game extends Application {
 				if (!startPopUp.isShowing()) {
 					startPopUp.show(primaryStage);
 					start.setVisible(false);
+					titleview.setVisible(false);
 
 				} else {
 				}
@@ -224,7 +230,11 @@ public class Game extends Application {
 		
 		
 		borderPane.setPrefSize(width, height);
-		borderPane.setCenter(start);
+		startScreen.getChildren().add(titleview);
+		startScreen.getChildren().add(start);
+		startScreen.setMargin(start, new Insets(300, 0, 0, 0));
+		borderPane.setCenter(startScreen);
+		//borderPane.setCenter(start);
 		stack.getChildren().add(borderPane);
 
 		root.getChildren().add(stack);
