@@ -224,7 +224,7 @@ public class InteractivePane extends BorderPane {
 				if (globeSelected) {					
 				    colourGlobe.setEffect(effects.getEffect("borderGlow"));
 					btnGlobe.setGraphic(colourGlobe);
-					
+					board.mapController.clear();
 					showContinentsCover();
 				} else {
 					btnGlobe.setGraphic(darkGlobe);

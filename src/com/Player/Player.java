@@ -45,7 +45,19 @@ public class Player {
 	}
 
 
-
+	public boolean isDefeated(Board board) {
+		boolean defeated = true;
+		for (Continent cont : board.getContinents()) {
+			for (Country c : cont.getCountries()) {
+				if (c.getPlayerOccupantOfCountry() == this.playerNumber) {
+					return false;
+				}
+			}
+		}
+		return defeated;
+	}
+	
+	
 	public boolean equals(Player p) {
 		return this.getPlayerNumber() == p.getPlayerNumber();
 	}
