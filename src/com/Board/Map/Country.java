@@ -208,14 +208,19 @@ public class Country extends Clickable {
 	@Override
 	public void onClick() {
 		super.onClick();
-		if (isSelected()) {
-			imageView.setEffect(effects.getEffect("borderGlow"));
+		if (isSelected()) {			
 			mapController.selectCountry(this);
-						
+			imageView.setEffect(effects.getEffect("selectShadow"));						
 		} else {
 			mapController.clear();
 			mapController.unSelected();
-			imageView.setEffect(null);
+			if (isClickable()) {
+				//imageView.setImage(new Image(countryPathName + alliance + "DARK.png"));
+				imageView.setEffect(effects.getEffect("countryGlow"));
+			} else {
+				//imageView.setImage(new Image(getPath()));
+				imageView.setEffect(null);
+			}
 		}
 		updateAlliance();
 		updateImageView();
@@ -223,9 +228,26 @@ public class Country extends Clickable {
 
 	public void unSelect() {
 		super.unSelect();
-		imageView.setEffect(null);
+		if (isClickable()) {
+			//imageView.setImage(new Image(countryPathName + alliance + "DARK.png"));
+			imageView.setEffect(effects.getEffect("countryGlow"));
+		} else {
+			//imageView.setImage(new Image(getPath()));
+			imageView.setEffect(null);
+		}
 		updateImageView();
-		
+	}
+	
+	@Override
+	public void setClickable(boolean value) {
+		super.setClickable(value);
+		if (isClickable()) {
+			//imageView.setImage(new Image(countryPathName + alliance + "DARK.png"));
+			imageView.setEffect(effects.getEffect("countryGlow"));
+		} else {
+			//imageView.setImage(new Image(getPath()));
+			imageView.setEffect(null);
+		}
 	}
 
 

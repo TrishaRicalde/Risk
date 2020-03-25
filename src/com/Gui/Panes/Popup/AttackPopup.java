@@ -50,6 +50,7 @@ public class AttackPopup extends Stage {
 			public void handle(ActionEvent event) {
 				Country atkCountry = board.mapController.getSelectedCountry1();
 				Country dfdCountry = board.mapController.getSelectedCountry2();
+				int defender = dfdCountry.getPlayerOccupantOfCountry();
 				report = board.battle(atkCountry, dfdCountry);
 				atkCountry.subractTroops(report.getAttackingTroopsLost());
 				dfdCountry.subractTroops(report.getDefendingTroopsLost());				
@@ -57,8 +58,19 @@ public class AttackPopup extends Stage {
 				
 				close();
 				if (report.isVictorious()) {
-					 MoveTroopPopup movePopup = new MoveTroopPopup(atkCountry.getNumTroops() - 1, board);
-					 movePopup.show();
+					board.mapController.getSelectedCountry2().setOccupantID(board.mapController.getSelectedCountry1().getPlayerOccupantOfCountry());
+					//Checks if a Player is defeated.
+					if (board.getPlayer(defender).isDefeated(board)) {
+						board.playerDefeated(defender);
+						System.out.println("Player " + defender + " has been defeated!");
+						//Checks if a player has won the game.
+						if (board.getPlayers().size() == 1) {
+							board.victory();
+						}
+					}
+					//Move troops after attack
+					MoveTroopPopup movePopup = new MoveTroopPopup(atkCountry.getNumTroops() - 1, board);
+					movePopup.show();
 				} else {
 					board.mapController.clear();
 					board.resetMap();
