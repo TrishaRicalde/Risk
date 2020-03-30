@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -37,6 +38,7 @@ public class AttackPopup extends Stage {
 		attack = new Button("");
 		attack.setGraphic(attackImg);
 		Scene scene = new Scene(attack);
+		
 		this.setScene(scene);
 		this.setOpacity(0.9);
 		this.initStyle(StageStyle.UNDECORATED);

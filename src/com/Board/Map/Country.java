@@ -218,7 +218,7 @@ public class Country extends Clickable {
 	@Override
 	public void onClick() {
 		super.onClick();
-		updateLabel();
+		//updateLabel();
 		if (isSelected()) {			
 			mapController.selectCountry(this);
 			imageView.setEffect(effects.getEffect("selectShadow"));						
