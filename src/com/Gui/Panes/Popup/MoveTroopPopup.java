@@ -13,9 +13,10 @@ public class MoveTroopPopup extends TroopPopup {
 	public MoveTroopPopup(int numTroops, Board board) {
 		super(numTroops, board);
 		this.setTitle("Move Troops");
-		this.initStyle(StageStyle.UNDECORATED);
+		this.initStyle(StageStyle.TRANSPARENT);
 		this.setWidth(200);
 		this.setHeight(40);
+
 		getTroopBox().setInitialSelected(numTroops);		
 		board.getInteractivePane().setMouseTransparent(true);
 		

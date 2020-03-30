@@ -9,6 +9,7 @@ import com.Board.Map.Country;
 import com.Board.Map.Map;
 import com.Gui.Command;
 import com.Gui.Panes.InteractivePane;
+import com.Gui.Panes.LabelLayer;
 import com.Player.Player;
 
 import javafx.scene.layout.Pane;
@@ -515,7 +516,13 @@ public class Board {
 		interactivePane = new InteractivePane(this, earthMap);
 		interactivePane.setPrefWidth(width);
 		interactivePane.setPrefHeight(height);
+		
+		LabelLayer labelLayer = new LabelLayer(this);
+		labelLayer.setMouseTransparent(true);
+		
 		panes.add(interactivePane);
+		panes.add(labelLayer);
+		
 	}
 
 	public ArrayList<Pane> getPanes() {
