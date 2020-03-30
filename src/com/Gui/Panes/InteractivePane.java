@@ -26,6 +26,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
@@ -66,6 +67,7 @@ public class InteractivePane extends BorderPane {
 		initButtons();
 		initLabels();
 		initMapBlocker();		
+		initTroopLabels();
 	}
 
 	/**
@@ -97,8 +99,8 @@ public class InteractivePane extends BorderPane {
 				try {
 					this.getChildren().add(c.getImageView());
 					if (c.getShape() != null) {
-						this.getChildren().addAll(c.getShape());
-					}
+						this.getChildren().addAll(c.getShape());																						
+					}					
 				} catch (Exception e) {
 					System.out.println("ImageView Error: " + c.getName());
 				}
@@ -185,7 +187,20 @@ public class InteractivePane extends BorderPane {
 		initGlobeButton();
 		/*initAttackButton();*/
 	}
+	
+	private void initTroopLabels() {
+		BorderPane pane = new BorderPane();
+		pane.setPrefWidth(board.getWidth());
+		pane.setPrefHeight(board.getHeight());
+		Label l = new Label("Troop");
+		pane.getChildren().add(l);
+		l.setTranslateX(100.0);
+		l.setTranslateY(100.0);
+		this.getChildren().add(pane);
+
 		
+	}
+	
 	private void initLabels() {
 		phaseLbl = new Label("" + board.getPhase());
 		turnLbl = new Label("");
@@ -224,7 +239,7 @@ public class InteractivePane extends BorderPane {
 				if (globeSelected) {					
 				    colourGlobe.setEffect(effects.getEffect("borderGlow"));
 					btnGlobe.setGraphic(colourGlobe);
-					
+					board.mapController.clear();
 					showContinentsCover();
 				} else {
 					btnGlobe.setGraphic(darkGlobe);

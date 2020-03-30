@@ -10,6 +10,8 @@ import com.Board.Map.Map;
 import com.Gui.Command;
 import com.Gui.Panes.InteractivePane;
 import com.Gui.Panes.Popup.TransitionPopup;
+
+import com.Gui.Panes.LabelLayer;
 import com.Player.Player;
 
 import javafx.scene.layout.Pane;
@@ -27,6 +29,7 @@ public class Board {
 	private int turnNum;
 	private int width;
 	private int height;
+	
 
 	private Phase currentPhase;
 
@@ -186,6 +189,7 @@ public class Board {
 		 * 1).getAttackChoice(this.getBoard(),
 		 * getCurrentPlayerOwnedCountries())); }
 		 * 
+		 *
 		 * while (choice) { console.
 		 * println("Which Country would you like to launch your attack from?");
 		 * Country attackingCountry;
@@ -360,6 +364,28 @@ public class Board {
 	}
 
 	/**
+	 * Gets a Player from the ArrayList of Players based on the playerNumber.
+	 * @param playerNumber
+	 * @return the Player corresponding to the player number.
+	 */
+	public Player getPlayer(int playerNumber) {
+		for (Player p : players) {
+			if (p.getPlayerNumber() == playerNumber) return p;
+		}
+		return null;
+	}
+	
+	/**
+	 * This method should be called whenever a player has
+	 * no countries left.
+	 * @param playerNumber
+	 */
+	public void playerDefeated(int playerNumber) {
+		players.remove(getPlayer(playerNumber));		
+	}
+	
+	
+	/**
 	 * Gets an ArrayList of current Player Owned Countries with more than 1
 	 * troop.
 	 * 
@@ -460,7 +486,7 @@ public class Board {
 	}
 
 	private int getTroopBonus() {
-		int playerOwnedCountryNum = getCurrentPlayerOwnedCountries().size() / 3;
+		int troopBonus = getCurrentPlayerOwnedCountries().size() / 3;
 		int continentBonus = 0;
 		for (Continent cont : continents) {
 			int contScore = 0;
@@ -473,7 +499,8 @@ public class Board {
 				continentBonus = continentBonus + cont.getContinentBonus();
 			}
 		}
-		return playerOwnedCountryNum + continentBonus;
+		if (troopBonus == 0) troopBonus = 3;
+		return troopBonus + continentBonus;
 	}
 
 	public ArrayList<Continent> getContinents() {
@@ -494,7 +521,14 @@ public class Board {
 		interactivePane = new InteractivePane(this, earthMap);
 		interactivePane.setPrefWidth(width);
 		interactivePane.setPrefHeight(height);
+		
+		LabelLayer labelLayer = new LabelLayer(this);
+		labelLayer.setMouseTransparent(true);
+		
 		panes.add(interactivePane);
+
+		panes.add(labelLayer);
+
 		
 	}
 
@@ -538,11 +572,16 @@ public class Board {
 
 	}
 
-	private void nextTurn() 
-	{
-		transitionPopup.show();
-		transitionPopup.nextTurnTransition(getCurrentPlayerName());
-		if (turnNum < 4)
+
+	
+	/**
+	 * This method should be called when a Player wins the game.
+	 */
+	public void victory() {
+		System.out.println("YOU ARE VICTORIOUS!!!!!!!!!!");
+	}
+	private void nextTurn() {
+		if (turnNum < players.size())
 			turnNum++;
 		else
 			turnNum = 1;
