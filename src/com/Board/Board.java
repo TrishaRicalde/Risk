@@ -53,6 +53,7 @@ public class Board {
 		commands = new Command();
 		dice = new Dice();
 		continents = new ArrayList<Continent>(earthMap.getContinents());
+		transitionPopup = new TransitionPopup(this);
 
 		createBoard();
 		createPanes();
@@ -488,14 +489,17 @@ public class Board {
 		return null;
 	}
 
-	public void createPanes() {
+	public void createPanes() 
+	{
 		interactivePane = new InteractivePane(this, earthMap);
 		interactivePane.setPrefWidth(width);
 		interactivePane.setPrefHeight(height);
 		panes.add(interactivePane);
+		
 	}
 
-	public ArrayList<Pane> getPanes() {
+	public ArrayList<Pane> getPanes() 
+	{
 		return panes;
 	}
 
@@ -526,8 +530,9 @@ public class Board {
 			break;
 		}
 		// resetMap();
-		transitionPopup = new TransitionPopup(this);
+		transitionPopup.show();
 		transitionPopup.nextPhaseTransition(currentPhase);
+		
 		mapController.setPhase(currentPhase);
 		interactivePane.update();
 
@@ -535,7 +540,7 @@ public class Board {
 
 	private void nextTurn() 
 	{
-		transitionPopup = new TransitionPopup(this);
+		transitionPopup.show();
 		transitionPopup.nextTurnTransition(getCurrentPlayerName());
 		if (turnNum < 4)
 			turnNum++;
