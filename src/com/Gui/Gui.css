@@ -5,3 +5,8 @@
  #globe {
  	-fx-background-radius: 10;
  }
+ 
+ #roundedBorder {
+ 	-fx-background-color: red;
+ 	-fx-border-color: red;
+ }
