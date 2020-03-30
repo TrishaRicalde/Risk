@@ -4,6 +4,8 @@ import com.Board.Board;
 import com.Board.Map.Country;
 
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -19,12 +21,27 @@ public abstract class TroopPopup extends Stage {
 	
 	public TroopPopup(int numTroops, Board board) {
 		this.board = board;
+		StackPane pane = new StackPane();
+		Canvas canvas = new Canvas();
 		hBox = new TroopBox(numTroops);
-		Scene dialogScene = new Scene(hBox, 180, 25);
+		
+		canvas.setStyle("-fx-effect: innershadow(gaussian, #039ed3, 2, 1.0, 0, 0);");
+		canvas.setMouseTransparent(true);
+		
+		pane.getChildren().add(hBox);
+		pane.getChildren().add(canvas);
+		
+		Scene dialogScene = new Scene(pane, 180, 25);
+
+		
+        
+  		
 		this.setScene(dialogScene);
 		this.setOpacity(0.9);
 		this.setResizable(false);
 		this.setAlwaysOnTop(true);	
+		
+		
 		onButtonClick();
 	}
 	
