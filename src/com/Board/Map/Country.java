@@ -7,6 +7,7 @@ import com.Gui.Clickable;
 import com.Gui.Effects.Effects;
 import com.Player.Alliance;
 
+import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -22,6 +23,7 @@ public class Country extends Clickable {
 	private int playerIdentity;
 	private Alliance alliance;
 	private String countryPathName;
+	private Label troopLabel;
 
 	private ImageView imageView;
 	private MapController mapController;
@@ -174,6 +176,14 @@ public class Country extends Clickable {
 
 	// --------------------------------------------------GUI
 	// RELATED--------------------------------------------------
+	public void setLabel(Label label) {
+		troopLabel = label;
+	}
+	
+	public void updateLabel() {
+		troopLabel.setText("" + currentNumTroops);
+	}
+	
 	public void updateImageView() {
 		this.updateHighlight();
 		imageView.setImage(new Image(getPath()));
@@ -208,6 +218,7 @@ public class Country extends Clickable {
 	@Override
 	public void onClick() {
 		super.onClick();
+		updateLabel();
 		if (isSelected()) {			
 			mapController.selectCountry(this);
 			imageView.setEffect(effects.getEffect("selectShadow"));						
