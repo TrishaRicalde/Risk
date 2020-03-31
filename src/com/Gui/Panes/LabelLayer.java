@@ -156,6 +156,69 @@ public class LabelLayer extends Pane {
 			easternaustralia.setTranslateX(800);
 			easternaustralia.setTranslateY(340);
 			AllLabels.add(easternaustralia);
+		// ASIA
+			// YAKUTSK
+			Label yakutsk = new Label("3");
+			yakutsk.setTranslateX(682);
+			yakutsk.setTranslateY(60);
+			AllLabels.add(yakutsk);
+			// URAL
+			Label ural = new Label("3");
+			ural.setTranslateX(563);
+			ural.setTranslateY(75);
+			AllLabels.add(ural);
+			// SIBERIA
+			Label siberia = new Label("3");
+			siberia.setTranslateX(614);
+			siberia.setTranslateY(63);
+			AllLabels.add(siberia);
+			// SIAM
+			Label siam = new Label("3");
+			siam.setTranslateX(690);
+			siam.setTranslateY(214);
+			AllLabels.add(siam);
+			// MONGOLIA
+			Label mongolia = new Label("3");
+			mongolia.setTranslateX(682);
+			mongolia.setTranslateY(124);
+			AllLabels.add(mongolia);
+			// AFGHANISTAN
+			Label afghanistan = new Label("3");
+			afghanistan.setTranslateX(572);
+			afghanistan.setTranslateY(117);
+			AllLabels.add(afghanistan);
+			// CHINA
+			Label china = new Label("3");
+			china.setTranslateX(666);
+			china.setTranslateY(156);
+			AllLabels.add(china);
+			// JAPAN
+			Label japan = new Label("3");
+			japan.setTranslateX(776);
+			japan.setTranslateY(150);
+			AllLabels.add(japan);
+			// KAMCHATKA
+			Label kamchatka = new Label("3");
+			kamchatka.setTranslateX(763);
+			kamchatka.setTranslateY(62);
+			AllLabels.add(kamchatka);
+			// IRKUTSK
+			Label irkutsk = new Label("3");
+			irkutsk.setTranslateX(667);
+			irkutsk.setTranslateY(94);
+			AllLabels.add(irkutsk);
+			// INDIA
+			Label india = new Label("3");
+			india.setTranslateX(612);
+			india.setTranslateY(180);
+			AllLabels.add(india);
+			// MIDDLE EAST
+			Label middleeast = new Label("3");
+			middleeast.setTranslateX(516);
+			middleeast.setTranslateY(160);
+			AllLabels.add(middleeast);
+			
+			
 			
 	}
 
