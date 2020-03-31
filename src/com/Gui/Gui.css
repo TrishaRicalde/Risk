@@ -10,3 +10,7 @@
  	-fx-background-color: red;
  	-fx-border-color: red;
  }
+ 
+ #reportTitle {
+ 	-fx-font-size: 32px;
+ }
