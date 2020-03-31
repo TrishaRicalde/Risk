@@ -201,6 +201,7 @@ public class InteractivePane extends BorderPane {
 		
 	}
 	
+	
 	private void initLabels() {
 		phaseLbl = new Label("" + board.getPhase());
 		turnLbl = new Label("");
