@@ -12,6 +12,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -37,6 +39,8 @@ public class AttackPopup extends Stage {
 		
 		attack = new Button("");
 		attack.setGraphic(attackImg);
+		Background b = new Background(new BackgroundImage(new Image("swordBackground.png"), null, null, null, null));
+		attack.setStyle("-fx-background-color: #832B19;");
 		Scene scene = new Scene(attack);
 		
 		this.setScene(scene);
@@ -55,8 +59,12 @@ public class AttackPopup extends Stage {
 				int defender = dfdCountry.getPlayerOccupantOfCountry();
 				report = board.battle(atkCountry, dfdCountry);
 				atkCountry.subractTroops(report.getAttackingTroopsLost());
-				dfdCountry.subractTroops(report.getDefendingTroopsLost());				
+				dfdCountry.subractTroops(report.getDefendingTroopsLost());						
 				board.getInteractivePane().removeMapBlocker();
+				board.getInteractivePane().setMouseTransparent(true);
+				BattleReportPopup bPop = new BattleReportPopup(report);				
+				bPop.show();
+				
 				
 				close();
 				if (report.isVictorious()) {
@@ -71,9 +79,16 @@ public class AttackPopup extends Stage {
 						}
 					}
 					//Move troops after attack
-					MoveTroopPopup movePopup = new MoveTroopPopup(atkCountry.getNumTroops() - 1, board);
-					movePopup.show();
+					bPop.setOnCloseRequest(e -> {						
+						MoveTroopPopup movePopup = new MoveTroopPopup(atkCountry.getNumTroops() - 1, board);
+						movePopup.show();
+						
+					});
+					
 				} else {
+					bPop.setOnCloseRequest(e -> {						
+						board.getInteractivePane().setMouseTransparent(false);						
+					});					
 					board.mapController.clear();
 					board.resetMap();
 					board.mapController.setDeployableCountries();
