@@ -2,12 +2,16 @@ package com.Board;
 
 public class BattleReport {
 
+	private int startAlliedTroops;
+	private int startEnemyTroops;
 	private int attackingTroopsLost;
 	private int defendingTroopsLost;
 	private boolean victorious;
 	
 	
-	public BattleReport(int atkTroopsLost, int dfndTroopsLost, boolean won) {
+	public BattleReport(int startAlliedTroops, int startEnemyTroops, int atkTroopsLost, int dfndTroopsLost, boolean won) {
+		this.startAlliedTroops = startAlliedTroops;
+		this.startEnemyTroops = startEnemyTroops;
 		this.attackingTroopsLost = atkTroopsLost;
 		this.defendingTroopsLost = dfndTroopsLost;
 		this.victorious = won;
@@ -21,6 +25,14 @@ public class BattleReport {
 		}
 	}
 
+	public int getStartingAlliedTroops() {
+		return startAlliedTroops;
+	}
+	
+	public int getStartingEnemyTroops() {
+		return startEnemyTroops;
+	}
+	
 	public int getAttackingTroopsLost() {
 		return attackingTroopsLost;
 	}
