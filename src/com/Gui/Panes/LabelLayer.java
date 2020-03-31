@@ -83,8 +83,36 @@ public class LabelLayer extends Pane {
 			greatbritian.setTranslateX(395);
 			greatbritian.setTranslateY(96);
 			AllLabels.add(greatbritian);
-			
-			
+			// SCANDINAVIA
+			Label scandinavia = new Label("3");
+			scandinavia.setTranslateX(433);
+			scandinavia.setTranslateY(65);
+			AllLabels.add(scandinavia);
+			// SOUTHERN EUROPE
+			Label southerneurope = new Label("3");
+			southerneurope.setTranslateX(453);
+			southerneurope.setTranslateY(127);
+			AllLabels.add(southerneurope);
+			// NOTHERN EUROPE
+			Label northerneurope = new Label("3");
+			northerneurope.setTranslateX(430);
+			northerneurope.setTranslateY(102);
+			AllLabels.add(northerneurope);
+			// UKRAINE
+			Label ukraine = new Label("3");
+			ukraine.setTranslateX(493);
+			ukraine.setTranslateY(91);
+			AllLabels.add(ukraine);
+			// ICELAND
+			Label iceland = new Label("3");
+			iceland.setTranslateX(357);
+			iceland.setTranslateY(65);
+			AllLabels.add(iceland);
+			// WESTERN EUROPE
+			Label westerneurope = new Label("3");
+			westerneurope.setTranslateX(402);
+			westerneurope.setTranslateY(117);
+			AllLabels.add(westerneurope);
 	}
 
 }
