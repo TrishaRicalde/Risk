@@ -320,6 +320,8 @@ public class Board {
 	}
 
 	public BattleReport battle(Country attacking, Country defending) {
+		int startAlliedTroops = attacking.getNumTroops();
+		int startEnemyTroops = defending.getNumTroops();
 		int atkTroopsLost = 0;
 		int dfndTroopsLost = 0;
 
@@ -352,7 +354,7 @@ public class Board {
 			}
 		}
 
-		return new BattleReport(atkTroopsLost, dfndTroopsLost, victorious);
+		return new BattleReport(startAlliedTroops, startEnemyTroops, atkTroopsLost, dfndTroopsLost, victorious);
 	}
 
 	public int getTroopsDifference(int attackingTroops, int defendingTroops) {

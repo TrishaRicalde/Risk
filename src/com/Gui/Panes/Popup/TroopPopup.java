@@ -25,13 +25,13 @@ public abstract class TroopPopup extends Stage {
 		Canvas canvas = new Canvas();
 		hBox = new TroopBox(numTroops);
 		
-		canvas.setStyle("-fx-effect: innershadow(gaussian, #039ed3, 2, 1.0, 0, 0);");
+		//canvas.setStyle("-fx-effect: innershadow(gaussian, #039ed3, 2, 1.0, 0, 0);");
 		canvas.setMouseTransparent(true);
 		
 		pane.getChildren().add(hBox);
 		pane.getChildren().add(canvas);
 		
-		Scene dialogScene = new Scene(pane, 180, 25);
+		Scene dialogScene = new Scene(pane, 215, 35);
 
 		
         
