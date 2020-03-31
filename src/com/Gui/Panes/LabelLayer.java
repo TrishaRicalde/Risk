@@ -113,6 +113,29 @@ public class LabelLayer extends Pane {
 			westerneurope.setTranslateX(402);
 			westerneurope.setTranslateY(117);
 			AllLabels.add(westerneurope);
+			
+		// SOUTH AMERICA
+			// PERU
+			Label peru = new Label("3");
+			peru.setTranslateX(193);
+			peru.setTranslateY(312);
+			AllLabels.add(peru);
+			// BRAZIL
+			Label brazil = new Label("3");
+			brazil.setTranslateX(244);
+			brazil.setTranslateY(310);
+			AllLabels.add(brazil);
+			// ARGENTINA
+			Label argentina = new Label("3");
+			argentina.setTranslateX(213);
+			argentina.setTranslateY(369);
+			AllLabels.add(argentina);
+			// VENEZUELA
+			Label venezuela = new Label("3");
+			venezuela.setTranslateX(189);
+			venezuela.setTranslateY(246);
+			AllLabels.add(venezuela);
+			
 	}
 
 }
