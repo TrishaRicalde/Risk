@@ -217,8 +217,37 @@ public class LabelLayer extends Pane {
 			middleeast.setTranslateX(516);
 			middleeast.setTranslateY(160);
 			AllLabels.add(middleeast);
-			
-			
+		// AFRICA
+			// EGYPT
+			Label egypt = new Label("3");
+			egypt.setTranslateX(457);
+			egypt.setTranslateY(176);
+			AllLabels.add(egypt);
+			// EAST AFRICA
+			Label eastafrica = new Label("3");
+			eastafrica.setTranslateX(494);
+			eastafrica.setTranslateY(232);
+			AllLabels.add(eastafrica);
+			// NORTH AFRICA
+			Label northafrica = new Label("3");
+			northafrica.setTranslateX(395);
+			northafrica.setTranslateY(200);
+			AllLabels.add(northafrica);
+			// SOUTH AFRICA
+			Label southafrica = new Label("3");
+			southafrica.setTranslateX(460);
+			southafrica.setTranslateY(331);
+			AllLabels.add(southafrica);
+			// MADAGASCAR
+			Label madagascar = new Label("3");
+			madagascar.setTranslateX(528);
+			madagascar.setTranslateY(327);
+			AllLabels.add(madagascar);
+			// CONGO
+			Label congo = new Label("3");
+			congo.setTranslateX(459);
+			congo.setTranslateY(266);
+			AllLabels.add(congo);
 			
 	}
 
