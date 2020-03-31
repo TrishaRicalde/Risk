@@ -11,11 +11,11 @@ public class LabelLayer extends Pane {
 		this.setWidth(board.getWidth());
 		this.setHeight(board.getHeight());
 		
-		Label l = new Label("Troop");
+		/*Label l = new Label("Troop");
 		l.setText("Troop");
 		l.setTranslateX(100.0);
-		l.setTranslateY(100.0);
+		l.setTranslateY(100.0);*/
 		
-		this.getChildren().add(l);
+		/*this.getChildren().add(l);*/
 	}
 }
