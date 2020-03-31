@@ -135,6 +135,27 @@ public class LabelLayer extends Pane {
 			venezuela.setTranslateX(189);
 			venezuela.setTranslateY(246);
 			AllLabels.add(venezuela);
+		// AUSTRALIA
+			// WESTERN AUSTRALIA
+			Label westernaustralia = new Label("3");
+			westernaustralia.setTranslateX(743);
+			westernaustralia.setTranslateY(348);
+			AllLabels.add(westernaustralia);
+			// NEW GUINEA
+			Label newguinea = new Label("3");
+			newguinea.setTranslateX(807);
+			newguinea.setTranslateY(283);
+			AllLabels.add(newguinea);
+			// INDONESIA
+			Label indonesia = new Label("3");
+			indonesia.setTranslateX(727);
+			indonesia.setTranslateY(262);
+			AllLabels.add(indonesia);
+			// EASTERN AUSTRALIA
+			Label easternaustralia = new Label("3");
+			easternaustralia.setTranslateX(800);
+			easternaustralia.setTranslateY(340);
+			AllLabels.add(easternaustralia);
 			
 	}
 
