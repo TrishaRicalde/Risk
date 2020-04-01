@@ -19,7 +19,7 @@ public class LabelLayer extends Pane {
 
 		this.setWidth(board.getWidth());
 		this.setHeight(board.getHeight());
-<<<<<<< HEAD
+
 		int counter = 0;
 		for (Continent cont : board.getContinents()) {
 			for (Country country : cont.getCountries()) {
@@ -33,15 +33,6 @@ public class LabelLayer extends Pane {
 			this.getChildren().add(x);
 		}
 
-=======
-		
-		/*Label l = new Label("Troop");
-		l.setText("Troop");
-		l.setTranslateX(100.0);
-		l.setTranslateY(100.0);*/
-		
-		/*this.getChildren().add(l);*/
->>>>>>> 17090d4ee599340d0a3b070635b4269fe3b6982e
 	}
 
 	public void init() {
