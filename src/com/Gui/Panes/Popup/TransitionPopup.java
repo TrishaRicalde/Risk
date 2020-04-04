@@ -3,6 +3,7 @@ package com.Gui.Panes.Popup;
 import com.Board.Board;
 
 import com.Board.Phase;
+import com.Player.Alliance;
 
 import javafx.animation.ScaleTransition;
 import javafx.animation.Transition;
@@ -15,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -74,8 +76,34 @@ public class TransitionPopup extends Stage{
 	
 	public void nextPhaseTransition(Phase phase)
 	{
+		String playerColour = board.currentPlayer.getAlliance().toString();
+		
+		
+		
 		pane.getChildren().clear();
 		phaseLabel = new Label(phase.toString());
+		
+		
+		if (playerColour.equalsIgnoreCase("RED"))
+		{
+			System.out.print(playerColour);
+			phaseLabel.setTextFill(Color.CRIMSON);
+		}
+		else if (playerColour.equalsIgnoreCase("GREEN"))
+		{
+			System.out.print(playerColour);
+			phaseLabel.setTextFill(Color.FORESTGREEN);
+		}
+		else if (playerColour.equalsIgnoreCase("BLUE"))
+		{
+			System.out.print(playerColour);
+			phaseLabel.setTextFill(Color.ROYALBLUE);
+		}
+		else if (playerColour.equals("YELLOW"))
+		{
+			System.out.print(playerColour);
+			phaseLabel.setTextFill(Color.GOLDENROD);
+		}
 		ScaleTransition pt = new ScaleTransition(Duration.millis(2000), phaseLabel);
 		pt.setByX(5);
 		pt.setByY(5);

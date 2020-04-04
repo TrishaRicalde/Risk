@@ -235,10 +235,7 @@ public class Game extends Application {
 		borderPane.setCenter(startScreen);
 		
 		borderPane.setPrefSize(width, height);
-		startScreen.getChildren().add(titleview);
-		startScreen.getChildren().add(start);
-		startScreen.setMargin(start, new Insets(300, 0, 0, 0));
-		borderPane.setCenter(startScreen);
+		
 		//borderPane.setCenter(start);
 
 		stack.getChildren().add(borderPane);
