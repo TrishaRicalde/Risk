@@ -23,7 +23,7 @@ public class Country extends Clickable {
 	private int playerIdentity;
 	private Alliance alliance;
 	private String countryPathName;
-	private Label troopLabel;
+	private Label troopLabel = new Label("");
 
 	private ImageView imageView;
 	private MapController mapController;
@@ -121,10 +121,12 @@ public class Country extends Clickable {
 
 	public void addTroops(int numTroops) {
 		currentNumTroops += numTroops;
+		updateLabel();
 	}
 
 	public void subractTroops(int numTroops) {
 		currentNumTroops -= numTroops;
+		updateLabel();
 	}
 
 	/**
@@ -218,7 +220,7 @@ public class Country extends Clickable {
 	@Override
 	public void onClick() {
 		super.onClick();
-		//updateLabel();
+		updateLabel();
 		if (isSelected()) {			
 			mapController.selectCountry(this);
 			imageView.setEffect(effects.getEffect("selectShadow"));						
