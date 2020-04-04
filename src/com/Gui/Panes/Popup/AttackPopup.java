@@ -40,7 +40,7 @@ public class AttackPopup extends Stage {
 		attack = new Button("");
 		attack.setGraphic(attackImg);
 		Background b = new Background(new BackgroundImage(new Image("swordBackground.png"), null, null, null, null));
-		attack.setStyle("-fx-background-color: #832B19;");
+		//attack.setStyle("-fx-background-color: #832B19;");
 		Scene scene = new Scene(attack);
 		
 		this.setScene(scene);
