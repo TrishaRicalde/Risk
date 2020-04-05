@@ -65,7 +65,7 @@ public class InteractivePane extends BorderPane {
 		this.hideBottomDisplay();
 
 		initButtons();
-		initLabels();
+		initLabels(); 
 		initMapBlocker();		
 		initTroopLabels();
 	}
