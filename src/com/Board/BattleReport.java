@@ -15,14 +15,7 @@ public class BattleReport {
 		this.attackingTroopsLost = atkTroopsLost;
 		this.defendingTroopsLost = dfndTroopsLost;
 		this.victorious = won;
-		if (victorious) {
-			System.out.println("Victory!"
-					+ "\nYou have lost:" + atkTroopsLost + " troops.\n");
-		} else {
-			System.out.println("Defeat!"
-					+ "\n You have lost:" + atkTroopsLost + " troops."
-					+ "\n Your enemy has lost:" + dfndTroopsLost + " troops \n");
-		}
+		
 	}
 
 	public int getStartingAlliedTroops() {

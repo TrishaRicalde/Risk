@@ -43,7 +43,7 @@ public class Game extends Application {
 	private static final int height = 54 * 9;
 	private static final Image mapImage = new Image("Risk_White.png"); //"Risk_Map.png"
 	private static final Image titleScreen = new Image("Risk_Title.gif");
-	
+
 	private Board board;
 
 	private int numOfPlayers = 0;
@@ -56,10 +56,10 @@ public class Game extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		board = new Board(width, height);
+		board = new Board(width, height, primaryStage);
 		ImageView imageview = new ImageView(mapImage);
 		ImageView titleview = new ImageView(titleScreen);
-		
+
 		StackPane startScreen = new StackPane();
 		
 		StackPane stack = new StackPane();
@@ -67,13 +67,7 @@ public class Game extends Application {
 			stack.getChildren().add(p);
 		}
 
-
-		
-		
-		
-
-
-
+		Button instruction = new Button();
 		Button start = new Button();
 		Button next = new Button();
 		Button secondNext = new Button();
@@ -96,6 +90,10 @@ public class Game extends Application {
 
 		BorderPane borderPane = new BorderPane();
 
+		HBox startBox = new HBox(20);
+		startBox.setStyle("-fx-background-color: rgba(255, 255, 255, 0.65);");
+
+		
 		VBox vbox = new VBox(10);
 		VBox vbox2 = new VBox(10);
 		VBox vbox3 = new VBox(10);
@@ -113,6 +111,11 @@ public class Game extends Application {
 		startPopUp.getContent().add(vbox);
 		nextPopUp.getContent().add(vbox2);
 		finalPopUp.getContent().add(vbox3);
+		
+		startBox.getChildren().add(instruction);
+		startBox.getChildren().add(start);
+		startBox.setMargin(instruction, new Insets(30, 0, 30, 110));
+		startBox.setMargin(start, new Insets(30, 0, 30, 0));
 
 		vbox.getChildren().add(greeting);
 		vbox.getChildren().add(playerLabel);
@@ -130,11 +133,15 @@ public class Game extends Application {
 		vbox3.getChildren().add(goodLuck);
 		vbox3.getChildren().add(play);
 		vbox3.setMargin(play, new Insets(0, 0, 0, 265));
+		
+		start.setOpacity(0.85);
+		instruction.setOpacity(0.85);
 
 		start.setText("Start Game");
 		next.setText("Next");
 		secondNext.setText("Next");
 		play.setText("Play");
+		instruction.setText("Instructions");
 
 		start.setOnAction(new EventHandler<ActionEvent>() 
 		{
@@ -143,6 +150,7 @@ public class Game extends Application {
 					startPopUp.show(primaryStage);
 					start.setVisible(false);
 					titleview.setVisible(false);
+
 				} else {
 				}
 
@@ -192,21 +200,44 @@ public class Game extends Application {
 			public void handle(ActionEvent event)
 			{
 				String welcomeString = "Welcome strategists";
-				String nameString = "Hell yea";
+				boolean valid = false ;
 				ObservableList<Node>fieldNames = textVBox.getChildren();
+				names = new ArrayList<String>();
 				//System.out.print(names.get(counter));
 				for (int counter = 0; counter < fieldNames.size(); counter++)
 				{
 					
 					TextField tf = (TextField)fieldNames.get(counter);
-					nameString = tf.getText();
+					String nameString = tf.getText();
 					names.add(nameString);
+					
+				}
+				int countValid = 0;
+				for (int n = 0; n < names.size(); n++)
+				{
+					if (!names.get(n).equalsIgnoreCase(""))
+					{
+						countValid++;
+						
+					}
+					else
+					{
+						playerNames.setText("Make sure all players have entered name");
+					}
+				}
+				if (countValid == names.size()) 
+				{
+					nextPopUp.hide();
+					finalPopUp.show(primaryStage);
+					welcome.setText(welcomeString);
+					board.initializePlayers(names);
+					
 				}
 				
-				board.initializePlayers(names);
-				welcome.setText(welcomeString);
-				nextPopUp.hide();
-				finalPopUp.show(primaryStage);
+				
+				
+				//nextPopUp.hide();
+				//finalPopUp.show(primaryStage);
 				
 				
 			}
@@ -227,13 +258,14 @@ public class Game extends Application {
 		Scene scene = new Scene(root, width, height);
 		
 		startScreen.getChildren().add(titleview);
-		startScreen.getChildren().add(start);
-		startScreen.setMargin(start, new Insets(300, 0, 0, 0));
+		startScreen.getChildren().add(startBox);
+		startScreen.setMargin(startBox, new Insets(270, 200, 200, 270));
 		borderPane.setCenter(startScreen);
 		
 		borderPane.setPrefSize(width, height);
 		
-		
+		//borderPane.setCenter(start);
+
 		stack.getChildren().add(borderPane);
 
 		root.getChildren().add(stack);

@@ -9,10 +9,13 @@ import com.Board.Map.Country;
 import com.Board.Map.Map;
 import com.Gui.Command;
 import com.Gui.Panes.InteractivePane;
+import com.Gui.Panes.Popup.TransitionPopup;
+
 import com.Gui.Panes.LabelLayer;
 import com.Player.Player;
 
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class Board {
 	private ArrayList<Continent> continents;
@@ -34,13 +37,14 @@ public class Board {
 	private ArrayList<Pane> panes;
 	private InteractivePane interactivePane;
 	public MapController mapController;
+	private TransitionPopup transitionPopup;
 
 	private Country currentSelected;
 
 	private final int totalPlayerNum = 4;
 	private final int absolutePower = 5;
 
-	public Board(int width, int height) {
+	public Board(int width, int height, Stage primaryStage) {
 		this.width = width;
 		this.height = height;
 		currentPhase = Phase.START;
@@ -53,6 +57,7 @@ public class Board {
 		commands = new Command();
 		dice = new Dice();
 		continents = new ArrayList<Continent>(earthMap.getContinents());
+		transitionPopup = new TransitionPopup(this, primaryStage);
 
 		createBoard();
 		createPanes();
@@ -514,7 +519,8 @@ public class Board {
 		return null;
 	}
 
-	public void createPanes() {
+	public void createPanes() 
+	{
 		interactivePane = new InteractivePane(this, earthMap);
 		interactivePane.setPrefWidth(width);
 		interactivePane.setPrefHeight(height);
@@ -523,15 +529,19 @@ public class Board {
 		labelLayer.setMouseTransparent(true);
 		
 		panes.add(interactivePane);
+
 		panes.add(labelLayer);
+
 		
 	}
 
-	public ArrayList<Pane> getPanes() {
+	public ArrayList<Pane> getPanes() 
+	{
 		return panes;
 	}
 
 	public void nextPhase() {
+
 		mapController.clear();
 		switch (currentPhase) {
 		case START:
@@ -557,10 +567,15 @@ public class Board {
 			break;
 		}
 		// resetMap();
+		transitionPopup.show();
+		transitionPopup.nextPhaseTransition(currentPhase);
+		
 		mapController.setPhase(currentPhase);
 		interactivePane.update();
 
 	}
+
+
 	
 	/**
 	 * This method should be called when a Player wins the game.
