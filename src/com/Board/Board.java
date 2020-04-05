@@ -15,6 +15,7 @@ import com.Gui.Panes.LabelLayer;
 import com.Player.Player;
 
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class Board {
 	private ArrayList<Continent> continents;
@@ -43,7 +44,7 @@ public class Board {
 	private final int totalPlayerNum = 4;
 	private final int absolutePower = 5;
 
-	public Board(int width, int height) {
+	public Board(int width, int height, Stage primaryStage) {
 		this.width = width;
 		this.height = height;
 		currentPhase = Phase.START;
@@ -56,7 +57,7 @@ public class Board {
 		commands = new Command();
 		dice = new Dice();
 		continents = new ArrayList<Continent>(earthMap.getContinents());
-		transitionPopup = new TransitionPopup(this);
+		transitionPopup = new TransitionPopup(this, primaryStage);
 
 		createBoard();
 		createPanes();
