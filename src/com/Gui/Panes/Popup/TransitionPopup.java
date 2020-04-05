@@ -30,7 +30,7 @@ public class TransitionPopup extends Stage{
 	//Button next;
 	//VBox vbox;
 	//Popup animationPopUp = new Popup();
-	
+	//Bish
 
 	public TransitionPopup(Board board, Stage primaryStage) 
 	{
