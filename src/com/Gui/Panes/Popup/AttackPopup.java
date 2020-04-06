@@ -23,7 +23,6 @@ import javafx.stage.StageStyle;
  * Upon clicking the attack button, the player will attack the 
  * selected Country.
  * @author skusj
- *
  */
 public class AttackPopup extends Stage {
 	ImageView attackImg;

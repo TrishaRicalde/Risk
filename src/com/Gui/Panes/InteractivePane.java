@@ -9,6 +9,7 @@ import com.Board.Map.Map;
 import com.Gui.Effects.Effects;
 import com.Gui.Panes.Popup.AttackPopup;
 import com.Gui.Panes.Popup.DraftPopup;
+import com.Gui.Panes.Popup.InstructionPopup;
 import com.Gui.Panes.Popup.MoveTroopPopup;
 import com.Gui.Panes.Popup.TroopBox;
 
@@ -27,6 +28,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
@@ -39,12 +41,14 @@ public class InteractivePane extends BorderPane {
 	private Label turnLbl;
 	private HBox bottomDisplay;
 	private boolean globeSelected;
+	private boolean instructionSelected;
 	private ImageView riskContinents;
 	private Effects effects;
 	private Button btnNextPhase;
 	private Polygon mapBlocker;
 	private DraftPopup draftPopup;
 	private AttackPopup atkPopup;
+	private InstructionPopup instructPopup;
 	private Stage currentPopup;
 
 	public InteractivePane(Board board, Map map) {
@@ -63,6 +67,7 @@ public class InteractivePane extends BorderPane {
 		
 		this.setBottom(bottomDisplay);
 		this.hideBottomDisplay();
+		
 
 		initButtons();
 		initLabels(); 
@@ -180,6 +185,14 @@ public class InteractivePane extends BorderPane {
 	}
 	
 	
+	public void instructionPopup()
+	{
+		instructPopup = new InstructionPopup(board);
+		currentPopup = instructPopup;
+		addMapBlocker();
+		instructPopup.show();
+	}
+	
 	//------------------------------------------INITIALIZATION METHODS------------------------------------------------------------------
 	
 	private void initButtons() {
@@ -247,7 +260,7 @@ public class InteractivePane extends BorderPane {
 					btnGlobe.setGraphic(darkGlobe);
 					removeContinentsCover();
 				}				
-			}			
+			}
 		});
 		bottomDisplay.getChildren().add(bottomDisplay.getChildren().size(), btnGlobe);
 	}
@@ -258,6 +271,30 @@ public class InteractivePane extends BorderPane {
 		instructionBtn.setText("Instructions");
 		instructionBtn.setAlignment(Pos.BOTTOM_LEFT);
 		bottomDisplay.getChildren().add(0,instructionBtn);
+		/*
+		
+		VBox instructionBox = new VBox();
+		this.getChildren().add(instructionBox);
+		instructionBox.setStyle("-fx-background-color: rgba(255, 255, 255, 0.85);");
+		instructionBox.setVisible(false);
+		
+		Label instructionTitle = new Label();
+		instructionTitle.setText("Instructions");
+		
+		instructionBox.getChildren().add(instructionTitle);
+		*/
+		
+		
+		instructionBtn.setOnAction(new EventHandler<ActionEvent>() 
+		{
+
+			@Override
+			public void handle(ActionEvent event) 
+			{				
+					instructionPopup();
+								
+			}			
+		});
 		
 	}
 	
