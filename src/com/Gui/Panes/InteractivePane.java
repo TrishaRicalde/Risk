@@ -185,6 +185,7 @@ public class InteractivePane extends BorderPane {
 	private void initButtons() {
 		initNextPhaseButton();
 		initGlobeButton();
+		initInstructionButton();
 		/*initAttackButton();*/
 	}
 	
@@ -209,11 +210,11 @@ public class InteractivePane extends BorderPane {
 		turnLbl.setTextFill(Color.WHITE);
 		Region filler = new Region();
 		HBox.setHgrow(filler, Priority.ALWAYS);
-		Button btnFiller = new Button("Filler");
+		/*Button btnFiller = new Button("Filler");
 		btnFiller.setMinWidth(50);
 		btnFiller.setMinHeight(50);
 		btnFiller.setVisible(false);
-		bottomDisplay.getChildren().add(0, btnFiller);
+		bottomDisplay.getChildren().add(1, btnFiller);*/
 		bottomDisplay.getChildren().add(1, filler);
 		bottomDisplay.getChildren().add(2, turnLbl);
 		bottomDisplay.getChildren().add(3, phaseLbl);
@@ -249,6 +250,15 @@ public class InteractivePane extends BorderPane {
 			}			
 		});
 		bottomDisplay.getChildren().add(bottomDisplay.getChildren().size(), btnGlobe);
+	}
+	
+	private void initInstructionButton()
+	{
+		Button instructionBtn = new Button();
+		instructionBtn.setText("Instructions");
+		instructionBtn.setAlignment(Pos.BOTTOM_LEFT);
+		bottomDisplay.getChildren().add(0,instructionBtn);
+		
 	}
 	
 	private void initMapBlocker() {
