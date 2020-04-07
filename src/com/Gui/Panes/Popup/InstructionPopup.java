@@ -55,15 +55,17 @@ public class InstructionPopup extends Stage {
 				+ "\n"
 				+ "	2. ATTACK: This is where you can attack other territories and take them over \n"
 				+ "\n"
-				+ "	3. FORTIFY This is where you move soldiers from one territory, in order to "
-				+ "strengthen your position\n", "At the beginning of each turns you will get a certain number of troops, "
+				+ "	3. FORTIFY This is where you move soldiers from one territory to another, in order to "
+				+ "strengthen your position\n"
+				+ "\n", "At the beginning of each turn you will acquire a certain number of troops"
+						+ " which you can place in any territory you own, "
 						+ "the number of troops you receive depends on a number of factors such as: "
 						+ "\n"
 						+ "\n"
 						+ "	1. The number of territories you occupy\n"
 						+ "\n"
-						+ "		The number of troops you get for territories is as follows: Number of territories you occupy,"
-						+ "ignoring any remainder so if you had 13 territories occupied, you would get 4 troops\n"
+						+ "		The number of troops you get for territories is as follows: Number of territories you occupy divided by 3,"
+						+ "ignoring any remainder. So if you had 13 territories occupied, you would get 4 troops\n"
 						+ "\n"
 						+ "	2. The value of the continents you control\n"
 						+ "\n"
@@ -75,8 +77,41 @@ public class InstructionPopup extends Stage {
 						+ "			Africa: 3\n"
 						+ "			South America: 2\n"
 						+ "			Australia: 2\n"
-						+ "", "", "", "The game is over when one player occupues all the territories,"
-						+ "Good luck and may the odds be even in your favor" };
+						+ "\n", "After placing your armies at the beginning of your turn, "
+								+ "decide if you wish to attack at this time.\n"
+								+ "\n"
+								+ "The object of an attack is to capture a territory by defeating all the opposing armies already on it."
+								+ " The battle is fought by a roll of the dice. Study the board for a moment. Do you want to attack?\n"
+								+ "\n"
+								+ "If you choose not to attack, click the next button, you may still fortify your position"
+								+ " if you wish. If you decide to attack, you must follow these rules: \n"
+								+ "\n"
+								+ "	1) You may only attack a territory that's adjacent (touching) to one of your own, "
+								+ "or connected to it by a dashed line. Examples: Greenland may attack the Northwest Territory, "
+								+ "Ontario, Quebec, and Iceland. North Africa may attack Egypt, Western Europe, and Brazil. "
+								+ "At the western and eastern edges of the board, Alaska is considered adjacent to and may attack,"
+								+ " Kamchatka.\n"
+								+ "\n"
+								+ "	2) You must always have at least two armies in the territory you're attacking from.\n"
+								+ "\n"
+								+ "	3) You may continue attacking one territory until you have eliminated all armies on it,"
+								+ " or you may shift your attack from one territory to another, attacking each as often as you want"
+								+ " and attacking as many territories as you like during one turn.\n"
+								+ "\n"
+								+ "To Attack: Click both the territory you're attacking and the one you are attacking from and then attack"
+								+ "button.\n"
+								+ "\n", "No matter what you have done on your turn, you may end your turn by fortifying your position.\n"
+										+ "\n"
+										+ "Some players refer to this as the \"free move\".\n"
+										+ "\n"
+										+ "To fortify your position, move as many armies as you would like from one (and only one) of your"
+										+ " territories into one (and only one) of your adjacent territories.\n"
+										+ "\n"
+										+ "Remember to move troops towards borders where they can help in an attack and leave at least one army behind.\n"
+										+ "\n"
+										+ "", "The winner is the first player to eliminate every opponent by capturing all 42 territories on the board. "
+												+ "Good luck and may the odds be ever in your favor\n"
+												+ "\n" };
 
 		next = new Button();
 		back = new Button();
@@ -131,7 +166,7 @@ public class InstructionPopup extends Stage {
 		//buttonBox.setMargin(back, new Insets(0,0,0,200));
 		
 		initButtons();
-		this.scene = new Scene(instructionBox, 500, 500);
+		this.scene = new Scene(instructionBox, 500, 700);
 		this.setScene(scene);
 		//instructionPopup.getContent().add(instructionBox);
 		//instructionPopup.show(primaryStage);
