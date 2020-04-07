@@ -61,27 +61,7 @@ public class TransitionPopup extends Stage{
 	*/
 
 	}
-	
-	public void nextTurnTransition(String playerName)
-	{
-		pane.getChildren().clear();
-		playerLabel = new Label(playerName);
-		ScaleTransition tt = new ScaleTransition(Duration.millis(2000), playerLabel);
-		tt.setByX(1.5);
-		tt.setByY(1.5);
-		tt.setCycleCount(1);
-		tt.setAutoReverse(true);
-	
-		
-		tt.play();
-		pane.getChildren().add(playerLabel);
-		
-		
-		
-		
-		
-	}
-	
+
 	public void nextPhaseTransition(Phase phase)
 	{
 		String playerColour = board.currentPlayer.getAlliance().toString();
@@ -121,13 +101,13 @@ public class TransitionPopup extends Stage{
 		//long mTime = System.currentTimeMillis();
 		//long end = mTime + 2000;
 		
-		//PauseTransition delay = new PauseTransition(Duration.seconds(3));
-		//delay.setOnFinished(event -> this.close());
+		PauseTransition delay = new PauseTransition(Duration.seconds(3));
+		delay.setOnFinished(event -> this.close());
 		
 		
 		//animationPopUp.getContent().add(pane);
 		pt.play();		
-		//delay.play();
+		delay.play();
 		/*
 		while (mTime < end)
 		{
