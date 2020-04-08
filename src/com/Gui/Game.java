@@ -2,11 +2,9 @@ package com.Gui;
 
 import java.util.ArrayList;
 import java.util.Observable;
-
 import com.Board.Board;
 import com.Board.Map.Map;
 import com.Gui.Panes.InteractivePane;
-
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -21,7 +19,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,7 +31,6 @@ import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
-
 import javafx.util.Duration;
 
 public class Game extends Application {
