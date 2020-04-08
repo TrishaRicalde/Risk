@@ -5,6 +5,7 @@ import com.Board.Board;
 import com.Board.Phase;
 import com.Player.Alliance;
 
+import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
 import javafx.animation.Transition;
 import javafx.event.ActionEvent;
@@ -19,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class TransitionPopup extends Stage{
@@ -30,7 +32,7 @@ public class TransitionPopup extends Stage{
 	//Button next;
 	//VBox vbox;
 	//Popup animationPopUp = new Popup();
-	
+	//Bruh
 
 	public TransitionPopup(Board board, Stage primaryStage) 
 	{
@@ -48,6 +50,8 @@ public class TransitionPopup extends Stage{
 		
 		Scene scene = new Scene(pane, 720, 240);
 		this.setScene(scene);
+		//this.initStyle(StageStyle.TRANSPARENT);
+		this.initStyle(StageStyle.UNDECORATED);
 		
 	/*	
 		vbox.getChildren().add(pane);
@@ -57,27 +61,7 @@ public class TransitionPopup extends Stage{
 	*/
 
 	}
-	
-	public void nextTurnTransition(String playerName)
-	{
-		pane.getChildren().clear();
-		playerLabel = new Label(playerName);
-		ScaleTransition tt = new ScaleTransition(Duration.millis(2000), playerLabel);
-		tt.setByX(1.5);
-		tt.setByY(1.5);
-		tt.setCycleCount(1);
-		tt.setAutoReverse(true);
-	
-		
-		tt.play();
-		pane.getChildren().add(playerLabel);
-		
-		
-		
-		
-		
-	}
-	
+
 	public void nextPhaseTransition(Phase phase)
 	{
 		String playerColour = board.currentPlayer.getAlliance().toString();
@@ -109,9 +93,30 @@ public class TransitionPopup extends Stage{
 		pt.setByY(5);
 		pt.setCycleCount(1);
 		pt.setAutoReverse(true);
+		
+		
+		
 		pane.getChildren().add(phaseLabel);
+		
+		//long mTime = System.currentTimeMillis();
+		//long end = mTime + 2000;
+		
+		PauseTransition delay = new PauseTransition(Duration.seconds(3));
+		delay.setOnFinished(event -> this.close());
+		
+		
 		//animationPopUp.getContent().add(pane);
 		pt.play();		
+		delay.play();
+		/*
+		while (mTime < end)
+		{
+			mTime = System.currentTimeMillis();
+			System.out.println(mTime);
+			//System.out.print("running");
+		}
+		this.close();
+		*/
 		/*
 		next.setOnAction(new EventHandler<ActionEvent>()
 		{

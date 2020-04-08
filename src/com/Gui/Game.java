@@ -90,8 +90,8 @@ public class Game extends Application {
 
 		BorderPane borderPane = new BorderPane();
 
-		HBox startBox = new HBox(20);
-		startBox.setStyle("-fx-background-color: rgba(255, 255, 255, 0.65);");
+		//HBox startBox = new HBox(20);
+		//startBox.setStyle("-fx-background-color: rgba(255, 255, 255, 0.65);");
 
 		
 		VBox vbox = new VBox(10);
@@ -112,11 +112,13 @@ public class Game extends Application {
 		nextPopUp.getContent().add(vbox2);
 		finalPopUp.getContent().add(vbox3);
 		
+		/*
 		startBox.getChildren().add(instruction);
 		startBox.getChildren().add(start);
 		startBox.setMargin(instruction, new Insets(30, 0, 30, 110));
 		startBox.setMargin(start, new Insets(30, 0, 30, 0));
-
+*/
+		
 		vbox.getChildren().add(greeting);
 		vbox.getChildren().add(playerLabel);
 		vbox.getChildren().add(numPlayers);
@@ -258,8 +260,8 @@ public class Game extends Application {
 		Scene scene = new Scene(root, width, height);
 		
 		startScreen.getChildren().add(titleview);
-		startScreen.getChildren().add(startBox);
-		startScreen.setMargin(startBox, new Insets(270, 200, 200, 270));
+		startScreen.getChildren().add(start);
+		startScreen.setMargin(start, new Insets(300, 0, 0, 0));
 		borderPane.setCenter(startScreen);
 		
 		borderPane.setPrefSize(width, height);
