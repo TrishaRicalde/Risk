@@ -10,7 +10,7 @@ https://www.oracle.com/java/technologies/javase-jre8-downloads.html
 3) Navigate to where Game.java (src > com > Main) and run it 
 
 
-#### HOW TO RUN THE GUI/INTERACTIVE VERSION OF THE GAME
+### HOW TO RUN THE GUI/INTERACTIVE VERSION OF THE GAME
 1) Make sure you have JRE (JavaSE 1.8), you can download it here -
 https://www.oracle.com/java/technologies/javase-jre8-downloads.html
 2) Download the project repository, here's the link, https://github.com/TrishaRicalde/Risk
