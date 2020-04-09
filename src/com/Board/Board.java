@@ -14,6 +14,7 @@ import com.Gui.Panes.Popup.TransitionPopup;
 import com.Gui.Panes.LabelLayer;
 import com.Player.Player;
 
+
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -126,9 +127,11 @@ public class Board {
 	}
 
 	// TO DO
-	private void draft() {
-		currentPlayer.setBonusTroops(getTroopBonus());
-		interactivePane.setDisableNextButton(true);
+	
+	//private void draft() {
+	//	currentPlayer.setBonusTroops(getTroopBonus());
+	//	interactivePane.setDisableNextButton(true);
+		
 		/*
 		 * console.
 		 * println("\n---------------------- Draft ----------------------\n");
@@ -165,10 +168,10 @@ public class Board {
 		 * 
 		 * printBoardState();
 		 */
-	}
+//	}
 
 	// TO DO
-	private void attack() {
+//	private void attack() {
 		// console.println("---------------------- Attack
 		// ----------------------\n");
 		/*
@@ -231,7 +234,7 @@ public class Board {
 		 * console.println("Would you like to continue attacking?"); } else {
 		 * return; } } printBoardState();
 		 */
-	}
+//	}
 
 	/**
 	 * Moves troops from c1 to c2.
@@ -258,61 +261,53 @@ public class Board {
 	}
 
 	// TO DO
-	private void fortify() {
-		console.println("---------------------- Fortify ----------------------\n");
-		ArrayList<Country> deployableCountries = new ArrayList<Country>(this.getDeployableCountries());
-		if (deployableCountries.size() == 0) {
-			console.println("You do not have any troops to fortify with.\n");
-			return;
-		}
-
-		boolean choice;
-
-		if (players.get(currentPlayer.getPlayerNumber() - 1).getIsAI() == false) {
-			choice = console.getScannerCommand(commands.getFortifyCmds()).equalsIgnoreCase("fortify");
-		} else {
-			choice = false;// (players.get(currentPlayer.getPlayerNumber() -
-							// 1).getAttackChoice(this.getBoard(),
-							// getCurrentPlayerOwnedCountries()));
-		}
-
-		while (choice) {
-			console.println("Which Country would you like to take troops from?");
-
-			// Adds the countries owned with more than 1 troop to the ArrayList
-			// countryDeployable.
-
-			Country deployFrom;
-			deployFrom = getCountry(console.getScannerCountry(deployableCountries));
-
-			// Creates an ArrayList of fortifiable Countries.
-			ArrayList<Country> fortifiable = new ArrayList<Country>();
-			for (Country i : deployFrom.getBorders()) {
-				if (this.getCurrentPlayerOwnedCountries().indexOf(i) >= 0) {
-					fortifiable.add(i);
-				}
-			}
-
-			// If the ArrayList is of size 0, then gives the option to choose
-			// another country or end turn.
-			// Else
-			if (fortifiable.size() == 0) {
-				console.println("The Country you have selected has does not border any other Countries you own.\n" + ""
-						+ "Would you like to choose a different Country?");
-				deployableCountries.remove(deployFrom);
-			} else {
-				console.println("Which Country would you like to fortify?");
-				Country fortifiedCountry = getCountry(console.getScannerCountry(deployFrom.getBorders()));
-				int numTroopsToAdd = console.getScannerIntWithinRange(1, deployFrom.getNumTroops() - 1,
-						"How many troops would you like to place?");
-				fortifiedCountry.addTroops(numTroopsToAdd);
-				deployFrom.subractTroops(numTroopsToAdd);
-				return;
-			}
-		}
-		printBoardState();
-
-	}
+	/*
+	 * private void fortify() {
+	 * console.println("---------------------- Fortify ----------------------\n");
+	 * ArrayList<Country> deployableCountries = new
+	 * ArrayList<Country>(this.getDeployableCountries()); if
+	 * (deployableCountries.size() == 0) {
+	 * console.println("You do not have any troops to fortify with.\n"); return; }
+	 * 
+	 * boolean choice;
+	 * 
+	 * if (players.get(currentPlayer.getPlayerNumber() - 1).getIsAI() == false) {
+	 * choice =
+	 * console.getScannerCommand(commands.getFortifyCmds()).equalsIgnoreCase(
+	 * "fortify"); } else { choice = false;//
+	 * (players.get(currentPlayer.getPlayerNumber() - //
+	 * 1).getAttackChoice(this.getBoard(), // getCurrentPlayerOwnedCountries())); }
+	 * 
+	 * while (choice) {
+	 * console.println("Which Country would you like to take troops from?");
+	 * 
+	 * // Adds the countries owned with more than 1 troop to the ArrayList //
+	 * countryDeployable.
+	 * 
+	 * Country deployFrom; deployFrom =
+	 * getCountry(console.getScannerCountry(deployableCountries));
+	 * 
+	 * // Creates an ArrayList of fortifiable Countries. ArrayList<Country>
+	 * fortifiable = new ArrayList<Country>(); for (Country i :
+	 * deployFrom.getBorders()) { if
+	 * (this.getCurrentPlayerOwnedCountries().indexOf(i) >= 0) { fortifiable.add(i);
+	 * } }
+	 * 
+	 * // If the ArrayList is of size 0, then gives the option to choose // another
+	 * country or end turn. // Else if (fortifiable.size() == 0) { console.
+	 * println("The Country you have selected has does not border any other Countries you own.\n"
+	 * + "" + "Would you like to choose a different Country?");
+	 * deployableCountries.remove(deployFrom); } else {
+	 * console.println("Which Country would you like to fortify?"); Country
+	 * fortifiedCountry =
+	 * getCountry(console.getScannerCountry(deployFrom.getBorders())); int
+	 * numTroopsToAdd = console.getScannerIntWithinRange(1,
+	 * deployFrom.getNumTroops() - 1, "How many troops would you like to place?");
+	 * fortifiedCountry.addTroops(numTroopsToAdd);
+	 * deployFrom.subractTroops(numTroopsToAdd); return; } } printBoardState();
+	 * 
+	 * }
+	 */
 
 	// TO DO
 	private void endTurn() {
@@ -321,7 +316,10 @@ public class Board {
 
 	public void draftBonusTroops(Country c, int troopsToDraft) {
 		c.addTroops(troopsToDraft);
+		System.out.println("Troops to Draft: " + currentPlayer.getBonusTroops());
 		currentPlayer.setBonusTroops(currentPlayer.getBonusTroops() - troopsToDraft);
+		System.out.println(mapController.getSelectedCountry1().getName());
+		System.out.println("Troops to Draft: " + currentPlayer.getBonusTroops());
 	}
 
 	public BattleReport battle(Country attacking, Country defending) {
@@ -430,11 +428,12 @@ public class Board {
 		for (int i = 0; i < names.size(); i++) {
 			players.add(new Player(i + 1, false, this.getBoard()));
 			players.get(i).setPlayerName(names.get(i));
+			System.out.println(names);
 		}
 
 		for (int i = names.size(); i < totalPlayerNum; i++) {
-			players.add(new Player(i + 1, false, this.getBoard()));
-			players.get(i).setPlayerName("AI " + (i + 1));
+			players.add(new Player(i + 1, true, this.getBoard()));
+			players.get(i).setPlayerName(null);
 		}
 
 		currentPlayer = players.get(0);
@@ -539,6 +538,26 @@ public class Board {
 	{
 		return panes;
 	}
+	
+	private void draft() {
+		currentPlayer.setBonusTroops(getTroopBonus());
+		interactivePane.setDisableNextButton(true);
+		if(currentPlayer.getIsAI() == true) {
+			mapController.draftAi();
+		}
+	}
+	
+	private void attack() {
+		if(currentPlayer.getIsAI() == true) {
+			mapController.attackAi();
+		}
+	}
+	
+	private void fortify() {
+		if(currentPlayer.getIsAI() == true) {
+			mapController.fortifyAi();
+		}
+	}
 
 	public void nextPhase() {
 
@@ -552,12 +571,12 @@ public class Board {
 		case DRAFT:
 			currentPhase = Phase.ATTACK;
 			resetMap();
-			// attack();
+			attack();
 			break;
 		case ATTACK:
 			currentPhase = Phase.FORTIFY;
 			resetMap();
-			// fortify();
+			fortify();
 			break;
 		case FORTIFY:
 			currentPhase = Phase.DRAFT;
@@ -569,10 +588,8 @@ public class Board {
 		// resetMap();
 		transitionPopup.show();
 		transitionPopup.nextPhaseTransition(currentPhase);
-		
 		mapController.setPhase(currentPhase);
 		interactivePane.update();
-
 	}
 
 

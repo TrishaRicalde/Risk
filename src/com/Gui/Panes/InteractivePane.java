@@ -172,8 +172,10 @@ public class InteractivePane extends BorderPane {
 	public void attackPopup() {
 		atkPopup = new AttackPopup(board);
 		currentPopup = atkPopup;
-		addMapBlocker();
-		atkPopup.show();
+		if(board.currentPlayer.getIsAI() == false) {
+			addMapBlocker();
+			atkPopup.show();
+		}
 	}
 	
 	public void fortifyPopup(int maxTroops) {
