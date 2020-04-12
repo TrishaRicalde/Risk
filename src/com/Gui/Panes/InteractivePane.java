@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.Board.BattleReport;
 import com.Board.Board;
 import com.Board.MapController;
+import com.Board.Phase;
 import com.Board.Map.Continent;
 import com.Board.Map.Country;
 import com.Board.Map.Map;
@@ -45,20 +46,22 @@ public class InteractivePane extends BorderPane {
 	private boolean globeSelected;
 	private boolean instructionSelected;
 	private ImageView riskContinents;
-	private Effects effects;
-	private Button btnNextPhase;
+	private Effects effects;	
 	private Polygon mapBlocker;
 	private DraftPopup draftPopup;
 	private AttackPopup atkPopup;
 	private InstructionPopup instructPopup;
 	private Stage currentPopup;
-	//private ArrayList<Button> buttons;
+	private ArrayList<Button> buttons;
 	private Button instructionBtn;
+	private Button btnNextPhase;
+	private Button btnGlobe;
 
 	public InteractivePane(Board board, Map map) {
 		this.map = map;
 		this.board = board;
 		this.effects = new Effects();
+		buttons = new ArrayList<Button>();
 		
 		Image contImage = new Image("Risk_Continents.png");
 		riskContinents = new ImageView(contImage);
@@ -75,7 +78,7 @@ public class InteractivePane extends BorderPane {
 		initButtons();
 		initLabels(); 
 		initMapBlocker();		
-		initTroopLabels();
+		
 	}
 
 	/**
@@ -202,15 +205,45 @@ public class InteractivePane extends BorderPane {
 		});
 	}
 	
+	/**
+	 * Disables all buttons except btn.
+	 * @param btn the button excluded from being disabled.
+	 */
+	private void disableButtons(Button btn) {
+		for (Button b : buttons) {
+			if (!b.equals(btn)) b.setDisable(true);
+		}
+	}
+	
+	/**
+	 * Enables all the buttons. If the current phase is draft, then the Next button
+	 * is disabled.
+	 */
+	private void enableButtons() {
+		for (Button b : buttons) {
+			b.setDisable(false);
+		}		
+		if (board.getPhase() == Phase.DRAFT) btnNextPhase.setDisable(true);
+	}
+	
 	//------------------------------------------INITIALIZATION METHODS------------------------------------------------------------------
 	
+	/**
+	 * Initializes all the buttons and adds them to the ArrayList
+	 * of buttons.
+	 */
 	private void initButtons() {
 		initNextPhaseButton();
 		initGlobeButton();
 		initInstructionButton();
-		/*initAttackButton();*/
+		buttons.add(btnGlobe);
+		buttons.add(btnNextPhase);
+		buttons.add(instructionBtn);
 	}
 	
+	/**
+	 * Initializes all the troop labels for each Country.
+	 */
 	private void initTroopLabels() {
 		BorderPane pane = new BorderPane();
 		pane.setPrefWidth(board.getWidth());
@@ -219,31 +252,30 @@ public class InteractivePane extends BorderPane {
 		pane.getChildren().add(l);
 		l.setTranslateX(100.0);
 		l.setTranslateY(100.0);
-		this.getChildren().add(pane);
-
-		
+		this.getChildren().add(pane);		
 	}
 	
-	
+	/**
+	 * Initializes all the Labels.
+	 */
 	private void initLabels() {
+		initTroopLabels();
 		phaseLbl = new Label("" + board.getPhase());
 		turnLbl = new Label("");
 		phaseLbl.setTextFill(Color.WHITE);
 		turnLbl.setTextFill(Color.WHITE);
 		Region filler = new Region();
 		HBox.setHgrow(filler, Priority.ALWAYS);
-		/*Button btnFiller = new Button("Filler");
-		btnFiller.setMinWidth(50);
-		btnFiller.setMinHeight(50);
-		btnFiller.setVisible(false);
-		bottomDisplay.getChildren().add(1, btnFiller);*/
 		bottomDisplay.getChildren().add(1, filler);
 		bottomDisplay.getChildren().add(2, turnLbl);
 		bottomDisplay.getChildren().add(3, phaseLbl);
 	}
 	
+	/**
+	 * Initializes the Globe button.
+	 */
 	private void initGlobeButton() {
-		Button btnGlobe = new Button("");
+		btnGlobe = new Button("");
 		btnGlobe.setAlignment(Pos.BOTTOM_RIGHT);
 		globeSelected = false;
 		ImageView darkGlobe = new ImageView(new Image("globe_button_bw.png"));
@@ -264,12 +296,12 @@ public class InteractivePane extends BorderPane {
 				    colourGlobe.setEffect(effects.getEffect("borderGlow"));
 					btnGlobe.setGraphic(colourGlobe);
 					board.mapController.clear();
-					instructionBtn.setDisable(true);
+					disableButtons(btnGlobe);
 					board.getLabelLayer().setVisible(false);
 					showContinentsCover();
 				} else {
 					btnGlobe.setGraphic(darkGlobe);
-					instructionBtn.setDisable(false);
+					enableButtons();
 					board.getLabelLayer().setVisible(true);
 					removeContinentsCover();
 				}				
@@ -278,6 +310,10 @@ public class InteractivePane extends BorderPane {
 		bottomDisplay.getChildren().add(bottomDisplay.getChildren().size(), btnGlobe);
 	}
 	
+	/**
+	 * Initializes the Instruction button. This button creates a Pop-up which
+	 * displays information on how to play the game.
+	 */
 	private void initInstructionButton()
 	{
 		instructionBtn = new Button();
@@ -318,6 +354,10 @@ public class InteractivePane extends BorderPane {
 		
 	}
 	
+	/**
+	 * Initializes the mapBlocker. The mapBlocker is a semi-transparent polygon which covers the entire game.
+	 * MapBlocker is used to close any open Pop-ups when the User clicks on the game.
+	 */
 	private void initMapBlocker() {
 		//clickable shape which covers entire map from mouse events.
 		mapBlocker = new Polygon();
@@ -343,6 +383,10 @@ public class InteractivePane extends BorderPane {
 		});
 	}
 	
+	/**
+	 * Initializes btnNextPhase. This button is used to shift the game to the 
+	 * Next phase.
+	 */
 	private void initNextPhaseButton() {
 		btnNextPhase = new Button("Next");
 		btnNextPhase.setOnAction(new EventHandler<ActionEvent>() {
