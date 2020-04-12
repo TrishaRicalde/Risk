@@ -37,7 +37,8 @@ import javafx.scene.layout.HBox;
 
 import javafx.util.Duration;
 
-public class Game extends Application {
+public class Game extends Application 
+{
 	private static final String name = "Risk";
 	private static final int width = 54 * 16;
 	private static final int height = 54 * 9;
@@ -271,11 +272,13 @@ public class Game extends Application {
 	}
 			
 	
-	public void setPlayerNum(int i) {
+	public void setPlayerNum(int i) 
+	{
 		numOfPlayers = i;
 	}
 
-	public static void main(String args[]) {
+	public static void main(String args[]) 
+	{
 		launch(args);
 	}
 }
