@@ -9,11 +9,9 @@ import com.Player.Alliance;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 
 public class Country extends Clickable {
@@ -54,7 +52,7 @@ public class Country extends Clickable {
 		effects = new Effects();
 		
 		// Temporary Solution to display troop number
-		Tooltip troopNumTip = new Tooltip("" + currentNumTroops);
+		Tooltip troopNumTip = new Tooltip("" + countryName);
 		Tooltip.install(countryShape, troopNumTip);
 
 		
@@ -69,13 +67,13 @@ public class Country extends Clickable {
 			System.out.println("Country Image Error: " + countryPathName + alliance + highlightPath + ".png");
 		}
 
-		//updates number of troops whenever the mouse is moved
 		countryShape.addEventFilter(MouseEvent.MOUSE_MOVED, e -> {
-			troopNumTip.setText("" + currentNumTroops);
+			troopNumTip.setText("" + countryName);
 		});
 
 
 		countryShape.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+			if (countryName.equalsIgnoreCase("greenland")) System.out.println("Greenland");
 			if (isClickable()) {
 				if (mapController.checkSelectable(this)) {
 					onClick();				
@@ -84,19 +82,7 @@ public class Country extends Clickable {
 		});
 	}
 
-	/**
-	 * Copy Constructor
-	 * 
-	 * @param c
-	 */
-	// TO BE IMPLEMENTED
-	/*
-	 * public Country(Country c) {
-	 * 
-	 * }
-	 * 
-	 * 
-	 */
+
 	/**
 	 * Adds a border to the Country
 	 * 
@@ -233,10 +219,8 @@ public class Country extends Clickable {
 			mapController.clear();
 			mapController.unSelected();
 			if (isClickable()) {
-				//imageView.setImage(new Image(countryPathName + alliance + "DARK.png"));
 				imageView.setEffect(effects.getEffect("countryGlow"));
 			} else {
-				//imageView.setImage(new Image(getPath()));
 				imageView.setEffect(null);
 			}
 		}
@@ -247,10 +231,8 @@ public class Country extends Clickable {
 	public void unSelect() {
 		super.unSelect();
 		if (isClickable()) {
-			//imageView.setImage(new Image(countryPathName + alliance + "DARK.png"));
 			imageView.setEffect(effects.getEffect("countryGlow"));
 		} else {
-			//imageView.setImage(new Image(getPath()));
 			imageView.setEffect(null);
 		}
 		updateImageView();
@@ -260,10 +242,8 @@ public class Country extends Clickable {
 	public void setClickable(boolean value) {
 		super.setClickable(value);
 		if (isClickable()) {
-			//imageView.setImage(new Image(countryPathName + alliance + "DARK.png"));
 			imageView.setEffect(effects.getEffect("countryGlow"));
 		} else {
-			//imageView.setImage(new Image(getPath()));
 			imageView.setEffect(null);
 		}
 	}

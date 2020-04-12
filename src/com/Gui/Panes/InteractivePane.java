@@ -14,13 +14,11 @@ import com.Gui.Panes.Popup.AttackPopup;
 import com.Gui.Panes.Popup.DraftPopup;
 import com.Gui.Panes.Popup.InstructionPopup;
 import com.Gui.Panes.Popup.MoveTroopPopup;
-import com.Gui.Panes.Popup.TroopBox;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -30,8 +28,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
@@ -175,6 +171,10 @@ public class InteractivePane extends BorderPane {
 		//this.setMouseTransparent(true);
 	}
 	
+	/**
+	 * Creates a Pop-up which contains a button which, upon being clicked will
+	 * proceed with a Players attack.
+	 */
 	public void attackPopup() {
 		atkPopup = new AttackPopup(board);
 		currentPopup = atkPopup;
@@ -184,6 +184,10 @@ public class InteractivePane extends BorderPane {
 		}
 	}
 	
+	/**
+	 * Creates a Pop-up asking how many troops the Player wishes to move.
+	 * @param maxTroops
+	 */
 	public void fortifyPopup(int maxTroops) {
 		MoveTroopPopup moveTroops = new MoveTroopPopup(maxTroops, board);
 		this.setMouseTransparent(false);
