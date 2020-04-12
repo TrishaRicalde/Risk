@@ -39,7 +39,7 @@ public class Board {
 	private final int totalPlayerNum = 4;
 	private final int absolutePower = 5;
 
-	public Board(int width, int height, Stage primaryStage) {
+	public Board(int width, int height) {
 		this.width = width;
 		this.height = height;
 		currentPhase = Phase.START;
