@@ -34,7 +34,7 @@ public class TransitionPopup extends Stage{
 	//Popup animationPopUp = new Popup();
 	//Bruh
 
-	public TransitionPopup(Board board, Stage primaryStage) 
+	public TransitionPopup(Board board) 
 	{
 		/*
 		vbox = new VBox();

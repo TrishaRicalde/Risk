@@ -3,8 +3,8 @@ package com.Board.Map;
 import java.util.ArrayList;
 
 import com.Board.MapController;
-import com.Gui.Clickable;
 import com.Gui.Effects.Effects;
+import com.Gui.main.Clickable;
 import com.Player.Alliance;
 
 import javafx.scene.control.Label;
