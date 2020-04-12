@@ -41,7 +41,7 @@ public class Game extends Application {
 	private static final String name = "Risk";
 	private static final int width = 54 * 16;
 	private static final int height = 54 * 9;
-	private static final Image mapImage = new Image("Risk_White.png"); //"Risk_Map.png"
+	private static final Image mapImage = new Image("Risk_Main.png"); //"Risk_Map.png"
 	private static final Image titleScreen = new Image("Risk_Title.gif");
 
 	private Board board;
