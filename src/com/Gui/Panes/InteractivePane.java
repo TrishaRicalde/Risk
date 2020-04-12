@@ -1,5 +1,7 @@
 package com.Gui.Panes;
 
+import java.util.ArrayList;
+
 import com.Board.BattleReport;
 import com.Board.Board;
 import com.Board.MapController;
@@ -50,6 +52,7 @@ public class InteractivePane extends BorderPane {
 	private AttackPopup atkPopup;
 	private InstructionPopup instructPopup;
 	private Stage currentPopup;
+	//private ArrayList<Button> buttons;
 	private Button instructionBtn;
 
 	public InteractivePane(Board board, Map map) {
@@ -68,7 +71,6 @@ public class InteractivePane extends BorderPane {
 		
 		this.setBottom(bottomDisplay);
 		this.hideBottomDisplay();
-		
 
 		initButtons();
 		initLabels(); 
@@ -262,9 +264,13 @@ public class InteractivePane extends BorderPane {
 				    colourGlobe.setEffect(effects.getEffect("borderGlow"));
 					btnGlobe.setGraphic(colourGlobe);
 					board.mapController.clear();
+					instructionBtn.setDisable(true);
+					board.getLabelLayer().setVisible(false);
 					showContinentsCover();
 				} else {
 					btnGlobe.setGraphic(darkGlobe);
+					instructionBtn.setDisable(false);
+					board.getLabelLayer().setVisible(true);
 					removeContinentsCover();
 				}				
 			}
@@ -288,21 +294,6 @@ public class InteractivePane extends BorderPane {
 		
 		instructionBtn.setAlignment(Pos.BOTTOM_LEFT);
 		bottomDisplay.getChildren().add(0,instructionBtn);
-		
-		
-		/*
-		
-		VBox instructionBox = new VBox();
-		this.getChildren().add(instructionBox);
-		instructionBox.setStyle("-fx-background-color: rgba(255, 255, 255, 0.85);");
-		instructionBox.setVisible(false);
-		
-		Label instructionTitle = new Label();
-		instructionTitle.setText("Instructions");
-		
-		instructionBox.getChildren().add(instructionTitle);
-		*/
-		
 		
 		instructionBtn.setOnAction(new EventHandler<ActionEvent>() 
 		{

@@ -1,4 +1,4 @@
-package com.Gui;
+package com.Gui.main;
 
 /**
  * Class for objects which are clickable.

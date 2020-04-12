@@ -3,7 +3,6 @@ package com.Board.Map;
 import java.util.ArrayList;
 
 import com.Board.MapController;
-import com.Board.Console.Console;
 
 import javafx.scene.shape.Polygon;
 

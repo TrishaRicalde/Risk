@@ -1,4 +1,4 @@
-package com.Gui;
+package com.Gui.main;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -48,8 +48,6 @@ public class Game extends Application {
 
 	private int numOfPlayers = 0;
 	private ArrayList<String> names;
-
-	private boolean selected = true;
 
 	
 
@@ -112,12 +110,6 @@ public class Game extends Application {
 		nextPopUp.getContent().add(vbox2);
 		finalPopUp.getContent().add(vbox3);
 		
-		/*
-		startBox.getChildren().add(instruction);
-		startBox.getChildren().add(start);
-		startBox.setMargin(instruction, new Insets(30, 0, 30, 110));
-		startBox.setMargin(start, new Insets(30, 0, 30, 0));
-*/
 		
 		vbox.getChildren().add(greeting);
 		vbox.getChildren().add(playerLabel);
@@ -265,8 +257,6 @@ public class Game extends Application {
 		borderPane.setCenter(startScreen);
 		
 		borderPane.setPrefSize(width, height);
-		
-		//borderPane.setCenter(start);
 
 		stack.getChildren().add(borderPane);
 
