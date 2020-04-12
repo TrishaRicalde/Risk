@@ -10,6 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 public class LabelLayer extends Pane {
+	
+	
+	
 
 	private ArrayList<Label> allLabels;
 
