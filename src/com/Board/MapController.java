@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.Board.Map.Country;
 import com.Gui.Panes.InteractivePane;
 import com.Gui.Panes.Popup.AttackPopup;
+import com.Gui.Panes.Popup.BattleReportPopup;
+import com.Gui.Panes.Popup.AttackPopup;
 
 public class MapController {
 
@@ -18,6 +20,8 @@ public class MapController {
 	private boolean selected1;
 	private boolean selected2;
 	private InteractivePane interactivePane;
+	private BattleReport report;
+	//private ArrayList<>
 
 	/**
 	 * Acts as an intermediary between the Board and the Countries. Stores
@@ -48,22 +52,89 @@ public class MapController {
 	 * @param c
 	 *            the selected Country.
 	 */
+	
+	public void draftAi() {
+		int distributeNum = board.currentPlayer.getBonusTroops();
+		selectedCountry1 = board.currentPlayer.getCountryToAddTroops(this.board, board.getCurrentPlayerOwnedCountries());	
+		for(int i = 0; i < distributeNum; i++) {
+			board.draftBonusTroops(selectedCountry1, 1);
+		}
+		board.nextPhase();
+	}
+	
+	public void attackAi() {
+		for (Country c : board.getCurrentPlayerOwnedCountries()) {
+			for (Country border : c.getBorders()) {
+				if (border.isAllied(c) == false && c.getNumTroops() > 1) {
+					if(c.getNumTroops() > border.getNumTroops() + border.getNumTroops() * 0.25) {
+						selectedCountry1 = c;
+						selectedCountry2 = border;
+						report = board.battle(selectedCountry1, selectedCountry2);
+						System.out.println(selectedCountry1.getName() + " has attacked " + selectedCountry2.getName());
+						if (report.isVictorious()) {
+							board.mapController.getSelectedCountry1().subractTroops(report.getAttackingTroopsLost());
+							board.mapController.getSelectedCountry2().subractTroops(report.getDefendingTroopsLost());
+							board.mapController.getSelectedCountry2().setOccupantID(board.mapController.getSelectedCountry1().getPlayerOccupantOfCountry());
+							board.mapController.getSelectedCountry2().addTroops(1);
+							board.mapController.getSelectedCountry1().subractTroops(1);
+							System.out.println(board.getCurrentPlayerName() + " has been Won at the cost of " + report.getAttackingTroopsLost() + " troops.");
+						} else {
+							System.out.println(board.getCurrentPlayerName() + " has been Lost, further losing " + report.getAttackingTroopsLost() + " troops.");
+						}
+						//interactivePane.attackPopup();
+					}
+				}
+			}
+		}
+		board.nextPhase();
+	}
+	
+	public void fortifyAi() {
+		for (Country c : board.getCurrentPlayerOwnedCountries()) {
+			for (Country border : c.getBorders()) {
+				if (border.isAllied(c) == true) {
+					if(c.getNumTroops() > border.getNumTroops() + border.getNumTroops() * 0.25) {
+						selectedCountry1 = c;
+						selectedCountry2 = border;
+						report = board.battle(selectedCountry1, selectedCountry2);
+						System.out.println(selectedCountry1.getName() + " has fortified " + selectedCountry2.getName());
+							board.mapController.getSelectedCountry2().addTroops(1);
+							board.mapController.getSelectedCountry1().subractTroops(1);
+						}
+						//interactivePane.attackPopup();
+					}
+				}
+			}
+		board.nextPhase();
+		}
+		
+	
 	public void selectCountry(Country c) {
 		countSelected++;
 		switch (phase) {
 		case DRAFT:
-			selectedCountry1 = c;
-			if (board.currentPlayer.getBonusTroops() > 0) {
-				interactivePane.draftPopup(board.currentPlayer.getBonusTroops());
+			if(board.currentPlayer.getIsAI() == false) {
+				selectedCountry1 = c;
+				if (board.currentPlayer.getBonusTroops() > 0) {
+					interactivePane.draftPopup(board.currentPlayer.getBonusTroops());
+				}
 			}
 			break;
 		case ATTACK:
-			attack(c);
+			if(board.currentPlayer.getIsAI() == false) {
+				attack(c);
+			} else {
+				attackAi();
+			}
 			break;
 		case FORTIFY:
-			fortify(c);
+			if(board.currentPlayer.getIsAI() == false) {
+				fortify(c);
+			} else {
+				fortifyAi();
+			}
+			
 		default:
-
 		}
 	}
 
@@ -243,7 +314,7 @@ public class MapController {
 	public Country getSelectedCountry1() {
 		return this.selectedCountry1;
 	}
-
+	
 	public Country getSelectedCountry2() {
 		return this.selectedCountry2;
 	}

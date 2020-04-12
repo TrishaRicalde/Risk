@@ -155,15 +155,19 @@ public class Country extends Clickable {
 		switch (this.playerIdentity) {
 		case 1:
 			this.alliance = Alliance.RED;
+			updateImageView();
 			break;
 		case 2:
 			this.alliance = Alliance.GREEN;
+			updateImageView();
 			break;
 		case 3:
 			this.alliance = Alliance.BLUE;
+			updateImageView();
 			break;
 		case 4:
 			this.alliance = Alliance.YELLOW;
+			updateImageView();
 			break;
 		}
 	}
@@ -221,9 +225,10 @@ public class Country extends Clickable {
 	public void onClick() {
 		super.onClick();
 		updateLabel();
-		if (isSelected()) {			
-			mapController.selectCountry(this);
-			imageView.setEffect(effects.getEffect("selectShadow"));						
+		System.out.println("1");
+		if (isSelected()) {
+				mapController.selectCountry(this);
+				imageView.setEffect(effects.getEffect("selectShadow"));						
 		} else {
 			mapController.clear();
 			mapController.unSelected();

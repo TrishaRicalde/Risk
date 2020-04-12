@@ -2,9 +2,11 @@ package com.Gui;
 
 import java.util.ArrayList;
 import java.util.Observable;
+
 import com.Board.Board;
 import com.Board.Map.Map;
 import com.Gui.Panes.InteractivePane;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -19,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -31,6 +34,7 @@ import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
+
 import javafx.util.Duration;
 
 public class Game extends Application {
@@ -171,11 +175,9 @@ public class Game extends Application {
 								startPopUp.hide();
 								numPlayerLabel.setText("You have selected " + numOfPlayers + " players");
 								for (int counter = 0; counter < numOfPlayers; counter++) {
-
 									TextField nameField = new TextField();
 									textVBox.getChildren().add(nameField);
-									
-								}								
+								}
 								
 								nextPopUp.show(primaryStage);
 								
@@ -210,26 +212,28 @@ public class Game extends Application {
 					names.add(nameString);
 					
 				}
-				int countValid = 0;
-				for (int n = 0; n < names.size(); n++)
+				
+				for (int counter = 0; counter < fieldNames.size(); counter++)
 				{
+					
+				}
+				int countValid = 0;
+				for (int n = 0; n < names.size(); n++) {
 					if (!names.get(n).equalsIgnoreCase(""))
 					{
 						countValid++;
 						
 					}
-					else
-					{
+					else {
 						playerNames.setText("Make sure all players have entered name");
 					}
 				}
-				if (countValid == names.size()) 
-				{
+				
+				if (countValid == names.size()) {
 					nextPopUp.hide();
 					finalPopUp.show(primaryStage);
 					welcome.setText(welcomeString);
 					board.initializePlayers(names);
-					
 				}
 				
 				

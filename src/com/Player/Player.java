@@ -132,13 +132,8 @@ public class Player {
 		return temp;
 	}
 
-	public int aiDraft(int bonusTroops, Board b) {
-		return 1;
-	}
-
 	public boolean getAttackChoice(Board b, ArrayList<Country> c) {
 		ArrayList<Continent> continents = b.getContinents();
-
 		for(Continent cont : continents) {
 			for(Country country : cont.getCountries()) {
 				if(country.getPlayerOccupantOfCountry() == this.playerNumber) {

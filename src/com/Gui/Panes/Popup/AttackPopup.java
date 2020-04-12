@@ -46,8 +46,46 @@ public class AttackPopup extends Stage {
 		this.setOpacity(0.9);
 		this.initStyle(StageStyle.UNDECORATED);
 		onButtonClick();
+		if(board.currentPlayer.getIsAI()) {
+			aiAttacker();
+		}
+	}
+	
+	public void aiAttacker() {
+		Country atkCountry = board.mapController.getSelectedCountry1();
+		Country dfdCountry = board.mapController.getSelectedCountry2();
+		int defender = dfdCountry.getPlayerOccupantOfCountry();
+		report = board.battle(atkCountry, dfdCountry);
+		atkCountry.subractTroops(report.getAttackingTroopsLost());
+		dfdCountry.subractTroops(report.getDefendingTroopsLost());						
+		board.getInteractivePane().removeMapBlocker();
+		board.getInteractivePane().setMouseTransparent(true);
+		
+		close();
+		if (report.isVictorious()) {
+			board.mapController.getSelectedCountry2().setOccupantID(board.mapController.getSelectedCountry1().getPlayerOccupantOfCountry());
+			System.out.println("Player " + atkCountry.getPlayerOccupantOfCountry() + " has been Won!");
+			//Checks if a Player is defeated.
+			if (board.getPlayer(defender).isDefeated(board)) {
+				board.playerDefeated(defender);
+				System.out.println("Player " + defender + " has been defeated!");
+				//Checks if a player has won the game.
+				if (board.getPlayers().size() == 1) {
+					board.victory();
+				}
+			}
+			//Move troops after attack
+			MoveTroopPopup movePopup = new MoveTroopPopup(atkCountry.getNumTroops() - 1, board);
+			movePopup.show();
+			
+		} else {
+			board.mapController.clear();
+			board.resetMap();
+			board.mapController.setDeployableCountries();
+		}
 		
 	}
+
 	
 	public void onButtonClick() {
 		attack.setOnAction(new EventHandler<ActionEvent>() {
@@ -78,7 +116,7 @@ public class AttackPopup extends Stage {
 						}
 					}
 					//Move troops after attack
-					bPop.setOnCloseRequest(e -> {						
+					bPop.setOnCloseRequest(e -> {
 						MoveTroopPopup movePopup = new MoveTroopPopup(atkCountry.getNumTroops() - 1, board);
 						movePopup.show();
 						
