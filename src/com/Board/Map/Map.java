@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package com.Board.Map;
 
 import java.util.ArrayList;
@@ -6,13 +9,25 @@ import com.Board.MapController;
 
 import javafx.scene.shape.Polygon;
 
+
+/**
+ * The Class Map.
+ */
 public class Map {
 
+	/** The continents. */
 	private ArrayList<Continent> continents;
+	
+	/** The country shapes. */
 	private CountryShapes countryShapes;
+	
+	/** The shapes. */
 	private ArrayList<Polygon> shapes;
 
 	
+	/**
+	 * Instantiates a new map.
+	 */
 	public Map() {
 		continents = new ArrayList<Continent>();
 		countryShapes = new CountryShapes();
@@ -22,7 +37,7 @@ public class Map {
 	}
 	
 	/**
-	 * Initializes the entire Map with Continents and Countries
+	 * Initializes the entire Map with Continents and Countries.
 	 */
 	//TO BE IMPLEMENTED
 	private void initMap() {
@@ -373,14 +388,20 @@ public class Map {
 	
 	
 	/**
-	 * Gets the ArrayList of Continents
-	 * @return the ArrayList of Continents 
+	 * Gets the ArrayList of Continents.
+	 *
+	 * @return the ArrayList of Continents
 	 */
 	public ArrayList<Continent> getContinents() {
 		return continents;
 	}
 	
 
+	/**
+	 * Sets the map controller.
+	 *
+	 * @param m - the new map controller
+	 */
 	public void setMapController(MapController m) {
 		for (Continent cont : continents) {
 			for (Country c : cont.getCountries()) {
@@ -393,6 +414,11 @@ public class Map {
 		//Polygon p = new Polygon
 	}*/
 	
+	/**
+	 * Gets the shapes.
+	 *
+	 * @return the shapes
+	 */
 	public ArrayList<Polygon> getShapes() {
 		return shapes;
 	}

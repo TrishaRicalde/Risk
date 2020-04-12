@@ -22,14 +22,26 @@ import javafx.stage.StageStyle;
  * A Pop-up which only contains a single button for attacking.
  * Upon clicking the attack button, the player will attack the 
  * selected Country.
- * @author skusj
  */
 public class AttackPopup extends Stage {
+	
+	/** The attack img. */
 	ImageView attackImg;
+	
+	/** The board. */
 	Board board;
+	
+	/** The attack button. */
 	Button attack;
+	
+	/** The battle report. */
 	BattleReport report;
 	
+	/**
+	 * Instantiates a new attack popup.
+	 *
+	 * @param board the board
+	 */
 	public AttackPopup(Board board) {
 		this.board = board;
 		
@@ -51,6 +63,9 @@ public class AttackPopup extends Stage {
 		}
 	}
 	
+	/**
+	 * Ai attacker.
+	 */
 	public void aiAttacker() {
 		Country atkCountry = board.mapController.getSelectedCountry1();
 		Country dfdCountry = board.mapController.getSelectedCountry2();
@@ -87,6 +102,9 @@ public class AttackPopup extends Stage {
 	}
 
 	
+	/**
+	 * On button click.
+	 */
 	public void onButtonClick() {
 		attack.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -137,6 +155,11 @@ public class AttackPopup extends Stage {
 		
 	}
 	
+	/**
+	 * Gets the battle report.
+	 *
+	 * @return the battle report
+	 */
 	public BattleReport getBattleReport() {
 		return report;
 	}

@@ -32,27 +32,72 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 
+
+/**
+ * The Class InteractivePane.
+ */
 public class InteractivePane extends BorderPane {
 
+	/** The map. */
 	private Map map;
+	
+	/** The board. */
 	private Board board;
+	
+	/** The phase lbl. */
 	private Label phaseLbl;
+	
+	/** The turn lbl. */
 	private Label turnLbl;
+	
+	/** The bottom display. */
 	private HBox bottomDisplay;
+	
+	/** a bool repping the globeSelected */
 	private boolean globeSelected;
+	
+	/** a bool repping the instruction selected. */
 	private boolean instructionSelected;
+	
+	/** an image of risk continents. */
 	private ImageView riskContinents;
+	
+	/** The effects. */
 	private Effects effects;	
+	
+	/** The map blocker. */
 	private Polygon mapBlocker;
+	
+	/** The draft popup. */
 	private DraftPopup draftPopup;
+	
+	/** The atk popup. */
 	private AttackPopup atkPopup;
+	
+	/** The instruct popup. */
 	private InstructionPopup instructPopup;
+	
+	/** The current popup. */
 	private Stage currentPopup;
+	
+	/** The buttons. */
 	private ArrayList<Button> buttons;
+	
+	/** The instruction btn. */
 	private Button instructionBtn;
+	
+	/** The  next phase button */
 	private Button btnNextPhase;
+	
+	/** The globe button */
 	private Button btnGlobe;
 
+	/**
+	 * Instantiates a new interactive pane.
+	 *
+	 * @param board - the board
+	 * @param map - the map
+	 */
 	public InteractivePane(Board board, Map map) {
 		this.map = map;
 		this.board = board;
@@ -85,22 +130,28 @@ public class InteractivePane extends BorderPane {
 		this.requestLayout();
 	}
 
+	/**
+	 * Shows the bottom display.
+	 */
 	public void showBottomDisplay() {
 		update();
 		bottomDisplay.setVisible(true);
 	}
 
+	/**
+	 * Hides the bottom display.
+	 */
 	public void hideBottomDisplay() {
 		bottomDisplay.setVisible(false);
 	}
 
 	/**
 	 * Adds all the country shapes to the Pane.
-	 * 
-	 * @param map
+	 *
+	 * @param map - the new countries
 	 */
 	private void setCountries(Map map) {
-
+		
 		for (Continent cont : map.getContinents()) {
 			for (Country c : cont.getCountries()) {
 				try {
@@ -145,7 +196,8 @@ public class InteractivePane extends BorderPane {
 	
 	/**
 	 * Disables the next button.
-	 * @param value
+	 *
+	 * @param value -  the new disable next button
 	 */
 	public void setDisableNextButton(boolean value) {
 		btnNextPhase.setDisable(value);
@@ -161,7 +213,8 @@ public class InteractivePane extends BorderPane {
 
 	/**
 	 * Creates a pop-up for drafting troops and shows it on the scene.
-	 * @param numTroops the number of bonus troops the current player has
+	 *
+	 * @param bonusTroops - the bonus troops
 	 */
 	public void draftPopup(int bonusTroops) {
 		draftPopup = new DraftPopup(bonusTroops, board);
@@ -186,7 +239,9 @@ public class InteractivePane extends BorderPane {
 	
 	/**
 	 * Creates a Pop-up asking how many troops the Player wishes to move.
-	 * @param maxTroops
+	 *
+	 * @param maxTroops - the max troops a player is allowed to move
+	 * 
 	 */
 	public void fortifyPopup(int maxTroops) {
 		MoveTroopPopup moveTroops = new MoveTroopPopup(maxTroops, board);
@@ -197,6 +252,9 @@ public class InteractivePane extends BorderPane {
 	}
 	
 	
+	/**
+	 * Instruction popup.
+	 */
 	public void instructionPopup()
 	{
 		instructPopup = new InstructionPopup(board);

@@ -14,30 +14,68 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Polygon;
 
+
+/**
+ * The Class Country.
+ */
 public class Country extends Clickable {
+	
+	/** The country name. */
 	private String countryName;
+	
+	/** The current number of troops. */
 	private int currentNumTroops;
+	
+	/** The borders. */
 	private ArrayList<Country> borders;
+	
+	/** The player identity. */
 	private int playerIdentity;
+	
+	/** The alliance. */
 	private Alliance alliance;
+	
+	/** The country path name. */
 	private String countryPathName;
+	
+	/** The troop label. */
 	private Label troopLabel = new Label("");
 
+	/** The image view. */
 	private ImageView imageView;
+	
+	/** The map controller. */
 	private MapController mapController;
 
+	/** The country shape. */
 	private Polygon countryShape;
+	
+	/** The highlight path. */
 	private String highlightPath;
+	
+	/** The effects. */
 	private Effects effects;
 
+	/** The opacity. */
 	private final double opacity = 0.0;
 
+	/**
+	 * Instantiates a new country.
+	 *
+	 * @param countryName - the country name
+	 */
 	public Country(String countryName) {
 		this.countryName = countryName;
 		borders = new ArrayList<Country>();
 		currentNumTroops = 0;
 	}
 
+	/**
+	 * Instantiates a new country.
+	 *
+	 * @param countryName- the country name
+	 * @param shape - the shape of the country
+	 */
 	// For Gui
 	public Country(String countryName, Polygon shape) {
 		borders = new ArrayList<Country>();
@@ -84,40 +122,55 @@ public class Country extends Clickable {
 
 
 	/**
-	 * Adds a border to the Country
-	 * 
-	 * @param c
+	 * Adds a border to the Country.
+	 *
+	 * @param c - the country that the border is being added to
 	 */
 	public void addBorder(Country c) {
 		borders.add(c);
 	}
 
 	/**
-	 * Gets the current Player occupying the Country
-	 * 
+	 * Gets the current Player occupying the Country.
+	 *
 	 * @return the player number of the current Player occupying the territory
 	 */
 	public int getPlayerOccupantOfCountry() {
 		return playerIdentity;
 	}
 
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
 	public String getName() {
 		return countryName;
 	}
 
+	/**
+	 * Adds the troops.
+	 *
+	 * @param numTroops - the num troops of troops being added
+	 */
 	public void addTroops(int numTroops) {
 		currentNumTroops += numTroops;
 		updateLabel();
 	}
 
+	/**
+	 * Subract troops.
+	 *
+	 * @param numTroops - the num troops being subtracted
+	 */
 	public void subractTroops(int numTroops) {
 		currentNumTroops -= numTroops;
 		updateLabel();
 	}
 
 	/**
-	 * (Non-encapsulated)
-	 * 
+	 * (Non-encapsulated).
+	 *
 	 * @return the ArrayList of this Country's borders.
 	 */
 	public ArrayList<Country> getBorders() {
@@ -125,18 +178,27 @@ public class Country extends Clickable {
 	}
 
 	/**
-	 * 
+	 * Gets the num troops.
+	 *
 	 * @return the current number of troops occupying the country.
 	 */
 	public int getNumTroops() {
 		return currentNumTroops;
 	}
 
+	/**
+	 * Sets the occupant ID.
+	 *
+	 * @param playerNumber - the new occupant ID
+	 */
 	public void setOccupantID(int playerNumber) {
 		playerIdentity = playerNumber;
 		updateAlliance();
 	}
 
+	/**
+	 * Updates the alliance.
+	 */
 	public void updateAlliance() {
 		switch (this.playerIdentity) {
 		case 1:
@@ -158,6 +220,12 @@ public class Country extends Clickable {
 		}
 	}
 
+	/**
+	 * Checks if is allied.
+	 *
+	 * @param c the country being checked
+	 * @return true, if is allied
+	 */
 	public boolean isAllied(Country c) {
 		if (c.getPlayerOccupantOfCountry() == this.playerIdentity) {
 			return true;
@@ -167,30 +235,54 @@ public class Country extends Clickable {
 	}
 
 	// --------------------------------------------------GUI
+	/**
+	 * Sets the label.
+	 *
+	 * @param label - the new label
+	 */
 	// RELATED--------------------------------------------------
 	public void setLabel(Label label) {
 		troopLabel = label;
 	}
 	
+	/**
+	 * Update label.
+	 */
 	public void updateLabel() {
 		troopLabel.setText("" + currentNumTroops);
 	}
 	
+	/**
+	 * Update image view.
+	 */
 	public void updateImageView() {
 		this.updateHighlight();
 		imageView.setImage(new Image(getPath()));
 
 	}
 
+	/**
+	 * Gets the image view.
+	 *
+	 * @return the image view
+	 */
 	public ImageView getImageView() {
 		updateImageView();
 		return this.imageView;
 	}
 
+	/**
+	 * Gets the shape.
+	 *
+	 * @return the shape
+	 */
 	public Polygon getShape() {
 		return countryShape;
 	}
 
+	/**
+	 * Update highlight.
+	 */
 	public void updateHighlight() {
 		if (isSelected()) {
 			highlightPath = "DARK";
@@ -199,14 +291,27 @@ public class Country extends Clickable {
 		}
 	}
 
+	/**
+	 * Sets the map controller.
+	 *
+	 * @param m - the new map controller
+	 */
 	public void setMapController(MapController m) {
 		this.mapController = m;
 	}
 
+	/**
+	 * Gets the path.
+	 *
+	 * @return the path
+	 */
 	public String getPath() {
 		return countryPathName + alliance + highlightPath + ".png";
 	}
 
+	/**
+	 * On click.
+	 */
 	@Override
 	public void onClick() {
 		super.onClick();
@@ -228,6 +333,9 @@ public class Country extends Clickable {
 		updateImageView();
 	}
 
+	/**
+	 * Un select.
+	 */
 	public void unSelect() {
 		super.unSelect();
 		if (isClickable()) {
@@ -238,6 +346,11 @@ public class Country extends Clickable {
 		updateImageView();
 	}
 	
+	/**
+	 * Sets the clickable.
+	 *
+	 * @param value - the new clickable
+	 */
 	@Override
 	public void setClickable(boolean value) {
 		super.setClickable(value);

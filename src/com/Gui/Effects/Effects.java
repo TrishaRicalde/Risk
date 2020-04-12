@@ -1,3 +1,5 @@
+
+
 package com.Gui.Effects;
 
 import java.util.HashMap;
@@ -10,11 +12,19 @@ import javafx.scene.effect.Lighting;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.paint.Color;
 
+
+/**
+ * The Class Effects.
+ */
 public class Effects {
 	
+	/** The effects. */
 	private HashMap<String, Effect> effects;
 	
 	
+	/**
+	 * Instantiates a new effect.
+	 */
 	public Effects() {
 		effects = new HashMap<String, Effect>();
 		DropShadow borderGlow;
@@ -39,6 +49,12 @@ public class Effects {
 		
 	}
 	
+	/**
+	 * Gets the effect.
+	 *
+	 * @param name - the name
+	 * @return the effect
+	 */
 	public Effect getEffect(String name) {
 		return (effects.get(name));
 	}

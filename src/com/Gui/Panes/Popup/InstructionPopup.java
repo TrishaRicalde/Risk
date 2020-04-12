@@ -18,23 +18,57 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
+
+/**
+ * The Class InstructionPopup.
+ * @author alextanasescu
+ */
 public class InstructionPopup extends Stage {
 	
+	/** The board. */
 	private Board board;
+	
+	/** The instruction box. */
 	private VBox instructionBox;
+	
+	/** The button box. */
 	private HBox buttonBox;
+	
+	/** The title. */
 	private Label title;
+	
+	/** The phase title. */
 	private Label phaseTitle;
+	
+	/** The instruction flow. */
 	private TextFlow instructionFlow;
+	
+	/** The instruction text. */
 	private Text instructionText;
+	
+	/** The next. */
 	private Button next;
+	
+	/** The back. */
 	private Button back;
+	
+	/** The page of instruction youre on */
 	private int i;
+	
+	/** The scene. */
 	private Scene scene;
 
+	/** The phase array. */
 	private String[] phaseArray;
+	
+	/** The instruction array. */
 	private String[] instructionArray;
 
+	/**
+	 * Instantiates a new instruction popup.
+	 *
+	 * @param board the board
+	 */
 	public InstructionPopup(Board board) {
 		
 		this.board = board;
@@ -173,6 +207,9 @@ public class InstructionPopup extends Stage {
 
 	}
 
+	/**
+	 * Initiates the buttons.
+	 */
 	public void initButtons()
 	{
 		
