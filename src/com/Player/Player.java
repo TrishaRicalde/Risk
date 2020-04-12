@@ -8,7 +8,7 @@ import com.Board.Map.Country;
 public class Player {
 	private Alliance alliance;
 	private int playerNumber;
-	private String[] possibleNames = {"Jefferson Bot", "Billy Bot", "Suzan Bot", "Kong Bot", "Makenzy Bot", "Lora Bot", "Kitten Bot", "Dogo Bot", "Izzy Bot", "Poppy Bot", "Lisa Bot", "John Bot", "Callie Bot", "Shadow Bot", "Whiskers Bot", "Lily Bot", "Charlotte Bot", "Sylvester Bot", "Gamer99 Bot", "Kid Bot", "Alexander_The_Great Bot"};
+	private String[] possibleNames = {"Jefferson Bot", "Billy Bot", "Suzan Bot", "Kong Bot", "Makenzy Bot", "Lora Bot", "Kitten Bot", "Dogo Bot", "Izzy Bot", "Poppy Bot", "Lisa Bot", "John Bot", "Callie Bot", "Shadow Bot", "Whiskers Bot", "Lily Bot", "Charlotte Bot", "Sylvester Bot", "Gamer99 Bot", "Kid Bot", "Alexander_The_Great Bot", "Darcie Bot", "Molly Bot", "Kye Bot", "Evelyn Bot", "Tina Bot", "Christina Bot", "Emmie Bot", "Tanya Bot", "Bryan Bot", "Saif Bot", "Jamal Bot", "Wayne Bot", "Malachi Bot", "Jose Bot", "Leonard Bot", "Owen Bot", "Terry Bot", "Abby Bot", "Lacey Bot", "Lucia Bot", "Felix Bot", "Anisa Bot", "Jessie Bot", "Frankie Bot", "Amber Bot", "Sylvia", "Attila Bot", "Zack Bot", "Colin Bot", "Klaus Bot", "Ash Bot", "Ben Bot", "Russel Bot", "Santiago Bot", "Athenodora Bot", "Jackson Bot", "Rusty Bot", "Green Bot", "Red Bot", "Blue Bot", "Yellow Bot", "White Bot", "Black Bot", "Grey Bot", "Orange Bot", "Zues (God) Bot", "Odin (God) Bot", "Ra (God) Bot"};
 	private String playerName;
 	private Board board;// = new Board();
 	private boolean isAI;
