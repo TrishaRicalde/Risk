@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.Board.Map.Country;
 import com.Gui.Panes.InteractivePane;
+import com.Gui.Panes.Popup.AiReportPopup;
 import com.Gui.Panes.Popup.AttackPopup;
 import com.Gui.Panes.Popup.BattleReportPopup;
 import com.Gui.Panes.Popup.AttackPopup;
@@ -21,6 +22,7 @@ public class MapController {
 	private boolean selected2;
 	private InteractivePane interactivePane;
 	private BattleReport report;
+	private ArrayList<String> events = new ArrayList<String>();
 	//private ArrayList<>
 
 	/**
@@ -58,6 +60,7 @@ public class MapController {
 		selectedCountry1 = board.currentPlayer.getCountryToAddTroops(this.board, board.getCurrentPlayerOwnedCountries());	
 		for(int i = 0; i < distributeNum; i++) {
 			board.draftBonusTroops(selectedCountry1, 1);
+			events.add(board.getCurrentPlayerName().toString() + " has Drafted " + 1 + " troop to " + selectedCountry1.getName() + "\n");
 		}
 		board.nextPhase();
 	}
@@ -70,18 +73,19 @@ public class MapController {
 						selectedCountry1 = c;
 						selectedCountry2 = border;
 						report = board.battle(selectedCountry1, selectedCountry2);
-						System.out.println(selectedCountry1.getName() + " has attacked " + selectedCountry2.getName());
+						//System.out.println(selectedCountry1.getName() + " has attacked " + selectedCountry2.getName());
 						if (report.isVictorious()) {
 							board.mapController.getSelectedCountry1().subractTroops(report.getAttackingTroopsLost());
 							board.mapController.getSelectedCountry2().subractTroops(report.getDefendingTroopsLost());
 							board.mapController.getSelectedCountry2().setOccupantID(board.mapController.getSelectedCountry1().getPlayerOccupantOfCountry());
 							board.mapController.getSelectedCountry2().addTroops(1);
 							board.mapController.getSelectedCountry1().subractTroops(1);
-							System.out.println(board.getCurrentPlayerName() + " has been Won at the cost of " + report.getAttackingTroopsLost() + " troops.");
+							//System.out.println(board.getCurrentPlayerName() + " has been Won at the cost of " + report.getAttackingTroopsLost() + " troops.");
+							events.add(board.getCurrentPlayerName().toString() + " has Captured " + selectedCountry2.getName() + " at the cost of " + report.getAttackingTroopsLost() + " troops." + "\n");
 						} else {
-							System.out.println(board.getCurrentPlayerName() + " has been Lost, further losing " + report.getAttackingTroopsLost() + " troops.");
+							//System.out.println(board.getCurrentPlayerName() + " has been Lost, further losing " + report.getAttackingTroopsLost() + " troops.");
+							events.add(board.getCurrentPlayerName().toString() + " has Lost " + report.getAttackingTroopsLost() + " troops trying to attack " + selectedCountry2.getName() + "\n");
 						}
-						//interactivePane.attackPopup();
 					}
 				}
 			}
@@ -97,18 +101,20 @@ public class MapController {
 						selectedCountry1 = c;
 						selectedCountry2 = border;
 						report = board.battle(selectedCountry1, selectedCountry2);
-						System.out.println(selectedCountry1.getName() + " has fortified " + selectedCountry2.getName());
+						//System.out.println(selectedCountry1.getName() + " has fortified " + selectedCountry2.getName());
 							board.mapController.getSelectedCountry2().addTroops(1);
 							board.mapController.getSelectedCountry1().subractTroops(1);
+							events.add(selectedCountry1.getName() + " has Fortified 1 troop to " + selectedCountry2.getName() + "\n");
 						}
-						//interactivePane.attackPopup();
 					}
 				}
 			}
+		if(board.currentPlayer.getIsAI() == true) {
+			AiReportPopup aiReport = new AiReportPopup(board, board.currentPlayer.getPlayerName(), events);
+		}
 		board.nextPhase();
 		}
 		
-	
 	public void selectCountry(Country c) {
 		countSelected++;
 		switch (phase) {
