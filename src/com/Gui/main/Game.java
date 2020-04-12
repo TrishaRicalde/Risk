@@ -55,7 +55,7 @@ public class Game extends Application
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		board = new Board(width, height, primaryStage);
+		board = new Board(width, height);
 		ImageView imageview = new ImageView(mapImage);
 		ImageView titleview = new ImageView(titleScreen);
 
@@ -88,9 +88,6 @@ public class Game extends Application
 		Popup finalPopUp = new Popup();
 
 		BorderPane borderPane = new BorderPane();
-
-		//HBox startBox = new HBox(20);
-		//startBox.setStyle("-fx-background-color: rgba(255, 255, 255, 0.65);");
 
 		
 		VBox vbox = new VBox(10);

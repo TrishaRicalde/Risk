@@ -75,18 +75,17 @@ public class LabelLayer extends Pane {
 		Label easternUnitedStates = new Label();
 		easternUnitedStates.setTranslateX(155);
 		easternUnitedStates.setTranslateY(148);
-		allLabels.add(easternUnitedStates);
-		// GREENLAND
-		Label greenland = new Label();
-		greenland.setTranslateX(130);
-		greenland.setTranslateY(63);
-		allLabels.add(greenland);
+		allLabels.add(easternUnitedStates);		
 		// NORTHWEST TERRITORY
 		Label northwestTerritory = new Label();
 		northwestTerritory.setTranslateX(323);
 		northwestTerritory.setTranslateY(35);
 		allLabels.add(northwestTerritory);
-
+		// GREENLAND
+		Label greenland = new Label();
+		greenland.setTranslateX(130);
+		greenland.setTranslateY(63);
+		allLabels.add(greenland);
 		// EUROPE
 
 		// GREAT BRITIAN

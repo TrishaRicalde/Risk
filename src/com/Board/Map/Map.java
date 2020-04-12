@@ -324,6 +324,7 @@ public class Map {
 			europe.addCountry(ukraine);
 			europe.addCountry(iceland);
 			europe.addCountry(westerneurope);
+			
 		continents.add(southAmerica);
 			southAmerica.addCountry(peru);
 			southAmerica.addCountry(brazil);
