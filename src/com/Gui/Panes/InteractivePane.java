@@ -50,6 +50,7 @@ public class InteractivePane extends BorderPane {
 	private AttackPopup atkPopup;
 	private InstructionPopup instructPopup;
 	private Stage currentPopup;
+	private Button instructionBtn;
 
 	public InteractivePane(Board board, Map map) {
 		this.map = map;
@@ -191,6 +192,10 @@ public class InteractivePane extends BorderPane {
 		currentPopup = instructPopup;
 		addMapBlocker();
 		instructPopup.show();
+		instructPopup.setOnCloseRequest(e-> {
+			instructionSelected = false;
+			System.out.println("hi");
+		});
 	}
 	
 	//------------------------------------------INITIALIZATION METHODS------------------------------------------------------------------
@@ -267,10 +272,22 @@ public class InteractivePane extends BorderPane {
 	
 	private void initInstructionButton()
 	{
-		Button instructionBtn = new Button();
-		instructionBtn.setText("Instructions");
+		instructionBtn = new Button();
+		
+		instructionSelected = false;
+		instructionBtn.setText("");
+		
+		ImageView darkInstruction = new ImageView(new Image("scroll_bw.png"));
+		ImageView colorInstructions = new ImageView(new Image("scroll.png"));
+		
+		instructionBtn.setGraphic(darkInstruction);
+		instructionBtn.setPadding(Insets.EMPTY);
+		instructionBtn.setId("globe");
+		
 		instructionBtn.setAlignment(Pos.BOTTOM_LEFT);
 		bottomDisplay.getChildren().add(0,instructionBtn);
+		
+		
 		/*
 		
 		VBox instructionBox = new VBox();
@@ -291,7 +308,17 @@ public class InteractivePane extends BorderPane {
 			@Override
 			public void handle(ActionEvent event) 
 			{				
+				instructionSelected = !instructionSelected;
+				if (instructionSelected) {					
+				    colorInstructions.setEffect(effects.getEffect("borderGlow"));
+					instructionBtn.setGraphic(colorInstructions);
+					//board.mapController.clear();
 					instructionPopup();
+					
+				} else {
+					instructionBtn.setGraphic(darkInstruction);
+					instructPopup.close();
+				}	
 								
 			}			
 		});
@@ -311,8 +338,14 @@ public class InteractivePane extends BorderPane {
 		mapBlocker.setOpacity(0.1);
 		
 		mapBlocker.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+			if (currentPopup.equals(instructPopup)) {
+				this.instructionSelected = false;
+				instructionBtn.setGraphic(new ImageView(new Image("scroll_bw.png")));
+				
+			}
 			currentPopup.close();
 			board.mapController.clear();
+			
 			removeMapBlocker();
 		});
 	}
