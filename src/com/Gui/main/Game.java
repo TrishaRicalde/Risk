@@ -1,5 +1,6 @@
 package com.Gui.main;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -33,6 +34,8 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.layout.HBox;
 
 import javafx.util.Duration;
@@ -40,6 +43,8 @@ import javafx.util.Duration;
 
 /**
  * The Class Game.
+ * 
+ * @author alextanasescu
  */
 public class Game extends Application 
 {
@@ -67,6 +72,17 @@ public class Game extends Application
 	
 	/** The names. */
 	private ArrayList<String> names;
+	
+	
+	/** The music file */
+	private String musicFile;
+	
+	/** The sound */
+	private Media sound;
+	
+	/** The media player */
+	private MediaPlayer player;
+
 
 	
 
@@ -82,6 +98,12 @@ public class Game extends Application
 		board = new Board(width, height);
 		ImageView imageview = new ImageView(mapImage);
 		ImageView titleview = new ImageView(titleScreen);
+		
+		musicFile = "Pirate Music.mp3";
+		sound = new Media(new File(musicFile).toURI().toString());
+		player = new MediaPlayer(sound);
+		player.play();
+		
 
 		StackPane startScreen = new StackPane();
 		
@@ -296,11 +318,12 @@ public class Game extends Application
 	}
 			
 	
-	/**
+ 	/**
 	 * Sets the player num.
 	 *
 	 * @param i - the new player num
 	 */
+
 	public void setPlayerNum(int i) 
 	{
 		numOfPlayers = i;
