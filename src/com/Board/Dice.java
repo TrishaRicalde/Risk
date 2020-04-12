@@ -2,16 +2,25 @@ package com.Board;
 
 import java.util.Random;
 
+
+/**
+ * The Class Dice.
+ */
 public class Dice {
 	
+	/** a random number. */
 	private Random randomNumber;
 	
+	/**
+	 * Instantiates a new dice.
+	 */
 	public Dice() {
 		randomNumber = new Random();
 	}
 
 	/**
-	 * 
+	 * Roll.
+	 *
 	 * @return a random number between 1 and 6 inclusive.
 	 */
 	public int roll() {
@@ -20,9 +29,10 @@ public class Dice {
 
 	
 	/**
-	 * Generates numbers between 1 and 6 inclusive, based on the amount of troops
-	 * @param numOfTroops
-	 * @return
+	 * Generates numbers between 1 and 6 inclusive, based on the amount of troops.
+	 *
+	 * @param numTroops the num troops
+	 * @return the number of rolls
 	 */
 	public int[] getRolls(int numTroops) {
 		int numRolls = 0;
@@ -43,10 +53,11 @@ public class Dice {
 
 	
 	/**
-	 * 
-	 * @param atckRolls
-	 * @param dfdRolls
-	 * @return true if atckRolls contains an int greater than the ints in dfdRolls.
+	 * Check if victorious.
+	 *
+	 * @param atckRolls - the number the atck rolls
+	 * @param dfdRolls the number the dfd rolls
+	 * @return true - if atckRolls contains an int greater than the ints in dfdRolls.
 	 */
 	public boolean checkIfVictorious(int[] atckRolls, int[] dfdRolls) {
 		boolean victorious = false;

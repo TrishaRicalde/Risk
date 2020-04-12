@@ -12,13 +12,22 @@ import javafx.stage.StageStyle;
 /**
  * A Pop-up for the player to choose an action for the chosen 
  * number of troops.
- * @author skusj
  *
  */
 public abstract class TroopPopup extends Stage {
+	
+	/** The h box. */
 	private TroopBox hBox;
+	
+	/** The board. */
 	protected Board board;
 	
+	/**
+	 * Instantiates a new troop popup.
+	 *
+	 * @param numTroops the num of troops
+	 * @param board the board
+	 */
 	public TroopPopup(int numTroops, Board board) {
 		this.board = board;
 		StackPane pane = new StackPane();
@@ -45,25 +54,53 @@ public abstract class TroopPopup extends Stage {
 		onButtonClick();
 	}
 	
+	/**
+	 * Gets the troop box.
+	 *
+	 * @return the troop box
+	 */
 	public TroopBox getTroopBox() {
 		return hBox;
 	}
 	
+	/**
+	 * Gets the num of troops.
+	 *
+	 * @return the num of troops
+	 */
 	public int getNumOfTroops() {
 		return hBox.getNumTroops();
 	}
 	
+	/**
+	 * Gets the bonus troops.
+	 *
+	 * @return the bonus troops
+	 */
 	public int getBonusTroops() {
 		return board.currentPlayer.getBonusTroops();
 	}
 		
+	/**
+	 * Gets the selected country.
+	 *
+	 * @return the selected country
+	 */
 	public Country getSelectedCountry() {
 		return board.mapController.getSelectedCountry1();
 	}
 	
+	/**
+	 * Sets the disable next button.
+	 *
+	 * @param value the new disable next button
+	 */
 	public void setDisableNextButton(boolean value) {
 		board.getInteractivePane().setDisableNextButton(value);
 	}
 	
+	/**
+	 * On button click.
+	 */
 	public abstract void onButtonClick();
 }

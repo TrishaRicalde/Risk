@@ -9,27 +9,54 @@ import com.Gui.Panes.Popup.AttackPopup;
 import com.Gui.Panes.Popup.BattleReportPopup;
 import com.Gui.Panes.Popup.AttackPopup;
 
+
+/**
+ * The Class MapController.
+ */
 public class MapController {
 
+	/** The board. */
 	private Board board;
+	
+	/** The phase. */
 	private Phase phase;
+	
+	/** The max of selected countries. */
 	private int maxSelected;
+	
+	/** The count of selected countries. */
 	private int countSelected;
+	
+	/** The first selected country. */
 	private Country selectedCountry1;
+	
+	/** The second selected country */
 	private Country selectedCountry2;
+	
+	/** an empty country. */
 	private Country empty;
+	
+	/** a bool to check if the first country is selected */
 	private boolean selected1;
+	
+	/** a bool to check if the second country is selected  */
 	private boolean selected2;
+	
+	/** The interactive pane. */
 	private InteractivePane interactivePane;
+	
+	/** The battle report. */
 	private BattleReport report;
+	
+	/** an arrayList of events. */
 	private ArrayList<String> events = new ArrayList<String>();
 	//private ArrayList<>
 
 	/**
 	 * Acts as an intermediary between the Board and the Countries. Stores
 	 * selected Countries.
-	 * 
-	 * @param board
+	 *
+	 * @param board the board
 	 */
 	public MapController(Board board) {
 		this.board = board;
@@ -50,9 +77,6 @@ public class MapController {
 	 * 
 	 * This method checks what phase the game is in and goes through the
 	 * appropriate actions.
-	 * 
-	 * @param c
-	 *            the selected Country.
 	 */
 	
 	public void draftAi() {
@@ -65,6 +89,9 @@ public class MapController {
 		board.nextPhase();
 	}
 	
+	/**
+	 * Attack ai.
+	 */
 	public void attackAi() {
 		for (Country c : board.getCurrentPlayerOwnedCountries()) {
 			for (Country border : c.getBorders()) {
@@ -93,6 +120,9 @@ public class MapController {
 		board.nextPhase();
 	}
 	
+	/**
+	 * Fortify ai.
+	 */
 	public void fortifyAi() {
 		for (Country c : board.getCurrentPlayerOwnedCountries()) {
 			for (Country border : c.getBorders()) {
@@ -115,6 +145,11 @@ public class MapController {
 		board.nextPhase();
 		}
 		
+	/**
+	 * Select country.
+	 *
+	 * @param c the country being selected
+	 */
 	public void selectCountry(Country c) {
 		countSelected++;
 		switch (phase) {
@@ -166,8 +201,8 @@ public class MapController {
 	/**
 	 * Sets the phase/state of the MapController. The maximum number of
 	 * countries selected at any moment changes based on the phase.
-	 * 
-	 * @param p
+	 *
+	 * @param p the new phase
 	 */
 	public void setPhase(Phase p) {
 		this.phase = p;
@@ -189,6 +224,11 @@ public class MapController {
 		}
 	}
 
+	/**
+	 * Attack.
+	 *
+	 * @param c - the country about to be attacked
+	 */
 	public void attack(Country c) {
 		if (selectedCountry1.equals(empty)) {
 			selectedCountry1 = c;
@@ -206,6 +246,11 @@ public class MapController {
 		}
 	}
 
+	/**
+	 * Fortify.
+	 *
+	 * @param c - the country about to be fortified
+	 */
 	public void fortify(Country c) {
 		if (selectedCountry1.equals(empty)) {
 			selectedCountry1 = c;
@@ -223,6 +268,9 @@ public class MapController {
 		}
 	}
 
+	/**
+	 * Sets the a country to fortifiable.
+	 */
 	public void setFortifiable() {
 		for (Country c : selectedCountry1.getBorders()) {
 			if (c.isAllied(selectedCountry1)) {
@@ -290,8 +338,8 @@ public class MapController {
 
 	/**
 	 * Sets the boolean clickable of the bordering enemy countries to true.
-	 * 
-	 * @param c
+	 *
+	 * @param c - the new bordering enemies
 	 */
 	private void setBorderingEnemies(Country c) {
 		for (Country border : c.getBorders()) {
@@ -317,19 +365,35 @@ public class MapController {
 		}
 	}
 
+	/**
+	 * Gets the first selected country 
+	 *
+	 * @return the first selected country
+	 */
 	public Country getSelectedCountry1() {
 		return this.selectedCountry1;
 	}
 	
+	/**
+	 * Gets the second selected country.
+	 *
+	 * @return the second selected country
+	 */
 	public Country getSelectedCountry2() {
 		return this.selectedCountry2;
 	}
 
+	/**
+	 * Calls both clear methods
+	 */
 	public void clear() {
 		clear1();
 		clear2();
 	}
 
+	/**
+	 * Clears the first selected country 
+	 */
 	private void clear1() {
 		if (!selectedCountry1.equals(empty)) {
 			selectedCountry1.unSelect();
@@ -340,6 +404,9 @@ public class MapController {
 
 	}
 
+	/**
+	 * Clears the second selected country
+	 */
 	private void clear2() {
 		if (!selectedCountry2.equals(empty)) {
 			selectedCountry2.unSelect();
@@ -349,6 +416,9 @@ public class MapController {
 		}
 	}
 
+	/**
+	 * resets the map
+	 */
 	public void unSelected() {
 		switch (phase) {
 		case ATTACK:
