@@ -6,7 +6,7 @@ A strategy board game of which the objective is to dominate territories. Players
 ### HOW TO RUN THE TEXT-BASED VERSION OF THE GAME
 1) Make sure you have JRE (JavaSE 1.8), you can download it here -
 https://www.oracle.com/java/technologies/javase-jre8-downloads.html
-2) Go to the project repository and download the project repository FROM THE TEXTBASED BRANCH, here's the link, https://github.com/TrishaRicalde/Risk
+2) Go to the project repository and download the project repository FROM THE TEXTBASED BRANCH, here's the link, https://github.com/TrishaRicalde/Risk/tree/RiskTextBased
 3) Navigate to where Game.java (src > com > Main) and run it 
 
 
