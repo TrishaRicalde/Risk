@@ -57,9 +57,9 @@ public class Game extends Application
 	
 	/** The Constant height. */
 	private static final int height = 54 * 9;
-	
+
 	/** The Constant mapImage. */
-	private static final Image mapImage = new Image("Risk_White.png"); //"Risk_Map.png"
+	private static final Image mapImage = new Image("Risk_Main.png"); 
 	
 	/** The Constant titleScreen. */
 	private static final Image titleScreen = new Image("Risk_Title.gif");

@@ -157,7 +157,7 @@ public class InteractivePane extends BorderPane {
 				try {
 					this.getChildren().add(c.getImageView());
 					if (c.getShape() != null) {
-						this.getChildren().addAll(c.getShape());																						
+						this.getChildren().add(c.getShape());		
 					}					
 				} catch (Exception e) {
 					System.out.println("ImageView Error: " + c.getName());
@@ -171,6 +171,13 @@ public class InteractivePane extends BorderPane {
 	 */
 	private void addMapBlocker()  {
 		this.getChildren().add(mapBlocker);
+		/*for (Continent c : board.getContinents()) {
+			for (Country co : c.getCountries()) {
+				if (co.getName().equalsIgnoreCase("alaska")) {
+					co.getShape().setMouseTransparent(false);
+				}
+			}
+		}*/
 	}
 	
 	/**
@@ -345,9 +352,7 @@ public class InteractivePane extends BorderPane {
 		btnGlobe.setGraphic(darkGlobe);
 		btnGlobe.setPadding(Insets.EMPTY);
 		//Css stylesheet id to make the button round.
-		btnGlobe.setId("globe");
-		
-		
+		btnGlobe.setId("globe");	
 
 		btnGlobe.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -403,7 +408,6 @@ public class InteractivePane extends BorderPane {
 				if (instructionSelected) {					
 				    colorInstructions.setEffect(effects.getEffect("borderGlow"));
 					instructionBtn.setGraphic(colorInstructions);
-					//board.mapController.clear();
 					instructionPopup();
 					
 				} else {
