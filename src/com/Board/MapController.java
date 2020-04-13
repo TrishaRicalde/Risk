@@ -71,14 +71,10 @@ public class MapController {
 		this.selectedCountry2 = empty;
 	}
 
-	/**
-	 * This method should be called IF AND ONLY IF the country is selected. When
-	 * the country is unselected this method should NOT be called.
-	 * 
-	 * This method checks what phase the game is in and goes through the
-	 * appropriate actions.
-	 */
 	
+	/**
+	 * Draft Ai.
+	 */
 	public void draftAi() {
 		int distributeNum = board.currentPlayer.getBonusTroops();
 		selectedCountry1 = board.currentPlayer.getCountryToAddTroops(this.board, board.getCurrentPlayerOwnedCountries());	
@@ -146,9 +142,11 @@ public class MapController {
 		}
 		
 	/**
-	 * Select country.
-	 *
-	 * @param c the country being selected
+	 * This method should be called IF AND ONLY IF the country is selected. When
+	 * the country is unselected this method should NOT be called.
+	 * 
+	 * This method checks what phase the game is in and goes through the
+	 * appropriate actions.
 	 */
 	public void selectCountry(Country c) {
 		countSelected++;
@@ -389,6 +387,7 @@ public class MapController {
 	public void clear() {
 		clear1();
 		clear2();
+		unSelected();
 	}
 
 	/**
@@ -419,7 +418,7 @@ public class MapController {
 	/**
 	 * resets the map
 	 */
-	public void unSelected() {
+	public void unSelected() {		
 		switch (phase) {
 		case ATTACK:
 			board.resetMap();

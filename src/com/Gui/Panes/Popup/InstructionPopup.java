@@ -7,16 +7,20 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 /**
@@ -72,7 +76,8 @@ public class InstructionPopup extends Stage {
 	public InstructionPopup(Board board) {
 		
 		this.board = board;
-		
+		this.setResizable(false);
+		this.initStyle(StageStyle.TRANSPARENT);
 		
 		phaseArray = new String[] { "Objective of the Game", "Gameplay", "Draft Phase", "Attack Phase",
 		"Fortify Phase", "Winning the Game" };
@@ -80,7 +85,7 @@ public class InstructionPopup extends Stage {
 				"The object of the game is to occupy every territory on the board and in doing so, "
 						+ "eliminate the other players. The game of world domination!",
 				"Turns consist of trying to capture enemy territory and defeating "
-				+ "your opponent’s armies. Successfully winning battles depends on careful planning "
+				+ "your opponent's armies. Successfully winning battles depends on careful planning "
 				+ "and bold moves. To win you must attack when the time is right while fortifying your"
 				+ " defenses. Each move in Risk is comprised of three phases:"
 				+ "\n"
@@ -149,12 +154,15 @@ public class InstructionPopup extends Stage {
 
 		next = new Button();
 		back = new Button();
+		
+
 
 		//instructionPopup = new Popup();
 		buttonBox = new HBox(30);
 
 		instructionBox = new VBox(10);
 		instructionBox.setStyle("-fx-background-color: rgba(255, 255, 255, 0.85);");
+		instructionBox.setAlignment(Pos.TOP_CENTER);
 		// instructionBox.setVisible(false);
 
 		title = new Label();
@@ -167,6 +175,8 @@ public class InstructionPopup extends Stage {
 		instructionText.setFont(new Font(15));
 		
 		title.setText("Instructions");
+		title.setAlignment(Pos.TOP_CENTER);
+		
 		phaseTitle.setText(phaseArray[i]);
 		instructionText.setText(instructionArray[i]);
 		
@@ -179,28 +189,32 @@ public class InstructionPopup extends Stage {
 
 		instructionFlow.getChildren().add(instructionText);
 		
+		Region filler = new Region();
 		buttonBox.getChildren().add(back);
+		buttonBox.getChildren().add(filler);
 		buttonBox.getChildren().add(next);
+		buttonBox.setHgrow(filler, Priority.ALWAYS);
 
 		instructionBox.getChildren().add(title);
 		instructionBox.getChildren().add(phaseTitle);
 		instructionBox.getChildren().add(instructionFlow);
 		instructionBox.getChildren().add(buttonBox);
-		
+		instructionBox.setSpacing(5);
 		//
-		instructionBox.setMargin(title,new Insets(0,0,0,150));
+		instructionBox.setMargin(title,new Insets(5,5,5,5));
 		//title.setStyle("-fx-alignment: center;");
-		instructionBox.setMargin(phaseTitle,new Insets(0,0,0,150));
+		instructionBox.setMargin(phaseTitle,new Insets(5,5,5,5));
 		//phaseTitle.setStyle("-fx-alignment: center;");
 		//instructionBox.setMargin(instructionFlow,new Insets(0,0,0,150));
 		//instructionFlow.setStyle("-fx-alignment: center;");
-		instructionBox.setMargin(buttonBox,new Insets(0,0,0,200));
+		instructionBox.setMargin(buttonBox,new Insets(5,5,5,5));
+		instructionBox.setMargin(instructionFlow,new Insets(5,20,5,20));
 		//buttonBox.setStyle("-fx-alignment: center;");
 		
 		//buttonBox.setMargin(back, new Insets(0,0,0,200));
 		
 		initButtons();
-		this.scene = new Scene(instructionBox, 500, 700);
+		this.scene = new Scene(instructionBox, 650, 700);
 		this.setScene(scene);
 		//instructionPopup.getContent().add(instructionBox);
 		//instructionPopup.show(primaryStage);

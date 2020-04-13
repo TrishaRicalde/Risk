@@ -120,6 +120,7 @@ public class InteractivePane extends BorderPane {
 		initLabels(); 
 		initMapBlocker();		
 		
+		
 	}
 
 	/**
@@ -171,13 +172,7 @@ public class InteractivePane extends BorderPane {
 	 */
 	private void addMapBlocker()  {
 		this.getChildren().add(mapBlocker);
-		/*for (Continent c : board.getContinents()) {
-			for (Country co : c.getCountries()) {
-				if (co.getName().equalsIgnoreCase("alaska")) {
-					co.getShape().setMouseTransparent(false);
-				}
-			}
-		}*/
+		
 	}
 	
 	/**
@@ -270,7 +265,8 @@ public class InteractivePane extends BorderPane {
 		instructPopup.show();
 		instructPopup.setOnCloseRequest(e-> {
 			instructionSelected = false;
-			System.out.println("hi");
+			instructionBtn.setGraphic(new ImageView(new Image("scroll_bw.png")));
+			removeMapBlocker();
 		});
 	}
 	
@@ -293,6 +289,7 @@ public class InteractivePane extends BorderPane {
 			b.setDisable(false);
 		}		
 		if (board.getPhase() == Phase.DRAFT) btnNextPhase.setDisable(true);
+		board.mapController.unSelected();
 	}
 	
 	//------------------------------------------INITIALIZATION METHODS------------------------------------------------------------------
@@ -405,7 +402,8 @@ public class InteractivePane extends BorderPane {
 			public void handle(ActionEvent event) 
 			{				
 				instructionSelected = !instructionSelected;
-				if (instructionSelected) {					
+				if (instructionSelected) {	
+					board.mapController.clear();
 				    colorInstructions.setEffect(effects.getEffect("borderGlow"));
 					instructionBtn.setGraphic(colorInstructions);
 					instructionPopup();

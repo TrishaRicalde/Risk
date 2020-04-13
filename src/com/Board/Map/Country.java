@@ -89,7 +89,7 @@ public class Country extends Clickable {
 		// Glow effect
 		effects = new Effects();
 		
-		// Temporary Solution to display troop number
+		// Displays country name
 		Tooltip troopNumTip = new Tooltip("" + countryName);
 		Tooltip.install(countryShape, troopNumTip);
 
