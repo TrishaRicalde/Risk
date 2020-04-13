@@ -111,7 +111,6 @@ public class Country extends Clickable {
 
 
 		countryShape.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-			if (countryName.equalsIgnoreCase("greenland")) System.out.println("Greenland");
 			if (isClickable()) {
 				if (mapController.checkSelectable(this)) {
 					onClick();				
