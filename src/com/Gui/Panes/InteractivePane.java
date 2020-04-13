@@ -9,6 +9,7 @@ import com.Board.Map.Continent;
 import com.Board.Map.Country;
 import com.Board.Map.Map;
 import com.Gui.Effects.Effects;
+import com.Gui.Panes.Popup.AiReportPopup;
 import com.Gui.Panes.Popup.AttackPopup;
 import com.Gui.Panes.Popup.DraftPopup;
 import com.Gui.Panes.Popup.InstructionPopup;
@@ -51,6 +52,7 @@ public class InteractivePane extends BorderPane {
 	private DraftPopup draftPopup;
 	private AttackPopup atkPopup;
 	private InstructionPopup instructPopup;
+	private AiReportPopup aiReport;
 	private Stage currentPopup;
 	//private ArrayList<Button> buttons;
 	private Button instructionBtn;
@@ -200,6 +202,11 @@ public class InteractivePane extends BorderPane {
 			instructionSelected = false;
 			System.out.println("hi");
 		});
+	}
+	
+	public void aiReportPopup(ArrayList<String> events) {
+		aiReport = new AiReportPopup(board, board.currentPlayer.getPlayerName(), events);
+		aiReport.show();
 	}
 	
 	//------------------------------------------INITIALIZATION METHODS------------------------------------------------------------------

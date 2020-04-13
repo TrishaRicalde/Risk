@@ -52,7 +52,6 @@ public class Country extends Clickable {
 		this.currentNumTroops = 0;
 		// Glow effect
 		effects = new Effects();
-		
 		// Temporary Solution to display troop number
 		Tooltip troopNumTip = new Tooltip("" + currentNumTroops);
 		Tooltip.install(countryShape, troopNumTip);
@@ -89,14 +88,8 @@ public class Country extends Clickable {
 	 * 
 	 * @param c
 	 */
-	// TO BE IMPLEMENTED
-	/*
-	 * public Country(Country c) {
-	 * 
-	 * }
-	 * 
-	 * 
-	 */
+
+	
 	/**
 	 * Adds a border to the Country
 	 * 
@@ -116,6 +109,7 @@ public class Country extends Clickable {
 	}
 
 	public String getName() {
+		System.out.println(countryName);
 		return countryName;
 	}
 

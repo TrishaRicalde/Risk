@@ -100,8 +100,6 @@ public class MapController {
 					if(c.getNumTroops() > border.getNumTroops() + border.getNumTroops() * 0.25) {
 						selectedCountry1 = c;
 						selectedCountry2 = border;
-						report = board.battle(selectedCountry1, selectedCountry2);
-						//System.out.println(selectedCountry1.getName() + " has fortified " + selectedCountry2.getName());
 							board.mapController.getSelectedCountry2().addTroops(1);
 							board.mapController.getSelectedCountry1().subractTroops(1);
 							events.add(selectedCountry1.getName() + " has Fortified 1 troop to " + selectedCountry2.getName() + "\n");
@@ -110,10 +108,9 @@ public class MapController {
 				}
 			}
 		if(board.currentPlayer.getIsAI() == true) {
-			AiReportPopup aiReport = new AiReportPopup(board, board.currentPlayer.getPlayerName(), events);
+			interactivePane.aiReportPopup(events);
 		}
-		board.nextPhase();
-		}
+	}
 		
 	public void selectCountry(Country c) {
 		countSelected++;
