@@ -45,7 +45,7 @@ public class AiReportPopup {
 				fortify = fortify + items;
 			}
 		}
-		this.show();
+		/*this.show();*/
 	}
 	
 	/**

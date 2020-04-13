@@ -14,13 +14,13 @@ import javafx.scene.layout.Region;
 public class TroopBox extends HBox {
 	
 	/** The combo box. */
-	ComboBox<Integer> cBox;
+	private ComboBox<Integer> cBox;
 	
 	/** The label info. */
-	Label lblInfo;
+	private Label lblInfo;
 	
 	/** The confirm button. */
-	Button btnConfirm;
+	private Button btnConfirm;
 	
 	/**
 	 * Instantiates a new troop box.
@@ -77,7 +77,7 @@ public class TroopBox extends HBox {
 	 *
 	 * @return the lbl info
 	 */
-	public Label getLblInfo() {
+	public Label getLabelInfo() {
 		return lblInfo;
 	}
 }

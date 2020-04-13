@@ -6,6 +6,8 @@ import com.Board.Map.Country;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.layout.HBox;
 import javafx.stage.StageStyle;
 
 /**
@@ -21,12 +23,16 @@ public class MoveTroopPopup extends TroopPopup {
 	 */
 	public MoveTroopPopup(int numTroops, Board board) {
 		super(numTroops, board);
-		this.setTitle("Move Troops");
+
 		this.initStyle(StageStyle.TRANSPARENT);
 		this.setWidth(300);
 		this.setHeight(50);
-
-		getTroopBox().setInitialSelected(numTroops);		
+		
+		TroopBox troopBox = getTroopBox();
+		
+		troopBox.setAlignment(Pos.CENTER);
+		troopBox.setInitialSelected(numTroops);	
+		troopBox.getLabelInfo().setText("Move Troops: ");
 		board.getInteractivePane().setMouseTransparent(true);
 		
 	}
