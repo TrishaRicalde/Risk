@@ -99,11 +99,12 @@ public class Game extends Application
 		ImageView imageview = new ImageView(mapImage);
 		ImageView titleview = new ImageView(titleScreen);
 		
+		/*
 		musicFile = "Pirate Music.mp3";
 		sound = new Media(new File(musicFile).toURI().toString());
 		player = new MediaPlayer(sound);
 		player.play();
-		
+		*/
 
 		StackPane startScreen = new StackPane();
 		
