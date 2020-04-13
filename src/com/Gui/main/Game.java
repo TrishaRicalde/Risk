@@ -1,5 +1,6 @@
 package com.Gui.main;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -33,30 +34,78 @@ import javafx.stage.Popup;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.layout.HBox;
 
 import javafx.util.Duration;
 
-public class Game extends Application {
+
+/**
+ * The Class Game.
+ * 
+ * @author alextanasescu
+ */
+public class Game extends Application 
+{
+	
+	/** The Constant name. */
 	private static final String name = "Risk";
+	
+	/** The Constant width. */
 	private static final int width = 54 * 16;
+	
+	/** The Constant height. */
 	private static final int height = 54 * 9;
-	private static final Image mapImage = new Image("Risk_White.png"); //"Risk_Map.png"
+
+	/** The Constant mapImage. */
+	private static final Image mapImage = new Image("Risk_Main.png"); 
+	
+	/** The Constant titleScreen. */
 	private static final Image titleScreen = new Image("Risk_Title.gif");
 
+	/** The board. */
 	private Board board;
 
+	/** The num of players. */
 	private int numOfPlayers = 0;
+	
+	/** The names. */
 	private ArrayList<String> names;
+	
+	
+	/** The music file */
+	private String musicFile;
+	
+	/** The sound */
+	private Media sound;
+	
+	/** The media player */
+	private MediaPlayer player;
+
 
 	
 
+	/**
+	 * Start.
+	 *
+	 * @param primaryStage the primary stage
+	 * @throws Exception - the exception being thrown
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
-		board = new Board(width, height, primaryStage);
+		board = new Board(width, height);
 		ImageView imageview = new ImageView(mapImage);
 		ImageView titleview = new ImageView(titleScreen);
+		
+		
+		musicFile = "Pirate Music - Cut.mp3";
+		sound = new Media(new File(musicFile).toURI().toString());
+		player = new MediaPlayer(sound);
+		player.setCycleCount(MediaPlayer.INDEFINITE);
+		player.play();
+		
 
 		StackPane startScreen = new StackPane();
 		
@@ -87,9 +136,6 @@ public class Game extends Application {
 		Popup finalPopUp = new Popup();
 
 		BorderPane borderPane = new BorderPane();
-
-		//HBox startBox = new HBox(20);
-		//startBox.setStyle("-fx-background-color: rgba(255, 255, 255, 0.65);");
 
 		
 		VBox vbox = new VBox(10);
@@ -274,11 +320,24 @@ public class Game extends Application {
 	}
 			
 	
-	public void setPlayerNum(int i) {
+ 	/**
+	 * Sets the player num.
+	 *
+	 * @param i - the new player num
+	 */
+
+	public void setPlayerNum(int i) 
+	{
 		numOfPlayers = i;
 	}
 
-	public static void main(String args[]) {
+	/**
+	 * The main method.
+	 *
+	 * @param args -  the arguments
+	 */
+	public static void main(String args[]) 
+	{
 		launch(args);
 	}
 }

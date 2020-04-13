@@ -14,32 +14,75 @@ import com.Player.Player;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+
+/**
+ * The Class Board.
+ */
 public class Board {
+	
+	/** The continents. */
 	private ArrayList<Continent> continents;
+	
+	/** The players. */
 	private ArrayList<Player> players;
+	
+	/** The current player. */
 	public Player currentPlayer;
+	
+	/** The number of AI. */
 	private int numAI;
+	
+	/** The earth map. */
 	private Map earthMap;
+	
+	/** The first round. */
 	private boolean firstRound;
+	
+	/** The dice. */
 	private Dice dice;
+	
+	/** The turn number. */
 	private int turnNum;
+	
+	/** The width. */
 	private int width;
+	
+	/** The height. */
 	private int height;
 	
 
+	/** The current phase. */
 	private Phase currentPhase;
 
+	/** The panes. */
 	private ArrayList<Pane> panes;
+	
+	/** The interactive pane. */
 	private InteractivePane interactivePane;
+	
+	/** The label layer. */
 	private LabelLayer labelLayer;
+	
+	/** The map controller. */
 	public MapController mapController;
+	
+	/** The transition popup. */
 	private TransitionPopup transitionPopup;
 
 
+	/** The total number of players */
 	private final int totalPlayerNum = 4;
+	
+	/** The absolute power to decide if a country will def win a battle */
 	private final int absolutePower = 5;
 
-	public Board(int width, int height, Stage primaryStage) {
+	/**
+	 * Instantiates a new board.
+	 *
+	 * @param width - the width of the board
+	 * @param height - the height of the board
+	 */
+	public Board(int width, int height) {
 		this.width = width;
 		this.height = height;
 		currentPhase = Phase.START;
@@ -60,6 +103,11 @@ public class Board {
 		earthMap.setMapController(mapController);
 	}
 
+	/**
+	 * Instantiates a new board.
+	 *
+	 * @param b - the board itself
+	 */
 	public Board(Board b) { // Have to make new ArrayList<Players> for all.
 		this.players = b.players;
 		this.earthMap = b.earthMap;
@@ -67,6 +115,9 @@ public class Board {
 		this.firstRound = b.firstRound;
 	}
 
+	/**
+	 * Start game - starts the fame
+	 */
 	public void startGame() {
 		setTurn(players.get(0));
 		nextPhase();
@@ -76,14 +127,19 @@ public class Board {
 		}
 	}
 
+	/**
+	 * Gets the board.
+	 *
+	 * @return the board
+	 */
 	private Board getBoard() {
 		return new Board(this);
 	}
 
 	/**
-	 * Return ArrayList of Players
-	 * 
-	 * @return
+	 * Return ArrayList of Players.
+	 *
+	 * @return the number of players
 	 */
 	public ArrayList<Player> getPlayers() {
 		return players;
@@ -91,7 +147,7 @@ public class Board {
 
 	/**
 	 * Sets the current Player to the Player p.
-	 * @param p the next Player in the game.
+	 * @param p - the next Player in the game.
 	 */
 	public void setTurn(Player p) {
 		currentPlayer = p;
@@ -99,8 +155,8 @@ public class Board {
 
 	/**
 	 * Adds the selected number of troops to the selected Country.
-	 * @param c the Country selected.
-	 * @param troopsToDraft the number of troops to add.
+	 * @param c - the Country selected.
+	 * @param troopsToDraft - the number of troops to add.
 	 */
 	public void draftBonusTroops(Country c, int troopsToDraft) {
 		c.addTroops(troopsToDraft);
@@ -109,8 +165,8 @@ public class Board {
 
 	/**
 	 * Initiates a battle between two opposing Countries.
-	 * @param attacking the attacking Country.
-	 * @param defending the defending Country.
+	 * @param attacking - the attacking Country.
+	 * @param defending - the defending Country.
 	 * @return a BattleReport containing the results of the battle between the 
 	 * attacking Country and the defending Country.
 	 */
@@ -164,7 +220,8 @@ public class Board {
 
 	/**
 	 * Gets a Player from the ArrayList of Players based on the playerNumber.
-	 * @param playerNumber
+	 *
+	 * @param playerNumber - the player number
 	 * @return the Player corresponding to the player number.
 	 */
 	public Player getPlayer(int playerNumber) {
@@ -177,7 +234,8 @@ public class Board {
 	/**
 	 * This method should be called whenever a player has
 	 * no countries left.
-	 * @param playerNumber
+	 *
+	 * @param playerNumber - the player number
 	 */
 	public void playerDefeated(int playerNumber) {
 		players.remove(getPlayer(playerNumber));		
@@ -201,8 +259,8 @@ public class Board {
 	}
 
 	/**
-	 * Gets the countries owned by the current player
-	 * 
+	 * Gets the countries owned by the current player.
+	 *
 	 * @return the ArrayList of Countries owned by the current Player
 	 */
 	public ArrayList<Country> getCurrentPlayerOwnedCountries() {
@@ -220,7 +278,8 @@ public class Board {
 	/**
 	 * Initializes the number of Players and their respective names by getting
 	 * user input with the Console class.
-	 * 
+	 *
+	 * @param names - the names
 	 */
 	public void initializePlayers(ArrayList<String> names) {
 		for (int i = 0; i < names.size(); i++) {
@@ -298,7 +357,8 @@ public class Board {
 
 	/**
 	 * Gets the player's name based on their player number.
-	 * @param playerNumber
+	 *
+	 * @param playerNumber - the player number
 	 * @return a String containing the player's name
 	 */
 	public String getPlayerName(int playerNumber) {
@@ -411,6 +471,10 @@ public class Board {
 	public void victory() {
 		System.out.println("YOU ARE VICTORIOUS!!!!!!!!!!");
 	}
+	
+	/**
+	 * Next turn.
+	 */
 	private void nextTurn() {
 		if (turnNum < players.size())
 			turnNum++;
@@ -462,7 +526,8 @@ public class Board {
 
 	/**
 	 * Gets the current phase of the game.
-	 * @return
+	 *
+	 * @return the current phase
 	 */
 	public Phase getPhase() {
 		return currentPhase;

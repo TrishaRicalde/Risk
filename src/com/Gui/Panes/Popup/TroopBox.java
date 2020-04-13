@@ -7,11 +7,26 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 
+
+/**
+ * The Class TroopBox.
+ */
 public class TroopBox extends HBox {
-	ComboBox<Integer> cBox;
-	Label lblInfo;
-	Button btnConfirm;
 	
+	/** The combo box. */
+	private ComboBox<Integer> cBox;
+	
+	/** The label info. */
+	private Label lblInfo;
+	
+	/** The confirm button. */
+	private Button btnConfirm;
+	
+	/**
+	 * Instantiates a new troop box.
+	 *
+	 * @param numTroops the num troops
+	 */
 	public TroopBox(int numTroops) {
 		cBox = new ComboBox<Integer>();
 		lblInfo = new Label("Troops");
@@ -30,19 +45,39 @@ public class TroopBox extends HBox {
         
 	}
 	
+	/**
+	 * Gets the confirm button.
+	 *
+	 * @return the confirm button
+	 */
 	public Button getConfirmButton() {
 		return btnConfirm;
 	}
 	
+	/**
+	 * Gets the num of troops.
+	 *
+	 * @return the num of troops
+	 */
 	public int getNumTroops() {
 		return (int) cBox.getValue();
 	}
 	
+	/**
+	 * Sets the initial selected.
+	 *
+	 * @param num - the new initial selected
+	 */
 	public void setInitialSelected(int num) {
 		cBox.setValue(num);
 	}
 	
-	public Label getLblInfo() {
+	/**
+	 * Gets the lbl info.
+	 *
+	 * @return the lbl info
+	 */
+	public Label getLabelInfo() {
 		return lblInfo;
 	}
 }

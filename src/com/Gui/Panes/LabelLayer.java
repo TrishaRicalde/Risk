@@ -9,10 +9,23 @@ import com.Board.Map.Country;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
-public class LabelLayer extends Pane {
 
+/**
+ * The Class LabelLayer.
+ */
+public class LabelLayer extends Pane {
+	
+	
+	
+
+	/** all of the labels. */
 	private ArrayList<Label> allLabels;
 
+	/**
+	 * Instantiates a new label layer.
+	 *
+	 * @param board - the board
+	 */
 	public LabelLayer(Board board) {
 		allLabels = new ArrayList<Label>();
 		init();
@@ -25,7 +38,11 @@ public class LabelLayer extends Pane {
 			for (Country country : cont.getCountries()) {
 				country.setLabel(allLabels.get(counter));
 				country.updateLabel();
+<<<<<<< HEAD
 				counter = counter + 1;
+=======
+				counter = counter + 1;				
+>>>>>>> d1d41fad0719fe99d77cea8a2bc3d057e52bb574
 			}
 		}
 		for (Label x : allLabels) {
@@ -34,6 +51,9 @@ public class LabelLayer extends Pane {
 
 	}
 
+	/**
+	 * Inits thes labels for all the countries
+	 */
 	public void init() {
 
 		// NORTH AMERICA
@@ -71,18 +91,17 @@ public class LabelLayer extends Pane {
 		Label easternUnitedStates = new Label();
 		easternUnitedStates.setTranslateX(155);
 		easternUnitedStates.setTranslateY(148);
-		allLabels.add(easternUnitedStates);
-		// GREENLAND
-		Label greenland = new Label();
-		greenland.setTranslateX(130);
-		greenland.setTranslateY(63);
-		allLabels.add(greenland);
+		allLabels.add(easternUnitedStates);		
 		// NORTHWEST TERRITORY
 		Label northwestTerritory = new Label();
 		northwestTerritory.setTranslateX(323);
 		northwestTerritory.setTranslateY(35);
 		allLabels.add(northwestTerritory);
-
+		// GREENLAND
+		Label greenland = new Label();
+		greenland.setTranslateX(130);
+		greenland.setTranslateY(63);
+		allLabels.add(greenland);
 		// EUROPE
 
 		// GREAT BRITIAN

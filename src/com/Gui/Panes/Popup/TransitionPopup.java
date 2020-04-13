@@ -23,10 +23,22 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+/**
+ * The Class TransitionPopup.
+ * @author alextanasescu
+ */
 public class TransitionPopup extends Stage{
+	
+	/** The pane. */
 	private StackPane pane;
+	
+	/** The board. */
 	private Board board;
+	
+	/** The player label. */
 	Label playerLabel = new Label();
+	
+	/** The phase label. */
 	Label phaseLabel = new Label();
 	
 	//Button next;
@@ -34,6 +46,11 @@ public class TransitionPopup extends Stage{
 	//Popup animationPopUp = new Popup();
 	//Bruh
 
+	/**
+	 * Instantiates a new transition popup.
+	 *
+	 * @param board - the board
+	 */
 	public TransitionPopup(Board board) 
 	{
 		/*
@@ -62,6 +79,11 @@ public class TransitionPopup extends Stage{
 
 	}
 
+	/**
+	 * Next phase transition.
+	 *
+	 * @param phase - the phase 
+	 */
 	public void nextPhaseTransition(Phase phase)
 	{
 		System.out.println("Hey");
@@ -102,7 +124,7 @@ public class TransitionPopup extends Stage{
 		//long mTime = System.currentTimeMillis();
 		//long end = mTime + 2000;
 		
-		PauseTransition delay = new PauseTransition(Duration.seconds(3));
+		PauseTransition delay = new PauseTransition(Duration.seconds(2.5));
 		delay.setOnFinished(event -> this.close());
 		
 		

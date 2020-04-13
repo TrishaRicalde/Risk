@@ -9,12 +9,28 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+
+/**
+ * The Class BattleReportPopup.
+ */
 public class BattleReportPopup extends Stage {
+	
+	/** The battle report. */
 	private BattleReport report;
+	
+	/** The allied info. */
 	private VBox alliedInfo;
+	
+	/** The enemy info. */
 	private VBox enemyInfo;
 	
+	/**
+	 * Instantiates a new battle report popup.
+	 *
+	 * @param report - the battle report
+	 */
 	public BattleReportPopup(BattleReport report) {
 		this.report = report;	
 		
@@ -40,16 +56,15 @@ public class BattleReportPopup extends Stage {
 				
 		initLabels();
 		
-		
-		if (report.isVictorious()) this.setTitle("Victory");
-		else this.setTitle("Defeat");
-		
 		this.setScene(dialogScene);
 		this.setOpacity(0.9);
 		this.setResizable(false);
 		this.setAlwaysOnTop(true);		
 	}
 
+	/**
+	 * Initiates the labels.
+	 */
 	public void initLabels() {
 		Label lblAllyText = new Label("Your Army");
 		Label lblTroops = new Label("Troops: " + report.getStartingAlliedTroops());

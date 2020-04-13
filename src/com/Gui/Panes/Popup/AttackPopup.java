@@ -4,17 +4,17 @@ package com.Gui.Panes.Popup;
 import com.Board.BattleReport;
 import com.Board.Board;
 import com.Board.Map.Country;
+import com.Gui.Effects.Effects;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -22,24 +22,40 @@ import javafx.stage.StageStyle;
  * A Pop-up which only contains a single button for attacking.
  * Upon clicking the attack button, the player will attack the 
  * selected Country.
- * @author skusj
  */
 public class AttackPopup extends Stage {
+	
+	/** The attack img. */
 	ImageView attackImg;
+	
+	/** The board. */
 	Board board;
+	
+	/** The attack button. */
 	Button attack;
+	
+	/** The battle report. */
 	BattleReport report;
 	
+	/**
+	 * Instantiates a new attack popup.
+	 *
+	 * @param board the board
+	 */
 	public AttackPopup(Board board) {
 		this.board = board;
 		
+		Effects effect = new Effects();
 		Image image = new Image("sword.png"); 
 		attackImg = new ImageView(image);
+				
+		Background b = new Background(new BackgroundImage(new Image("swordBackground.png"), null, null, null, null));
 		
 		attack = new Button("");
 		attack.setGraphic(attackImg);
-		Background b = new Background(new BackgroundImage(new Image("swordBackground.png"), null, null, null, null));
-		//attack.setStyle("-fx-background-color: #832B19;");
+		attack.setBackground(b);
+		attack.setStyle("-fx-border-color: black");
+		attackImg.setEffect(effect.getEffect("borderGlow"));
 		Scene scene = new Scene(attack);
 		
 		this.setScene(scene);
@@ -51,6 +67,9 @@ public class AttackPopup extends Stage {
 		}
 	}
 	
+	/**
+	 * Ai attacker.
+	 */
 	public void aiAttacker() {
 		Country atkCountry = board.mapController.getSelectedCountry1();
 		Country dfdCountry = board.mapController.getSelectedCountry2();
@@ -87,6 +106,9 @@ public class AttackPopup extends Stage {
 	}
 
 	
+	/**
+	 * On button click.
+	 */
 	public void onButtonClick() {
 		attack.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -137,6 +159,11 @@ public class AttackPopup extends Stage {
 		
 	}
 	
+	/**
+	 * Gets the battle report.
+	 *
+	 * @return the battle report
+	 */
 	public BattleReport getBattleReport() {
 		return report;
 	}
