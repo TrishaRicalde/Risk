@@ -2,11 +2,7 @@ package com.Gui.Panes.Popup;
 
 
 import java.util.ArrayList;
-
-import com.Board.BattleReport;
 import com.Board.Board;
-import com.Gui.Panes.InteractivePane;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -15,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class AiReportPopup extends Stage {
@@ -26,7 +21,6 @@ public class AiReportPopup extends Stage {
 	private Button cont;
 	private String name;
 	private ArrayList<String> events;
-	private InteractivePane interactPane;
 	private Board board;
 	
 	public AiReportPopup(Board b, String inName, ArrayList<String> inList) {
