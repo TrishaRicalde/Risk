@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 
 /**
@@ -54,10 +55,6 @@ public class BattleReportPopup extends Stage {
 
 				
 		initLabels();
-		
-		
-		if (report.isVictorious()) this.setTitle("Victory");
-		else this.setTitle("Defeat");
 		
 		this.setScene(dialogScene);
 		this.setOpacity(0.9);

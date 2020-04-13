@@ -124,7 +124,7 @@ public class TransitionPopup extends Stage{
 		//long mTime = System.currentTimeMillis();
 		//long end = mTime + 2000;
 		
-		PauseTransition delay = new PauseTransition(Duration.seconds(3));
+		PauseTransition delay = new PauseTransition(Duration.seconds(2.5));
 		delay.setOnFinished(event -> this.close());
 		
 		
