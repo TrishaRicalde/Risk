@@ -100,9 +100,10 @@ public class Game extends Application
 		ImageView titleview = new ImageView(titleScreen);
 		
 		
-		musicFile = "Pirate Music.mp3";
+		musicFile = "Pirate Music - Cut.mp3";
 		sound = new Media(new File(musicFile).toURI().toString());
 		player = new MediaPlayer(sound);
+		player.setCycleCount(MediaPlayer.INDEFINITE);
 		player.play();
 		
 

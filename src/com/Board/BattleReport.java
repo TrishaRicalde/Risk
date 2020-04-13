@@ -77,8 +77,14 @@ public class BattleReport {
 	 *
 	 * @param attackingTroopsLost-  the new number of attacking troops lost
 	 */
-	public void setAttackingTroopsLost(int attackingTroopsLost) {
-		this.attackingTroopsLost = attackingTroopsLost;
+	public void setAttackingTroopsLost(int attackingTroopsLost) 
+	{
+		
+		if (attackingTroopsLost > 0 && attackingTroopsLost <= startEnemyTroops)
+		{
+			this.attackingTroopsLost = attackingTroopsLost;
+
+		}
 	}
 
 	/**
@@ -95,8 +101,13 @@ public class BattleReport {
 	 *
 	 * @param defendingTroopsLost - the new number of defending troops lost
 	 */
-	public void setDefendingTroopsLost(int defendingTroopsLost) {
-		this.defendingTroopsLost = defendingTroopsLost;
+	public void setDefendingTroopsLost(int defendingTroopsLost) 
+	{
+		if (defendingTroopsLost > 0 && defendingTroopsLost <= startAlliedTroops)
+		{
+			this.defendingTroopsLost = defendingTroopsLost;
+		}
+		
 	}
 
 	/**
