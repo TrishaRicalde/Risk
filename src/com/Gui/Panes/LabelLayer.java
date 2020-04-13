@@ -38,11 +38,7 @@ public class LabelLayer extends Pane {
 			for (Country country : cont.getCountries()) {
 				country.setLabel(allLabels.get(counter));
 				country.updateLabel();
-<<<<<<< HEAD
 				counter = counter + 1;
-=======
-				counter = counter + 1;				
->>>>>>> d1d41fad0719fe99d77cea8a2bc3d057e52bb574
 			}
 		}
 		for (Label x : allLabels) {
