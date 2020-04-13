@@ -4,17 +4,41 @@ import java.util.HashMap;
 
 import javafx.scene.shape.Polygon;
 
+/**
+ * The Class CountryShapes.
+ */
 public class CountryShapes {
 
+	/** The country shapes. */
 	private HashMap<String, Polygon> countryShapes;
 	
+	/**
+	 * Instantiates a new country shapes.
+	 */
 	public CountryShapes() {
 		countryShapes = new HashMap<String, Polygon>();
 		initializeShapes();
 	}
 	
+	/**
+	 * Initializes shapes.
+	 */
 	public void initializeShapes() {
+		/*
+		//Test
 		
+		Polygon test = new Polygon();
+		test.getPoints().addAll(new Double[]{ 
+			84.0, 117.0,
+			76.0, 110.0,
+			76.0, 101.0,
+			84.0, 97.0,
+			84.0, 87.0,
+			81.0, 84.0,
+			159.0, 85.0,
+			140.0, 117.0
+		});
+		*/
 		//NORTH AMERICA
 		
 		Polygon alaska = new Polygon();
@@ -1146,8 +1170,8 @@ public class CountryShapes {
 	
 	/**
 	 * Get the polygon corresponding to the name from the HashMap countryShapes.
-	 * @param name
-	 * @return
+	 * @param name of the country
+	 * @return the polygon
 	 */
 	public Polygon getPolygon(String name) {
 		return countryShapes.get(name.toUpperCase());

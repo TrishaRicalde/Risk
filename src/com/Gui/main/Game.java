@@ -37,20 +37,45 @@ import javafx.scene.layout.HBox;
 
 import javafx.util.Duration;
 
-public class Game extends Application {
+
+/**
+ * The Class Game.
+ */
+public class Game extends Application 
+{
+	
+	/** The Constant name. */
 	private static final String name = "Risk";
+	
+	/** The Constant width. */
 	private static final int width = 54 * 16;
+	
+	/** The Constant height. */
 	private static final int height = 54 * 9;
-	private static final Image mapImage = new Image("Risk_Main.png"); //"Risk_Map.png"
+
+	/** The Constant mapImage. */
+	private static final Image mapImage = new Image("Risk_Main.png"); 
+	
+	/** The Constant titleScreen. */
 	private static final Image titleScreen = new Image("Risk_Title.gif");
 
+	/** The board. */
 	private Board board;
 
+	/** The num of players. */
 	private int numOfPlayers = 0;
+	
+	/** The names. */
 	private ArrayList<String> names;
 
 	
 
+	/**
+	 * Start.
+	 *
+	 * @param primaryStage the primary stage
+	 * @throws Exception - the exception being thrown
+	 */
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
@@ -271,11 +296,23 @@ public class Game extends Application {
 	}
 			
 	
-	public void setPlayerNum(int i) {
+	/**
+	 * Sets the player num.
+	 *
+	 * @param i - the new player num
+	 */
+	public void setPlayerNum(int i) 
+	{
 		numOfPlayers = i;
 	}
 
-	public static void main(String args[]) {
+	/**
+	 * The main method.
+	 *
+	 * @param args -  the arguments
+	 */
+	public static void main(String args[]) 
+	{
 		launch(args);
 	}
 }

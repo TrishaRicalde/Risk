@@ -10,7 +10,6 @@ import javafx.scene.layout.HBox;
 /**
  * A Pop-up with which a player can select the number of troops
  * to draft to the selected Country.
- * @author skusj
  *
  */
 public class DraftPopup extends TroopPopup {

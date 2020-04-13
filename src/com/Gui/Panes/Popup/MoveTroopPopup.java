@@ -8,8 +8,17 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.StageStyle;
 
+/**
+ * The Class MoveTroopPopup.
+ */
 public class MoveTroopPopup extends TroopPopup {
 
+	/**
+	 * Instantiates a new move troop popup.
+	 *
+	 * @param numTroops - the num of troops being moved
+	 * @param board - the board
+	 */
 	public MoveTroopPopup(int numTroops, Board board) {
 		super(numTroops, board);
 		this.setTitle("Move Troops");
@@ -22,6 +31,9 @@ public class MoveTroopPopup extends TroopPopup {
 		
 	}
 
+	/**
+	 * On button click.
+	 */
 	@Override
 	public void onButtonClick() {
 		getTroopBox().getConfirmButton().setOnAction(new EventHandler<ActionEvent>() {

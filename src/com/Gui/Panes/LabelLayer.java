@@ -9,10 +9,23 @@ import com.Board.Map.Country;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
-public class LabelLayer extends Pane {
 
+/**
+ * The Class LabelLayer.
+ */
+public class LabelLayer extends Pane {
+	
+	
+	
+
+	/** all of the labels. */
 	private ArrayList<Label> allLabels;
 
+	/**
+	 * Instantiates a new label layer.
+	 *
+	 * @param board - the board
+	 */
 	public LabelLayer(Board board) {
 		allLabels = new ArrayList<Label>();
 		init();
@@ -34,6 +47,9 @@ public class LabelLayer extends Pane {
 
 	}
 
+	/**
+	 * Inits thes labels for all the countries
+	 */
 	public void init() {
 
 		// NORTH AMERICA
