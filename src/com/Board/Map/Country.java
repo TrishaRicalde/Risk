@@ -57,7 +57,7 @@ public class Country extends Clickable {
 	private Effects effects;
 
 	/** The opacity. */
-	private final double opacity = 0.0;
+	private final double opacity = 0.5;
 
 	/**
 	 * Instantiates a new country.
@@ -111,6 +111,7 @@ public class Country extends Clickable {
 
 
 		countryShape.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+			System.out.println(countryName);
 			if (isClickable()) {
 				if (mapController.checkSelectable(this)) {
 					onClick();				

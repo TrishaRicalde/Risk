@@ -1,7 +1,6 @@
 package com.Board.Map;
 
 import java.util.HashMap;
-
 import javafx.scene.shape.Polygon;
 
 /**
@@ -70,6 +69,7 @@ public class CountryShapes {
 			15.0, 98.0,
 			9.0, 98.0
 		});
+		
 		countryShapes.put("ALASKA", alaska);
 		
 		Polygon alberta = new Polygon();
@@ -1164,8 +1164,7 @@ public class CountryShapes {
 			797.0, 361.0
 		});
 		countryShapes.put("WESTERN AUSTRALIA", westernAustralia);
-		
-		Polygon mapCover = new Polygon();
+
 	}
 	
 	/**

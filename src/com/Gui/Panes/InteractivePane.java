@@ -115,6 +115,9 @@ public class InteractivePane extends BorderPane {
 		
 		this.setBottom(bottomDisplay);
 		this.hideBottomDisplay();
+		this.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
+			
+		});
 
 		initButtons();
 		initLabels(); 
@@ -152,7 +155,6 @@ public class InteractivePane extends BorderPane {
 	 * @param map - the new countries
 	 */
 	private void setCountries(Map map) {
-		
 		for (Continent cont : map.getContinents()) {
 			for (Country c : cont.getCountries()) {
 				try {
@@ -164,7 +166,7 @@ public class InteractivePane extends BorderPane {
 					System.out.println("ImageView Error: " + c.getName());
 				}
 			}
-		}
+		}		
 	}	
 	
 	/**
@@ -327,9 +329,11 @@ public class InteractivePane extends BorderPane {
 	private void initLabels() {
 		initTroopLabels();
 		phaseLbl = new Label("" + board.getPhase());
-		turnLbl = new Label("");
-		phaseLbl.setTextFill(Color.WHITE);
-		turnLbl.setTextFill(Color.WHITE);
+		turnLbl = new Label("hi");
+		turnLbl.setTextFill(Color.RED);
+		turnLbl.setEffect(effects.getEffect("borderGlow"));
+		phaseLbl.setTextFill(Color.RED);
+		phaseLbl.setEffect(effects.getEffect("borderGlow"));
 		Region filler = new Region();
 		HBox.setHgrow(filler, Priority.ALWAYS);
 		bottomDisplay.getChildren().add(1, filler);
@@ -457,6 +461,8 @@ public class InteractivePane extends BorderPane {
 			@Override
 			public void handle(ActionEvent e) {
 				board.nextPhase();
+				turnLbl.setTextFill(board.currentPlayer.getPlayerColour());
+				phaseLbl.setTextFill(board.currentPlayer.getPlayerColour());
 			}
 		});
 		Region filler = new Region();
