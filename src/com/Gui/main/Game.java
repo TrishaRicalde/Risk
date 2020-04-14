@@ -103,12 +103,11 @@ public class Game extends Application
 		ImageView titleview = new ImageView(titleScreen);
 		muteSelected = false;
 		
-		
-		musicFile = "Pirate Music - Cut.mp3";
-		sound = new Media(new File(musicFile).toURI().toString());
-		player = new MediaPlayer(sound);
-		player.setCycleCount(MediaPlayer.INDEFINITE);
-		player.play();
+//		musicFile = "Pirate Music - Cut.mp3";
+//		sound = new Media(new File(musicFile).toURI().toString());
+//		player = new MediaPlayer(sound);
+//		player.setCycleCount(MediaPlayer.INDEFINITE);
+//		player.play();
 		
 
 		StackPane startScreen = new StackPane();
@@ -276,8 +275,7 @@ public class Game extends Application
 					
 				}
 				
-				for (int counter = 0; counter < fieldNames.size(); counter++)
-				{
+				for (int counter = 0; counter < fieldNames.size(); counter++) {
 					
 				}
 				int countValid = 0;
