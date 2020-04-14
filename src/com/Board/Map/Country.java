@@ -101,7 +101,7 @@ public class Country extends Clickable {
 			imageView = new ImageView(new Image(getPath()));
 			imageView.setMouseTransparent(true);
 		} catch (Exception e) {
-			System.out.println("Country Image Error: " + countryPathName + alliance + highlightPath + ".png");
+			//System.out.println("Country Image Error: " + countryPathName + alliance + highlightPath + ".png");
 		}
 
 		countryShape.addEventFilter(MouseEvent.MOUSE_MOVED, e -> {
@@ -118,7 +118,6 @@ public class Country extends Clickable {
 					}
 				}
 			} catch (Exception e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});
@@ -162,7 +161,7 @@ public class Country extends Clickable {
 	 * @return the name
 	 */
 	public String getName() {
-		System.out.println(countryName);
+		//System.out.println(countryName);
 		return countryName;
 	}
 

@@ -78,6 +78,15 @@ public class Game extends Application
 	/** The music file */
 	private String musicFile;
 	
+	/** The sound file */
+	private String soundFile;
+	
+	/** The sound */
+	private Media clickSound;
+	
+	/** The sound player */
+	private MediaPlayer soundPlayer;
+	
 	/** The sound */
 	private Media sound;
 	
@@ -107,8 +116,16 @@ public class Game extends Application
 		sound = new Media(new File(musicFile).toURI().toString());
 		player = new MediaPlayer(sound);
 		player.setCycleCount(MediaPlayer.INDEFINITE);
-		player.setVolume(1);
+		player.setVolume(0.3);
 		player.play();
+		
+		/*
+		soundFile = "res/NewClick.mp3";
+		clickSound = new Media(new File(soundFile).toURI().toString());
+		soundPlayer = new MediaPlayer(clickSound);
+		soundPlayer.setCycleCount(1);
+		soundPlayer.setVolume(1);
+		*/
 		
 		
 
@@ -129,13 +146,14 @@ public class Game extends Application
 		mute.setPadding(Insets.EMPTY);
 		
 		mute.setOnAction(e-> {
+			//soundPlayer.play();
 			muteSelected = !muteSelected;
 			if (muteSelected) {
 				mute.setGraphic(unmuteImg);
 				player.setVolume(0);
 			} else {
 				mute.setGraphic(muteImg);
-				player.setVolume(1);
+				player.setVolume(0.3);
 			}
 		});
 		board.getInteractivePane().getBottomDisplay().getChildren().add(1, mute);
@@ -212,6 +230,7 @@ public class Game extends Application
 		start.setOnAction(new EventHandler<ActionEvent>() 
 		{
 			public void handle(ActionEvent event) {
+				//soundPlayer.play();
 				if (!startPopUp.isShowing()) {
 					startPopUp.show(primaryStage);
 					start.setVisible(false);
@@ -219,7 +238,7 @@ public class Game extends Application
 
 				} else {
 				}
-
+				//soundPlayer.setStopTime(Duration.seconds(1));
 			}
 		});
 		
@@ -229,8 +248,9 @@ public class Game extends Application
 					@Override
 					public void handle(ActionEvent event) 
 					{
-						
+						//soundPlayer.play();
 						String text = numPlayers.getText();
+						
 						
 						if (text.equals("1")|| text.equals("2") || text.equals("3")|| text.equals("4"))
 						{
@@ -263,6 +283,7 @@ public class Game extends Application
 		{
 			public void handle(ActionEvent event)
 			{
+				//soundPlayer.play();
 				String welcomeString = "Welcome strategists";
 				boolean valid = false ;
 				ObservableList<Node>fieldNames = textVBox.getChildren();
@@ -311,6 +332,7 @@ public class Game extends Application
 		play.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event)
 			{
+				//soundPlayer.play();
 				finalPopUp.hide();
 				stack.getChildren().remove(borderPane);
 				board.getPanes().get(0).setOpacity(1);

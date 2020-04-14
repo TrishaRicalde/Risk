@@ -83,11 +83,11 @@ public class AttackPopup extends Stage {
 		close();
 		if (report.isVictorious()) {
 			board.mapController.getSelectedCountry2().setOccupantID(board.mapController.getSelectedCountry1().getPlayerOccupantOfCountry());
-			System.out.println("Player " + atkCountry.getPlayerOccupantOfCountry() + " has been Won!");
+			//System.out.println("Player " + atkCountry.getPlayerOccupantOfCountry() + " has been Won!");
 			//Checks if a Player is defeated.
 			if (board.getPlayer(defender).isDefeated(board)) {
 				board.playerDefeated(defender);
-				System.out.println("Player " + defender + " has been defeated!");
+				//System.out.println("Player " + defender + " has been defeated!");
 				//Checks if a player has won the game.
 				if (board.getPlayers().size() == 1) {
 					board.victory();
@@ -131,7 +131,7 @@ public class AttackPopup extends Stage {
 					//Checks if a Player is defeated.
 					if (board.getPlayer(defender).isDefeated(board)) {
 						board.playerDefeated(defender);
-						System.out.println("Player " + defender + " has been defeated!");
+						//System.out.println("Player " + defender + " has been defeated!");
 						//Checks if a player has won the game.
 						if (board.getPlayers().size() == 1) {
 							board.victory();
