@@ -247,6 +247,8 @@ public class InstructionPopup extends Stage {
 				{
 					next.setDisable(true);
 				}
+				
+				
 			}
 		
 		});

@@ -57,7 +57,7 @@ public class Country extends Clickable {
 	private Effects effects;
 
 	/** The opacity. */
-	private final double opacity = 0.0;
+	private double opacity = 0.0;
 
 	/**
 	 * Instantiates a new country.
@@ -93,7 +93,6 @@ public class Country extends Clickable {
 		Tooltip troopNumTip = new Tooltip("" + countryName);
 		Tooltip.install(countryShape, troopNumTip);
 
-		
 
 		this.updateHighlight();
 		
@@ -111,19 +110,38 @@ public class Country extends Clickable {
 
 
 		countryShape.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-			if (isClickable()) {
-				if (mapController.checkSelectable(this)) {
-					onClick();				
+			
+			try {
+				if (isClickable()) {
+					if (mapController.checkSelectable(this)) {
+						onClick();				
+					}
 				}
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		});
 	}
 
 
 	/**
+<<<<<<< HEAD
+	 * Copy Constructor
+	 * 
+	 * @param c
+	 */
+
+	
+	/**
+	 * Adds a border to the Country
+	 * 
+	 * @param c
+=======
 	 * Adds a border to the Country.
 	 *
 	 * @param c - the country that the border is being added to
+>>>>>>> d1d41fad0719fe99d77cea8a2bc3d057e52bb574
 	 */
 	public void addBorder(Country c) {
 		borders.add(c);
@@ -144,6 +162,7 @@ public class Country extends Clickable {
 	 * @return the name
 	 */
 	public String getName() {
+		System.out.println(countryName);
 		return countryName;
 	}
 
@@ -248,7 +267,7 @@ public class Country extends Clickable {
 	 * Update label.
 	 */
 	public void updateLabel() {
-		troopLabel.setText("" + currentNumTroops);
+		troopLabel.setText(""+currentNumTroops);
 	}
 	
 	/**
@@ -257,6 +276,7 @@ public class Country extends Clickable {
 	public void updateImageView() {
 		this.updateHighlight();
 		imageView.setImage(new Image(getPath()));
+		imageView.setMouseTransparent(true);
 
 	}
 
