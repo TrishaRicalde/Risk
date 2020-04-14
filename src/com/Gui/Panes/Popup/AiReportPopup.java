@@ -15,17 +15,46 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AiReportPopup.
+ */
 public class AiReportPopup extends Stage {
+	
+	/** The draft button. */
 	private Button draftButton;
+	
+	/** The attack button. */
 	private Button attackButton;
+	
+	/** The fortify button. */
 	private Button fortifyButton;
+	
+	/** The back. */
 	private Button back;
+	
+	/** The cont. */
 	private Button cont;
+	
+	/** The name. */
 	private String name;
+	
+	/** The events. */
 	private ArrayList<String> events;
+	
+	/** The board. */
 	private Board board;
+	
+	/** The interact pane. */
 	private InteractivePane interactPane;
 	
+	/**
+	 * Instantiates a new ai report popup.
+	 *
+	 * @param b the board
+	 * @param inName the in name
+	 * @param inList the in list
+	 */
 	public AiReportPopup(Board b, String inName, ArrayList<String> inList) {
 		name = inName;
 		events = inList;
@@ -66,6 +95,9 @@ public class AiReportPopup extends Stage {
 		onButtonClick();
 	}
 	
+	/**
+	 * On button click.
+	 */
 	public void onButtonClick() {
 		draftButton.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -116,6 +148,9 @@ public class AiReportPopup extends Stage {
 		});
 	}
 	
+	/**
+	 * Draft.
+	 */
 	public void draft() {
 		String draftAction = "";
 		Label title = new Label(name + "'s Draft");
@@ -133,6 +168,9 @@ public class AiReportPopup extends Stage {
 		this.setAlwaysOnTop(true);	
 	}
 	
+	/**
+	 * Attack.
+	 */
 	public void attack() {
 		String attackAction = "";
 		Label title = new Label(name + "'s Attack");
@@ -151,6 +189,9 @@ public class AiReportPopup extends Stage {
 		this.setAlwaysOnTop(true);	
 	}
 
+	/**
+	 * Fortify.
+	 */
 	public void fortify() {
 		String fortifyAction = "";
 		Label title = new Label(name + "'s Fortification");
