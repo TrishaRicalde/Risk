@@ -404,7 +404,6 @@ public class Board {
 	 * shifts the board to the next phase.
 	 */
 	public void nextPhase() {
-		victory();
 		mapController.clear();
 		switch (currentPhase) {
 		case START:
