@@ -95,7 +95,7 @@ public class MapController {
 		for (Country c : board.getCurrentPlayerOwnedCountries()) {
 			for (Country border : c.getBorders()) {
 				if (border.isAllied(c) == false && c.getNumTroops() > 1) {
-					if(c.getNumTroops() > border.getNumTroops() + border.getNumTroops() * 0.5) {
+					if(c.getNumTroops() > border.getNumTroops() + border.getNumTroops() * 0.75) {
 						selectedCountry1 = c;
 						selectedCountry2 = border;
 						report = board.battle(selectedCountry1, selectedCountry2);
@@ -129,7 +129,7 @@ public class MapController {
 								selectedCountry2 = border;
 								board.mapController.getSelectedCountry2().addTroops((int) (c.getNumTroops()*0.5));
 								board.mapController.getSelectedCountry1().subractTroops((int) (c.getNumTroops()*0.5));
-								events.add(selectedCountry1.getName() + " has Fortified 1 troop to " + selectedCountry2.getName() + "\n");
+								events.add(selectedCountry1.getName() + " has Fortified " + (int) (c.getNumTroops()*0.5) +  " troop to " + selectedCountry2.getName() + "\n");
 								fortified = true;
 							}
 							}
