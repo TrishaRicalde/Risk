@@ -7,7 +7,7 @@ A strategy board game of which the objective is to dominate territories. Players
 1) Make sure you have the JRE (JavaSE 1.8), you can download it here -
 https://www.oracle.com/java/technologies/javase-jre8-downloads.html
 2) Go to the project repository and download it, here's the link, https://github.com/TrishaRicalde/Risk
-3) Open terminal or command prompt and navigate to where Risk-Text.jar (to the repository folder "Risk") 
+3) Open terminal or command prompt and navigate to where Risk-Text.jar is (to the repository folder "Risk") 
 4) Type in "java -jar Risk-Text.jar"
 
 
