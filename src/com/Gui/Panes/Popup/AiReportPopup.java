@@ -165,6 +165,6 @@ public class AiReportPopup extends Stage {
 		this.setScene(fortifyScene);
 		this.setOpacity(0.9);
 		this.setResizable(false);
-		this.setAlwaysOnTop(true);	
+		this.setAlwaysOnTop(true);
 	}
 }
