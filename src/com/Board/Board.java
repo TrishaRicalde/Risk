@@ -7,6 +7,7 @@ import com.Board.Map.Country;
 import com.Board.Map.Map;
 import com.Gui.Panes.InteractivePane;
 import com.Gui.Panes.Popup.TransitionPopup;
+import com.Gui.Panes.Popup.VictoryPopup;
 import com.Gui.Panes.LabelLayer;
 import com.Player.Player;
 
@@ -288,7 +289,6 @@ public class Board {
 		for (int i = 0; i < names.size(); i++) {
 			players.add(new Player(i + 1, false, this.getBoard()));
 			players.get(i).setPlayerName(names.get(i));
-			System.out.println(names);
 		}
 
 		for (int i = names.size(); i < totalPlayerNum; i++) {
@@ -406,7 +406,6 @@ public class Board {
 	 * shifts the board to the next phase.
 	 */
 	public void nextPhase() {
-
 		mapController.clear();
 		switch (currentPhase) {
 		case START:
@@ -444,6 +443,7 @@ public class Board {
 	private void draft() {
 		currentPlayer.setBonusTroops(getTroopBonus());
 		interactivePane.setDisableNextButton(true);
+		interactivePane.removeMapBlocker();
 		if(currentPlayer.getIsAI() == true) {
 			mapController.draftAi();
 		}
@@ -472,7 +472,7 @@ public class Board {
 	 * This method should be called when a Player wins the game.
 	 */
 	public void victory() {
-		System.out.println("YOU ARE VICTORIOUS!!!!!!!!!!");
+		new VictoryPopup(this, currentPlayer);
 	}
 	
 	/**

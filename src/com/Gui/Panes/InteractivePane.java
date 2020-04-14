@@ -1,7 +1,6 @@
 package com.Gui.Panes;
 
 import java.util.ArrayList;
-
 import com.Board.BattleReport;
 import com.Board.Board;
 import com.Board.MapController;
@@ -15,7 +14,6 @@ import com.Gui.Panes.Popup.AttackPopup;
 import com.Gui.Panes.Popup.DraftPopup;
 import com.Gui.Panes.Popup.InstructionPopup;
 import com.Gui.Panes.Popup.MoveTroopPopup;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -38,6 +36,7 @@ import javafx.stage.Stage;
  * The Class InteractivePane.
  */
 public class InteractivePane extends BorderPane {
+	ArrayList<String> eve = new ArrayList<String>();
 
 	/** The map. */
 	private Map map;
@@ -95,6 +94,7 @@ public class InteractivePane extends BorderPane {
 	
 	/** The globe button */
 	private Button btnGlobe;
+	
 
 	/**
 	 * Instantiates a new interactive pane.
@@ -116,6 +116,8 @@ public class InteractivePane extends BorderPane {
 		bottomDisplay = new HBox(50);
 		bottomDisplay.setAlignment(Pos.CENTER);
 		bottomDisplay.setPrefWidth(Double.MAX_VALUE);
+		bottomDisplay.setSpacing(5.0);
+		
 		
 		this.setBottom(bottomDisplay);
 		this.hideBottomDisplay();
@@ -124,7 +126,7 @@ public class InteractivePane extends BorderPane {
 		initLabels(); 
 		initMapBlocker();		
 		
-		
+		bottomDisplay.setMargin(phaseLbl, new Insets(0, 15, 0, 15));
 	}
 
 	/**
@@ -156,21 +158,18 @@ public class InteractivePane extends BorderPane {
 	 * @param map - the new countries
 	 */
 	private void setCountries(Map map) {
-		
 		for (Continent cont : map.getContinents()) {
 			for (Country c : cont.getCountries()) {
-				try {
-					
+				try {					
 					this.getChildren().add(c.getImageView());
 					if (c.getShape() != null) {
-						System.out.println(c.getName());
 						this.getChildren().add(c.getShape());		
 					}					
 				} catch (Exception e) {
 					System.out.println("ImageView Error: " + c.getName());
 				}
 			}
-		}
+		}		
 	}	
 	
 	/**
@@ -178,7 +177,6 @@ public class InteractivePane extends BorderPane {
 	 */
 	private void addMapBlocker()  {
 		this.getChildren().add(mapBlocker);
-		
 	}
 	
 	/**
@@ -252,10 +250,10 @@ public class InteractivePane extends BorderPane {
 	 * 
 	 */
 	public void fortifyPopup(int maxTroops) {
+		addMapBlocker();
 		MoveTroopPopup moveTroops = new MoveTroopPopup(maxTroops, board);
 		this.setMouseTransparent(false);
 		currentPopup = moveTroops;
-		addMapBlocker();
 		moveTroops.show();
 	}
 	
@@ -277,9 +275,14 @@ public class InteractivePane extends BorderPane {
 	}
 	
 	public void aiReportPopup(ArrayList<String> events) {
+		eve = events;
+		removeMapBlocker();
 		aiReport = new AiReportPopup(board, board.currentPlayer.getPlayerName(), events);
+		currentPopup = aiReport;
+		addMapBlocker();
 		aiReport.show();
-}
+	}
+	
 	/**
 	 * Disables all buttons except btn.
 	 * @param btn the button excluded from being disabled.
@@ -337,9 +340,11 @@ public class InteractivePane extends BorderPane {
 	private void initLabels() {
 		initTroopLabels();
 		phaseLbl = new Label("" + board.getPhase());
-		turnLbl = new Label("");
-		phaseLbl.setTextFill(Color.WHITE);
-		turnLbl.setTextFill(Color.WHITE);
+		turnLbl = new Label("hi");
+		turnLbl.setTextFill(Color.RED);
+		turnLbl.setEffect(effects.getEffect("borderGlow"));		
+		phaseLbl.setTextFill(Color.RED);
+		phaseLbl.setEffect(effects.getEffect("borderGlow"));
 		Region filler = new Region();
 		HBox.setHgrow(filler, Priority.ALWAYS);
 		bottomDisplay.getChildren().add(1, filler);
@@ -454,6 +459,10 @@ public class InteractivePane extends BorderPane {
 			board.mapController.clear();
 			
 			removeMapBlocker();
+			
+			if (currentPopup.equals(aiReport)) {
+				aiReportPopup(eve);
+			}
 		});
 	}
 	
@@ -467,10 +476,16 @@ public class InteractivePane extends BorderPane {
 			@Override
 			public void handle(ActionEvent e) {
 				board.nextPhase();
+				turnLbl.setTextFill(board.currentPlayer.getPlayerColour());
+				phaseLbl.setTextFill(board.currentPlayer.getPlayerColour());
 			}
 		});
 		Region filler = new Region();
 		HBox.setHgrow(filler, Priority.ALWAYS);
 		bottomDisplay.getChildren().addAll(btnNextPhase, filler);
+	}
+	
+	public HBox getBottomDisplay() {
+		return bottomDisplay;		
 	}
 }

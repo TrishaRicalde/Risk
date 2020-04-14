@@ -5,6 +5,8 @@ import com.Board.Board;
 import com.Board.Map.Continent;
 import com.Board.Map.Country;
 
+import javafx.scene.paint.Color;
+
 
 /**
  * The Class Player.
@@ -75,6 +77,24 @@ public class Player {
 			this.alliance = Alliance.YELLOW;
 			break;
 		}
+	}
+	
+	/**
+	 * Gets the colour of the Player's Alliance.
+	 * @return Colour of the Player's Alliance.
+	 */
+	public Color getPlayerColour() {
+		switch (playerNumber) {
+		case 1:
+			return Color.RED;
+		case 2:
+			return Color.GREEN;
+		case 3:
+			return Color.BLUE;
+		case 4:
+			return Color.YELLOW;
+		}
+		return Color.RED;
 	}
 
 

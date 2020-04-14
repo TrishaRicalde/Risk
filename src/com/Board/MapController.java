@@ -50,7 +50,9 @@ public class MapController {
 	
 	/** an arrayList of events. */
 	private ArrayList<String> events = new ArrayList<String>();
-	//private ArrayList<>
+	
+	/** A boolean describing if the ai has fortified */
+	boolean fortified;
 
 	/**
 	 * Acts as an intermediary between the Board and the Countries. Stores
@@ -69,6 +71,7 @@ public class MapController {
 		this.empty = new Country("Empty");
 		this.selectedCountry1 = empty;
 		this.selectedCountry2 = empty;
+		fortified = false;
 	}
 
 	
@@ -92,21 +95,18 @@ public class MapController {
 		for (Country c : board.getCurrentPlayerOwnedCountries()) {
 			for (Country border : c.getBorders()) {
 				if (border.isAllied(c) == false && c.getNumTroops() > 1) {
-					if(c.getNumTroops() > border.getNumTroops() + border.getNumTroops() * 0.25) {
+					if(c.getNumTroops() > border.getNumTroops() + border.getNumTroops() * 0.5) {
 						selectedCountry1 = c;
 						selectedCountry2 = border;
 						report = board.battle(selectedCountry1, selectedCountry2);
-						//System.out.println(selectedCountry1.getName() + " has attacked " + selectedCountry2.getName());
 						if (report.isVictorious()) {
 							board.mapController.getSelectedCountry1().subractTroops(report.getAttackingTroopsLost());
 							board.mapController.getSelectedCountry2().subractTroops(report.getDefendingTroopsLost());
 							board.mapController.getSelectedCountry2().setOccupantID(board.mapController.getSelectedCountry1().getPlayerOccupantOfCountry());
 							board.mapController.getSelectedCountry2().addTroops(1);
 							board.mapController.getSelectedCountry1().subractTroops(1);
-							//System.out.println(board.getCurrentPlayerName() + " has been Won at the cost of " + report.getAttackingTroopsLost() + " troops.");
 							events.add(board.getCurrentPlayerName().toString() + " has Captured " + selectedCountry2.getName() + " at the cost of " + report.getAttackingTroopsLost() + " troops." + "\n");
 						} else {
-							//System.out.println(board.getCurrentPlayerName() + " has been Lost, further losing " + report.getAttackingTroopsLost() + " troops.");
 							events.add(board.getCurrentPlayerName().toString() + " has Lost " + report.getAttackingTroopsLost() + " troops trying to attack " + selectedCountry2.getName() + "\n");
 						}
 					}
@@ -120,23 +120,27 @@ public class MapController {
 	 * Fortify ai.
 	 */
 	public void fortifyAi() {
-		for (Country c : board.getCurrentPlayerOwnedCountries()) {
-			for (Country border : c.getBorders()) {
-				if (border.isAllied(c) == true) {
-					if(c.getNumTroops() > border.getNumTroops() + border.getNumTroops() * 0.25) {
-						selectedCountry1 = c;
-						selectedCountry2 = border;
-							board.mapController.getSelectedCountry2().addTroops(1);
-							board.mapController.getSelectedCountry1().subractTroops(1);
-							events.add(selectedCountry1.getName() + " has Fortified 1 troop to " + selectedCountry2.getName() + "\n");
+			for (Country c : board.getCurrentPlayerOwnedCountries()) {
+				for (Country border : c.getBorders()) {
+					if (border.isAllied(c) == true) {
+						if(c.getNumTroops() > border.getNumTroops() + border.getNumTroops() * 0.5) {
+							if(!fortified) {
+								selectedCountry1 = c;
+								selectedCountry2 = border;
+								board.mapController.getSelectedCountry2().addTroops((int) (c.getNumTroops()*0.5));
+								board.mapController.getSelectedCountry1().subractTroops((int) (c.getNumTroops()*0.5));
+								events.add(selectedCountry1.getName() + " has Fortified 1 troop to " + selectedCountry2.getName() + "\n");
+								fortified = true;
+							}
+							}
 						}
 					}
 				}
+			if(board.currentPlayer.getIsAI() == true) {
+				interactivePane.aiReportPopup(events);
+				fortified = false;
 			}
-		if(board.currentPlayer.getIsAI() == true) {
-			interactivePane.aiReportPopup(events);
 		}
-	}
 		
 	/**
 	 * This method should be called IF AND ONLY IF the country is selected. When
@@ -169,6 +173,7 @@ public class MapController {
 			} else {
 				fortifyAi();
 			}
+			interactivePane.removeMapBlocker();
 			
 		default:
 		}

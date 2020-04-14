@@ -16,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -82,6 +83,8 @@ public class Game extends Application
 	
 	/** The media player */
 	private MediaPlayer player;
+	
+	private boolean muteSelected;
 
 
 	
@@ -98,12 +101,13 @@ public class Game extends Application
 		board = new Board(width, height);
 		ImageView imageview = new ImageView(mapImage);
 		ImageView titleview = new ImageView(titleScreen);
-		
+		muteSelected = false;
 		
 		musicFile = "Pirate Music - Cut.mp3";
 		sound = new Media(new File(musicFile).toURI().toString());
 		player = new MediaPlayer(sound);
 		player.setCycleCount(MediaPlayer.INDEFINITE);
+		player.setVolume(0.2);
 		player.play();
 		player.setVolume(0.1);
 		
@@ -115,7 +119,28 @@ public class Game extends Application
 		for (Pane p : board.getPanes()) {
 			stack.getChildren().add(p);
 		}
-
+		
+		ImageView muteImg = new ImageView(new Image("volume_off.png"));
+		ImageView unmuteImg = new ImageView(new Image("volume_on.png"));
+		
+		Button mute = new Button();
+		mute.setGraphic(muteImg);
+		mute.setId("globe");
+		mute.setAlignment(Pos.TOP_LEFT);
+		mute.setPadding(Insets.EMPTY);
+		
+		mute.setOnAction(e-> {
+			muteSelected = !muteSelected;
+			if (muteSelected) {
+				mute.setGraphic(unmuteImg);
+				player.setVolume(0);
+			} else {
+				mute.setGraphic(muteImg);
+				player.setVolume(0.2);
+			}
+		});
+		board.getInteractivePane().getBottomDisplay().getChildren().add(1, mute);
+		
 		Button instruction = new Button();
 		Button start = new Button();
 		Button next = new Button();
@@ -253,8 +278,7 @@ public class Game extends Application
 					
 				}
 				
-				for (int counter = 0; counter < fieldNames.size(); counter++)
-				{
+				for (int counter = 0; counter < fieldNames.size(); counter++) {
 					
 				}
 				int countValid = 0;
