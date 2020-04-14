@@ -105,6 +105,8 @@ public class Game extends Application
 		player = new MediaPlayer(sound);
 		player.setCycleCount(MediaPlayer.INDEFINITE);
 		player.play();
+		player.setVolume(0.1);
+		
 		
 
 		StackPane startScreen = new StackPane();

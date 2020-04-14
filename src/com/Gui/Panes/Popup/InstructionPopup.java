@@ -57,7 +57,7 @@ public class InstructionPopup extends Stage {
 	private Button back;
 	
 	/** The page of instruction youre on */
-	private int i;
+	private int i = 0;
 	
 	/** The scene. */
 	private Scene scene;
