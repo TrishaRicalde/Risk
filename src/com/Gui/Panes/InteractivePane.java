@@ -95,6 +95,7 @@ public class InteractivePane extends BorderPane {
 	
 	/** The globe button */
 	private Button btnGlobe;
+	
 
 	/**
 	 * Instantiates a new interactive pane.
@@ -116,6 +117,8 @@ public class InteractivePane extends BorderPane {
 		bottomDisplay = new HBox(50);
 		bottomDisplay.setAlignment(Pos.CENTER);
 		bottomDisplay.setPrefWidth(Double.MAX_VALUE);
+		bottomDisplay.setSpacing(5.0);
+		
 		
 		this.setBottom(bottomDisplay);
 		this.hideBottomDisplay();
@@ -124,7 +127,7 @@ public class InteractivePane extends BorderPane {
 		initLabels(); 
 		initMapBlocker();		
 		
-		
+		bottomDisplay.setMargin(phaseLbl, new Insets(0, 15, 0, 15));
 	}
 
 	/**
@@ -156,21 +159,18 @@ public class InteractivePane extends BorderPane {
 	 * @param map - the new countries
 	 */
 	private void setCountries(Map map) {
-		
 		for (Continent cont : map.getContinents()) {
 			for (Country c : cont.getCountries()) {
-				try {
-					
+				try {					
 					this.getChildren().add(c.getImageView());
 					if (c.getShape() != null) {
-						System.out.println(c.getName());
 						this.getChildren().add(c.getShape());		
 					}					
 				} catch (Exception e) {
 					System.out.println("ImageView Error: " + c.getName());
 				}
 			}
-		}
+		}		
 	}	
 	
 	/**
@@ -337,9 +337,11 @@ public class InteractivePane extends BorderPane {
 	private void initLabels() {
 		initTroopLabels();
 		phaseLbl = new Label("" + board.getPhase());
-		turnLbl = new Label("");
-		phaseLbl.setTextFill(Color.WHITE);
-		turnLbl.setTextFill(Color.WHITE);
+		turnLbl = new Label("hi");
+		turnLbl.setTextFill(Color.RED);
+		turnLbl.setEffect(effects.getEffect("borderGlow"));		
+		phaseLbl.setTextFill(Color.RED);
+		phaseLbl.setEffect(effects.getEffect("borderGlow"));
 		Region filler = new Region();
 		HBox.setHgrow(filler, Priority.ALWAYS);
 		bottomDisplay.getChildren().add(1, filler);
@@ -467,10 +469,16 @@ public class InteractivePane extends BorderPane {
 			@Override
 			public void handle(ActionEvent e) {
 				board.nextPhase();
+				turnLbl.setTextFill(board.currentPlayer.getPlayerColour());
+				phaseLbl.setTextFill(board.currentPlayer.getPlayerColour());
 			}
 		});
 		Region filler = new Region();
 		HBox.setHgrow(filler, Priority.ALWAYS);
 		bottomDisplay.getChildren().addAll(btnNextPhase, filler);
+	}
+	
+	public HBox getBottomDisplay() {
+		return bottomDisplay;		
 	}
 }

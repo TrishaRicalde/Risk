@@ -86,7 +86,6 @@ public class TransitionPopup extends Stage{
 	 */
 	public void nextPhaseTransition(Phase phase)
 	{
-		System.out.println("Hey");
 		String playerColour = board.currentPlayer.getAlliance().toString();
 		
 		

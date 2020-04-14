@@ -52,8 +52,8 @@ public class Map {
 		
 		// All of the Countries
 			//North America
-				Country alberta = new Country("Alberta", countryShapes.getPolygon("Alberta"));				
 				Country alaska = new Country("Alaska", countryShapes.getPolygon("alaska"));
+				Country alberta = new Country("Alberta", countryShapes.getPolygon("Alberta"));								
 				Country centralAmerica = new Country("Central America", countryShapes.getPolygon("central america"));
 				Country easternUnitedStates = new Country("Eastern United States", countryShapes.getPolygon("Eastern United States"));
 				Country greenland = new Country("Greenland", countryShapes.getPolygon("greenland"));
@@ -322,7 +322,7 @@ public class Map {
 						//AND ADDING COUNTRIES TO CONTINENTS
 		continents.add(northAmerica);
 			northAmerica.addCountry(alaska);
-			northAmerica.addCountry(alberta);
+			northAmerica.addCountry(alberta);			
 			northAmerica.addCountry(ontario);
 			northAmerica.addCountry(quebec);
 			northAmerica.addCountry(centralAmerica);
@@ -330,6 +330,7 @@ public class Map {
 			northAmerica.addCountry(easternUnitedStates);
 			northAmerica.addCountry(greenland);
 			northAmerica.addCountry(northwestTerritory);
+			
 			
 		continents.add(europe);
 			europe.addCountry(greatbritain);

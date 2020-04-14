@@ -15,9 +15,6 @@ import javafx.scene.layout.Pane;
  */
 public class LabelLayer extends Pane {
 	
-	
-	
-
 	/** all of the labels. */
 	private ArrayList<Label> allLabels;
 
