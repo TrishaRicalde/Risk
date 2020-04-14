@@ -116,18 +116,17 @@ public class InteractivePane extends BorderPane {
 		bottomDisplay = new HBox(50);
 		bottomDisplay.setAlignment(Pos.CENTER);
 		bottomDisplay.setPrefWidth(Double.MAX_VALUE);
+		bottomDisplay.setSpacing(5.0);
+		
 		
 		this.setBottom(bottomDisplay);
 		this.hideBottomDisplay();
-		this.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-			
-		});
 
 		initButtons();
 		initLabels(); 
 		initMapBlocker();		
 		
-		
+		bottomDisplay.setMargin(phaseLbl, new Insets(0, 15, 0, 15));
 	}
 
 	/**
@@ -341,7 +340,7 @@ public class InteractivePane extends BorderPane {
 		phaseLbl = new Label("" + board.getPhase());
 		turnLbl = new Label("hi");
 		turnLbl.setTextFill(Color.RED);
-		turnLbl.setEffect(effects.getEffect("borderGlow"));
+		turnLbl.setEffect(effects.getEffect("borderGlow"));		
 		phaseLbl.setTextFill(Color.RED);
 		phaseLbl.setEffect(effects.getEffect("borderGlow"));
 		Region filler = new Region();
@@ -478,5 +477,9 @@ public class InteractivePane extends BorderPane {
 		Region filler = new Region();
 		HBox.setHgrow(filler, Priority.ALWAYS);
 		bottomDisplay.getChildren().addAll(btnNextPhase, filler);
+	}
+	
+	public HBox getBottomDisplay() {
+		return bottomDisplay;		
 	}
 }
