@@ -166,7 +166,7 @@ public class InteractivePane extends BorderPane {
 						this.getChildren().add(c.getShape());		
 					}					
 				} catch (Exception e) {
-					System.out.println("ImageView Error: " + c.getName());
+					//System.out.println("ImageView Error: " + c.getName());
 				}
 			}
 		}		
@@ -212,9 +212,11 @@ public class InteractivePane extends BorderPane {
 	/**
 	 * Updates the panes's Labels.
 	 */
-	private void updateLabels() {
+	public void updateLabels() {
 		phaseLbl.setText("" + board.getPhase());
 		turnLbl.setText("" + board.currentPlayer.getPlayerName());
+		turnLbl.setTextFill(board.currentPlayer.getPlayerColour());
+		phaseLbl.setTextFill(board.currentPlayer.getPlayerColour());
 	}
 
 	/**
@@ -476,8 +478,7 @@ public class InteractivePane extends BorderPane {
 			@Override
 			public void handle(ActionEvent e) {
 				board.nextPhase();
-				turnLbl.setTextFill(board.currentPlayer.getPlayerColour());
-				phaseLbl.setTextFill(board.currentPlayer.getPlayerColour());
+				
 			}
 		});
 		Region filler = new Region();

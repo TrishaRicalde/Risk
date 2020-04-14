@@ -188,6 +188,8 @@ public class InstructionPopup extends Stage {
 
 		next.setText("Next");
 		back.setText("Back");
+		
+		back.setDisable(true);
 
 		instructionFlow.getChildren().add(instructionText);
 		
@@ -238,17 +240,31 @@ public class InstructionPopup extends Stage {
 			{
 				if (i < phaseArray.length - 1)
 				{
-					next.setDisable(false);
 					i++;
 					phaseTitle.setText(phaseArray[i]);
 					instructionText.setText(instructionArray[i]);
 				}
+				/*
 				else
 				{
 					next.setDisable(true);
 				}
-				
-				
+				*/
+				if (i == 0)
+				{
+					next.setDisable(false);
+					back.setDisable(true);
+				}
+				else if (i == phaseArray.length - 1)
+				{
+					next.setDisable(true);
+					back.setDisable(false);
+				}
+				else
+				{
+					next.setDisable(false);
+					back.setDisable(false);	
+				}
 			}
 		
 		});
@@ -261,14 +277,31 @@ public class InstructionPopup extends Stage {
 			{
 				if (i > 0)
 				{
-					back.setDisable(false);
+					//back.setDisable(false);
 					i--;
 					phaseTitle.setText(phaseArray[i]);
 					instructionText.setText(instructionArray[i]);
 				}
+				/*
 				else
 				{
 					back.setDisable(true);
+				}
+				*/
+				if (i == 0)
+				{
+					next.setDisable(false);
+					back.setDisable(true);
+				}
+				else if (i == phaseArray.length - 1)
+				{
+					next.setDisable(true);
+					back.setDisable(false);
+				}
+				else
+				{
+					next.setDisable(false);
+					back.setDisable(false);	
 				}
 			}
 		

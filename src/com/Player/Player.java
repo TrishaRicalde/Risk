@@ -295,7 +295,7 @@ public class Player {
 					ArrayList<Country> borders = country.getBorders();
 					for(Country bord : borders) {
 						if(country.getNumTroops() > bord.getNumTroops() + bord.getNumTroops() * 0.25) {
-							System.out.println(country.getName());
+							//System.out.println(country.getName());
 							return country;
 						}
 					}
@@ -321,7 +321,7 @@ public class Player {
 					ArrayList<Country> borders = country.getBorders();
 					for(Country bord : borders) {
 						if(country.getNumTroops() > bord.getNumTroops() + bord.getNumTroops() * 0.25) {
-							System.out.println(bord.getName());
+							//System.out.println(bord.getName());
 							return bord;
 						}
 					}
