@@ -41,6 +41,23 @@ public class CountryShapes {
 		*/
 		//NORTH AMERICA
 		
+		
+		
+		Polygon alberta = new Polygon();
+		alberta.getPoints().addAll(new Double[]{ 
+			84.0, 117.0,
+			76.0, 110.0,
+			76.0, 101.0,
+			84.0, 97.0,
+			84.0, 87.0,
+			81.0, 84.0,
+			159.0, 85.0,
+			140.0, 117.0
+		});
+		countryShapes.put("ALBERTA", alberta);
+		
+		
+		
 		Polygon alaska = new Polygon();
 		alaska.getPoints().addAll(new Double[] {
 			8.0, 96.0,
@@ -71,19 +88,7 @@ public class CountryShapes {
 			9.0, 98.0
 		});
 		countryShapes.put("ALASKA", alaska);
-		
-		Polygon alberta = new Polygon();
-		alberta.getPoints().addAll(new Double[]{ 
-			84.0, 117.0,
-			76.0, 110.0,
-			76.0, 101.0,
-			84.0, 97.0,
-			84.0, 87.0,
-			81.0, 84.0,
-			159.0, 85.0,
-			140.0, 117.0
-		});
-		countryShapes.put("ALBERTA", alberta);
+
 
 		Polygon centralAmerica = new Polygon();
 		centralAmerica.getPoints().addAll(new Double[] {
