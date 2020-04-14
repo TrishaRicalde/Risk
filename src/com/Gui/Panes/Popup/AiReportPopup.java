@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class AiReportPopup extends Stage {
 	private Button draftButton;
@@ -102,6 +103,14 @@ public class AiReportPopup extends Stage {
 			public void handle(ActionEvent event) {
 				events.clear();
 				board.nextPhase();
+				close();
+			}
+		});
+		
+		this.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent event) {
+				AiReportPopup aiReport = new AiReportPopup(board, name, events);
+				aiReport.show();
 				close();
 			}
 		});

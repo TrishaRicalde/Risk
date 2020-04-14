@@ -288,7 +288,6 @@ public class Board {
 		for (int i = 0; i < names.size(); i++) {
 			players.add(new Player(i + 1, false, this.getBoard()));
 			players.get(i).setPlayerName(names.get(i));
-			System.out.println(names);
 		}
 
 		for (int i = names.size(); i < totalPlayerNum; i++) {
@@ -444,6 +443,7 @@ public class Board {
 	private void draft() {
 		currentPlayer.setBonusTroops(getTroopBonus());
 		interactivePane.setDisableNextButton(true);
+		interactivePane.removeMapBlocker();
 		if(currentPlayer.getIsAI() == true) {
 			mapController.draftAi();
 		}
