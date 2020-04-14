@@ -118,19 +118,22 @@ public class Game extends Application
 			stack.getChildren().add(p);
 		}
 		
+		ImageView muteImg = new ImageView(new Image("volume_off.png"));
+		ImageView unmuteImg = new ImageView(new Image("volume_on.png"));
 		
 		Button mute = new Button();
-		mute.setMaxWidth(50.0);
-		mute.setMaxWidth(50.0);
-		mute.setText("mute");
+		mute.setGraphic(muteImg);
+		mute.setId("globe");
 		mute.setAlignment(Pos.TOP_LEFT);
+		mute.setPadding(Insets.EMPTY);
+		
 		mute.setOnAction(e-> {
 			muteSelected = !muteSelected;
 			if (muteSelected) {
-				mute.setText("unmute");
+				mute.setGraphic(unmuteImg);
 				player.setVolume(0);
 			} else {
-				mute.setText("mute");
+				mute.setGraphic(muteImg);
 				player.setVolume(1);
 			}
 		});
