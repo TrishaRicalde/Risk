@@ -126,9 +126,22 @@ public class Country extends Clickable {
 
 
 	/**
+<<<<<<< HEAD
+	 * Copy Constructor
+	 * 
+	 * @param c
+	 */
+
+	
+	/**
+	 * Adds a border to the Country
+	 * 
+	 * @param c
+=======
 	 * Adds a border to the Country.
 	 *
 	 * @param c - the country that the border is being added to
+>>>>>>> d1d41fad0719fe99d77cea8a2bc3d057e52bb574
 	 */
 	public void addBorder(Country c) {
 		borders.add(c);
@@ -149,6 +162,7 @@ public class Country extends Clickable {
 	 * @return the name
 	 */
 	public String getName() {
+		System.out.println(countryName);
 		return countryName;
 	}
 
