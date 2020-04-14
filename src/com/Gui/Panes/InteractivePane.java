@@ -1,7 +1,6 @@
 package com.Gui.Panes;
 
 import java.util.ArrayList;
-
 import com.Board.BattleReport;
 import com.Board.Board;
 import com.Board.MapController;
@@ -15,7 +14,6 @@ import com.Gui.Panes.Popup.AttackPopup;
 import com.Gui.Panes.Popup.DraftPopup;
 import com.Gui.Panes.Popup.InstructionPopup;
 import com.Gui.Panes.Popup.MoveTroopPopup;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -38,6 +36,7 @@ import javafx.stage.Stage;
  * The Class InteractivePane.
  */
 public class InteractivePane extends BorderPane {
+	ArrayList<String> eve = new ArrayList<String>();
 
 	/** The map. */
 	private Map map;
@@ -176,7 +175,6 @@ public class InteractivePane extends BorderPane {
 	 */
 	private void addMapBlocker()  {
 		this.getChildren().add(mapBlocker);
-		
 	}
 	
 	/**
@@ -250,10 +248,10 @@ public class InteractivePane extends BorderPane {
 	 * 
 	 */
 	public void fortifyPopup(int maxTroops) {
+		addMapBlocker();
 		MoveTroopPopup moveTroops = new MoveTroopPopup(maxTroops, board);
 		this.setMouseTransparent(false);
 		currentPopup = moveTroops;
-		addMapBlocker();
 		moveTroops.show();
 	}
 	
@@ -275,9 +273,14 @@ public class InteractivePane extends BorderPane {
 	}
 	
 	public void aiReportPopup(ArrayList<String> events) {
+		eve = events;
+		removeMapBlocker();
 		aiReport = new AiReportPopup(board, board.currentPlayer.getPlayerName(), events);
+		currentPopup = aiReport;
+		addMapBlocker();
 		aiReport.show();
-}
+	}
+	
 	/**
 	 * Disables all buttons except btn.
 	 * @param btn the button excluded from being disabled.
@@ -452,6 +455,10 @@ public class InteractivePane extends BorderPane {
 			board.mapController.clear();
 			
 			removeMapBlocker();
+			
+			if (currentPopup.equals(aiReport)) {
+				aiReportPopup(eve);
+			}
 		});
 	}
 	

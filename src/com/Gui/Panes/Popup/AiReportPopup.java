@@ -3,6 +3,7 @@ package com.Gui.Panes.Popup;
 
 import java.util.ArrayList;
 import com.Board.Board;
+import com.Gui.Panes.InteractivePane;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -22,6 +23,7 @@ public class AiReportPopup extends Stage {
 	private String name;
 	private ArrayList<String> events;
 	private Board board;
+	private InteractivePane interactPane;
 	
 	public AiReportPopup(Board b, String inName, ArrayList<String> inList) {
 		name = inName;
@@ -59,7 +61,7 @@ public class AiReportPopup extends Stage {
 		this.setScene(buttonMenu);
 		this.setOpacity(0.9);
 		this.setResizable(false);
-		this.setAlwaysOnTop(true);	
+		this.setAlwaysOnTop(true);
 		onButtonClick();
 	}
 	

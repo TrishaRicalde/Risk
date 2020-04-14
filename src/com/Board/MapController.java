@@ -123,7 +123,7 @@ public class MapController {
 		for (Country c : board.getCurrentPlayerOwnedCountries()) {
 			for (Country border : c.getBorders()) {
 				if (border.isAllied(c) == true) {
-					if(c.getNumTroops() > border.getNumTroops() + border.getNumTroops() * 0.25) {
+					if(c.getNumTroops() > border.getNumTroops() + border.getNumTroops() * 0.1) {
 						selectedCountry1 = c;
 						selectedCountry2 = border;
 							board.mapController.getSelectedCountry2().addTroops(1);
@@ -135,6 +135,7 @@ public class MapController {
 			}
 		if(board.currentPlayer.getIsAI() == true) {
 			interactivePane.aiReportPopup(events);
+			//interactivePane.removeMapBlocker();
 		}
 	}
 		
