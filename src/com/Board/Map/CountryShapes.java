@@ -23,24 +23,8 @@ public class CountryShapes {
 	 * Initializes shapes.
 	 */
 	public void initializeShapes() {
-		/*
-		//Test
-		
-		Polygon test = new Polygon();
-		test.getPoints().addAll(new Double[]{ 
-			84.0, 117.0,
-			76.0, 110.0,
-			76.0, 101.0,
-			84.0, 97.0,
-			84.0, 87.0,
-			81.0, 84.0,
-			159.0, 85.0,
-			140.0, 117.0
-		});
-		*/
-		//NORTH AMERICA
-		
-		
+
+			
 		
 		Polygon alberta = new Polygon();
 		alberta.getPoints().addAll(new Double[]{ 

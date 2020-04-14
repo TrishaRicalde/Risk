@@ -4,15 +4,15 @@ A strategy board game of which the objective is to dominate territories. Players
 
 
 ### HOW TO RUN THE TEXT-BASED VERSION OF THE GAME
-1) Make sure you have JRE (JavaSE 1.8), you can download it here -
+1) Make sure you have the JRE (JavaSE 1.8), you can download it here -
 https://www.oracle.com/java/technologies/javase-jre8-downloads.html
 2) Go to the project repository and download it, here's the link, https://github.com/TrishaRicalde/Risk
-3) Open terminal or command prompt and navigate to where Risk-Text (to the repository folder "Risk") 
+3) Open terminal or command prompt and navigate to where Risk-Text.jar is (to the repository folder "Risk") 
 4) Type in "java -jar Risk-Text.jar"
 
 
 ### HOW TO RUN THE GUI/INTERACTIVE VERSION OF THE GAME
-1) Make sure you have JRE (JavaSE 1.8), you can download it here -
+1) Make sure you have the JRE (JavaSE 1.8), you can download it here -
 https://www.oracle.com/java/technologies/javase-jre8-downloads.html
 2) Download the project repository, here's the link, https://github.com/TrishaRicalde/Risk
 3) Run Risk.jar by double clicking on it (or running java -jar Risk.jar in command prompt/terminal while you're in the directory where the file is)
