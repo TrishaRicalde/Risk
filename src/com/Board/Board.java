@@ -472,7 +472,7 @@ public class Board {
 	 * This method should be called when a Player wins the game.
 	 */
 	public void victory() {
-		new VictoryPopup(this, currentPlayer);
+		VictoryPopup victoryPopup = new VictoryPopup(this, currentPlayer);
 	}
 	
 	/**
