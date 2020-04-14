@@ -406,6 +406,7 @@ public class Board {
 	 * shifts the board to the next phase.
 	 */
 	public void nextPhase() {
+		this.interactivePane.setMouseTransparent(false);
 		mapController.clear();
 		switch (currentPhase) {
 		case START:
@@ -426,7 +427,7 @@ public class Board {
 		case FORTIFY:
 			currentPhase = Phase.DRAFT;
 			nextTurn();
-			resetMap();			
+			resetMap();
 			draft();
 			break;
 		}
@@ -443,7 +444,6 @@ public class Board {
 	private void draft() {
 		currentPlayer.setBonusTroops(getTroopBonus());
 		interactivePane.setDisableNextButton(true);
-		interactivePane.removeMapBlocker();
 		if(currentPlayer.getIsAI() == true) {
 			mapController.draftAi();
 		}

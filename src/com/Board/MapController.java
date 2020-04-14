@@ -172,9 +172,7 @@ public class MapController {
 				fortify(c);
 			} else {
 				fortifyAi();
-			}
-			interactivePane.removeMapBlocker();
-			
+			}			
 		default:
 		}
 	}
