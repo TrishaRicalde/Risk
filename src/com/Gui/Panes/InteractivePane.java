@@ -1,5 +1,6 @@
 package com.Gui.Panes;
 
+import java.io.File;
 import java.util.ArrayList;
 import com.Board.BattleReport;
 import com.Board.Board;
@@ -27,6 +28,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
@@ -95,6 +98,15 @@ public class InteractivePane extends BorderPane {
 	/** The globe button */
 	private Button btnGlobe;
 	
+	/** The sound file */
+	private String soundFile;
+	
+	/** The sound */
+	private Media clickSound;
+	
+	/** The sound player */
+	private MediaPlayer soundPlayer;
+	
 
 	/**
 	 * Instantiates a new interactive pane.
@@ -112,6 +124,12 @@ public class InteractivePane extends BorderPane {
 		riskContinents = new ImageView(contImage);
 		
 		setCountries(map);
+		
+		soundFile = "res/NewClick.mp3";
+		clickSound = new Media(new File(soundFile).toURI().toString());
+		soundPlayer = new MediaPlayer(clickSound);
+		soundPlayer.setCycleCount(1);
+		soundPlayer.setVolume(1);
 
 		bottomDisplay = new HBox(50);
 		bottomDisplay.setAlignment(Pos.CENTER);
@@ -370,6 +388,7 @@ public class InteractivePane extends BorderPane {
 
 			@Override
 			public void handle(ActionEvent event) {
+				//soundPlayer.play();
 				globeSelected = !globeSelected;
 				if (globeSelected) {					
 				    colourGlobe.setEffect(effects.getEffect("borderGlow"));
@@ -416,6 +435,8 @@ public class InteractivePane extends BorderPane {
 			@Override
 			public void handle(ActionEvent event) 
 			{				
+				//soundPlayer.play();
+
 				instructionSelected = !instructionSelected;
 				if (instructionSelected) {	
 					board.mapController.clear();
@@ -471,6 +492,8 @@ public class InteractivePane extends BorderPane {
 	 * Next phase.
 	 */
 	private void initNextPhaseButton() {
+		//soundPlayer.play();
+
 		btnNextPhase = new Button("Next");
 		btnNextPhase.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
