@@ -103,13 +103,12 @@ public class Game extends Application
 		ImageView titleview = new ImageView(titleScreen);
 		muteSelected = false;
 		
-		musicFile = "Pirate Music - Cut.mp3";
+		musicFile = "res/Pirate Music - Cut.mp3";
 		sound = new Media(new File(musicFile).toURI().toString());
 		player = new MediaPlayer(sound);
 		player.setCycleCount(MediaPlayer.INDEFINITE);
-		player.setVolume(0.2);
+		player.setVolume(1);
 		player.play();
-		player.setVolume(0.1);
 		
 		
 
@@ -120,8 +119,8 @@ public class Game extends Application
 			stack.getChildren().add(p);
 		}
 		
-		ImageView muteImg = new ImageView(new Image("volume_off.png"));
-		ImageView unmuteImg = new ImageView(new Image("volume_on.png"));
+		ImageView muteImg = new ImageView(new Image("volume_on.png"));
+		ImageView unmuteImg = new ImageView(new Image("volume_off.png"));
 		
 		Button mute = new Button();
 		mute.setGraphic(muteImg);
@@ -136,7 +135,7 @@ public class Game extends Application
 				player.setVolume(0);
 			} else {
 				mute.setGraphic(muteImg);
-				player.setVolume(0.2);
+				player.setVolume(1);
 			}
 		});
 		board.getInteractivePane().getBottomDisplay().getChildren().add(1, mute);
