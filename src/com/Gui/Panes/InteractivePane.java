@@ -252,7 +252,6 @@ public class InteractivePane extends BorderPane {
 	 * 
 	 */
 	public void fortifyPopup(int maxTroops) {
-		addMapBlocker();
 		MoveTroopPopup moveTroops = new MoveTroopPopup(maxTroops, board);
 		this.setMouseTransparent(false);
 		currentPopup = moveTroops;
@@ -278,10 +277,9 @@ public class InteractivePane extends BorderPane {
 	
 	public void aiReportPopup(ArrayList<String> events) {
 		eve = events;
-		removeMapBlocker();
+		this.setMouseTransparent(true);
 		aiReport = new AiReportPopup(board, board.currentPlayer.getPlayerName(), events);
 		currentPopup = aiReport;
-		addMapBlocker();
 		aiReport.show();
 	}
 	
@@ -462,9 +460,9 @@ public class InteractivePane extends BorderPane {
 			
 			removeMapBlocker();
 			
-			if (currentPopup.equals(aiReport)) {
-				aiReportPopup(eve);
-			}
+//			if (currentPopup.equals(aiReport)) {
+//				aiReportPopup(eve);
+//			}
 		});
 	}
 	
