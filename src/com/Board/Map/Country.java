@@ -57,7 +57,7 @@ public class Country extends Clickable {
 	private Effects effects;
 
 	/** The opacity. */
-	private final double opacity = 0.0;
+	private double opacity = 0.0;
 
 	/**
 	 * Instantiates a new country.
@@ -93,7 +93,6 @@ public class Country extends Clickable {
 		Tooltip troopNumTip = new Tooltip("" + countryName);
 		Tooltip.install(countryShape, troopNumTip);
 
-		
 
 		this.updateHighlight();
 		
@@ -111,10 +110,16 @@ public class Country extends Clickable {
 
 
 		countryShape.addEventFilter(MouseEvent.MOUSE_CLICKED, e -> {
-			if (isClickable()) {
-				if (mapController.checkSelectable(this)) {
-					onClick();				
+			
+			try {
+				if (isClickable()) {
+					if (mapController.checkSelectable(this)) {
+						onClick();				
+					}
 				}
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		});
 	}
@@ -248,7 +253,7 @@ public class Country extends Clickable {
 	 * Update label.
 	 */
 	public void updateLabel() {
-		troopLabel.setText("" + currentNumTroops);
+		troopLabel.setText(""+currentNumTroops);
 	}
 	
 	/**
@@ -257,6 +262,7 @@ public class Country extends Clickable {
 	public void updateImageView() {
 		this.updateHighlight();
 		imageView.setImage(new Image(getPath()));
+		imageView.setMouseTransparent(true);
 
 	}
 
