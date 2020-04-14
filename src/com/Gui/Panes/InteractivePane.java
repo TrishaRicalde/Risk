@@ -159,8 +159,10 @@ public class InteractivePane extends BorderPane {
 		for (Continent cont : map.getContinents()) {
 			for (Country c : cont.getCountries()) {
 				try {
+					
 					this.getChildren().add(c.getImageView());
 					if (c.getShape() != null) {
+						System.out.println(c.getName());
 						this.getChildren().add(c.getShape());		
 					}					
 				} catch (Exception e) {

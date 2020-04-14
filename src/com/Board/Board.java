@@ -101,6 +101,7 @@ public class Board {
 		// mapController must be initialized last
 		mapController = new MapController(this);
 		earthMap.setMapController(mapController);
+		
 	}
 
 	/**
@@ -255,6 +256,8 @@ public class Board {
 				deployableCountries.add(c);
 			}
 		}
+		
+
 		return deployableCountries;
 	}
 
