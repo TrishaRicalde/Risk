@@ -79,6 +79,7 @@ public class InstructionPopup extends Stage {
 		this.setResizable(false);
 		this.initStyle(StageStyle.TRANSPARENT);
 		this.setOpacity(0.95);
+		i = 0;
 		
 		phaseArray = new String[] { "Objective of the Game", "Gameplay", "Draft Phase", "Attack Phase",
 		"Fortify Phase", "Winning the Game" };

@@ -7,6 +7,7 @@ import com.Board.Map.Country;
 import com.Board.Map.Map;
 import com.Gui.Panes.InteractivePane;
 import com.Gui.Panes.Popup.TransitionPopup;
+import com.Gui.Panes.Popup.VictoryPopup;
 import com.Gui.Panes.LabelLayer;
 import com.Player.Player;
 
@@ -405,7 +406,6 @@ public class Board {
 	 * shifts the board to the next phase.
 	 */
 	public void nextPhase() {
-
 		mapController.clear();
 		switch (currentPhase) {
 		case START:
@@ -472,7 +472,7 @@ public class Board {
 	 * This method should be called when a Player wins the game.
 	 */
 	public void victory() {
-		System.out.println("YOU ARE VICTORIOUS!!!!!!!!!!");
+		new VictoryPopup(this, currentPlayer);
 	}
 	
 	/**
