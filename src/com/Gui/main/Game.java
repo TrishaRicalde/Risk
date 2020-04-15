@@ -74,18 +74,8 @@ public class Game extends Application
 	/** The names. */
 	private ArrayList<String> names;
 	
-	
 	/** The music file */
 	private String musicFile;
-	
-	/** The sound file */
-	private String soundFile;
-	
-	/** The sound */
-	private Media clickSound;
-	
-	/** The sound player */
-	private MediaPlayer soundPlayer;
 	
 	/** The sound */
 	private Media sound;
@@ -118,14 +108,6 @@ public class Game extends Application
 		player.setCycleCount(MediaPlayer.INDEFINITE);
 		player.setVolume(0.3);
 		player.play();
-		
-		/*
-		soundFile = "res/NewClick.mp3";
-		clickSound = new Media(new File(soundFile).toURI().toString());
-		soundPlayer = new MediaPlayer(clickSound);
-		soundPlayer.setCycleCount(1);
-		soundPlayer.setVolume(1);
-		*/
 		
 		
 
