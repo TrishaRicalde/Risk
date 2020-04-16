@@ -15,9 +15,6 @@ https://www.oracle.com/java/technologies/javase-jre8-downloads.html
 1) Make sure you have the JRE (JavaSE 1.8), you can download it here -
 https://www.oracle.com/java/technologies/javase-jre8-downloads.html
 2) Download the project repository, here's the link, https://github.com/TrishaRicalde/Risk
-3) Run Risk.jar by double clicking on it (or running java -jar Risk.jar in command prompt/terminal while you're in the directory where the file is)
-
-4) If this step is still up,
-
-4) If this step is still in the readMe this means we were unable to export the interactive version to a jar file and what you should do in this case is to clone this project on your computer (go in terminal or command prompt and type in "git clone https://github.com/TrishaRicalde/Risk.git" (make sure you have git installed))and import and run it in an IDE such as eclipse (download at https://www.eclipse.org/downloads/) or intellij (download at https://www.jetbrains.com/idea/download/#section=mac) the file you should run is com.Gui.main.Game.java
+3) Run Risk.jar by double clicking on it (or running java -jar Risk.jar in command prompt/terminal while you're in the directory where the file is) when you're doing this make sure that the res folder is in the same location as the jar file
+4) If the above step doesn't work, clone this project on your computer (go in terminal or command prompt and type in "git clone https://github.com/TrishaRicalde/Risk.git" (make sure you have git installed))and import and run it in an IDE such as eclipse (download at https://www.eclipse.org/downloads/) or intellij (download at https://www.jetbrains.com/idea/download/#section=mac) the file you should run is com.Gui.main.Game.java
 
