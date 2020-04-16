@@ -124,13 +124,14 @@ public class InteractivePane extends BorderPane {
 		riskContinents = new ImageView(contImage);
 		
 		setCountries(map);
+		/*
 		
 		soundFile = "res/NewClick.mp3";
 		clickSound = new Media(new File(soundFile).toURI().toString());
 		soundPlayer = new MediaPlayer(clickSound);
 		soundPlayer.setCycleCount(1);
 		soundPlayer.setVolume(1);
-
+*/
 		bottomDisplay = new HBox(50);
 		bottomDisplay.setAlignment(Pos.CENTER);
 		bottomDisplay.setPrefWidth(Double.MAX_VALUE);
