@@ -16,3 +16,4 @@ https://www.oracle.com/java/technologies/javase-jre8-downloads.html
 https://www.oracle.com/java/technologies/javase-jre8-downloads.html
 2) Download the project repository, here's the link, https://github.com/TrishaRicalde/Risk
 3) Run Risk.jar by double clicking on it (or running java -jar Risk.jar in command prompt/terminal while you're in the directory where the file is)
+4) If this step is still up,
