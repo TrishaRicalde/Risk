@@ -102,7 +102,7 @@ public class Game extends Application
 		ImageView titleview = new ImageView(titleScreen);
 		muteSelected = false;
 		
-		musicFile = "res/PirateMusic-Cut.mp3";
+		musicFile = "res/Pirate Music - Cut.mp3";
 		sound = new Media(new File(musicFile).toURI().toString());
 		player = new MediaPlayer(sound);
 		player.setCycleCount(MediaPlayer.INDEFINITE);

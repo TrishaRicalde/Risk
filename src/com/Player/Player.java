@@ -92,7 +92,7 @@ public class Player {
 		case 3:
 			return Color.BLUE;
 		case 4:
-			return Color.YELLOW;
+			return Color.GOLD;
 		}
 		return Color.RED;
 	}
