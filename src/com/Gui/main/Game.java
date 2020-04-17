@@ -46,6 +46,8 @@ import javafx.util.Duration;
  * The Class Game.
  * 
  * @author alextanasescu
+ * 
+ * 
  */
 public class Game extends Application 
 {
