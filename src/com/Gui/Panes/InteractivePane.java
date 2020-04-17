@@ -116,7 +116,6 @@ public class InteractivePane extends BorderPane {
 		
 		setCountries(map);
 
-
 		bottomDisplay = new HBox(50);
 		bottomDisplay.setAlignment(Pos.CENTER);
 		bottomDisplay.setPrefWidth(Double.MAX_VALUE);
