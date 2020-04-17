@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -35,6 +36,7 @@ public class VictoryPopup extends Stage {
 		Label victory = new Label("Victory");
 		victory.setFont(Font.font(40.0));
 		victory.setTextFill(p.getPlayerColour());
+
 		
 		Label congrat = new Label(p.getPlayerName() + " has conquered the World!");
 		congrat.setFont(Font.font(18.0));
@@ -45,6 +47,10 @@ public class VictoryPopup extends Stage {
 		vBox.getChildren().add(victory);
 		vBox.getChildren().add(congrat);		
 		
+		
+		this.setOnCloseRequest(e-> {
+			System.exit(0);
+		});
 		this.setResizable(false);
 		this.setAlwaysOnTop(true);
 		this.setScene(scene);

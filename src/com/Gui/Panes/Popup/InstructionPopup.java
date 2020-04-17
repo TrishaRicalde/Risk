@@ -151,7 +151,7 @@ public class InstructionPopup extends Stage {
 										+ "Remember to move troops towards borders where they can help in an attack and leave at least one army behind.\n"
 										+ "\n"
 										+ "", "The winner is the first player to eliminate every opponent by capturing all 42 territories on the board. "
-												+ "Good luck and may the odds be ever in your favor\n"
+												+ "Good luck and may the odds be ever in your favor!\n"
 												+ "\n" };
 
 		next = new Button();
