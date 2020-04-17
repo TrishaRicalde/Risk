@@ -408,7 +408,6 @@ public class Board {
 	public void nextPhase() {
 		this.interactivePane.setMouseTransparent(false);
 		mapController.clear();
-		this.victory();
 		switch (currentPhase) {
 		case START:
 			currentPhase = Phase.DRAFT;
